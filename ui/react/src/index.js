@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import TextComponent from './components/TextComponent';
-import ToggleSwitch from './components/toggleSwitch';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 //ReactDOM.render(<ToggleSwitch />, document.getElementById('root'));
