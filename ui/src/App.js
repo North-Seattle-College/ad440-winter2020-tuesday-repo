@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './css/App.css';
 import TextComponent from './components/TextComponent';
 import ToggleSwitch from './components/toggleSwitch';
 // renders main page together omponents/TextComponent';with new Text Component
