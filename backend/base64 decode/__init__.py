@@ -29,9 +29,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     if base64Str:
         base64decoded = base64.b64decode(base64str)
         logging.info('Base64 Decoded: ' + base64decoded)
-        return func.HttpResponse(f"Decoded base64: {base64decoded}")
+        return func.HttpResponse(f"Decoded base64 output: {base64decoded}")
     else:
         return func.HttpResponse(
-            "Base64 String not found,",
+            "Base64 String not found.",
             status_code=400
         )
