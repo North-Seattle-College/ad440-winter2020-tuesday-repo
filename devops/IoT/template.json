@@ -1,0 +1,104 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "IotHubs_bet_rg_feat_usw2_task2_connectionString": {
+            "type": "SecureString"
+        },
+        "IotHubs_bet_rg_feat_usw2_task2_containerName": {
+            "type": "SecureString"
+        },
+        "IotHubs_bet_rg_feat_usw2_task2_name": {
+            "defaultValue": "bet-rg-feat-usw2-task2",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Devices/IotHubs",
+            "apiVersion": "2019-11-04",
+            "name": "[parameters('IotHubs_bet_rg_feat_usw2_task2_name')]",
+            "location": "westus2",
+            "sku": {
+                "name": "S1",
+                "tier": "Standard",
+                "capacity": 1
+            },
+            "properties": {
+                "ipFilterRules": [],
+                "eventHubEndpoints": {
+                    "events": {
+                        "retentionTimeInDays": 1,
+                        "partitionCount": 4
+                    }
+                },
+                "routing": {
+                    "endpoints": {
+                        "serviceBusQueues": [],
+                        "serviceBusTopics": [],
+                        "eventHubs": [],
+                        "storageContainers": [
+                            {
+                                "connectionString": "DefaultEndpointsProtocol=https;AccountName=kiastrfeatusw2task3;AccountKey=****",
+                                "containerName": "kia-prod-usw2-storagecon",
+                                "fileNameFormat": "{iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}",
+                                "batchFrequencyInSeconds": 100,
+                                "maxChunkSizeInBytes": 104857600,
+                                "encoding": "json",
+                                "name": "kia-prod-usw2-messageendpoint",
+                                "subscriptionId": "9f4dcf43-aa06-457b-b975-f0216baef20d",
+                                "resourceGroup": "kia-rg-feat-usw2-task3"
+                            }
+                        ]
+                    },
+                    "routes": [
+                        {
+                            "name": "kia-prod-usw2-messageroute",
+                            "source": "DeviceMessages",
+                            "condition": "level=\"storage\"",
+                            "endpointNames": [
+                                "kia-prod-usw2-messageendpoint"
+                            ],
+                            "isEnabled": true
+                        }
+                    ],
+                    "fallbackRoute": {
+                        "name": "$fallback",
+                        "source": "DeviceMessages",
+                        "condition": "true",
+                        "endpointNames": [
+                            "events"
+                        ],
+                        "isEnabled": true
+                    }
+                },
+                "storageEndpoints": {
+                    "$default": {
+                        "sasTtlAsIso8601": "PT1H",
+                        "connectionString": "[parameters('IotHubs_bet_rg_feat_usw2_task2_connectionString')]",
+                        "containerName": "[parameters('IotHubs_bet_rg_feat_usw2_task2_containerName')]"
+                    }
+                },
+                "messagingEndpoints": {
+                    "fileNotifications": {
+                        "lockDurationAsIso8601": "PT1M",
+                        "ttlAsIso8601": "PT1H",
+                        "maxDeliveryCount": 10
+                    }
+                },
+                "enableFileUploadNotifications": false,
+                "cloudToDevice": {
+                    "maxDeliveryCount": 10,
+                    "defaultTtlAsIso8601": "PT1H",
+                    "feedback": {
+                        "lockDurationAsIso8601": "PT1M",
+                        "ttlAsIso8601": "PT1H",
+                        "maxDeliveryCount": 10
+                    }
+                },
+                "features": "None"
+            }
+        }
+    ]
+}
