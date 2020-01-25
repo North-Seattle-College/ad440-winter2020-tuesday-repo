@@ -2,26 +2,37 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "IotHubs_bet_rg_feat_usw2_task2_connectionString": {
-            "type": "SecureString"
+        "iotHubName": {
+            "type": "string",
+             "minLength": 3,
+             "metadata": {
+             "description": "Specifies the name of the IoT Hub."
+             }
         },
-        "IotHubs_bet_rg_feat_usw2_task2_containerName": {
-            "type": "SecureString"
-        },
-        "IotHubs_bet_rg_feat_usw2_task2_name": {
-            "defaultValue": "bet-rg-feat-usw2-task2",
-            "type": "String"
-        }
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
     },
-    "variables": {},
+    "resourceTags": {
+        "type": "object",
+        "defaultValue": {
+            "Environment": "Dev",
+            "Project": "IoTHubs"
+        }
+    } 
+    },
+    "variables": {
+        "iotHubName": "[concat(parameters('iotHubName'), uniqueString(resourceGroup().id))]"
+    },
     "resources": [
         {
             "type": "Microsoft.Devices/IotHubs",
             "apiVersion": "2019-11-04",
-            "name": "[parameters('IotHubs_bet_rg_feat_usw2_task2_name')]",
-            "location": "westus2",
+            "name": "[variables('iotHubName')]",
+            "location": "[parameters('location')]",
+            "tags": "[parameters('resourceTags')]", 
             "sku": {
-                "name": "S1",
+                "name": "[parameters('SkuName')]",
                 "tier": "Standard",
                 "capacity": 1
             },
@@ -76,8 +87,8 @@
                 "storageEndpoints": {
                     "$default": {
                         "sasTtlAsIso8601": "PT1H",
-                        "connectionString": "[parameters('IotHubs_bet_rg_feat_usw2_task2_connectionString')]",
-                        "containerName": "[parameters('IotHubs_bet_rg_feat_usw2_task2_containerName')]"
+                        "connectionString": "[parameters('iotHubName')]",
+                        "containerName": "[parameters('iotHubName')]"
                     }
                 },
                 "messagingEndpoints": {
