@@ -13,6 +13,14 @@
       "type": "string",
       "defaultValue": "[resourceGroup().location]"
     },
+    
+    "skuName": {
+      "type": "string",
+      "defaultValue": "F1",
+      "metadata": {
+        "description": "Specifies the IotHub SKU."
+      }
+    },
     "resourceTags": {
         "type": "object",
         "defaultValue": {
