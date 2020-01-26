@@ -17,13 +17,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             base64str = req_body.get('base64Decode')
 
     if base64str:
-        dataDecoded=base64.b64decode(base64str)
-        return func.HttpResponse(f"Output: {dataDecoded}")
+        dataDecode=base64.b64decode(base64str)
+        return func.HttpResponse(f"Output: {dataDecode}")
     else:
         return func.HttpResponse(
-             "Please pass a name on the query string or in the request body",
+             "Please pass a base64str on the query string or in the request body",
              status_code=400
         )
-
-
-
