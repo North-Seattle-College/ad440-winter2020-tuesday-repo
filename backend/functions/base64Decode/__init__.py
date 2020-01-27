@@ -19,7 +19,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     if base64str:
         dataDecode=base64.b64decode(base64str)
         logging.info('Base64 decode complete. Output: ' + str(dataDecode))
-        return func.HttpResponse(f"Output: {dataDecode}!")
+        return func.HttpResponse(f"Output: {dataDecode}")
     else:
         logging.warning('Missing input')
         return func.HttpResponse(
