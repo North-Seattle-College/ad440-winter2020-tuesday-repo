@@ -2,8 +2,33 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "streamingjobs_jos_sa_feat_usw2_task4_name": {
-            "value": null
+        "streamAnalyticsOwnerName": {
+            "value": null,
+            "metadata": {
+                "description": "This is something the user is prompted to enter"
+            }
         }
+        "streamAnalyticsOwnerEmail": {
+            "value": null,
+            "metadata": {
+                "description": "This is something the user is prompted to enter"
+            }
+        }
+        "streamAnalyticsJobName": {
+            "value": "job1"
+        }
+        "streamAnalyticsAppName": {
+            "value": "Pot-O-Gold"
+        }
+        "streamAnalyticsStorageAccountName": {
+            "value": "kiastrfeatusw2task3"
+        }
+        "streamAnalyticsFeature": {
+            "value": "bet-rg-feat-usw2"
+        }
+        "streamAnalyticsTaskName": {
+            "value": "task2"
+        }
+
     }
 }
