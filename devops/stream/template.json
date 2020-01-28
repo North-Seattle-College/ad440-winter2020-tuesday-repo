@@ -52,8 +52,8 @@
 
     },
     "variables": {
-        "streamAnalyticsInputName": "[concat(parameters(‘streamAnalyticsJobName’), '/', parameters('streamAnalyticsFeature'), '-input')]",
-        "streamAnalyticsOutputName": "[concat(parameters(‘streamAnalyticsJobName’), '/', parameters('streamAnalyticsFeature'), '-output')]",
+        "streamAnalyticsInputName": "[concat(parameters('streamAnalyticsJobName'), '/', parameters('streamAnalyticsFeature'), '-input')]",
+        "streamAnalyticsOutputName": "[concat(parameters('streamAnalyticsJobName'), '/', parameters('streamAnalyticsFeature'), '-output')]",
         "streamAnalyticsTaskName": "[concat(parameters('streamAnalyticsFeature'), parameters('streamAnalyticsTaskName'))]
     },
     "resources": [
@@ -61,12 +61,12 @@
             "comment": "This starts the streaming job",
             "type": "Microsoft.StreamAnalytics/streamingjobs",
             "apiVersion": "2016-03-01",
-            "name": "[parameters(‘streamAnalyticsJobName’)]",
+            "name": "[parameters('streamAnalyticsJobName')]",
             "location": "[resourceGroup().location]",
             "tags": {
-                "Owner": "[parameters(‘streamAnalyticsOwnerName’)]",
-                "Application": "[parameters(‘streamAnalyticsAppName’)]",
-                "OwnerEmail ": "[parameters(‘streamAnalyticsOwnerEmail’)]",
+                "Owner": "[parameters('streamAnalyticsOwnerName')]",
+                "Application": "[parameters('streamAnalyticsAppName')]",
+                "OwnerEmail ": "[parameters('streamAnalyticsOwnerEmail')]",
                 "Sprint": "1"
             },
             "properties": {
@@ -87,7 +87,7 @@
             "apiVersion": "2016-03-01",
             "name": "[variables('streamAnalyticsInputName')]",
             "dependsOn": [
-                "[resourceId(‘Microsoft.StreamAnalytics/streamingjobs’, parameters(‘streamAnalyticsJobName’))]"
+                "[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('streamAnalyticsJobName'))]"
             ],
             "properties": {
                 "type": "Stream",
@@ -119,7 +119,7 @@
             "apiVersion": "2016-03-01",
             "name": "[variables('streamAnalyticsOutputName')]",
             "dependsOn": [
-                "[resourceId(‘Microsoft.StreamAnalytics/streamingjobs’, parameters(‘streamAnalyticsJobName’))]"
+                "[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('streamAnalyticsJobName'))]"
             ],
             "properties": {
                 "datasource": {
