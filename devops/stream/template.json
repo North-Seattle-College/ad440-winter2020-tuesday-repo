@@ -1,0 +1,100 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "streamingjobs_jos_sa_feat_usw2_task4_name": {
+            "defaultValue": "jos-sa-feat-usw2-task4",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.StreamAnalytics/streamingjobs",
+            "apiVersion": "2016-03-01",
+            "name": "[parameters(‘streamingjobs_jos_sa_feat_usw2_task4_name’)]",
+            "location": "West US 2",
+            "tags": {
+                "Owner": "Jose Lopez",
+                "Application": "Pot-O-Gold",
+                "OwnerEmail ": "jose.lopez@seattlecolleges.edu",
+                "Sprint": "1"
+            },
+            "properties": {
+                "sku": {
+                    "name": "Standard"
+                },
+                "eventsOutOfOrderPolicy": "Adjust",
+                "outputErrorPolicy": "Stop",
+                "eventsOutOfOrderMaxDelayInSeconds": 0,
+                "eventsLateArrivalMaxDelayInSeconds": 5,
+                "dataLocale": "en-US",
+                "compatibilityLevel": "1.1"
+            }
+        },
+        {
+            "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+            "apiVersion": "2016-03-01",
+            "name": "[concat(parameters(‘streamingjobs_jos_sa_feat_usw2_task4_name’), ‘/bet-rg-feat-usw2-input’)]",
+            "dependsOn": [
+                "[resourceId(‘Microsoft.StreamAnalytics/streamingjobs’, parameters(‘streamingjobs_jos_sa_feat_usw2_task4_name’))]"
+            ],
+            "properties": {
+                "type": "Stream",
+                "datasource": {
+                    "type": "Microsoft.Devices/IotHubs",
+                    "properties": {
+                        "iotHubNamespace": "bet-rg-feat-usw2-task2",
+                        "sharedAccessPolicyName": "iothubowner",
+                        "endpoint": "messages/events",
+                        "consumerGroupName": "$Default"
+                    }
+                },
+                "compression": {
+                    "type": "None"
+                },
+                "partitionKey": "",
+                "serialization": {
+                    "type": "Json",
+                    "properties": {
+                        "encoding": "UTF8"
+                    }
+                },
+                "etag": "86cf57a8-4b3e-4b94-a20b-851846b7b95f"
+            }
+        },
+        {
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "apiVersion": "2016-03-01",
+            "name": "[concat(parameters(‘streamingjobs_jos_sa_feat_usw2_task4_name’), ‘/kia-rg-feat-usw2-output’)]",
+            "dependsOn": [
+                "[resourceId(‘Microsoft.StreamAnalytics/streamingjobs’, parameters(‘streamingjobs_jos_sa_feat_usw2_task4_name’))]"
+            ],
+            "properties": {
+                "datasource": {
+                    "type": "Microsoft.Storage/Blob",
+                    "properties": {
+                        "blobPathPrefix": "",
+                        "storageAccounts": [
+                            {
+                                "accountName": "kiastrfeatusw2task3"
+                            }
+                        ],
+                        "container": "jos-rg-feat-usw2-test-storage",
+                        "pathPattern": "",
+                        "dateFormat": "yyyy/MM/dd",
+                        "timeFormat": "HH",
+                        "authenticationMode": "ConnectionString"
+                    }
+                },
+                "serialization": {
+                    "type": "Json",
+                    "properties": {
+                        "encoding": "UTF8",
+                        "format": "LineSeparated"
+                    }
+                }
+            }
+        }
+    ]
+}
