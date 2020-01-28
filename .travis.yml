@@ -20,8 +20,8 @@ branches:
 #  directories:
 #    - node_modules
 
-#script:
-#  - ng build --prod --no-progress
+script:
+  - ng build --prod --no-progress
 
 after_success:
   - az storage blob upload-batch -d kevinscontainer --account-name kevinstoragetask5 -s directory_path --pattern *.html
