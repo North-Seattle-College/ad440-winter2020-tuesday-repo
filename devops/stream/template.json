@@ -2,22 +2,71 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "streamingjobs_jos_sa_feat_usw2_task4_name": {
-            "defaultValue": "jos-sa-feat-usw2-task4",
-            "type": "String"
+        "streamAnalyticsOwnerName": {
+            "type": "String",
+            "metadata": {
+                "description": "This is the name of the current user/owner of the current job"
+            }
         }
+        "streamAnalyticsOwnerEmail": {
+            "type": "String",
+            "metadata": {
+                "description": "This is the email of the current user/owner of this stream job"
+            }
+        }
+        "streamAnalyticsJobName": {
+            "defaultValue": "anonymous_job",
+            "type": "String",
+            "metadata": {
+                "description": "This is the name of the current stream job"
+            }
+        }
+        "streamAnalyticsAppName": {
+            "defaultValue": "Pot-O-Gold",
+            "type": "String",
+            "metadata": {
+                "description": "This is the name of the current app this is being used for"
+            }
+        }
+        "streamAnalyticsStorageAccountName": {
+            "defaultValue": "kiastrfeatusw2task3",
+            "type": "String",
+            "metadata": {
+                "description": "This is the name of the current storage account this app uses"
+            }
+        }
+        "streamAnalyticsFeature": {
+            "defaultValue": "bet-rg-feat-usw2",
+            "type": "String",
+            "metadata": {
+                "description": "This is the name of the current feature branch this app uses"
+            }
+        }
+        "streamAnalyticsTaskName": {
+            "defaultValue": "task2",
+            "type": "String",
+            "metadata": {
+                "description": "This is the name of the current task"
+            }
+        }
+
     },
-    "variables": {},
+    "variables": {
+        "streamAnalyticsInputName": "[concat(parameters(‘streamAnalyticsJobName’), '/', parameters('streamAnalyticsFeature'), '-input')]",
+        "streamAnalyticsOutputName": "[concat(parameters(‘streamAnalyticsJobName’), '/', parameters('streamAnalyticsFeature'), '-output')]",
+        "streamAnalyticsTaskName": "[concat(parameters('streamAnalyticsFeature'), parameters('streamAnalyticsTaskName'))]
+    },
     "resources": [
         {
+            "comment": "This starts the streaming job",
             "type": "Microsoft.StreamAnalytics/streamingjobs",
             "apiVersion": "2016-03-01",
-            "name": "[parameters(‘streamingjobs_jos_sa_feat_usw2_task4_name’)]",
-            "location": "West US 2",
+            "name": "[parameters(‘streamAnalyticsJobName’)]",
+            "location": "[resourceGroup().location]",
             "tags": {
-                "Owner": "Jose Lopez",
-                "Application": "Pot-O-Gold",
-                "OwnerEmail ": "jose.lopez@seattlecolleges.edu",
+                "Owner": "[parameters(‘streamAnalyticsOwnerName’)]",
+                "Application": "[parameters(‘streamAnalyticsAppName’)]",
+                "OwnerEmail ": "[parameters(‘streamAnalyticsOwnerEmail’)]",
                 "Sprint": "1"
             },
             "properties": {
@@ -33,18 +82,19 @@
             }
         },
         {
+            "comment": "This takes the input of the current stream",
             "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
             "apiVersion": "2016-03-01",
-            "name": "[concat(parameters(‘streamingjobs_jos_sa_feat_usw2_task4_name’), ‘/bet-rg-feat-usw2-input’)]",
+            "name": "[variables('streamAnalyticsInputName')]",
             "dependsOn": [
-                "[resourceId(‘Microsoft.StreamAnalytics/streamingjobs’, parameters(‘streamingjobs_jos_sa_feat_usw2_task4_name’))]"
+                "[resourceId(‘Microsoft.StreamAnalytics/streamingjobs’, parameters(‘streamAnalyticsJobName’))]"
             ],
             "properties": {
                 "type": "Stream",
                 "datasource": {
                     "type": "Microsoft.Devices/IotHubs",
                     "properties": {
-                        "iotHubNamespace": "bet-rg-feat-usw2-task2",
+                        "iotHubNamespace": "[variables('streamAnalyticsTaskName')]",
                         "sharedAccessPolicyName": "iothubowner",
                         "endpoint": "messages/events",
                         "consumerGroupName": "$Default"
@@ -64,11 +114,12 @@
             }
         },
         {
+            "comment": "This takes the output of the current stream",
             "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
             "apiVersion": "2016-03-01",
-            "name": "[concat(parameters(‘streamingjobs_jos_sa_feat_usw2_task4_name’), ‘/kia-rg-feat-usw2-output’)]",
+            "name": "[variables('streamAnalyticsOutputName')]",
             "dependsOn": [
-                "[resourceId(‘Microsoft.StreamAnalytics/streamingjobs’, parameters(‘streamingjobs_jos_sa_feat_usw2_task4_name’))]"
+                "[resourceId(‘Microsoft.StreamAnalytics/streamingjobs’, parameters(‘streamAnalyticsJobName’))]"
             ],
             "properties": {
                 "datasource": {
@@ -77,7 +128,7 @@
                         "blobPathPrefix": "",
                         "storageAccounts": [
                             {
-                                "accountName": "kiastrfeatusw2task3"
+                                "accountName": "[parameters('streamAnalyticsStorageAccountName')]"
                             }
                         ],
                         "container": "jos-rg-feat-usw2-test-storage",
