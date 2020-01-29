@@ -16,3 +16,4 @@ before_install:
 
 after_success:
   - az storage blob upload-batch -d kevinscontainer --account-name kevinstoragetask5 -s directory_path --pattern *.html
+  
