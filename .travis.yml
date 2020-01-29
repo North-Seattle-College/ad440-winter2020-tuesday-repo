@@ -7,6 +7,10 @@ branches:
     - feature-kevin-task5
     
 before_install:
+    - echo $AZ_LOGIN_NAME
+    - echo $AZ_PASSOWRD
+    - echo $AZ_TENANT
+    - echo $AZURE_STORAGE_ACCOUNT
     - az login -u $AZ_LOGIN_NAME -p $AZ_PASSWORD --service-principal --tenant $AZ_TENANT > /dev/null 2>&1
     - az account show
 
