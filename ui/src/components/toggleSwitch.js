@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Switch from "react-switch";
+import TextComponent from './TextComponent'
 
 {/*Created by Siergiey
 This is a simple toggle switch for Sprint 1.
@@ -20,16 +21,14 @@ export default class ToggleSwitch extends Component {
   }
  
   render() {
+   
     return (
         <div className='toggleSwitch'>
       <label>
         <Switch onChange={this.handleChange} checked={this.state.checked} />
+        {/* Text component changes text ON and OFF based on the toggle state */}
+        <TextComponent text = {this.state.checked ? 'ON' : 'OFF'}/>
       </label>
-        
-        {/*Logical statement for the text change.
-        Based on the position of the switch the text will change from "off" to "on".*/}
-        
-         <p>The switch is <b><span>{this.state.checked ? 'on' : 'off'}</span></b>.</p>
         </div>
     );
   }
