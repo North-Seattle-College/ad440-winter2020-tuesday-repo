@@ -8,6 +8,7 @@ branches:
     
 before_install:
     - az login -u $AZ_LOGIN_NAME -p $AZ_PASSWORD --service-principal --tenant $AZ_TENANT > /dev/null 2>&1
+    - az account show
 
 after_success:
   - az storage blob upload-batch -d kevinscontainer --account-name kevinstoragetask5 -s directory_path --pattern *.html
