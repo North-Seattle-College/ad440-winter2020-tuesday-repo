@@ -7,6 +7,7 @@ branches:
     - feature-kevin-task5
     
 before_install:
+    - az --help
     - echo $AZ_LOGIN_NAME
     - echo $AZ_PASSOWRD
     - echo $AZ_TENANT
