@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import TextComponent from './TextComponent';
-import ToggleSwitch from './toggleSwitch';
+import ToggleSwitch from './ToggleSwitch';
 
 
 const style = {
