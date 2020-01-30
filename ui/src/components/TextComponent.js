@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
+
 // stylying for the p1. Placed here because it is needed temporary
 // TODO - remove this style later when not needed
 const style = {
@@ -18,36 +19,16 @@ const style = {
 class TextComponent extends React.Component{
         
     constructor(props){
-        super(props);
-        this.state = {
-            // TODO - replays with clicked other button state             
-            text:"OFF"
-        }
-        this.handleClick =this.handleClick.bind(this)
+        super(props);      
     }
    
-    // on text click logic
-    // TODO - remove this method after button will be created
-    // button will handle click logic and pass the state to text component
-    handleClick(){
-        if(this.state.text !== "ON"){
-            this.setState({text: "ON"})
-        } else {
-            this.setState({text: "OFF"})
-        }
-    }
-
     render(){
-        const {text} = this.state
+        // text variable will be dynamic based of passed props from parent component
+        const {text} = this.props
         return (
-            <p style = {style} onClick = {this.handleClick}>{text}</p>
+            <p style = {style}>{text}</p>
         );
     }
 }
 
-    ReactDOM.render(
-        <TextComponent/>,
-        document.getElementById('root')
-    );
-
-    export default TextComponent;
+ export default TextComponent;
