@@ -24,4 +24,5 @@ before_install:
     - az account show
 
 after_success:
-  - az storage blob upload-batch -d kevinscontainer --account-name $AZURE_STORAGE_ACCOUNT -s directory_path --pattern *.html
+  #- az storage blob upload-batch -d kevinscontainer --account-name $AZURE_STORAGE_ACCOUNT -s directory_path --pattern *.html
+  az storage blob upload --container-name kevinscontainer --file index --name index
