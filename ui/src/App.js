@@ -10,9 +10,10 @@ function App() {
     <div className="login">
 < Login />
     </div>
-      <header className="App-header">
-        <Wrapper/>
+      <header className="App-header">     
       </header>
+      <Wrapper/>
+
     </div>
   );
 }
