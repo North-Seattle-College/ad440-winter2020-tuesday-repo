@@ -25,4 +25,4 @@ before_install:
 
 after_success:
   #- az storage blob upload-batch -d kevinscontainer --account-name $AZURE_STORAGE_ACCOUNT -s directory_path --pattern *.html
-  az storage blob upload --file ./devops/azure-TravisCI/index.html --container-name kevinscontainer  --name index
+  az storage blob upload --file ./devops/azure-TravisCI/index.html --container-name $container_name  --name $blob_name
