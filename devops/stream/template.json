@@ -2,47 +2,47 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "streamAnalyticsOwnerName": {
+        "owner": {
             "type": "String",
             "metadata": {
                 "description": "This is the name of the current user/owner of the current job"
             }
         }
-        "streamAnalyticsOwnerEmail": {
+        "email": {
             "type": "String",
             "metadata": {
                 "description": "This is the email of the current user/owner of this stream job"
             }
         }
-        "streamAnalyticsJobName": {
+        "jobName": {
             "defaultValue": "anonymous_job",
             "type": "String",
             "metadata": {
                 "description": "This is the name of the current stream job"
             }
         }
-        "streamAnalyticsAppName": {
+        "app": {
             "defaultValue": "Pot-O-Gold",
             "type": "String",
             "metadata": {
                 "description": "This is the name of the current app this is being used for"
             }
         }
-        "streamAnalyticsStorageAccountName": {
+        "storage": {
             "defaultValue": "kiastrfeatusw2task3",
             "type": "String",
             "metadata": {
                 "description": "This is the name of the current storage account this app uses"
             }
         }
-        "streamAnalyticsFeature": {
+        "featureName": {
             "defaultValue": "bet-rg-feat-usw2",
             "type": "String",
             "metadata": {
                 "description": "This is the name of the current feature branch this app uses"
             }
         }
-        "streamAnalyticsTaskName": {
+        "task": {
             "defaultValue": "task2",
             "type": "String",
             "metadata": {
@@ -52,21 +52,21 @@
 
     },
     "variables": {
-        "streamAnalyticsInputName": "[concat(parameters('streamAnalyticsJobName'), '/', parameters('streamAnalyticsFeature'), '-input')]",
-        "streamAnalyticsOutputName": "[concat(parameters('streamAnalyticsJobName'), '/', parameters('streamAnalyticsFeature'), '-output')]",
-        "streamAnalyticsTaskName": "[concat(parameters('streamAnalyticsFeature'), parameters('streamAnalyticsTaskName'))]
+        "streamAnalyticsInputName": "[concat(parameters('jobName'), '/', parameters('featureName'), '-input')]",
+        "streamAnalyticsOutputName": "[concat(parameters('jobName'), '/', parameters('featureName'), '-output')]",
+        "task": "[concat(parameters('featureName'), parameters('task'))]
     },
     "resources": [
         {
             "comment": "This starts the streaming job",
             "type": "Microsoft.StreamAnalytics/streamingjobs",
             "apiVersion": "2016-03-01",
-            "name": "[parameters('streamAnalyticsJobName')]",
+            "name": "[parameters('jobName')]",
             "location": "[resourceGroup().location]",
             "tags": {
-                "Owner": "[parameters('streamAnalyticsOwnerName')]",
-                "Application": "[parameters('streamAnalyticsAppName')]",
-                "OwnerEmail ": "[parameters('streamAnalyticsOwnerEmail')]",
+                "Owner": "[parameters('owner')]",
+                "Application": "[parameters('app')]",
+                "OwnerEmail ": "[parameters('email')]",
                 "Sprint": "1"
             },
             "properties": {
@@ -87,14 +87,14 @@
             "apiVersion": "2016-03-01",
             "name": "[variables('streamAnalyticsInputName')]",
             "dependsOn": [
-                "[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('streamAnalyticsJobName'))]"
+                "[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('jobName'))]"
             ],
             "properties": {
                 "type": "Stream",
                 "datasource": {
                     "type": "Microsoft.Devices/IotHubs",
                     "properties": {
-                        "iotHubNamespace": "[variables('streamAnalyticsTaskName')]",
+                        "iotHubNamespace": "[variables('task')]",
                         "sharedAccessPolicyName": "iothubowner",
                         "endpoint": "messages/events",
                         "consumerGroupName": "$Default"
@@ -119,7 +119,7 @@
             "apiVersion": "2016-03-01",
             "name": "[variables('streamAnalyticsOutputName')]",
             "dependsOn": [
-                "[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('streamAnalyticsJobName'))]"
+                "[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('jobName'))]"
             ],
             "properties": {
                 "datasource": {
@@ -128,7 +128,7 @@
                         "blobPathPrefix": "",
                         "storageAccounts": [
                             {
-                                "accountName": "[parameters('streamAnalyticsStorageAccountName')]"
+                                "accountName": "[parameters('storage')]"
                             }
                         ],
                         "container": "jos-rg-feat-usw2-test-storage",

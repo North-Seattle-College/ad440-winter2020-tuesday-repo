@@ -2,31 +2,31 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "streamAnalyticsOwnerName": {
+        "owner": {
             "value": null,
             "metadata": {
                 "description": "This is something the user is prompted to enter"
             }
         }
-        "streamAnalyticsOwnerEmail": {
+        "email": {
             "value": null,
             "metadata": {
                 "description": "This is something the user is prompted to enter"
             }
         }
-        "streamAnalyticsJobName": {
+        "jobName": {
             "value": "job1"
         }
-        "streamAnalyticsAppName": {
+        "app": {
             "value": "Pot-O-Gold"
         }
-        "streamAnalyticsStorageAccountName": {
+        "storage": {
             "value": "kiastrfeatusw2task3"
         }
-        "streamAnalyticsFeature": {
+        "featureName": {
             "value": "bet-rg-feat-usw2"
         }
-        "streamAnalyticsTaskName": {
+        "task": {
             "value": "task2"
         }
 
