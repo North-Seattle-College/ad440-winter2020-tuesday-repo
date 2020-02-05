@@ -25,5 +25,5 @@ data = {'api_dev_key': API_KEY,
 r = requests.post(url=API_ENDPOINT, data=data)
 
 # extracting response text  
-pastebin_url = r.text
-print("The pastebin URL is:%s" % pastebin_url)
+post_url = r.text
+print("The post_url URL is:%s" % post_url)
