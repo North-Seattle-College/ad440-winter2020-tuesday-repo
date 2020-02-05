@@ -252,7 +252,7 @@ function Table({ columns, data }) {
       defaultColumn, // Be sure to pass the defaultColumn option
       filterTypes,
     },
-     // useFilters!
+    // useFilters, // useFilters! - temporary removed to match wireframe
     useGlobalFilter // useGlobalFilter!
   )
 
@@ -330,25 +330,33 @@ filterGreaterThan.autoRemove = val => typeof val !== 'number'
 
 function App() {
 
-
+// columns with the top column containing the title of a table
 const columns =  [
-  {
-      Header: "Machine",
-      accessor: "id"
-  },
-  {
-      Header: "Vendor",
-      accessor: "vendor"
-  },
-  {
-      Header: "Address",
-      accessor: "id"
-  },
-  {
-      Header: "Status",
-      accessor: "status"
+ 
+  { 
+    Header: "Machine List",
+
+    columns: [
+      {
+        Header: "Machine",
+        accessor: "id"
+      },
+      {
+        Header: "Vendor",
+        accessor: "vendor"
+      },
+      {
+        Header: "Address",
+        accessor: "id"
+      },
+      {
+        Header: "Status",
+        accessor: "status"
+      }
+    ]
   }
 ]
+
 // broken(filter, dispencer) - red, loud motor noise - orange, out of some type of coffee but has a different one - yellow
 // working - green
   const data = React.useMemo(() => [
