@@ -6,6 +6,7 @@ import { useTable, useFilters, useGlobalFilter } from 'react-table'
 // A great library for fuzzy filtering/sorting items
 import matchSorter from 'match-sorter'
 
+
 // style for the search bar on top
 // TODO - move to a separate CSS file
 const style = {
@@ -14,9 +15,16 @@ const style = {
   fontWeight: 'bold',
   textAlign: 'center',
   border: '1px solid black',
-  width: '750px'
+  width: '750px',
+  float: 'right',
   
 };
+
+const styleWrapper= {
+  padding: '10px',
+  margin: '10px',
+  border: '2px solid gold'
+}
 
 const data = [
   { id: 1, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
@@ -24,15 +32,51 @@ const data = [
   { id: 3, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
   { id: 4, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
   { id: 5, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
-  { id: 6, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'}
-
+  { id: 6, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'},
+  { id: 7, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
+  { id: 8, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
+  { id: 9, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
+  { id: 10, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
+  { id: 11, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
+  { id: 12, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'},
+  { id: 13, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
+  { id: 14, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
+  { id: 15, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
+  { id: 16, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
+  { id: 17, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
+  { id: 18, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'},
+  { id: 19, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
+  { id: 20, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
+  { id: 21, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
+  { id: 22, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
+  { id: 23, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
+  { id: 24, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'}
 ]
-// style for the table
+// style for the div around table
 const Styles = styled.div`
-  padding: 1rem;
+  margin-top: 20px;
+  martin-bottom: 20px;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80%;
+  display: block;
+  border: 2px solid gold;
+  border-radius:15px;
+  height: 900px;
+  overflow: none;
+  background-color: #fffdfa;
+
+   
   table {
+    display: inline-block;
+    position: relative;
+    overflow: none;
+    max-width: 90%;
+    float: right;
     border-spacing: 0;
-    border: 1px solid black;
+    border: 2px solid black;
+    border-radius: 15px;
     tr {
       :last-child {
         td {
@@ -42,7 +86,7 @@ const Styles = styled.div`
     }
     th,
     td {
-      margin: 0;
+      margin: auto;
       padding: 0.5rem;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
@@ -53,6 +97,8 @@ const Styles = styled.div`
   }
 `
 
+
+
 function GlobalFilter({
   preGlobalFilteredRows,
   globalFilter,
@@ -61,7 +107,7 @@ function GlobalFilter({
   const count = preGlobalFilteredRows.length
 
   return (
-    <span>
+    <span style = {{marginLeft: '5px', fontSize: '16pt', float: 'right'}}>
       Search:{' '}
       <input
         value={globalFilter || ''}
@@ -73,7 +119,7 @@ function GlobalFilter({
         placeholder={`${count} records...`}
        
         style={{
-          fontSize: '1.1rem',
+          fontSize: '1.3rem',
           border: '1',
           borderRadius: '8pt'
         }}
@@ -130,14 +176,14 @@ function Table({ columns, data }) {
     []
   )
 
-  const defaultColumn = React.useMemo(
-    () => ({
-      // Let's set up our default Filter UI
-      Filter: DefaultColumnFilter,
-    }),
-    []
-  )
-
+  // const defaultColumn = React.useMemo(
+  //   () => ({
+  //     // Let's set up our default Filter UI
+  //     Filter: DefaultColumnFilter,
+  //   }),
+  //   []
+  // )
+// flat column - for searching
   const {
     getTableProps,
     getTableBodyProps,
@@ -152,7 +198,7 @@ function Table({ columns, data }) {
     {
       columns,
       data,
-      defaultColumn,
+      //defaultColumn,
       // Be sure to pass the defaultColumn option
       filterTypes,
     },
@@ -162,53 +208,40 @@ function Table({ columns, data }) {
 
   // We don't want to render all of the rows for this example, so cap
   // it for this use case
-  const firstPageRows = rows.slice(0, 10)
+  const firstPageRows = rows.slice(0, 20)
 
   return (
     
     <>
-    <div style = {style}>
-    <GlobalFilter style = {style}
+    
+    {/* <GlobalFilter
+                preGlobalFilteredRows={preGlobalFilteredRows}
+                globalFilter={state.globalFilter}
+                setGlobalFilter={setGlobalFilter}
+              /> */}
+
+      <table {...getTableProps()}>
+        <thead> 
+        <GlobalFilter
                 preGlobalFilteredRows={preGlobalFilteredRows}
                 globalFilter={state.globalFilter}
                 setGlobalFilter={setGlobalFilter}
               />
-
-
-    </div>
     
-      <table {...getTableProps()}>
-        <thead>
           {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr  style={{fontSize: '18pt'}} {...headerGroup.getHeaderGroupProps()}>
+           
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>
+                <th   {...column.getHeaderProps()}>
+                
                   {column.render('Header')}
                   {/* Render the columns filter UI */}
-                  <div>{column.canFilter ? column.render('Filter') : null}</div>
+                  <div className = "canFilter">{column.canFilter ? column.render('Filter') : null}</div>
                 </th>
               ))}
             </tr>
           ))}
-          <tr>
-            <th
-              colSpan={flatColumns.length}
-              style={{
-                textAlign: 'left',
-              }}
-            >
-            
-
-            <GlobalFilter
-                preGlobalFilteredRows={preGlobalFilteredRows}
-                globalFilter={state.globalFilter}
-                setGlobalFilter={setGlobalFilter}
-              />
-
-            
-              
-            </th>
-          </tr>
+      
         </thead>
         <tbody {...getTableBodyProps()}>
           {firstPageRows.map((row, i) => {
@@ -224,7 +257,7 @@ function Table({ columns, data }) {
         </tbody>
       </table>
       <br />
-      <div>Showing the first 20 results of {rows.length} rows</div>
+      <div style={{float: "right", margin: "5px"}}> Showing the first 20 results of {rows.length} rows</div>
       <div>
         <pre>
           <code>{JSON.stringify(state.filters, null, 2)}</code>
@@ -234,39 +267,59 @@ function Table({ columns, data }) {
   )
 }
 
-function App() { 
-// columns with the top column containing the title of a table
-const columns = React.useMemo(
-  () => [
+
+// Filter: ({ filter, onChange }) =>
+//                     <select
+//                       onChange={event => onChange(event.target.value)}
+//                       style={{ width: "100%" }}
+//                       value={filter ? filter.value : "all"}
+//                     >
+//                       <option value="all">Show All</option>
+//                       <option value="true">Can Drink</option>
+//                       <option value="false">Can't Drink</option>
+//                     </select>
+
+
+const columns = 
+   [
   { 
     // this global filter in the header doesn't word
     Header: "Machine List",
+    style: styleWrapper,
     //defaultCanFilter: true,
-    canFilter: true,
-    Filter: GlobalFilter,
-    
-
+    // canFilter: true,
+    // Filter: GlobalFilter,
     columns: [
       {
         Header: "Machine",
+        filterable:false,
+        canFilter: false,
+        sortable: false,
         accessor: "id",
       },
       {
         Header: "Vendor",
+        canFilter: false,
         accessor: "vendor"
       },
       {
         Header: "Address",
+        canFilter: false,
         accessor: "address"
-      }
-    ]
-  },
+      },  
       {
         Header: "Status",
+        canFilter: false,
         accessor: "status"
       }
     ]
-)
+  }
+]
+
+export default  class App extends React.Component { 
+
+  
+// columns with the top column containing the title of a table
 
 // broken(filter, dispencer) - red, loud motor noise - orange, out of some type of coffee but has a different one - yellow
 // working - green
@@ -279,19 +332,22 @@ const columns = React.useMemo(
 //     { id: 6, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'}
 
 // ]);
-
+render(){
   return (
     <div className="App">
     <div className="login">
-< Login />
+    < Login />
     </div>
       <header className="App-header">     
       </header>
-      <Styles>
-      <Table columns={columns} data={data} />
+      <Styles>     
+          <Table columns={columns} data={data}/>
     </Styles>
     </div>
   );
+
+
+}
+  
 }
 
-export default App;
