@@ -257,7 +257,7 @@ function Table({ columns, data }) {
         </tbody>
       </table>
       <br />
-      <div style={{float: "right", margin: "5px"}}> Showing the first 20 results of {rows.length} rows</div>
+      {/* <div style={{margin: "5px"}}> Showing the first 20 results of {rows.length} rows</div> */}
       <div>
         <pre>
           <code>{JSON.stringify(state.filters, null, 2)}</code>
