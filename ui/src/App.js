@@ -5,8 +5,29 @@ import styled from 'styled-components'
 import { useTable, useFilters, useGlobalFilter } from 'react-table'
 // A great library for fuzzy filtering/sorting items
 import matchSorter from 'match-sorter'
-// renders main page together omponents/TextComponent';with new Text Component
 
+// style for the search bar on top
+// TODO - move to a separate CSS file
+const style = {
+  fontSize: '20px',
+  padding: '10px',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  border: '1px solid black',
+  width: '750px'
+  
+};
+
+const data = [
+  { id: 1, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
+  { id: 2, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
+  { id: 3, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
+  { id: 4, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
+  { id: 5, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
+  { id: 6, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'}
+
+]
+// style for the table
 const Styles = styled.div`
   padding: 1rem;
   table {
@@ -32,24 +53,6 @@ const Styles = styled.div`
   }
 `
 
-// And in your global search
-
-// function globalSearch(){
-//   let { searchInput, data } = this.state;
-//   let filteredData = data.filter(value => {
-//   return (
-//       value.vendor.toLowerCase().includes(searchInput.toLowerCase()) ||
-//       value.address.toLowerCase().includes(searchInput.toLowerCase()) ||
-//       value.status.toLowerCase().includes(searchInput.toLowerCase())
-//         .toString()
-//         .toLowerCase()
-//         .includes(searchInput.toLowerCase())
-//     );
-//   });
-//   this.setState({ filteredData });
-// };
-
-// Define a default UI for filtering
 function GlobalFilter({
   preGlobalFilteredRows,
   globalFilter,
@@ -68,9 +71,11 @@ function GlobalFilter({
           console.log(e.target.value)
         }}
         placeholder={`${count} records...`}
+       
         style={{
           fontSize: '1.1rem',
-          border: '0',
+          border: '1',
+          borderRadius: '8pt'
         }}
       />
     </span>
@@ -90,7 +95,7 @@ function DefaultColumnFilter
       onChange={e => {
         setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
       }}
-      placeholder={`Search ${count} records...`}
+     // placeholder={`Search ${count} records...`}
     />
   )
 }
@@ -103,7 +108,7 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 // Let the table remove the filter if the string is empty
 fuzzyTextFilterFn.autoRemove = val => !val
 
-// Our table component
+// The table component, which displays machines
 function Table({ columns, data }) {
   const filterTypes = React.useMemo(
     () => ({
@@ -160,7 +165,18 @@ function Table({ columns, data }) {
   const firstPageRows = rows.slice(0, 10)
 
   return (
+    
     <>
+    <div style = {style}>
+    <GlobalFilter style = {style}
+                preGlobalFilteredRows={preGlobalFilteredRows}
+                globalFilter={state.globalFilter}
+                setGlobalFilter={setGlobalFilter}
+              />
+
+
+    </div>
+    
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
@@ -181,11 +197,16 @@ function Table({ columns, data }) {
                 textAlign: 'left',
               }}
             >
-              <GlobalFilter
+            
+
+            <GlobalFilter
                 preGlobalFilteredRows={preGlobalFilteredRows}
                 globalFilter={state.globalFilter}
                 setGlobalFilter={setGlobalFilter}
               />
+
+            
+              
             </th>
           </tr>
         </thead>
@@ -220,9 +241,10 @@ const columns = React.useMemo(
   { 
     // this global filter in the header doesn't word
     Header: "Machine List",
+    //defaultCanFilter: true,
+    canFilter: true,
+    Filter: GlobalFilter,
     
-    //canFilter: true,
-    //Filter: GlobalFilter,
 
     columns: [
       {
@@ -236,27 +258,27 @@ const columns = React.useMemo(
       {
         Header: "Address",
         accessor: "address"
-      },
+      }
+    ]
+  },
       {
         Header: "Status",
         accessor: "status"
       }
     ]
-  }
-]
 )
 
 // broken(filter, dispencer) - red, loud motor noise - orange, out of some type of coffee but has a different one - yellow
 // working - green
-  const data = React.useMemo(() => [
-    { id: 1, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
-    { id: 2, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
-    { id: 3, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
-    { id: 4, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
-    { id: 5, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
-    { id: 6, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'}
+//   const data = React.useMemo(() => [
+//     { id: 1, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
+//     { id: 2, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
+//     { id: 3, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
+//     { id: 4, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
+//     { id: 5, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
+//     { id: 6, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'}
 
-]);
+// ]);
 
   return (
     <div className="App">
