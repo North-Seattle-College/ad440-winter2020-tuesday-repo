@@ -1,7 +1,6 @@
 import React from 'react';
 import './css/App.css';
 import Login from './components/login';
-import Wrapper from './components/Wrapper';
 import styled from 'styled-components'
 import { useTable, useFilters, useGlobalFilter } from 'react-table'
 // A great library for fuzzy filtering/sorting items
@@ -33,6 +32,23 @@ const Styles = styled.div`
   }
 `
 
+// And in your global search
+
+// function globalSearch(){
+//   let { searchInput, data } = this.state;
+//   let filteredData = data.filter(value => {
+//   return (
+//       value.vendor.toLowerCase().includes(searchInput.toLowerCase()) ||
+//       value.address.toLowerCase().includes(searchInput.toLowerCase()) ||
+//       value.status.toLowerCase().includes(searchInput.toLowerCase())
+//         .toString()
+//         .toLowerCase()
+//         .includes(searchInput.toLowerCase())
+//     );
+//   });
+//   this.setState({ filteredData });
+// };
+
 // Define a default UI for filtering
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -48,6 +64,8 @@ function GlobalFilter({
         value={globalFilter || ''}
         onChange={e => {
           setGlobalFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
+          // prints target value everytime new
+          console.log(e.target.value)
         }}
         placeholder={`${count} records...`}
         style={{
@@ -133,7 +151,7 @@ function Table({ columns, data }) {
       // Be sure to pass the defaultColumn option
       filterTypes,
     },
-    useFilters, // useFilters! - temporary removed to match wireframe
+    //useFilters, // useFilters! - temporary removed to match wireframe
     useGlobalFilter // useGlobalFilter!
   )
 
@@ -195,15 +213,16 @@ function Table({ columns, data }) {
   )
 }
 
-function App() {
-
+function App() { 
 // columns with the top column containing the title of a table
 const columns = React.useMemo(
   () => [
   { 
+    // this global filter in the header doesn't word
     Header: "Machine List",
-    canFilter: true,
-    Filter: GlobalFilter,
+    
+    //canFilter: true,
+    //Filter: GlobalFilter,
 
     columns: [
       {
@@ -246,9 +265,8 @@ const columns = React.useMemo(
     </div>
       <header className="App-header">     
       </header>
-      <Wrapper/>
       <Styles>
-      <Table columns={columns} data={data} filterable/>
+      <Table columns={columns} data={data} />
     </Styles>
     </div>
   );
