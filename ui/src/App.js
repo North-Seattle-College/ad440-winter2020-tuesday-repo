@@ -11,7 +11,7 @@ import matchSorter from 'match-sorter'
 // TODO - move to a separate CSS file
 const style = {
   fontSize: '20px',
-  padding: '10px',
+  padding: '2px',
   fontWeight: 'bold',
   textAlign: 'center',
   border: '1px solid black',
@@ -53,29 +53,39 @@ const data = [
   { id: 24, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'}
 ]
 // style for the div around table
+const Title = styled.div`
+
+  border:'2px solid red';
+  display: 'inline-block';
+  float: 'left';
+  margin-left: 10%;
+  fontWeight: 'bold';
+  max-width: 100%;
+},
+`
+
 const Styles = styled.div`
   margin-top: 20px;
   martin-bottom: 20px;
-  padding: 20px;
+  padding: 2px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 80%;
-  display: block;
   border: 2px solid gold;
   border-radius:15px;
-  height: 900px;
-  overflow: none;
+  height: 1000px;
   background-color: #fffdfa;
-
+  display: inline-block;
+  box-sizing: border-box;
    
   table {
-    display: inline-block;
+   display: inline;
     position: relative;
     overflow: none;
-    max-width: 90%;
+    max-width: 100%;
     float: right;
     border-spacing: 0;
     border: 2px solid black;
+    margin: 5px;
     border-radius: 15px;
     tr {
       :last-child {
@@ -96,9 +106,7 @@ const Styles = styled.div`
     }
   }
 `
-
-
-
+// filter UI
 function GlobalFilter({
   preGlobalFilteredRows,
   globalFilter,
@@ -107,7 +115,7 @@ function GlobalFilter({
   const count = preGlobalFilteredRows.length
 
   return (
-    <span style = {{marginLeft: '5px', fontSize: '16pt', float: 'right'}}>
+    <div style = {{marginLeft: '1px', fontSize: '16pt', float: 'right', marginTop: '1.5%'}}>
       Search:{' '}
       <input
         value={globalFilter || ''}
@@ -124,25 +132,7 @@ function GlobalFilter({
           borderRadius: '8pt'
         }}
       />
-    </span>
-  )
-}
-
-// Define a default UI for filtering
-function DefaultColumnFilter
-({
-  column: { filterValue, preFilteredRows, setFilter },
-}) {
-  const count = preFilteredRows.length
-
-  return (
-    <input
-      value={filterValue || ''}
-      onChange={e => {
-        setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
-      }}
-     // placeholder={`Search ${count} records...`}
-    />
+    </div>
   )
 }
 
@@ -176,13 +166,7 @@ function Table({ columns, data }) {
     []
   )
 
-  // const defaultColumn = React.useMemo(
-  //   () => ({
-  //     // Let's set up our default Filter UI
-  //     Filter: DefaultColumnFilter,
-  //   }),
-  //   []
-  // )
+  
 // flat column - for searching
   const {
     getTableProps,
@@ -191,14 +175,13 @@ function Table({ columns, data }) {
     rows,
     prepareRow,
     state,
-    flatColumns,
     preGlobalFilteredRows,
     setGlobalFilter,
   } = useTable(
     {
       columns,
       data,
-      //defaultColumn,
+      // defaultColumn,
       // Be sure to pass the defaultColumn option
       filterTypes,
     },
@@ -213,21 +196,16 @@ function Table({ columns, data }) {
   return (
     
     <>
-    
-    {/* <GlobalFilter
-                preGlobalFilteredRows={preGlobalFilteredRows}
-                globalFilter={state.globalFilter}
-                setGlobalFilter={setGlobalFilter}
-              /> */}
+    <Title> <p style= {{fontSize: '24pt', fontWeight: 'bold', float: 'left', margin: '0 0 9px 20px'}}>Machines List</p>
+      <GlobalFilter
+                    preGlobalFilteredRows={preGlobalFilteredRows}
+                    globalFilter={state.globalFilter}
+                    setGlobalFilter={setGlobalFilter}
+                  />
 
-      <table {...getTableProps()}>
+    </Title>
+      <table {...getTableProps()}>     
         <thead> 
-        <GlobalFilter
-                preGlobalFilteredRows={preGlobalFilteredRows}
-                globalFilter={state.globalFilter}
-                setGlobalFilter={setGlobalFilter}
-              />
-    
           {headerGroups.map(headerGroup => (
             <tr  style={{fontSize: '18pt'}} {...headerGroup.getHeaderGroupProps()}>
            
@@ -268,52 +246,23 @@ function Table({ columns, data }) {
 }
 
 
-// Filter: ({ filter, onChange }) =>
-//                     <select
-//                       onChange={event => onChange(event.target.value)}
-//                       style={{ width: "100%" }}
-//                       value={filter ? filter.value : "all"}
-//                     >
-//                       <option value="all">Show All</option>
-//                       <option value="true">Can Drink</option>
-//                       <option value="false">Can't Drink</option>
-//                     </select>
-
-
-const columns = 
-   [
-  { 
-    // this global filter in the header doesn't word
-    Header: "Machine List",
-    style: styleWrapper,
-    //defaultCanFilter: true,
-    // canFilter: true,
-    // Filter: GlobalFilter,
-    columns: [
+const columns = [
       {
         Header: "Machine",
-        filterable:false,
-        canFilter: false,
-        sortable: false,
         accessor: "id",
       },
       {
         Header: "Vendor",
-        canFilter: false,
         accessor: "vendor"
       },
       {
         Header: "Address",
-        canFilter: false,
         accessor: "address"
       },  
       {
         Header: "Status",
-        canFilter: false,
         accessor: "status"
       }
-    ]
-  }
 ]
 
 export default  class App extends React.Component { 
@@ -339,10 +288,10 @@ render(){
     < Login />
     </div>
       <header className="App-header">     
-      </header>
-      <Styles>     
-          <Table columns={columns} data={data}/>
-    </Styles>
+      </header>   
+      <Styles>    
+          <Table columns={columns} data={data}/>    
+    </Styles>    
     </div>
   );
 
