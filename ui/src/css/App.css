@@ -49,3 +49,11 @@ cursor: pointer;
 margin-left: 1150px;
 margin-top: 50px;
 }
+
+.buttonGroup {
+  width: 200px; 
+  border: 1px solid lightgray;
+  margin: 2% 1% 1% 2%;
+  float: left;
+  padding: 1% 1% 1% 1%;
+}

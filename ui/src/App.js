@@ -1,10 +1,12 @@
 import React from 'react';
 import './css/App.css';
+import './css/Button.css'
 import Login from './components/login';
 import styled from 'styled-components'
 import { useTable, useFilters, useGlobalFilter } from 'react-table'
 // A great library for fuzzy filtering/sorting items
 import matchSorter from 'match-sorter'
+import Button from './components/Button'
 
 
 // style for the search bar on top
@@ -290,10 +292,24 @@ render(){
     < Login />
     </div>
       <header className="App-header">     
-      </header>   
+      </header> 
+      <div className = "outer" style = {{width: '80%', border: '1px solid red', position: 'absolute', margin: '1% 1% 1% 1%'}}>
+      {/* Button container */}
+      <div className = "buttonGroup">
+          <Button label = "Home">
+          </Button>
+          <Button label = "Area 1">
+          </Button>
+          <Button label = "Area 2">
+          </Button>
+          <Button label = "Area 3">
+          </Button>        
+      </div>
+      
       <Styles>    
           <Table columns={columns} data={data}/>    
-    </Styles>    
+    </Styles>   
+    </div>  
     </div>
   );
 
