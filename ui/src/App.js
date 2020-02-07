@@ -7,54 +7,11 @@ import { useTable, useFilters, useGlobalFilter } from 'react-table'
 // A great library for fuzzy filtering/sorting items
 import matchSorter from 'match-sorter'
 import Button from './components/Button'
+import mockData from './data/mockTableData.json'
 
+// assign data variable to the mock json file data
+const data = mockData;
 
-// style for the search bar on top
-// TODO - move to a separate CSS file
-const style = {
-  fontSize: '20px',
-  padding: '2px',
-  fontWeight: 'bold',
-  textAlign: 'center',
-  border: '1px solid black',
-  width: '750px',
-  float: 'right',
-  
-};
-
-const styleWrapper= {
-  padding: '10px',
-  margin: '10px',
-  border: '2px solid gold',
-  width: '90%'
-}
-
-const data = [
-  { id: 1, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
-  { id: 2, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
-  { id: 3, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
-  { id: 4, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
-  { id: 5, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
-  { id: 6, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'},
-  { id: 7, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
-  { id: 8, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
-  { id: 9, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
-  { id: 10, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
-  { id: 11, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
-  { id: 12, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'},
-  { id: 13, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
-  { id: 14, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
-  { id: 15, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
-  { id: 16, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
-  { id: 17, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
-  { id: 18, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'},
-  { id: 19, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
-  { id: 20, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
-  { id: 21, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
-  { id: 22, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
-  { id: 23, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
-  { id: 24, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'}
-]
 // style for the div around table
 const Title = styled.div`
 
@@ -66,59 +23,12 @@ const Title = styled.div`
   max-width: 100%;
 },
 `
-
-const Styles = styled.div`
-  margin-top: 2%;
-  martin-bottom: 20px;
-  padding: 2px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 2px solid gold;
-  border-radius:15px;
-  height: 1000px;
-  background-color: #fffdfa;
-  display: inline-block;
-  width: 75%;
-  box-sizing: border-box;
-   
-  table {
-   display: inline;
-    position: relative;
-    overflow: none;
-    width: 97%;
-    float: right;
-    border-spacing: 0;
-    border: 2px solid black;
-    margin: 5px;
-    border-radius: 15px;
-    tr {
-      
-      :last-child {
-        td {
-          border-bottom: 0;
-         
-        }
-      }
-    }
-    th,
-    td {
-      margin: auto;
-      width: 20%;
-      padding: 0.8rem;
-      border-bottom: 1px solid gray;
-      
-      :last-child {
-        border-right: 0;
-      }
-    }
-  }
-`
 // filter UI
 function GlobalFilter({
   preGlobalFilteredRows,
   globalFilter,
   setGlobalFilter,
-}) {
+  }) {
 
   return (
     <div style = {{marginLeft: '1px', fontSize: '16pt', float: 'right', marginTop: '1.5%', marginRight: '1.5%', minWidth: '60%'}}>
@@ -276,20 +186,6 @@ const columns = [
 
 export default  class App extends React.Component { 
 
-  
-// columns with the top column containing the title of a table
-
-// broken(filter, dispencer) - red, loud motor noise - orange, out of some type of coffee but has a different one - yellow
-// working - green
-//   const data = React.useMemo(() => [
-//     { id: 1, vendor: 'Microsoft', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken'},
-//     { id: 2, vendor: 'North Seattle College', address: '9600 College Way N, WA 98103', status: 'possible motor wear'},
-//     { id: 3, vendor: 'Central Seattle College', address: '539 12th Ave, Redmond, WA 98052', status: 'working'},
-//     { id: 4, vendor: 'Some Fun Office', address: '50 Occidental Ave S, WA 98124', status: 'broken water pipe'},
-//     { id: 5, vendor: 'Fidelity', address: '4600 5th Ave, Seattle, WA 980104', status: 'coffee jam'},
-//     { id: 6, vendor: 'Amazon Spheres', address: '5000 148th Ave NE, Redmond, WA 98052', status: 'broken dispencer'}
-
-// ]);
 render(){
   return (
     <div className="App">
@@ -311,13 +207,15 @@ render(){
           </Button>        
       </div>
       
-      <Styles>    
-          <Table columns={columns} data={data}/>    
-    </Styles>   
+      {/* <Styles> */}
+        <div className = "styles">
+           <Table columns={columns} data={data}/>  
+        </div>    
+            
+    {/* </Styles>    */}
     </div>  
     </div>
   );
-
 
 }
   

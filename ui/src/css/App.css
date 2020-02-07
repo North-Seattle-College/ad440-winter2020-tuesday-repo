@@ -58,3 +58,44 @@
   padding: 1% 1% 1% 1%;
   border-radius: 13px;
 }
+
+.styles{
+  margin-top: 2%;
+  margin-bottom: 20px;
+  padding: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid gold;
+  border-radius:15px;
+  height: 1000px;
+  background-color: #fffdfa;
+  display: inline-block;
+  width: 75%;
+  box-sizing: border-box;
+}
+
+table {
+  display: inline;
+    position: relative;
+    overflow: none;
+    box-sizing: border-box;
+    width: 97%;
+    float: right;
+    border-spacing: 0;
+    border: 2px solid black;
+    margin: 5px;
+    border-radius: 15px;
+} 
+
+th,td {
+      margin: auto;
+      width: 20%;
+      padding: 0.8rem;
+      border-bottom: 1px solid gray;     
+    }
+
+
+tr:last-child td {
+  border-bottom: none;
+}
+
