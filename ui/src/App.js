@@ -97,9 +97,9 @@ const Styles = styled.div`
     th,
     td {
       margin: auto;
-      padding: 0.5rem;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
+      padding: 0.8rem;
+      border-bottom: 1px solid gray;
+      
       :last-child {
         border-right: 0;
       }
@@ -112,10 +112,9 @@ function GlobalFilter({
   globalFilter,
   setGlobalFilter,
 }) {
-  const count = preGlobalFilteredRows.length
 
   return (
-    <div style = {{marginLeft: '1px', fontSize: '16pt', float: 'right', marginTop: '1.5%'}}>
+    <div style = {{marginLeft: '1px', fontSize: '16pt', float: 'right', marginTop: '1.5%', marginRight: '1.5%', minWidth: '60%'}}>
       Search:{' '}
       <input
         value={globalFilter || ''}
@@ -124,11 +123,14 @@ function GlobalFilter({
           // prints target value everytime new
           console.log(e.target.value)
         }}
-        placeholder={`${count} records...`}
+        placeholder={`Search machine list...`}
        
         style={{
-          fontSize: '1.3rem',
+          fontSize: '1.1rem',
+          padding: '2px',
+          minWidth: '70%',
           border: '1',
+         
           borderRadius: '8pt'
         }}
       />
@@ -196,7 +198,7 @@ function Table({ columns, data }) {
   return (
     
     <>
-    <Title> <p style= {{fontSize: '24pt', fontWeight: 'bold', float: 'left', margin: '0 0 9px 20px'}}>Machines List</p>
+    <Title> <p style= {{fontSize: '24pt', fontWeight: 'bold', float: 'left', margin: '5px 0 9px 20px'}}>Machines List</p>
       <GlobalFilter
                     preGlobalFilteredRows={preGlobalFilteredRows}
                     globalFilter={state.globalFilter}
