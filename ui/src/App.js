@@ -12,7 +12,7 @@ import mockData from './data/mockTableData.json'
 // assign data variable to the mock json file data
 const data = mockData;
 
-// style for the div around table
+// styled component of the table title
 const Title = styled.div`
 
   border:'2px solid red';
@@ -183,7 +183,7 @@ const columns = [
         accessor: "status"
       }
 ]
-
+// The root App component
 export default  class App extends React.Component { 
 
 render(){
@@ -208,7 +208,7 @@ render(){
       </div>
       
       {/* <Styles> */}
-        <div className = "styles">
+        <div className = "table-container">
            <Table columns={columns} data={data}/>  
         </div>    
             

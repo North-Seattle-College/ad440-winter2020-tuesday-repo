@@ -59,7 +59,7 @@
   border-radius: 13px;
 }
 
-.styles{
+.table-container{
   margin-top: 2%;
   margin-bottom: 20px;
   padding: 2px;
@@ -72,6 +72,7 @@
   display: inline-block;
   width: 75%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 table {
@@ -85,6 +86,7 @@ table {
     border: 2px solid black;
     margin: 5px;
     border-radius: 15px;
+    overflow: hidden;
 } 
 
 th,td {
