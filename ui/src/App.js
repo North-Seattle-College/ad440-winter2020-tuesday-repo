@@ -25,7 +25,8 @@ const style = {
 const styleWrapper= {
   padding: '10px',
   margin: '10px',
-  border: '2px solid gold'
+  border: '2px solid gold',
+  width: '90%'
 }
 
 const data = [
@@ -67,7 +68,7 @@ const Title = styled.div`
 `
 
 const Styles = styled.div`
-  margin-top: 20px;
+  margin-top: 2%;
   martin-bottom: 20px;
   padding: 2px;
   margin-left: auto;
@@ -77,28 +78,32 @@ const Styles = styled.div`
   height: 1000px;
   background-color: #fffdfa;
   display: inline-block;
+  width: 75%;
   box-sizing: border-box;
    
   table {
    display: inline;
     position: relative;
     overflow: none;
-    max-width: 100%;
+    width: 97%;
     float: right;
     border-spacing: 0;
     border: 2px solid black;
     margin: 5px;
     border-radius: 15px;
     tr {
+      
       :last-child {
         td {
           border-bottom: 0;
+         
         }
       }
     }
     th,
     td {
       margin: auto;
+      width: 20%;
       padding: 0.8rem;
       border-bottom: 1px solid gray;
       
@@ -293,7 +298,7 @@ render(){
     </div>
       <header className="App-header">     
       </header> 
-      <div className = "outer" style = {{width: '80%', border: '1px solid red', position: 'absolute', margin: '1% 1% 1% 1%'}}>
+      <div className = "outer" style = {{width: '90%', border: '1px solid red', position: 'absolute', margin: '1% 1% 1% 1%'}}>
       {/* Button container */}
       <div className = "buttonGroup">
           <Button label = "Home">
