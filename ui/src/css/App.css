@@ -98,8 +98,6 @@ th,td {
 
 tr:last-child td {
   border-bottom: none;
-  line-height: 0.8;
-
 }
 
 tr:last-child {
@@ -114,3 +112,17 @@ tr:last-child {
   line-height: 0.5;
    background-color: aquamarine; 
 } 
+
+.status-button{
+  width: 80%;
+  box-sizing: border-box;
+  background-color:green;
+  border: none;
+  display: inline-block;
+  margin: 1% 1% 1% 1%;
+  height: 30px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 10px;
+ 
+}

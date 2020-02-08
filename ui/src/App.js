@@ -22,6 +22,14 @@ const Title = styled.div`
   max-width: 100%;
 },
 `
+
+function StatusButton(props) {
+
+  return (   
+    <button className= "status-button" onClick={props.handleClick}>
+    </button>   
+  );
+}
 // filter UI
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -169,6 +177,7 @@ function Table({
                       {
                         className: cell.column.className,
                         style: cell.column.style,
+                        button: cell.column.button,
                       },
                       getColumnProps(cell.column),
                       getCellProps(cell),
@@ -209,8 +218,15 @@ const columns = [
       {
         Header: "Status",
         accessor: "status",
-        
-
+        Cell: () => (
+          <StatusButton/>     
+        )
+        //         {/* getProps: {
+    // (state, rowInfo) => ({
+    //   style: {
+    //     backgroundColor: (rowInfo.row.specific_column===1?'red':null)
+    //   }
+    // }) */}
       }
 ]
 // The root App component
@@ -243,7 +259,7 @@ render(){
            columns={columns} 
            data={data}
            
-            getCellProps = {cellInfo => ({ 
+          getCellProps = {cellInfo => ({ 
               
               style: {
                 // backgroundColor: `red`,
