@@ -98,10 +98,19 @@ th,td {
 
 tr:last-child td {
   border-bottom: none;
+  line-height: 0.8;
 
 }
 
-td:last-child {
+tr:last-child {
+  line-height: 0.5;
+}
+
+/* td:last-child {
  background-color: greenyellow;
-}
+} */
 
+.status {
+  line-height: 0.5;
+   background-color: aquamarine; 
+} 

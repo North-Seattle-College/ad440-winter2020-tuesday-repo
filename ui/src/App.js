@@ -12,7 +12,6 @@ import mockData from './data/mockTableData.json'
 // assign data variable to the mock json file data
 const data = mockData;
 
-// styled component of the table title
 const Title = styled.div`
 
   border:'2px solid red';
@@ -63,8 +62,18 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 // Let the table remove the filter if the string is empty
 fuzzyTextFilterFn.autoRemove = val => !val
 
+// Create a default prop getter
+const defaultPropGetter = () => ({})
 // The table component, which displays machines
-function Table({ columns, data }) {
+function Table({ 
+  columns, 
+  data,
+  getHeaderProps = defaultPropGetter,
+  getColumnProps = defaultPropGetter,
+  getRowProps = defaultPropGetter,
+  getCellProps = defaultPropGetter,
+
+}) {
   const filterTypes = React.useMemo(
     () => ({
       // Add a new fuzzyTextFilterFn filter type.
@@ -85,8 +94,8 @@ function Table({ columns, data }) {
     []
   )
 
-  
-// flat column - for searching
+
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -100,11 +109,8 @@ function Table({ columns, data }) {
     {
       columns,
       data,
-      // defaultColumn,
-      // Be sure to pass the defaultColumn option
       filterTypes,
     },
-    //useFilters, // useFilters! - temporary removed to match wireframe
     useGlobalFilter // useGlobalFilter!
   )
 
@@ -129,7 +135,17 @@ function Table({ columns, data }) {
             <tr  style={{fontSize: '18pt'}} {...headerGroup.getHeaderGroupProps()}>
            
               {headerGroup.headers.map(column => (
-                <th   {...column.getHeaderProps()}>
+                <th  
+                // Return an array of prop objects and react-table will merge them appropriately
+
+                {...column.getHeaderProps([
+                  {
+                    className: column.className,
+                    style: column.style,
+                  },
+                  getColumnProps(column),
+                  getHeaderProps(column),
+                ])}>
                 
                   {column.render('Header')}
                   {/* Render the columns filter UI */}
@@ -144,12 +160,24 @@ function Table({ columns, data }) {
           {firstPageRows.map((row, i) => {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps(getRowProps(row))}>
                 {row.cells.map(cell => {
-                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                })}
-              </tr>
-            )
+                  return (
+                  <td 
+                    // Return an array of prop objects and react-table will merge them appropriately
+                    {...cell.getCellProps([
+                      {
+                        className: cell.column.className,
+                        style: cell.column.style,
+                      },
+                      getColumnProps(cell.column),
+                      getCellProps(cell),
+                    ])}>
+                    {cell.render('Cell')}
+                    </td>)
+                  })}
+                </tr>
+              )
           })}
         </tbody>
       </table>
@@ -180,7 +208,9 @@ const columns = [
       },  
       {
         Header: "Status",
-        accessor: "status"
+        accessor: "status",
+        
+
       }
 ]
 // The root App component
@@ -209,7 +239,23 @@ render(){
       
       {/* <Styles> */}
         <div className = "table-container">
-           <Table columns={columns} data={data}/>  
+           <Table 
+           columns={columns} 
+           data={data}
+           
+            getCellProps = {cellInfo => ({ 
+              
+              style: {
+                // backgroundColor: `red`,
+               
+                background: cellInfo.column.Header === "Status" & (cellInfo.value === "broken" || cellInfo.value === "broken water pipe" || cellInfo.value === "broken dispencer") ? "pink" : 
+                            cellInfo.column.Header === "Status" & (cellInfo.value === "coffee jam" || cellInfo.value === "possible motor wear")? "yellow" :
+                            cellInfo.column.Header === "Status" ? "green" : "#fffdfa",
+                       
+                // cellInfo.column.header === "Status"
+              },
+          })}
+           />  
         </div>    
             
     {/* </Styles>    */}
