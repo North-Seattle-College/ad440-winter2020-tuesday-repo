@@ -5,20 +5,17 @@ import azure.functions as func
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-
-    logging.info(req.__dict__)
-
+    
 
     if req.method == "POST":
-        # logging.info(req.body)
         try:
             req_body = req.get_json()
             logging.info(req_body)
-            return func.HttpResponse(f"Sucess")
+            return func.HttpResponse(f"Success")
         except ValueError:
             pass
     else:
-        logging.info("Not POST request")
+        logging.info("Not a POST request")
 
 
     return func.HttpResponse(
