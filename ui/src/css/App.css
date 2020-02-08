@@ -96,8 +96,12 @@ th,td {
       border-bottom: 1px solid gray;     
     }
 
-
 tr:last-child td {
   border-bottom: none;
+
+}
+
+td:last-child {
+ background-color: greenyellow;
 }
 
