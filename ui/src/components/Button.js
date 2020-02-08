@@ -3,11 +3,14 @@
 import React, { Component } from "react";
 import  '../css/Button.css'
 
-// pass props of button text and onClick
+/**
+ * Functional button component
+ * @param {} props 
+ */
 export default function Button(props) {
-
+// pass props of button text and onClick
   return (   
-    <button className= "button" onClick={props.handleClick}>
+    <button className= "work-areas" onClick={props.handleClick}>
        {props.label}
     </button>   
   );

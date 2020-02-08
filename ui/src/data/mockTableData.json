@@ -1,3 +1,4 @@
+
 [
   { "id": 1, "vendor": "Microsoft", "address": "5000 148th Ave NE, Redmond, WA 98052", "status": "broken"},
   { "id": 2, "vendor": "North Seattle College", "address": "9600 College Way N, WA 98103", "status": "possible motor wear"},

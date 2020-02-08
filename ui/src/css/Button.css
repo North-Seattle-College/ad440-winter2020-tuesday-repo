@@ -1,7 +1,9 @@
 
 
-
-.button{
+/**
+    This is a cSS for the left-side buttons
+*/
+.work-areas{
   width: 80%;
   box-sizing: border-box;
   background-color: white;

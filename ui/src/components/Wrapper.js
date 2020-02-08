@@ -4,9 +4,16 @@ import Table from "./Table";
 import TextComponent from './TextComponent';
 import ToggleSwitch from './ToggleSwitch';
 
-// This is a wrapper container
-// It is a parent component to ToggleSwitch and TextComponent and it is a child component 
-// of  App.js
+/**
+ * Created by Iryna Sherepot
+ * 
+ * This container is not being currently used and is here for the demo purpose
+ * This is a wrapper container from Sprint 1
+ * It is a parent component to ToggleSwitch and TextComponent and it is a child component 
+ * of  App.js
+ * 
+ *  */
+
 const columns =  [
         {
             Header: "Machine",
