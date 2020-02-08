@@ -218,15 +218,15 @@ const columns = [
       {
         Header: "Status",
         accessor: "status",
-        Cell: () => (
-          <StatusButton/>     
-        )
-        //         {/* getProps: {
-    // (state, rowInfo) => ({
-    //   style: {
-    //     backgroundColor: (rowInfo.row.specific_column===1?'red':null)
-    //   }
-    // }) */}
+        // Cell: (cellInfo) => (
+        //   <StatusButton/>     
+        // ),
+        Cell: ({cellInfo}) =>
+    (<StatusButton 
+      
+    />)
+
+        
       }
 ]
 // The root App component
@@ -259,18 +259,18 @@ render(){
            columns={columns} 
            data={data}
            
-          getCellProps = {cellInfo => ({ 
+          // getCellProps = {cellInfo => ({ 
               
-              style: {
-                // backgroundColor: `red`,
+          //     style: {
+          //       // backgroundColor: `red`,
                
-                background: cellInfo.column.Header === "Status" & (cellInfo.value === "broken" || cellInfo.value === "broken water pipe" || cellInfo.value === "broken dispencer") ? "pink" : 
-                            cellInfo.column.Header === "Status" & (cellInfo.value === "coffee jam" || cellInfo.value === "possible motor wear")? "yellow" :
-                            cellInfo.column.Header === "Status" ? "green" : "#fffdfa",
+          //       background: cellInfo.column.Header === "Status" & (cellInfo.value === "broken" || cellInfo.value === "broken water pipe" || cellInfo.value === "broken dispencer") ? "pink" : 
+          //                   cellInfo.column.Header === "Status" & (cellInfo.value === "coffee jam" || cellInfo.value === "possible motor wear")? "yellow" :
+          //                   cellInfo.column.Header === "Status" ? "green" : "#fffdfa",
                        
-                // cellInfo.column.header === "Status"
-              },
-          })}
+          //       // cellInfo.column.header === "Status"
+          //     },
+          // })}
            />  
         </div>    
             

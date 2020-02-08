@@ -116,10 +116,9 @@ tr:last-child {
 .status-button{
   width: 80%;
   box-sizing: border-box;
-  background-color:green;
+  background-color:red;
   border: none;
   display: inline-block;
-  margin: 1% 1% 1% 1%;
   height: 30px;
   cursor: pointer;
   border: 1px solid black;
