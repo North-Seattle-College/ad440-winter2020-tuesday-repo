@@ -1,5 +1,13 @@
+#lists all current IoT Hubs resources
+Get-AzIotHub
+
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
+$templateFile = Read-Host -Prompt "Enter file path to your template"
 $location = Read-Host -Prompt "Enter the location (i.e. centralus)"
 
-New-AzResourceGroup -Name $resourceGroupName -Location "$location"
-New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile "$yozelinm/ad440-winter2020-tuesday-repo/devops/iot/template.json"
+New-AzIotHub `
+-resourceGroupName $resourceGroupName
+-Location $location
+-TemplateUri $templateFile
+
+
