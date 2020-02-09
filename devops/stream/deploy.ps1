@@ -49,7 +49,7 @@ param(
  [string]$templateFilePath = ".\template.json",
 
  [Parameter(Mandatory=$True)]
- [string]$parametersFilePath = ".\parameters.json",
+ [string]$parametersFilePath = ".\parameters.json"
 )
 
 #******************************************************************************
@@ -57,14 +57,19 @@ param(
 # Execution begins here
 #******************************************************************************
 
-$owner = Read-Host -Prompt "Enter the Owner name"
-$email = Read-Host -Prompt "Enter the Owner name"
+$owner = Read-Host -Prompt "Enter owner name: "
+$email = Read-Host -Prompt "Enter email: "
+$jobname = Read-Host -Prompt "Enter job name: "
+$location = "West US 2"
+$resourceGroupName = Read-Host -Prompt "Enter resource group name: "
 
-# Create the storage account.
-$storageAccount = New-AzStorageAccount -ResourceGroupName $resourceGroupName `
+# Create the streaming job
+$streamJob = New-AzStreamAnalyticsJob -ResourceGroupName $resourceGroupName `
   -Name $owner `
   -Location $location `
-  -SkuName "Standard_LRS"
 
-# Retrieve the context.
-$ctx = $storageAccount.Context
+  # Get-AzStreamAnalyticsJob
+  #  [[-ResourceGroupName] <String>]
+  #  [[-Name] <String>]
+  #  [[-DefaultProfile] <IAzureContextContainer>]
+  #  [<CommonParameters>]
