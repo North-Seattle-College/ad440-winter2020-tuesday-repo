@@ -13,7 +13,7 @@
     The name of the App this template is for
  .PARAMETER storage
     The storage used for the streaming.
- .PARAMETER featureName
+ .PARAMETER resourceGroupName
     The current feature this stream satisfies
  .PARAMETER task
     The current task this stream satisfies
@@ -23,6 +23,7 @@
     Optional, path to the parameters file. Defaults to parameters.json. If file is not found, will prompt for parameter values based on template.
 #>
 
+#Queries all of the entries necessary to deploy the Stream Job
 param(
  [Parameter(Mandatory=$True)]
  [string]$owner,
@@ -40,13 +41,16 @@ param(
  [string]$storage = "kiastrfeatusw2task3",
 
  [Parameter(Mandatory=$True)]
- [string]$featureName = "bet-rg-feat-usw2",
+ [string]$resourceGroupName = "bet-rg-feat-usw2",
 
  [Parameter(Mandatory=$True)]
  [string]$task = "task2",
 
  [Parameter(Mandatory=$True)]
  [string]$templateFilePath = ".\template.json",
+
+ [Parameter(Mandatory=$True)]
+ [string]$parametersFilePath = ".\parameters.json"
 
  [Parameter(Mandatory=$True)]
  [string]$parametersFilePath = ".\parameters.json"
@@ -59,17 +63,13 @@ param(
 
 $owner = Read-Host -Prompt "Enter owner name: "
 $email = Read-Host -Prompt "Enter email: "
-$jobname = Read-Host -Prompt "Enter job name: "
-$location = "West US 2"
-$resourceGroupName = Read-Host -Prompt "Enter resource group name: "
+# $jobname = Read-Host -Prompt "Enter job name: "
+# $location = ""
+# $resourceGroupName = Read-Host -Prompt "Enter resource group name: "
 
 # Create the streaming job
-$streamJob = New-AzStreamAnalyticsJob -ResourceGroupName $resourceGroupName `
-  -Name $owner `
-  -Location $location `
-
-  # Get-AzStreamAnalyticsJob
-  #  [[-ResourceGroupName] <String>]
-  #  [[-Name] <String>]
-  #  [[-DefaultProfile] <IAzureContextContainer>]
-  #  [<CommonParameters>]
+New-AzStreamAnalyticsJob -ResourceGroupName $resourceGroupName `
+  -ResourceGroupName $resourceGroupName `
+  -File $jobDefinitionFile `
+  -Name $jobName `
+  -Force

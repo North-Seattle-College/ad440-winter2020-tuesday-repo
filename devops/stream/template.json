@@ -35,7 +35,7 @@
                 "description": "This is the name of the current storage account this app uses"
             }
         }
-        "featureName": {
+        "resourceGroupName": {
             "defaultValue": "bet-rg-feat-usw2",
             "type": "String",
             "metadata": {
@@ -52,9 +52,9 @@
 
     },
     "variables": {
-        "streamAnalyticsInputName": "[concat(parameters('jobName'), '/', parameters('featureName'), '-input')]",
-        "streamAnalyticsOutputName": "[concat(parameters('jobName'), '/', parameters('featureName'), '-output')]",
-        "task": "[concat(parameters('featureName'), parameters('task'))]
+        "streamAnalyticsInputName": "[concat(parameters('jobName'), '/', parameters('resourceGroupName'), '-input')]",
+        "streamAnalyticsOutputName": "[concat(parameters('jobName'), '/', parameters('resourceGroupName'), '-output')]",
+        "task": "[concat(parameters('resourceGroupName'), parameters('task'))]
     },
     "resources": [
         {
