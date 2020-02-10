@@ -50,7 +50,7 @@ def iothub_client_telemetry_sample_run():
             print ( "Message successfully sent" )
 
             #time between messages
-            time.sleep(1)
+            time.sleep(60)
 
     except KeyboardInterrupt:
       #quits with control/c
