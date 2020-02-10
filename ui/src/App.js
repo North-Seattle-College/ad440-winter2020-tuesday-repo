@@ -258,7 +258,8 @@ render(){
       {/* Rendering the outer wrapper */}
       <div className = "outer" style = {{width: '90%', border: '1px solid red', position: 'absolute', margin: '1% 1% 1% 1%'}}>
       {/* Button container  that holds Home and Work area buttons on a left form table*/}
-      <div className = "buttonGroup">
+      
+      {/* <div className = "buttonGroup">
           <Button class = "home" label = "Home">
           </Button>
           <Button class = "work-areas" label = "Area 1">
@@ -267,7 +268,7 @@ render(){
           </Button>
           <Button class = "work-areas" label = "Area 3">
           </Button>        
-      </div>
+      </div> */}
       
       {/* <Styles> */}
       {/* Rendering the table with machinese */}
