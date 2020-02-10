@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import  '../css/StatusButton.css'
 import '../css/MachinesTable.css'
 import styled from 'styled-components'
+// A great library for fuzzy filtering/sorting items
 import { useTable, useGlobalFilter } from 'react-table'
 import matchSorter from 'match-sorter'
 import GlobalFilter from './GlobalFilter'

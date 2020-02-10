@@ -2,7 +2,6 @@ import React from 'react';
 import './css/App.css';
 import './css/Button.css'
 import Login from './components/login';
-// A great library for fuzzy filtering/sorting items
 import mockData from './data/mockTableData.json'
 import StatusButton from './components/StatusButton'
 import MachinesTable from './components/MachinesTable'
@@ -14,7 +13,6 @@ import MachinesTable from './components/MachinesTable'
 
 // assigns data variable to the mock json file data
 const data = mockData;
-// styled component using styled components library
 
 // table columns array to be passed as a prop to the table component
 const columns = [
