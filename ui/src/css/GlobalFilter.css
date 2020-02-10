@@ -1,0 +1,19 @@
+.global-filter-wrap{
+   margin-left: 1px;
+   font-size: 16pt;
+   float: right; 
+   margin-top: 1.5%; 
+   margin-right: 1.5%; 
+   min-width: 60%;
+}
+
+.global-filter-input{
+  font-size: 1.1rem;
+  padding: 2px;
+  min-width: 70%;
+  border: 1;
+  border-radius: 8pt
+}
+
+
+
