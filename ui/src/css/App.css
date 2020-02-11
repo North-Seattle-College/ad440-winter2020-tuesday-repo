@@ -3,7 +3,12 @@
 }
 
 .outer{
-    margin-top:1000px;
+  width: 70%; 
+  border: 1px solid red;
+  
+  margin: 2% 3% 1% 1%;
+  float: right;
+  
 }
 
 .App-logo {

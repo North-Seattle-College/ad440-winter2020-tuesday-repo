@@ -73,7 +73,7 @@ render(){
       </MuiThemeProvider>
     
       {/* Rendering the outer wrapper */}
-      <div className = "outer" style = {{width: '90%', border: '1px solid red', position: 'absolute', margin: '30% 1% 1% 1%'}}>
+      <div className = "outer">
       {/* Button container  that holds Home and Work area buttons on a left form table*/}
       
       {/* <div className = "buttonGroup">
