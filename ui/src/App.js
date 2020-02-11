@@ -2,9 +2,13 @@ import React from 'react';
 import './css/App.css';
 import './css/Button.css'
 import Login from './components/login';
-import mockData from './data/mockTableData.json'
-import StatusButton from './components/StatusButton'
-import MachinesTable from './components/MachinesTable'
+import mockData from './data/mockTableData.json';
+import StatusButton from './components/StatusButton';
+import MachinesTable from './components/MachinesTable';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import SideNav from './components/SideNav';
+import PageTabs from './components/PageTabs';
+
 /**
  * This is a root component 
  * 
@@ -63,8 +67,13 @@ render(){
     </div>
       <header className="App-header">     
       </header> 
+          <MuiThemeProvider>
+        <SideNav/>
+        <PageTabs/>
+      </MuiThemeProvider>
+    
       {/* Rendering the outer wrapper */}
-      <div className = "outer" style = {{width: '90%', border: '1px solid red', position: 'absolute', margin: '1% 1% 1% 1%'}}>
+      <div className = "outer" style = {{width: '90%', border: '1px solid red', position: 'absolute', margin: '30% 1% 1% 1%'}}>
       {/* Button container  that holds Home and Work area buttons on a left form table*/}
       
       {/* <div className = "buttonGroup">
