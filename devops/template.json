@@ -3,130 +3,139 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "subscriptionId": {
-            "type": "string"
+            "type": "String"
         },
         "name": {
-            "type": "string"
+            "type": "String"
         },
         "location": {
-            "type": "string"
+            "type": "String"
         },
         "hostingEnvironment": {
-            "type": "string"
+            "type": "String"
         },
         "hostingPlanName": {
-            "type": "string"
+            "type": "String"
         },
         "serverFarmResourceGroup": {
-            "type": "string"
+            "type": "String"
         },
         "alwaysOn": {
-            "type": "bool"
+            "type": "Bool"
         },
         "storageAccountName": {
-            "type": "string"
+            "type": "String"
         },
         "linuxFxVersion": {
-            "type": "string"
+            "type": "String"
         },
         "sku": {
-            "type": "string"
+            "type": "String"
         },
         "skuCode": {
-            "type": "string"
+            "type": "String"
         },
         "workerSize": {
-            "type": "string"
+            "type": "String"
         },
         "workerSizeId": {
-            "type": "string"
+            "type": "String"
         },
         "numberOfWorkers": {
-            "type": "string"
+            "type": "String"
         }
     },
     "resources": [
         {
+            "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
             "name": "[parameters('name')]",
-            "type": "Microsoft.Web/sites",
-            "kind": "functionapp",
             "location": "[parameters('location')]",
-            "tags": {},
             "dependsOn": [
-                "microsoft.insights/components/CoffeeMachine",
+                "microsoft.insights/components/wenbin-fun-feat-usw2-task1",
                 "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
                 "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]"
             ],
+            "tags": {
+                "Owner": "Wenbin Guan",
+                "Owner Email": "weguan@hotmail.com",
+                "Application": "Pot-O-Gold",
+                "Sprint": "1"
+            },
+            "kind": "functionapp,linux",
             "properties": {
                 "name": "[parameters('name')]",
                 "siteConfig": {
                     "appSettings": [
                         {
                             "name": "FUNCTIONS_EXTENSION_VERSION",
-                            "value": "~2"
+                            "value": "~3"
                         },
                         {
                             "name": "FUNCTIONS_WORKER_RUNTIME",
-                            "value": "powershell"
+                            "value": "python"
                         },
                         {
                             "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                            "value": "[reference('microsoft.insights/components/CoffeeMachine', '2015-05-01').InstrumentationKey]"
+                            "value": "[reference('microsoft.insights/components/wenbin-fun-feat-usw2-task1', '2015-05-01').InstrumentationKey]"
                         },
                         {
                             "name": "AzureWebJobsStorage",
                             "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
-                        },
-                        {
-                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
-                        },
-                        {
-                            "name": "WEBSITE_CONTENTSHARE",
-                            "value": "[concat(toLower(parameters('name')), 'ab33')]"
                         }
-                    ]
+                    ],
+                    "linuxFxVersion": "[parameters('linuxFxVersion')]"
                 },
                 "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
                 "hostingEnvironment": "[parameters('hostingEnvironment')]",
-                "clientAffinityEnabled": true
+                "clientAffinityEnabled": false
             }
         },
         {
+            "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2018-11-01",
             "name": "[parameters('hostingPlanName')]",
-            "type": "Microsoft.Web/serverfarms",
             "location": "[parameters('location')]",
-            "kind": "",
-            "tags": {},
             "dependsOn": [],
+            "tags": {
+                "Owner": "Wenbin Guan",
+                "Owner Email": "weguan@hotmail.com",
+                "Application": "Pot-O-Gold",
+                "Sprint": "1"
+            },
+            "sku": {
+                "Tier": "[parameters('sku')]",
+                "Name": "[parameters('skuCode')]"
+            },
+            "kind": "linux",
             "properties": {
                 "name": "[parameters('hostingPlanName')]",
                 "workerSize": "[parameters('workerSize')]",
                 "workerSizeId": "[parameters('workerSizeId')]",
                 "numberOfWorkers": "[parameters('numberOfWorkers')]",
+                "reserved": true,
                 "hostingEnvironment": "[parameters('hostingEnvironment')]"
-            },
-            "sku": {
-                "Tier": "[parameters('sku')]",
-                "Name": "[parameters('skuCode')]"
             }
         },
         {
-            "apiVersion": "2015-05-01",
-            "name": "CoffeeMachine",
             "type": "microsoft.insights/components",
+            "apiVersion": "2015-05-01",
+            "name": "wenbin-fun-feat-usw2-task1",
             "location": "westus2",
-            "tags": {},
+            "tags": {
+                "Owner": "Wenbin Guan",
+                "Owner Email": "weguan@hotmail.com",
+                "Application": "Pot-O-Gold",
+                "Sprint": "1"
+            },
             "properties": {
                 "ApplicationId": "[parameters('name')]",
                 "Request_Source": "IbizaWebAppExtensionCreate"
             }
         },
         {
-            "apiVersion": "2019-06-01",
             "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-06-01",
             "name": "[parameters('storageAccountName')]",
             "location": "[parameters('location')]",
             "sku": {

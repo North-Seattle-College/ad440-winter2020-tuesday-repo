@@ -41,11 +41,24 @@
 }
 .btn{
   border: 2px solid black;
-background-color: white;
-color: black;
-padding: 10px 20px;
-font-size: 16px;
-cursor: pointer;
-margin-left: 1150px;
-margin-top: 50px;
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 1150px;
+  margin-top: 50px;
 }
+
+.buttonGroup {
+  width: 15%; 
+  border: 1px solid lightgray;
+  margin: 2% 1% 1% 2%;
+  float: left;
+  padding: 1% 1% 1% 1%;
+  border-radius: 13px;
+}
+
+
+
+
