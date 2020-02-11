@@ -19,10 +19,14 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     else:
         # request was not a POST
         logging.info("Request was not a POST")
-        return func.HttpResponse('Request was not a POST')
+        return func.HttpResponse(
+            'Request was not a POST',
+            status_code=400
+            )
 
      # no POST request was made
+    logging.info("No POST request was made")
     return func.HttpResponse(
-             "Please pass a POST request in the request body",
-             status_code=400
+        "Please pass a POST request in the request body",
+        status_code=400
         )
