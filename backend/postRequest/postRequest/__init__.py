@@ -24,7 +24,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             status_code=400
             )
 
-     # no POST request was made
+     # no request was made
     logging.info("No POST request was made")
     return func.HttpResponse(
         "Please pass a POST request in the request body",
