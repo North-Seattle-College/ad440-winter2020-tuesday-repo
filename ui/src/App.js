@@ -51,14 +51,21 @@ export default  class App extends React.Component {
 
    // The state of this root component will be passed to child components as props
   // right now the app.js containes only elements nessesary for the table with failing machines - col and rows
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       columns: columns,
       data: mockData
     }
   }
-
+ //runs after the component output has been rendered to the DOM
+ // prevents missing data during async loading
+  componentDidMount() {
+    this.setState({
+      columns: columns,
+      data: mockData
+    });
+  }
 render(){
   return (
     <div className="App">
@@ -73,7 +80,7 @@ render(){
       </MuiThemeProvider>
     
       {/* Rendering the outer wrapper */}
-      <div className = "outer" style = {{width: '90%', border: '1px solid red', position: 'absolute', margin: '30% 1% 1% 1%'}}>
+      <div className = "outer">
       {/* Button container  that holds Home and Work area buttons on a left form table*/}
       
       {/* <div className = "buttonGroup">
