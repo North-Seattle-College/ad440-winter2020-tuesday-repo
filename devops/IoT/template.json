@@ -1,19 +1,21 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "iotHubName": {
-            "type": "string",
-             "minLength": 3,
-             "metadata": {
-             "description": "Specifies the name of the IoT Hub."
-             }
-        },
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "iotHubName": {
+      "type": "string",
+      "minLength": 3,
+      "metadata": {
+        "description": "Specifies the name of the IoT Hub."
+      }
+    },
     "location": {
       "type": "string",
-      "defaultValue": "[resourceGroup().location]"
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+              "description": "Location for all resources."
+      }
     },
-    
     "skuName": {
       "type": "string",
       "defaultValue": "F1",
@@ -21,103 +23,61 @@
         "description": "Specifies the IotHub SKU."
       }
     },
-    "resourceTags": {
-        "type": "object",
-        "defaultValue": {
-            "Environment": "Dev",
-            "Project": "IoTHubs"
+    "capacityUnits": {
+      "type": "int",
+      "minValue": 1,
+      "maxValue": 1,
+      "defaultValue": 1,
+      "metadata": {
+        "description": "Specifies the number of provisioned IoT Hub units. Restricted to 1 unit for the F1 SKU. Can be set up to maximum number allowed for subscription."
+      }
+    }
+  },
+  "variables": {
+    "consumerGroupName": "[concat(parameters('iotHubName'), '/events/cg1')]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Devices/IotHubs",
+      "apiVersion": "2018-04-01",
+      "name": "[parameters('iotHubName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "eventHubEndpoints": {
+          "events": {
+            "retentionTimeInDays": 1,
+            "partitionCount": 2
+          }
+        },
+        "cloudToDevice": {
+          "defaultTtlAsIso8601": "PT1H",
+          "maxDeliveryCount": 10,
+          "feedback": {
+            "ttlAsIso8601": "PT1H",
+            "lockDurationAsIso8601": "PT60S",
+            "maxDeliveryCount": 10
+          }
+        },
+        "messagingEndpoints": {
+          "fileNotifications": {
+            "ttlAsIso8601": "PT1H",
+            "lockDurationAsIso8601": "PT1M",
+            "maxDeliveryCount": 10
+          }
         }
-    } 
+      },
+      "sku": {
+        "name": "[parameters('skuName')]",
+        "capacity": "[parameters('capacityUnits')]"
+      }
     },
-    "variables": {
-        "iotHubName": "[concat(parameters('iotHubName'), uniqueString(resourceGroup().id))]"
-    },
-    "resources": [
-        {
-            "type": "Microsoft.Devices/IotHubs",
-            "apiVersion": "2019-11-04",
-            "name": "[variables('iotHubName')]",
-            "location": "[parameters('location')]",
-            "tags": "[parameters('resourceTags')]", 
-            "sku": {
-                "name": "[parameters('SkuName')]",
-                "tier": "Standard",
-                "capacity": 1
-            },
-            "properties": {
-                "ipFilterRules": [],
-                "eventHubEndpoints": {
-                    "events": {
-                        "retentionTimeInDays": 1,
-                        "partitionCount": 4
-                    }
-                },
-                "routing": {
-                    "endpoints": {
-                        "serviceBusQueues": [],
-                        "serviceBusTopics": [],
-                        "eventHubs": [],
-                        "storageContainers": [
-                            {
-                                "connectionString": "DefaultEndpointsProtocol=https;AccountName=kiastrfeatusw2task3;AccountKey=****",
-                                "containerName": "kia-prod-usw2-storagecon",
-                                "fileNameFormat": "{iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}",
-                                "batchFrequencyInSeconds": 100,
-                                "maxChunkSizeInBytes": 104857600,
-                                "encoding": "json",
-                                "name": "kia-prod-usw2-messageendpoint",
-                                "subscriptionId": "9f4dcf43-aa06-457b-b975-f0216baef20d",
-                                "resourceGroup": "kia-rg-feat-usw2-task3"
-                            }
-                        ]
-                    },
-                    "routes": [
-                        {
-                            "name": "kia-prod-usw2-messageroute",
-                            "source": "DeviceMessages",
-                            "condition": "level=\"storage\"",
-                            "endpointNames": [
-                                "kia-prod-usw2-messageendpoint"
-                            ],
-                            "isEnabled": true
-                        }
-                    ],
-                    "fallbackRoute": {
-                        "name": "$fallback",
-                        "source": "DeviceMessages",
-                        "condition": "true",
-                        "endpointNames": [
-                            "events"
-                        ],
-                        "isEnabled": true
-                    }
-                },
-                "storageEndpoints": {
-                    "$default": {
-                        "sasTtlAsIso8601": "PT1H",
-                        "connectionString": "[parameters('iotHubName')]",
-                        "containerName": "[parameters('iotHubName')]"
-                    }
-                },
-                "messagingEndpoints": {
-                    "fileNotifications": {
-                        "lockDurationAsIso8601": "PT1M",
-                        "ttlAsIso8601": "PT1H",
-                        "maxDeliveryCount": 10
-                    }
-                },
-                "enableFileUploadNotifications": false,
-                "cloudToDevice": {
-                    "maxDeliveryCount": 10,
-                    "defaultTtlAsIso8601": "PT1H",
-                    "feedback": {
-                        "lockDurationAsIso8601": "PT1M",
-                        "ttlAsIso8601": "PT1H",
-                        "maxDeliveryCount": 10
-                    }
-                },
-                "features": "None"
-            }
-        }
-    ]
+    {
+      "type": "Microsoft.Devices/iotHubs/eventhubEndpoints/ConsumerGroups",
+      "apiVersion": "2018-04-01",
+      "name": "[variables('consumerGroupName')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName'))]"
+      ]
+    }
+  ]
 }
