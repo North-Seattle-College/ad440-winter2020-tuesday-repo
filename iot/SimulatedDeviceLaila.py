@@ -17,7 +17,7 @@ MSG_TXT = '{{"general info": {generalInformation},"Incoming info": {incomingInfo
 def iothub_client_init():
     # Create an IoT Hub client
     client = IoTHubDeviceClient.create_from_connection_string(CONNECTION_STRING)
-    
+
     return client
 def iothub_client_telemetry_sample_run():
     try:
