@@ -12,7 +12,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             # check JSON file
             req_body = req.get_json()
             logging.info(req_body)
-            #POST request sucessful
+            #POST request successful
             return func.HttpResponse(f"Successful request")
         except ValueError:
             pass

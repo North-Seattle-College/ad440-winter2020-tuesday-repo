@@ -1,4 +1,3 @@
-// src/services/Auth.js
 import AuthenticationContext from 'adal-angular'
 import AdalConfig from './AdalConfig'
 
