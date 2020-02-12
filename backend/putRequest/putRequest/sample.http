@@ -1,8 +1,0 @@
-
-PUT  http://localhost:7071/api/putRequest
-Content-Type: application/json
-
-{
-    "machineId": "3"
-}
-
