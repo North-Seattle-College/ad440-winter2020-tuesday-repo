@@ -1,6 +1,6 @@
 
 // this page is the sign in button connection to the login page, this page will render after you click sign in button.
-import React, { Component } from "react";
+import React from "react";
 import  '../css/StatusButton.css'
 import '../css/MachinesTable.css'
 import styled from 'styled-components'
@@ -14,7 +14,6 @@ import GlobalFilter from './GlobalFilter'
 //const data = mockData;
 // styled component using styled components library
 const Title = styled.div`
-
   border:'2px solid red';
   display: 'inline-block';
   float: 'left';
