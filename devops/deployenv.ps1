@@ -1,3 +1,17 @@
+<#
+All you need to run in order to begin this code is the following script:
+
+./deployenv.ps1 `
+-SubscriptionId "000000000-0000-0000-0000-0000000000000" `
+-LabName "mydevtestlab" `
+-ResourceGroupName "mydevtestlabRG000000" `
+-RepositoryName "myRepository" `
+-TemplateName "My Environment template name" `
+-EnvironmentName "myGroupEnv"
+
+#>
+
+
 #Requires -Module Az.Resources
 
 [CmdletBinding()]
