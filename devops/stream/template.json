@@ -51,11 +51,7 @@
         }
 
     },
-    "variables": {
-        "streamAnalyticsInputName": "[concat(parameters('jobName'), '/', parameters('resourceGroupName'), '-input')]",
-        "streamAnalyticsOutputName": "[concat(parameters('jobName'), '/', parameters('resourceGroupName'), '-output')]",
-        "task": "[concat(parameters('resourceGroupName'), parameters('task'))]
-    },
+    "variables": {},
     "resources": [
         {
             "comment": "This starts the streaming job",
@@ -82,7 +78,7 @@
             }
         },
         {
-            "comment": "This takes the input of the current stream",
+            "comment": "This takes the input of the current stream from the current iot hub",
             "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
             "apiVersion": "2016-03-01",
             "name": "[variables('streamAnalyticsInputName')]",
