@@ -9,7 +9,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     if (req.method == "GET"):
         
         try:
-            #req_body = req.get_json()
+            req_body = req.get_json()
             #paramater for machine
             machine= req.params.get("machine")
             #parameter for machine id
