@@ -1,4 +1,4 @@
-#Enter your resource group name and location.
+#Enter your resource group name and location
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
 
 $location = Read-Host -Prompt "Enter the location (i.e. centralus)"
