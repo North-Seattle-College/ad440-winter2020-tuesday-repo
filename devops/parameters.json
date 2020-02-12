@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subscriptionId": {
+            "value": "9f4dcf43-aa06-457b-b975-f0216baef20d"
+        },
+        "name": {
+            "value": "wenbin-fun-feat-usw2-task1"
+        },
+        "location": {
+            "value": "West US 2"
+        },
+        "hostingEnvironment": {
+            "value": ""
+        },
+        "hostingPlanName": {
+            "value": "ASP-wenbinrgfeatusw2task1-bec1"
+        },
+        "serverFarmResourceGroup": {
+            "value": "wenbin-rg-feat-usw2-task1"
+        },
+        "alwaysOn": {
+            "value": false
+        },
+        "storageAccountName": {
+            "value": "wenbinstrfeatusw2task1"
+        },
+        "linuxFxVersion": {
+            "value": "python|3.7"
+        },
+        "sku": {
+            "value": "Dynamic"
+        },
+        "skuCode": {
+            "value": "Y1"
+        },
+        "workerSize": {
+            "value": "0"
+        },
+        "workerSizeId": {
+            "value": "0"
+        },
+        "numberOfWorkers": {
+            "value": "1"
+        }
+    }
+}

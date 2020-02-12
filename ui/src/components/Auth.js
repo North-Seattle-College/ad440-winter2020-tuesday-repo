@@ -1,4 +1,4 @@
-import AuthenticationContext from 'adal-angular'
+import { AuthenticationContext } from 'react-adal'
 import AdalConfig from './AdalConfig'
 
 // We use this to enable logging in the adal library. When you're building for production, you should know that it's best to disable the logging.
