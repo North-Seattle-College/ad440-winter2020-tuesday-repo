@@ -16,7 +16,7 @@ import PageTabs from './components/PageTabs';
  */
 
 // assigns data variable to the mock json file data
-const data = mockData;
+//const data = mockData;
 
 // table columns array to be passed as a prop to the table component
 const columns = [

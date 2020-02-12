@@ -1,6 +1,6 @@
 
 // this page is the sign in button connection to the login page, this page will render after you click sign in button.
-import React, { Component } from "react";
+import React from "react";
 import  '../css/StatusButton.css'
 
 /**
