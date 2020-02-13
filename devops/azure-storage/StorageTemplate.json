@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "$schema": "https://raw.githubusercontent.com/North-Seattle-College/ad440-winter2020-tuesday-repo/develop/devops/azure-storage/StorageTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "storageName": {
