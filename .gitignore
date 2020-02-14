@@ -2,7 +2,7 @@
 node_modules
 proxies.json
 .funcignore
-.azure-functions-core-tools
+azure-functions-core-tools
 scripts/flow/*/.flowconfig
 *~
 *.pyc

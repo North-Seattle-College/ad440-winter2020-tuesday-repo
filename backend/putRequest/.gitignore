@@ -2,7 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+azure-functions-core-tools
 # C extensions
 *.so
 
