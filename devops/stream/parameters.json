@@ -2,33 +2,48 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "owner": {
-            "value": null,
-            "metadata": {
-                "description": "This is something the user is prompted to enter"
-            }
-        }
-        "email": {
-            "value": null,
-            "metadata": {
-                "description": "This is something the user is prompted to enter"
-            }
-        }
-        "jobName": {
-            "value": "job1"
-        }
-        "app": {
-            "value": "Pot-O-Gold"
-        }
-        "storage": {
-            "value": "kiastrfeatusw2task3"
-        }
-        "resourceGroupName": {
-            "value": "bet-rg-feat-usw2"
-        }
-        "task": {
-            "value": "task2"
-        }
-
+      "owner": {
+          "type": "String",
+          "metadata": {
+              "description": "current user name"
+          }
+      }
+      "email": {
+          "type": "String",
+          "metadata": {
+              "description": "current user email"
+          }
+      }
+      "jobName": {
+          "type": "String",
+          "metadata": {
+              "description": "name of the current job"
+          }
+      }
+      "iotHubName" : {
+          "type" : "String",
+          "metadata" : {
+              "description" : "iothub being analyzed"
+          }
+      }
+      "storage": {
+          "type": "String",
+          "metadata": {
+              "description": "name of the blob storage"
+          }
+      }
+      "resourceGroupName": {
+          "type": "String",
+          "metadata": {
+              "description": "name of resource group being used"
+          }
+      }
+      "location": {
+          "type": "string",
+          "defaultValue": "[resourceGroup().location]",
+          "metadata": {
+              "description": "location for the resources."
+          }
+      }
     }
 }
