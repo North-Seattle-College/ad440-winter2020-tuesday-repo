@@ -23,6 +23,7 @@ chrome-user-data
 *.sublime-project
 *.sublime-workspace
 .idea
+.vscode
 *.iml
 
 *.swp
