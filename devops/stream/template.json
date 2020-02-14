@@ -5,65 +5,73 @@
         "owner": {
             "type": "String",
             "metadata": {
-                "description": "This is the name of the current user/owner of the current job"
+                "description": "current user name"
             }
         }
         "email": {
             "type": "String",
             "metadata": {
-                "description": "This is the email of the current user/owner of this stream job"
+                "description": "current user email"
             }
         }
         "jobName": {
-            "defaultValue": "anonymous_job",
             "type": "String",
             "metadata": {
-                "description": "This is the name of the current stream job"
+                "description": "name of the current job"
             }
         }
-        "app": {
-            "defaultValue": "Pot-O-Gold",
-            "type": "String",
-            "metadata": {
-                "description": "This is the name of the current app this is being used for"
+        "iotHubName" : {
+            "type" : "String",
+            "metadata" : {
+                "description" : "iothub being analyzed"
             }
         }
         "storage": {
-            "defaultValue": "kiastrfeatusw2task3",
             "type": "String",
             "metadata": {
-                "description": "This is the name of the current storage account this app uses"
+                "description": "name of the blob storage"
             }
         }
         "resourceGroupName": {
-            "defaultValue": "bet-rg-feat-usw2",
             "type": "String",
             "metadata": {
-                "description": "This is the name of the current feature branch this app uses"
+                "description": "name of resource group being used"
             }
         }
-        "task": {
-            "defaultValue": "task2",
-            "type": "String",
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
             "metadata": {
-                "description": "This is the name of the current task"
+                "description": "location for the resources."
             }
         }
-
+        "numberOfStreamingUnits": {
+            "type": "int",
+            "minValue": 1,
+            "maxValue": 48,
+            "allowedValues": [
+                1, 3, 6, 12, 18, 24, 30, 36, 42, 48
+            ],
+            "metadata": {
+                "description": "number of streaming units"
+            }
+        }
     },
-    "variables": {},
+    "variables": {
+      "inputName":"[concat([parameters('owner')],'-rg-usw2-iothub')]"
+      "outputName":"[concat([parameters('owner')],'-sg-usw2-storage')]"
+    },
     "resources": [
         {
             "comment": "This starts the streaming job",
             "type": "Microsoft.StreamAnalytics/streamingjobs",
             "apiVersion": "2016-03-01",
             "name": "[parameters('jobName')]",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "tags": {
                 "Owner": "[parameters('owner')]",
-                "Application": "[parameters('app')]",
+                "Application": "Pot-O-Gold",
                 "OwnerEmail ": "[parameters('email')]",
-                "Sprint": "1"
             },
             "properties": {
                 "sku": {
@@ -81,7 +89,7 @@
             "comment": "This takes the input of the current stream from the current iot hub",
             "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
             "apiVersion": "2016-03-01",
-            "name": "[variables('streamAnalyticsInputName')]",
+            "name": "[variables('inputName')]",
             "dependsOn": [
                 "[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('jobName'))]"
             ],
@@ -90,7 +98,7 @@
                 "datasource": {
                     "type": "Microsoft.Devices/IotHubs",
                     "properties": {
-                        "iotHubNamespace": "[variables('task')]",
+                        "iotHubNamespace": "[parameters('iotHubName')]",
                         "sharedAccessPolicyName": "iothubowner",
                         "endpoint": "messages/events",
                         "consumerGroupName": "$Default"
@@ -113,7 +121,7 @@
             "comment": "This takes the output of the current stream",
             "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
             "apiVersion": "2016-03-01",
-            "name": "[variables('streamAnalyticsOutputName')]",
+            "name": "[variables('outputName')]",
             "dependsOn": [
                 "[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('jobName'))]"
             ],
@@ -127,7 +135,7 @@
                                 "accountName": "[parameters('storage')]"
                             }
                         ],
-                        "container": "jos-rg-feat-usw2-test-storage",
+                        "container": "[parameters('storage')]",
                         "pathPattern": "",
                         "dateFormat": "yyyy/MM/dd",
                         "timeFormat": "HH",
