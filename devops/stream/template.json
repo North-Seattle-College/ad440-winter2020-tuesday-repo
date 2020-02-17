@@ -16,14 +16,15 @@
         }
         "jobName": {
             "type": "String",
+            "defaultValue" : "concat(parameters['owner'],'-pogsj-usw2')",
             "metadata": {
-                "description": "name of the current job"
+                "description": "name of the current streaming job"
             }
         }
         "iotHubName" : {
             "type" : "String",
             "metadata" : {
-                "description" : "iothub being analyzed"
+                "description" : "new iothub being created and analyzed"
             }
         }
         "storage": {
