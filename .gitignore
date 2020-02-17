@@ -1,5 +1,8 @@
 .DS_STORE
 node_modules
+proxies.json
+.funcignore
+azure-functions-core-tools
 scripts/flow/*/.flowconfig
 *~
 *.pyc
@@ -20,8 +23,9 @@ chrome-user-data
 *.sublime-project
 *.sublime-workspace
 .idea
-*.iml
 .vscode
+*.iml
+
 *.swp
 *.swo
 
