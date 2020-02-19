@@ -47,8 +47,7 @@
 			}
 		}
 	},
-	"variables": {
-	},
+	"variables": {},
 	"resources": [{
 			"type": "Microsoft.StreamAnalytics/streamingjobs",
 			"apiVersion": "2016-03-01",
@@ -164,5 +163,11 @@
 				}
 			}
 		}
-	]
+	],
+	"outputs": {
+		"someRGoutput": {
+			"value": "[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('jobName'))]",
+			"type": "string"
+		}
+	}
 }

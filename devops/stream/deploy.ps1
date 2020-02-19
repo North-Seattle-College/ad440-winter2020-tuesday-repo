@@ -9,19 +9,37 @@
   You need all of these elements in order to suceessfully launch a stream analytics resource
 #>
 
-param (
-# Name of the current user
-[string] [Parameter(Mandatory=$true)] $owner,
+#Creates the resource group being used
+$resourceGroupName = "tho-sag-usw2-test"
 
-# Name of the current user email
-[string] [Parameter(Mandatory=$true)] $email,
+#create new resource group if it does not exist
+Get-AzResourceGroup -Name $resourceGroupName -ErrorVariable notPresent -ErrorAction SilentlyContinue
 
-# Name of the resource group being created
-[string] [Parameter(Mandatory=$true)] $resourceGroupName,
-)
+if ($notPresent) {
+  #create new resource group
+  New-AzResourceGroup -Name $resourceGroupName -Location "westus2"
+}
 
-#Test-AzResourceGroupDeployment ` #use this line to test and comment out line below
-New-AzResourceGroupDeployment `
-  -Name $owner -ResourceGroupName $resourceGroupName `
-  -TemplateUri https://raw.githubusercontent.com/North-Seattle-College/ad440-winter2020-tuesday-repo/feature-thomas-3/devops/stream/template.json `
-  -TemplateParameterUri https://raw.githubusercontent.com/North-Seattle-College/ad440-winter2020-tuesday-repo/feature-thomas-3/devops/stream/parameters.json `
+#Finds the template in order to begin making the stream analytics resource
+$resourceGroupName = "tho-sag-usw2-test"
+
+#local file paths
+$templateFilePath = "C:\Users\tcodu\Documents\github\ad440-winter2020-tuesday-repo\devops\stream\template.json"
+$parameterFilePath = "C:\Users\tcodu\Documents\github\ad440-winter2020-tuesday-repo\devops\stream\parameters.json"
+#remote file path
+#$templateUriPath = "https://raw.githubusercontent.com/North-Seattle-College/ad440-winter2020-tuesday-repo/feature-thomas-3/devops/stream/template.json"
+#$parameterUriPath = "https://raw.githubusercontent./North-Seattle-College/ad440-winter2020-tuesday-repo/feature-thomas-3/devops/stream/template.json"
+
+#Tests local deployment
+New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName `
+  -TemplateFile $templateFilePath `
+  -TemplateParameterFile $parameterFilePath `
+#
+# # -TemplateParameterUri https://raw.githubusercontent.com/North-Seattle-College/ad440-winter2020-tuesday-repo/feature-thomas-3/devops/stream/parameters.json `
+# # -TemplateUri https://raw.githubusercontent.com/North-Seattle-College/ad440-winter2020-tuesday-repo/feature-thomas-3/devops/stream/template.json `
+#
+# $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
+# $location = Read-Host -Prompt "Enter the location (i.e. centralus)"
+#
+# New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName `
+#   -TemplateUri "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-storage-account-create/azuredeploy.json"
