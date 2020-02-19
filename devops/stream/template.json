@@ -16,7 +16,6 @@
 		},
 		"jobName": {
 			"type": "String",
-			"defaultValue": "concat(parameters('owner'),'-pogsj-usw2')",
 			"metadata": {
 				"description": "name of the current streaming job"
 			}
@@ -49,8 +48,6 @@
 		}
 	},
 	"variables": {
-		"inputName": "(concat((parameters('owner')),'-rg-usw2-iothub'))",
-		"outputName": "(concat((parameters('owner')),'-sg-usw2-storage'))"
 	},
 	"resources": [{
 			"type": "Microsoft.StreamAnalytics/streamingjobs",
