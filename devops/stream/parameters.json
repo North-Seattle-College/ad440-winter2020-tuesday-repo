@@ -1,12 +1,42 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-      "location": {
-        "value" : "uswest2"
-        "metadata": {
-            "description": "automatically uses this value as location"
-        }
-      }
-    }
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"location": {
+			"value": "westus2",
+			"metadata": {
+				"description": "automatically uses this value as location"
+			}
+		},
+		"owner": {
+			"value": "thomas",
+			"metadata": {
+				"description": "automatically uses this value as location"
+			}
+		},
+		"email": {
+			"value": "test@test.com",
+			"metadata": {
+				"description": "automatically uses this value as location"
+			}
+		},
+		"jobName": {
+			"value": "tho-sag-test",
+			"metadata": {
+				"description": "automatically uses this value as location"
+			}
+		},
+		"iotHubName": {
+			"value": "tho-iot-test",
+			"metadata": {
+				"description": "automatically uses this value as location"
+			}
+		},
+		"storage": {
+			"value": "tho-sto-test",
+			"metadata": {
+				"description": "automatically uses this value as location"
+			}
+		}
+	}
 }
