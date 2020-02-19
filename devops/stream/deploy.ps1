@@ -1,4 +1,23 @@
 <#
+  Finds all of the parameters
+#>
+
+param(
+    [Parameter(Mandatory = $True)]
+    [string]
+    $location,
+​
+    [Parameter(Mandatory = $True)]
+    [string]
+    $owner,
+​
+    [Parameter(Mandatory = $True)]
+    [string]
+    $email
+)
+
+
+<#
   Creates the resource group being used
 #>
 
@@ -9,7 +28,7 @@ $resourceGroupName = "tho-sag-usw2-test"
 Get-AzResourceGroup -Name $resourceGroupName -ErrorVariable notPresent -ErrorAction SilentlyContinue
 if ($notPresent) {
   #create new resource group
-  New-AzResourceGroup -Name $resourceGroupName -Location "westus2"
+  New-AzResourceGroup -Name $resourceGroupName -Location $location
 }
 
 <#

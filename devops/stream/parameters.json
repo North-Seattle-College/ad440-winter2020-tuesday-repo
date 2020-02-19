@@ -19,18 +19,6 @@
 			"metadata": {
 				"description": "automatically uses this value as location"
 			}
-		},
-		"iotHubName": {
-			"value": "tho-iot-test",
-			"metadata": {
-				"description": "automatically uses this value as location"
-			}
-		},
-		"storage": {
-			"value": "tho-sto-test",
-			"metadata": {
-				"description": "automatically uses this value as location"
-			}
 		}
 	}
 }

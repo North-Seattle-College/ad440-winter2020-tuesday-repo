@@ -19,30 +19,18 @@
 			"metadata": {
 				"description": "name of the current streaming job"
 			}
-		},
-		"iotHubName": {
-			"type": "String",
-			"metadata": {
-				"description": "new iothub being created and analyzed"
-			}
-		},
-		"storage": {
-			"type": "String",
-			"metadata": {
-				"description": "name of the blob storage"
-			}
 		}
 	},
 	"variables": {},
 	"resources": [{
 			"type": "Microsoft.StreamAnalytics/streamingjobs",
 			"apiVersion": "2016-03-01",
-			"name": "(parameters('jobName'))",
+			"name": "[parameters('jobName')]",
 			"location": "[resourceGroup().location]",
 			"tags": {
-				"Owner": "(parameters('owner'))",
+				"Owner": "[parameters('owner')]",
 				"Application": "Pot-O-Gold",
-				"OwnerEmail ": "(parameters('email'))"
+				"OwnerEmail ": "[parameters('email')]"
 			},
 			"properties": {
 				"sku": {
