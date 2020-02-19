@@ -74,7 +74,7 @@
 		{
 			"type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
 			"apiVersion": "2016-03-01",
-			"name": "(variables('inputName'))",
+			"name": "(parameters('iotHubName'))",
 			"dependsOn": [
 				"(resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('jobName')))"
 			],
@@ -105,7 +105,7 @@
 		{
 			"type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
 			"apiVersion": "2016-03-01",
-			"name": "[variables('inputName')]",
+			"name": "[parameters('jobName')]",
 			"dependsOn": [
 				"[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('jobName'))]"
 			],
@@ -136,7 +136,7 @@
 		{
 			"type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
 			"apiVersion": "2016-03-01",
-			"name": "(variables('outputName'))",
+			"name": "(parameters('storage'))",
 			"dependsOn": [
 				"[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('jobName'))]"
 			],
