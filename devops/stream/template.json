@@ -53,7 +53,6 @@
 		"outputName": "[concat([parameters('owner')],'-sg-usw2-storage')]"
 	},
 	"resources": [{
-			"comment": "This starts the streaming job",
 			"type": "Microsoft.StreamAnalytics/streamingjobs",
 			"apiVersion": "2016-03-01",
 			"name": "[parameters('jobName')]",
@@ -76,7 +75,6 @@
 			}
 		},
 		{
-			"comment": "This takes the input of the current stream from the current iot hub",
 			"type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
 			"apiVersion": "2016-03-01",
 			"name": "[variables('inputName')]",
@@ -108,7 +106,6 @@
 			}
 		},
 		{
-			"comment": "This takes the output of the current stream",
 			"type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
 			"apiVersion": "2016-03-01",
 			"name": "[variables('outputName')]",
