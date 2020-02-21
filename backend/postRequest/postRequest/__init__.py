@@ -1,5 +1,5 @@
 import logging
-
+import pyodbc
 import azure.functions as func
 
 
@@ -12,6 +12,19 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         # check JSON file
         req_body = req.get_json()
         logging.info(req_body)
+
+        #connect to database
+        cnxn = pyodbc.connect(#connection name
+        )
+
+        cursor = cnxn.cursor()
+        #insert data into SQL
+        cursor.execute(
+            "INSERT INTO Machines (Model, ModelNum, ModelPhoto, SerialNum, VendorID, LocationID)\
+                VALUES (req_body['Model'], req_body['ModelNum'], req_body['ModelPhoto'], req_body['SerialNum'],req_body['VendorID'],req_body['LocationID'])"
+            )
+
+
         #POST request successful
         return func.HttpResponse(f"Successful request")
     except ValueError:
