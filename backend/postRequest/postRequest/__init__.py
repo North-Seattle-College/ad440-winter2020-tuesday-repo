@@ -16,6 +16,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         #connect to database
         cnxn = pyodbc.connect(#connection name
         )
+        logging.info('Connect to database complete')
 
         cursor = cnxn.cursor()
         #insert data into SQL
@@ -24,7 +25,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 VALUES (req_body['Model'], req_body['ModelNum'], req_body['ModelPhoto'], req_body['SerialNum'],req_body['VendorID'],req_body['LocationID'])"
             )
 
-
+        logging.info("Data inserted into SQL complete.")
         #POST request successful
         return func.HttpResponse(f"Successful request")
     except ValueError:
