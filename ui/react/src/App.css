@@ -24,7 +24,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 10vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,6 +45,8 @@
     transform: rotate(360deg);
   }
 }
+<<<<<<< HEAD:ui/react/src/App.css
+=======
 .login {
   background-color: #282c34;
 }
@@ -71,3 +73,4 @@
 
 
 
+>>>>>>> develop:ui/src/css/App.css

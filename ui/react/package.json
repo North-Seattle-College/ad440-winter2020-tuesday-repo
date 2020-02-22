@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,12 +11,16 @@
     "material-ui": "^0.20.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+<<<<<<< HEAD:ui/react/package.json
+    "react-scripts": "3.3.0"
+=======
     "react-scripts": "3.3.0",
     "react-switch": "^5.0.1",
     "react-table": "^7.0.0-rc.15",
     "react-toggle-switch": "^3.0.4",
     "reakit": "^1.0.0-beta.16",
     "styled-components": "^5.0.1"
+>>>>>>> develop:ui/package.json
   },
   "scripts": {
     "start": "react-scripts start",
