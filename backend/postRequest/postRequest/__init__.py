@@ -5,12 +5,15 @@ import os
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
-    
+    logging.info('Python HTTP trigger function processed a request.')    
     # connect to database
-    cnxn = pyodbc.connect(os.environ['DatabaseConnString'])
-    # logging.info('Connect to database complete')
-    # cursor = cnxn.cursor()
+    try:
+        cnxn = pyodbc.connect(os.environ['DatabaseConnString'])
+        logging.info('Connect to database complete')    
+        # cursor = cnxn.cursor()
+        return func.HttpRequest(f"Successful database connection")
+    except:
+        logging.warning("Database connection failed")
 
     # check that it is a POST request
     try:
