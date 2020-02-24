@@ -10,6 +10,10 @@ import {
   TabPanel as BaseTabPanel
 } from "reakit/Tab";
 import '../css/PageTabs.css';
+import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
+import { MachineData } from './MachinesData';
+import MachinesEditForm from './MachinesEditForm';
+import MachinesMain from './MachinesMain';
 
 const TabsContext = React.createContext();
 
@@ -41,6 +45,7 @@ function TabPanel(props) {
 
 //Function in that combines everything together
 //Here we create names for the tabs, and populate them with data
+
 export default function PageTabs() {
   return (
       <div className="tabs">
@@ -58,7 +63,8 @@ export default function PageTabs() {
         <Tab stopId="tab11">Tab 11</Tab>
         <Tab stopId="tab12">Tab 12</Tab>
       
-<TabPanel stopId="tab1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+<TabPanel stopId="tab1">
+      <MachinesMain/>
       </TabPanel>
       
 <TabPanel stopId="tab2">Where does it come from?

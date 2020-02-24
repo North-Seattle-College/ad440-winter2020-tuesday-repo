@@ -8,6 +8,11 @@ import MachinesTable from './components/MachinesTable';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SideNav from './components/SideNav';
 import PageTabs from './components/PageTabs';
+import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
+import { MachineData } from './components/MachinesData';
+import MachinesEditForm from './components/MachinesEditForm';
+import MachinesButtons from './components/MachinesButtons';
+import MachinesMain from './components/MachinesMain';
 
 /**
  * This is a root component 
@@ -77,7 +82,9 @@ render(){
           <MuiThemeProvider>
         <SideNav/>
         <PageTabs/>
+    
       </MuiThemeProvider>
+    
     
       {/* Rendering the outer wrapper */}
       <div className = "outer">
@@ -115,7 +122,8 @@ render(){
           //     },
           // })}
            />  
-        </div>    
+        </div>
+    
             
     {/* </Styles>    */}
     </div>  
