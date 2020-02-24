@@ -4,9 +4,6 @@
     "parameters": {
         "vault_name": {
             "value": "test-pog-vault"
-        },
-        "location": {
-          "value":"westus2"
         }
     }
 }

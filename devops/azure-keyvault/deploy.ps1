@@ -15,12 +15,19 @@ $projectName = "pog"
 
 #create variables
 $resourceGroupName = "test-${projectName}-vault"
+$location = "westus2"
 
 #add templates for the file and parameters
 $template = ".\template.json"
 $parameters = ".\parameters.json"
 
-New-AzRmResourceGroup `
+Get-AzResourceGroup -Name $resourceGroupName -ErrorVariable notPresent -ErrorAction SilentlyContinue
+if ($notPresent) {
+  #create new resource group
+  New-AzResourceGroup -Name $resourceGroupName -Location $location
+}
+
+New-AzResourceGroupDeployment `
     -ResourceGroupName $resourceGroupName `
     -TemplateFile $template `
     -TemplateParameterFile $parameters
