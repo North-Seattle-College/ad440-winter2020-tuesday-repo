@@ -1,0 +1,15 @@
+.tabs{
+    background-color: lightgrey;
+    width: 70%;
+    margin-left:2.5%;
+    margin-right: 2%;
+    height: 50%;
+    min-height:250px;
+    float:left;
+
+}
+
+.tab1{
+    width:300px;
+    position: relative;
+}
