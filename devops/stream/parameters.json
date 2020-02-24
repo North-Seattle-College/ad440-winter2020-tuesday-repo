@@ -3,19 +3,17 @@
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"owner": {
-			"value": "thomas",
 			"metadata": {
 				"description": "automatically uses this value as location"
 			}
 		},
 		"email": {
-			"value": "test@test.com",
 			"metadata": {
 				"description": "automatically uses this value as location"
 			}
 		},
 		"jobName": {
-			"value": "tho-sag-test",
+			"value": "stream-analytics-job",
 			"metadata": {
 				"description": "automatically uses this value as location"
 			}

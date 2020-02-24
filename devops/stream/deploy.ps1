@@ -1,51 +1,39 @@
 <#
-  Finds all of the parameters
+  This deploys a streaming analytics job without input and output
 #>
 
-param(
-    [Parameter(Mandatory = $True)]
-    [string]
-    $location,
-​
-    [Parameter(Mandatory = $True)]
-    [string]
-    $owner,
-​
-    [Parameter(Mandatory = $True)]
-    [string]
-    $email
+Param(
+    [Parameter(Mandatory = $True, HelpMessage = "Enter owner name: ")]
+    [string] $owner,
+    [Parameter(Mandatory = $True, HelpMessage = "Enter owner email: ")]
+    [string] $email,
+    [Parameter(Mandatory = $True, HelpMessage = "Enter job name: ")]
+    [string] $jobName,
+    [Parameter(Mandatory = $True, HelpMessage = "Enter location (i.e. westus2): ")]
+    [string] $location,
+    [Parameter(Mandatory = $True, HelpMessage = "Enter resource group name (i.e. {name}-rg-usw2-task#): ")]
+    [string] $resourceGroupName
 )
 
-
-<#
-  Creates the resource group being used
-#>
-
-#variable names
-$resourceGroupName = "tho-sag-usw2-test"
-
-#create new resource group if it does not exist
+#Creates new resource group if it does not exist
 Get-AzResourceGroup -Name $resourceGroupName -ErrorVariable notPresent -ErrorAction SilentlyContinue
 if ($notPresent) {
   #create new resource group
   New-AzResourceGroup -Name $resourceGroupName -Location $location
 }
 
-<#
-  Finds the template in order to begin making the stream analytics resource
-#>
-
-#local file paths
-$templateFilePath = "C:\Users\tcodu\Documents\github\ad440-winter2020-tuesday-repo\devops\stream\template.json"
-$parameterFilePath = "C:\Users\tcodu\Documents\github\ad440-winter2020-tuesday-repo\devops\stream\parameters.json"
-#remote file path
-#$templateUriPath = "https://raw.githubusercontent.com/North-Seattle-College/ad440-winter2020-tuesday-repo/feature-thomas-3/devops/stream/template.json"
-#$parameterUriPath = "https://raw.githubusercontent./North-Seattle-College/ad440-winter2020-tuesday-repo/feature-thomas-3/devops/stream/template.json"
+#file paths
+$templateFilePath = ".\template.json"
+$parameterFilePath = ".\parameters.json"
 
 #Tests local deployment
 New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName `
   -TemplateFile $templateFilePath `
-  -TemplateParameterFile $parameterFilePath
+  -owner $owner `
+  -email $email `
+  -jobName $jobName
+  #uncomment below if using parameters.json file
+  #-TemplateParameterFile $parameterFilePath
 
 #Deletes newly created resource group
 #Remove-AzResourceGroup -Name $resourceGroupName
