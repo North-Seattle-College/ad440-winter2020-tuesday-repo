@@ -2,7 +2,7 @@
 // this page is the sign in button connection to the login page, this page will render after you click sign in button.
 import React from "react";
 import  '../css/StatusButton.css'
-import '../css/MachinesTable.css'
+// import '../css/MachinesTable.css'
 import styled from 'styled-components'
 // A great library for fuzzy filtering/sorting items
 import { useTable, useGlobalFilter } from 'react-table'
@@ -35,9 +35,9 @@ fuzzyTextFilterFn.autoRemove = val => !val
 const defaultPropGetter = () => ({})
 
 
-/** The table component, which displays machines, and contains the filter function */ 
-export default function MachinesTable({ 
-  columns, 
+/** The table component, which displays machines, and contains the filter function */
+export default function MachinesTable({
+  columns,
   data,
   getHeaderProps = defaultPropGetter,
   getColumnProps = defaultPropGetter,
@@ -84,11 +84,11 @@ export default function MachinesTable({
   )
 
   // Specifies how many rows to show on page - currently 20
-  // 
+  //
   const firstPageRows = rows.slice(0, 20)
 
   return (
-    
+
     <>
     <Title> <p className = "table-style">Machines List</p>
       {/* Render the global filter UI */}
@@ -99,13 +99,13 @@ export default function MachinesTable({
                   />
 
     </Title>
-      <table {...getTableProps()}>     
-        <thead> 
+      <table {...getTableProps()}>
+        <thead>
           {headerGroups.map(headerGroup => (
             <tr  style={{fontSize: '18pt'}} {...headerGroup.getHeaderGroupProps()}>
-           
+
               {headerGroup.headers.map(column => (
-                <th  
+                <th
                 // Return an array of prop objects and react-table will merge them appropriately
 
                 {...column.getHeaderProps([
@@ -116,15 +116,15 @@ export default function MachinesTable({
                   getColumnProps(column),
                   getHeaderProps(column),
                 ])}>
-                
+
                   {column.render('Header')}
-                  
+
                   <div className = "canFilter">{column.canFilter ? column.render('Filter') : null}</div>
                 </th>
               ))}
             </tr>
           ))}
-      
+
         </thead>
         <tbody {...getTableBodyProps()}>
           {firstPageRows.map((row, i) => {
@@ -133,7 +133,7 @@ export default function MachinesTable({
               <tr {...row.getRowProps(getRowProps(row))}>
                 {row.cells.map(cell => {
                   return (
-                  <td 
+                  <td
                     // Return an array of prop objects and react-table will merge them appropriately
                     {...cell.getCellProps([
                       {
