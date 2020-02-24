@@ -4,9 +4,7 @@
 
 
 #get variables from the admin who is creating
-$name = Read-Host -Prompt "Enter your name: "
-$name = $name.Substring(0, 3).ToLower()
-$projectName = Read-Host -Prompt "Enter acronym for the project name being (i.e. pog for Pot-o-Gold): "
+$resourceGroupName = Read-Host -Prompt "Enter resource group name (i.e. nam-rg-usw2-task128): "
 $location = Read-Host -Prompt "Enter the same location that is used for creating the key vault (i.e. westus2): "
 
 <#
@@ -15,14 +13,11 @@ $projectName = "pog" #refers to pot of gold
 $location = "westus2" #WA location
 #>
 
-#create variables
-$resourceGroupName = "${name}-kv-${projectName}-vault"
-
 #add templates for the file and parameters
 $template = ".\template.json"
 $parameters = ".\parameters.json"
 
-#created resource group only if it does not exist
+#creates resource group only if it does not exist
 Get-AzResourceGroup -Name $resourceGroupName -ErrorVariable notPresent -ErrorAction SilentlyContinue
 if ($notPresent) {
   New-AzResourceGroup -Name $resourceGroupName -Location $location
@@ -33,3 +28,8 @@ New-AzResourceGroupDeployment `
     -ResourceGroupName $resourceGroupName `
     -TemplateFile $template `
     -TemplateParameterFile $parameters
+
+<#
+#removes resource group if needed
+Remove-AzResourceGroup -Name $resourceGroupName
+#>

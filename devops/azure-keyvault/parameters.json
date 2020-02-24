@@ -3,7 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "vault_name": {
-            "value": "key-vault"
+            "value": "tho-key-vault",
+            "metadata": {
+              "description": "this is the unique name of the key vault, please update this to a unique name before deploying"
+            }
         }
     }
 }
