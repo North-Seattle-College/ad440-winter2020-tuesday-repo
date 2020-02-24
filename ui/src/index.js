@@ -47,7 +47,7 @@ class UserTableRow extends React.Component {
       <td>{user.machineID}</td>
         <td>{user.vendor}</td>
         <td>{capitalize(user.location.street)}</td>
-        <td><p style = {{backgroundColor: user.status_color}}>&nbsp;</p></td>
+        <td><p id = "p2" style = {{backgroundColor: user.status_color}}>&nbsp;</p></td>
       </tr>,
       this.state.expanded && (
         <tr className="expandable" key="tr-expander">

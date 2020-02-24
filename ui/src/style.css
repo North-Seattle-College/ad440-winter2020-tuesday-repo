@@ -118,4 +118,9 @@ h2 {
 
 #p1 {
     display: inline;
+    border-radius: 25px;
+}
+
+#p2 {
+    border-radius: 25px;
 }
