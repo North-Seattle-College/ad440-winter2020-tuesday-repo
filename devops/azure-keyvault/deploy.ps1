@@ -14,9 +14,13 @@ $location = Read-Host -Prompt "Enter the same location that is used for creating
 $projectName = "pog"
 
 #create variables
-$resourceGroupName = "${projectName}-keyvault"
+$resourceGroupName = "test-${projectName}-vault"
 
-Test-AzResourceGroupDeployment `
+#add templates for the file and parameters
+$template = ".\template.json"
+$parameters = ".\parameters.json"
+
+New-AzRmResourceGroup `
     -ResourceGroupName $resourceGroupName `
-    -TemplateFile "./template.json" `
-    -TemplateParameterFile "./parameters.json"
+    -TemplateFile $template `
+    -TemplateParameterFile $parameters
