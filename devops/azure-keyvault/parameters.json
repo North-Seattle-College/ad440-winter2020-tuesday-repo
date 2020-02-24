@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "vault_name": {
-            "value": "test-pog-vault"
+            "value": "pog-vault"
         }
     }
 }

@@ -5,7 +5,7 @@
         "vault_name": {
             "type": "String",
             "metadata": {
-                "description": "this is the name of the key vault"
+                "description": "this is the name of the key vault, retrieved from parameters.json file"
             }
         }
     },
