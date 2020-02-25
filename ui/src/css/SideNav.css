@@ -2,7 +2,7 @@
     position: relative;
     background: #FFE9E9 !important;
     padding: 50px;
-    padding-bottom: 100%;
+    padding-bottom: 25%;
     height: 100%;
     width: 25%;
     min-width:100px;
@@ -15,7 +15,7 @@
 .relative-logo-wrapper {
   position: relative;
   height: 100px;
-    
+
 
 }
 .relative-nav-wrapper {
@@ -41,6 +41,6 @@
   font-family: 'Helvetica';
 }
 .name {
-  font-size: 32px;
+  font-size: 24px;
   color: black;
 }
