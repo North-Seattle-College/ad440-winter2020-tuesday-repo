@@ -9,9 +9,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     
     # connect to database
     try:
-        cnxn = pyodbc.connect(os.environ['DatabaseConnString'])
+        cnxn = pyodbc.connect(os.environ['ConnStringDB'])
         logging.info('Connect to database complete')    
-        # # cursor = cnxn.cursor()
+        # cursor = cnxn.cursor()
         return func.HttpRequest(f"Successful database connection")
     except:
         logging.exception("Database connection failed")
@@ -27,9 +27,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         #     "INSERT INTO [dbo].[Machines] ([Model], [ModelNum], [ModelPhoto], [SerialNum], [VendorID], [LocationID])\
         #         VALUES (req_body['Model'], req_body['ModelNum'], req_body['ModelPhoto'], req_body['SerialNum'], req_body['VendorID'], req_body['LocationID'])"
         #     )
-
         # logging.info("Data inserted into SQL complete.")
-        #POST request successful
+        
+        #POST request successfulS
         return func.HttpResponse(f"Successful request")
     except ValueError:
         pass
