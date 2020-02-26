@@ -9,7 +9,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     
     # connect to database
     try:
-        cnxn = pyodbc.connect(os.environ['ConnStringDB'])
+        cnxn = pyodbc.connect(os.environ['odbc13ConnStting'])
         logging.info('Connect to database complete')    
         # cursor = cnxn.cursor()
         return func.HttpRequest(f"Successful database connection")
