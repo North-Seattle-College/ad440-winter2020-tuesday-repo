@@ -7,10 +7,7 @@ import azure.functions as func
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
     #cnxn = pyodbc.connect(os.environ['DatabaseConnString'])
-    #cnxn = pyodbc.connect("Driver={SQL Server Native Client 11.0};"
-                        #"Server=yoz-sql-server-task2;"
-                        #"Database=yoz-sql-feat-usw2-task2 (yoz-sql-server-task2/yoz-sql-feat-usw2-task2);"
-                       # "uid=devops-admin-t2;pwd=Sparky2018!")
+    #cnxn = pyodbc.connect()
 
    # try:
         #req_body = req.get_json()
