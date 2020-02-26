@@ -1,4 +1,3 @@
-# The parameters for the resource group and resources
 param(
     [Parameter(Mandatory = $True)]
     [string]
@@ -13,7 +12,6 @@ param(
     $Environment
 )
 
-# Function to register the resource providers 
 Function RegisterRP {
     Param(
         [string]$ResourceProviderNamespace
@@ -25,7 +23,7 @@ Function RegisterRP {
 
 $ErrorActionPreference = "Stop"
 
-# Register resource providers
+# Register RPs
 $resourceProviders = @("microsoft.network", "microsoft.storage");
 if ($resourceProviders.length) {
     Write-Host "Registering resource providers"
@@ -35,7 +33,7 @@ if ($resourceProviders.length) {
 }
 
 # Build the resource group name
-$resourceGroupName = ("{0}-{1}-rg" -f $AppName, $Environment).ToLower(); # Build the name for the resource group
+$resourceGroupName = ("{0}-{1}-rg" -f $AppName, $Environment).ToLower(); # Build the name for the RG
 
 $resourceGroup = Get-AzResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue
 if (!$resourceGroup) {
@@ -50,7 +48,6 @@ else {
     Write-Host "Using existing resource group '$resourceGroupName'" -ForegroundColor "Green";
 }
 
-# Deployment
 $deploymentName = ( -join ("deployment_", (Get-Date -Format "yyyy-MM-dd_HHmm").ToString()))
 
 $Environment = $Environment.ToLower()
