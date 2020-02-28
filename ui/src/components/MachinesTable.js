@@ -1,7 +1,7 @@
 
 // this page is the sign in button connection to the login page, this page will render after you click sign in button.
 import React from "react";
-import  '../css/StatusButton.css'
+//import  '../css/StatusButton.css'
 // import '../css/MachinesTable.css'
 import styled from 'styled-components'
 // A great library for fuzzy filtering/sorting items

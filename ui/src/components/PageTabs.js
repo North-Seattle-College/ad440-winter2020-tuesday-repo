@@ -4,12 +4,14 @@
 //Here I imported libraries in order to create tabs
 import React from "react";
 import {
-  useTabState,
-  Tab as BaseTab,
-  // TabList as BaseTabList,
-  TabPanel as BaseTabPanel
-} from "reakit/Tab";
+    useTabState,
+    Tab as BaseTab,
+    TabList as BaseTabList,
+    TabPanel as BaseTabPanel} 
+from "reakit/Tab";
+
 import '../css/PageTabs.css';
+
 import MachinesMain from './MachinesMain';
 
 const TabsContext = React.createContext();

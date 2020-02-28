@@ -76,16 +76,11 @@ export default class MachinesEditForm extends React.Component {
             <DialogActionsBar>
                 <button
                     className="k-button"
-                    onClick={this.props.cancel}
-                >
-                    Cancel
-                </button>
-                <button
+                    onClick={this.props.cancel}>Cancel</button>
+                
+            <button
                     className="k-button k-primary"
-                    onClick={this.props.save}
-                >
-                    Save
-                </button>
+                    onClick={this.props.save}>Save</button>
             </DialogActionsBar>
         </Dialog>
     );

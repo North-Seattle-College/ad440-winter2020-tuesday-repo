@@ -9,6 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SideNav from './components/SideNav';
 import GlobalFilter from './components/GlobalFilter';
 
+
 // function formatDate(str) {
 //   return str.substr(0, 10);
 // }
