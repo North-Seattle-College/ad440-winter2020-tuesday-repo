@@ -3,6 +3,8 @@
 import React, { Component } from "react";
 import AdalConfig from './AdalConfig';
 import AuthContext from './Auth';
+import logo from './logo.png';
+import '../css/App.css';
 
 
 export default  class Login extends Component {
@@ -22,8 +24,8 @@ export default  class Login extends Component {
     return (
 
         <div className='login'>
-  <button className='btn' onClick={this.sign}>Sign in</button>
-
+            <img src={logo} className="logo" alt="logo"/>
+            <button className='btn' onClick={this.sign}>Sign in</button>
         </div>
 
     );

@@ -3,11 +3,9 @@
 
 //Here I imported libraries in order to create the side navigation
 import React, { Component } from 'react';
-import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import '../css/SideNav.css';
-import logo from './logo.png';
 
 //Class for the navigation
 class SideNav extends Component {
@@ -18,7 +16,7 @@ class SideNav extends Component {
       },
       tabLabel: {
         fontSize: 28,
-        color: 'black',
+        color: 'white',
         textTransform: 'none',
       }
     };
@@ -26,32 +24,14 @@ class SideNav extends Component {
       <div>
 
         <Paper
-        zDepth={1}
         className="sidenav"
+        zDepth={0}
         children= {
 
         <div className="content-wrapper">
 
-        <center>
-        <div className="relative-logo-wrapper">
-
-        {/*This part os responsible for placing the logo on the page*/}
-        <img src={logo} className="logo" alt="logo"/>
-        </div>
-        </center>
 
         <div className="relative-nav-wrapper">
-        <center>
-
-        <div>
-        {/*This part is responsible for the title */}
-        <span className="name">PotO'Gold</span>
-
-        </div>
-        </center>
-
-        <br/>
-        <Divider/>
 
         {/*This part responsible for creating buttons for the side navigation */}
         <div>
