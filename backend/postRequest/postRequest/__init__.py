@@ -21,12 +21,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         req_body = req.get_json()
         logging.info(req_body)
         
-        #check for duplicate Models
+        #check for duplicate MachineID
         cursor.execute('SELECT COUNT (*) FROM [dbo].[Machines] WHERE MachineID= ?', (req_body['MachineID']))
         result = cursor.fetchone()
         found = result[0]
         if found == 0:                 
-            # no duplicate Model was found
+            # no duplicate MachineID was found
             # insert data into SQL
             cursor.execute(
                 '''INSERT INTO [dbo].[Machines] (Model, ModelNum, ModelPhoto, SerialNum, VendorID, LocationID)
