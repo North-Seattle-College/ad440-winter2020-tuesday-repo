@@ -7,7 +7,7 @@ import logo from './logo.png';
 import '../css/App.css';
 
 
-export default  class Login extends Component {
+export default class Login extends Component {
   sign(){
     AuthContext.handleWindowCallback()
 
