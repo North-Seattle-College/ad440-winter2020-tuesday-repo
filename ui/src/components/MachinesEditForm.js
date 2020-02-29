@@ -1,7 +1,9 @@
+//Created by Siergiey
 import React from 'react';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
 
+{/*this component is responsible for generating the pop-up form for ADDing and EDITING machines */}
 export default class MachinesEditForm extends React.Component {
   constructor(props) {
       super(props);
@@ -13,6 +15,7 @@ export default class MachinesEditForm extends React.Component {
       event.preventDefault();
   }
 
+  /*stored value for the form*/
   onDialogInputChange = (event) => {
       let target = event.target;
       const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -25,7 +28,8 @@ export default class MachinesEditForm extends React.Component {
           productInEdit: edited
       });
   }
-
+  
+  /*The pop-up window is being generated here*/
   render() {
       return (
         <Dialog
@@ -33,8 +37,9 @@ export default class MachinesEditForm extends React.Component {
         >
             <form onSubmit={this.handleSubmit}>
 
-
+          {/*All the variables for the form are being generated here*/}
                 <div style={{ marginBottom: '1rem' }}>
+                    {/*vendor field*/}
                     <label>
                     Vendor<br />
                     <Input
@@ -47,6 +52,7 @@ export default class MachinesEditForm extends React.Component {
 
 
                       <div style={{ marginBottom: '1rem' }}>
+                    {/*Address field*/}
                     <label>
                     Address<br />
                     <Input
@@ -57,7 +63,9 @@ export default class MachinesEditForm extends React.Component {
                     />
                     </label>
                 </div>
-                                      <div style={{ marginBottom: '1rem' }}>
+                      
+                     <div style={{ marginBottom: '1rem' }}>
+                    {/*Status field*/}
                     <label>
                     Status<br />
                     <Input
@@ -72,6 +80,7 @@ export default class MachinesEditForm extends React.Component {
 
 
             </form>
+            {/*actions for the form buttons*/}
             <DialogActionsBar>
                 <button
                     className="k-button"
