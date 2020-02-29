@@ -1,4 +1,5 @@
-
+//Created by Siergiey
+{/*This is sample data for the MachinesMain*/}
 export const MachineData = 
 [
   { "id": 1, "vendor": "Microsoft", "address": "5000 148th Ave NE, Redmond, WA 98052", "status": "broken"},

@@ -12,3 +12,7 @@
     width:300px;
     position: relative;
 }
+
+.tabwidth1, .tabwidth2, .tabwidth3, .tabwidth4, .tabwidth5, .tabwidth6, .tabwidth7, .tabwidth8, .tabwidth9, .tabwidth10, .tabwidth11, .tabwidth12{
+    width: 8.33%;
+}
