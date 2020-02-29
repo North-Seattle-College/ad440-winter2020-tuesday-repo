@@ -22,7 +22,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         logging.info(req_body)
         
         #check for duplicate Models
-        cursor.execute('SELECT COUNT (*) FROM [dbo].[Machines] WHERE Model= ?', (req_body['Model']))
+        cursor.execute('SELECT COUNT (*) FROM [dbo].[Machines] WHERE MachineID= ?', (req_body['MachineID']))
         result = cursor.fetchone()
         found = result[0]
         if found == 0:                 
@@ -46,3 +46,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         "Please pass a POST request in the request body",   
         status_code=400 
         )
+
+
+
