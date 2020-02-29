@@ -1,28 +1,31 @@
-
+//Created by Siergiey \
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { MachineData } from './MachinesData';
 import MachinesEditForm from './MachinesEditForm';
 import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
 
+//This is the main component that is responsible for importing all the components
+//to generate the machines table
 export default class MachinesMain extends React.Component {
     state = {
         products: MachineData.slice(0, 12),
         productInEdit: undefined
     };
 
+/*state of the edited machine*/
+
     edit = (dataItem) => {
         this.setState({ productInEdit: this.cloneProduct(dataItem) });
     }
-
+/*state of the removed machines*/
     remove = (dataItem) => {
         this.setState({
             products: this.state.products.filter(p => p.id !== dataItem.id)
         });
     }
-
+/*state of the saved machine*/
     save = () => {
         const dataItem = this.state.productInEdit;
         const products = this.state.products.slice();
@@ -40,7 +43,7 @@ export default class MachinesMain extends React.Component {
             productInEdit: undefined
         });
     }
-
+/*what happens when we cancel the action*/
     cancel = () => {
         this.setState({ productInEdit: undefined });
     }
@@ -48,7 +51,7 @@ export default class MachinesMain extends React.Component {
     insert = () => {
         this.setState({ productInEdit: { } });
     }
-
+/*this part renders the table*/
     render() {
         return (
             <div >
@@ -64,6 +67,7 @@ export default class MachinesMain extends React.Component {
                             Add New
                         </button>
                     </GridToolbar>
+                    {/*names for the columns*/}
                     <Column field="id" title="ID" width="50px" />
                     <Column field="vendor" title="Vendor" />
                     <Column field="address" title="Address" />
