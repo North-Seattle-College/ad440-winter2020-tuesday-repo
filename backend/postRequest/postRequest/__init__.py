@@ -9,16 +9,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     
     # connect to database
     try:
-        conn = pyodbc.connect( 
-            "Driver={ODBC Driver 17 for SQL Server};" 
-            "Server=tcp:yoz-sql-server-task2.database.windows.net,1433;" 
-            "Database=yoz-sql-feat-usw2-task2;Uid=devops-admin-t2;" 
-            #input password here
-            "Pwd=---PASSWORD HERE----;" 
-            "Encrypt=yes;" 
-            "TrustServerCertificate=no;" 
-            "Connection Timeout=30;" 
-            )
+        conn = pyodbc.connect(os.environ['odbc17ConnString'])
         cursor = conn.cursor()
         logging.info('Connect to database complete')  
     except:
