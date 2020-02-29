@@ -52,18 +52,18 @@ export default function PageTabs() {
   return (
       <div className="tabs">
     <Tabs selectedId="tab1">
-        <Tab stopId="tab1">Tab 1</Tab>
-        <Tab stopId="tab2">Tab 2</Tab>
-        <Tab stopId="tab3">Tab 3</Tab>
-        <Tab stopId="tab4">Tab 4</Tab>
-        <Tab stopId="tab5">Tab 5</Tab>
-        <Tab stopId="tab6">Tab 6</Tab>
-        <Tab stopId="tab7">Tab 7</Tab>
-        <Tab stopId="tab8">Tab 8</Tab>
-        <Tab stopId="tab9">Tab 9</Tab>
-        <Tab stopId="tab10">Tab 10</Tab>
-        <Tab stopId="tab11">Tab 11</Tab>
-        <Tab stopId="tab12">Tab 12</Tab>
+        <Tab className = "tabwidth1" stopId="tab1">Tab 1</Tab>
+        <Tab className = "tabwidth2" stopId="tab2">Tab 2</Tab>
+        <Tab className = "tabwidth3" stopId="tab3">Tab 3</Tab>
+        <Tab className = "tabwidth4" stopId="tab4">Tab 4</Tab>
+        <Tab className = "tabwidth5" stopId="tab5">Tab 5</Tab>
+        <Tab className = "tabwidth6" stopId="tab6">Tab 6</Tab>
+        <Tab className = "tabwidth7" stopId="tab7">Tab 7</Tab>
+        <Tab className = "tabwidth8" stopId="tab8">Tab 8</Tab>
+        <Tab className = "tabwidth9" stopId="tab9">Tab 9</Tab>
+        <Tab className = "tabwidth10" stopId="tab10">Tab 10</Tab>
+        <Tab className = "tabwidth11" stopId="tab11">Tab 11</Tab>
+        <Tab className = "tabwidth12" stopId="tab12">Tab 12</Tab>
 
 <TabPanel stopId="tab1">
       <MachinesMain/>
