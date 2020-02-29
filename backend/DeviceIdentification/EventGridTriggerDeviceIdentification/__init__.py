@@ -15,7 +15,7 @@ def main(event: func.EventGridEvent):
         'event_type': event.event_type,
         'event_test' : 'test string'
             
-    })
+    }) 
 
     url = 'https://san-zg-fun-usw2-task61.azurewebsites.net/api/machineid'
     if requests.get(url) != 404: 
