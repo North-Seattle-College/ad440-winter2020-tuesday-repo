@@ -16,7 +16,7 @@ PhoneNum varchar(25) not null,
 PRIMARY KEY (LocationID)
 );
 
-CREATE TABLES Machines(
+CREATE TABLE Machines(
 MachineID int not null identity(1,1) primary key,
 Model varchar(255) not null,
 ModelNum varchar(255) not null,
