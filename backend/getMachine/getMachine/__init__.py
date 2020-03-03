@@ -10,14 +10,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     try:
         #database connection 
-        conct = pyodbc.connect(
-             "Driver={ODBC Driver 17 for SQL Server};" 
-            "Server=;"
-            "Database=;" 
-            "Pwd=;" "Encrypt=yes;" 
-            "TrustServerCertificate=no;" 
-            "Connection Timeout=30;"
-            )
+        conct = pyodbc.connect(os.environ['ConnString'])
         cursor = conct.cursor()
         #query to select everything from the Machines table and put results in a tuple then convert tuples into dictionary
         rows = cursor.execute('''SELECT * FROM [dbo].[Machines]''').fetchall()
