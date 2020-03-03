@@ -4,10 +4,54 @@ import '../css/UserTableFrame.css';
 import testData from '../data/testUser.json';
 import UserTableRow from './UserTableRow';
 import '../css/UserTableFrame.css';
-
+import { MachineData } from './MachinesData';
+import MachinesEditForm from './MachinesEditForm';
+import MachinesButtons from './MachinesButtons';
 
 export default class UserTableFrame extends React.Component {
-  state = { users: testData.results }
+  state = {
+     users: testData.results,
+     products: MachineData,
+    productInEdit: undefined
+    }
+
+    /*state of the edited machine*/
+
+    edit = (dataItem) => {
+      this.setState({ productInEdit: this.cloneProduct(dataItem) });
+  }
+/*state of the removed machines*/
+  remove = (dataItem) => {
+      this.setState({
+          products: this.state.products.filter(p => p.id !== dataItem.id)
+      });
+  }
+/*state of the saved machine*/
+  save = () => {
+      const dataItem = this.state.productInEdit;
+      const products = this.state.products.slice();
+      const isNewProduct = dataItem.id === undefined;
+
+      if (isNewProduct) {
+          products.unshift(this.newProduct(dataItem));
+      } else {
+          const index = products.findIndex(p => p.id === dataItem.id);
+          products.splice(index, 1, dataItem);
+      }
+
+      this.setState({
+          products: products,
+          productInEdit: undefined
+      });
+  }
+/*what happens when we cancel the action*/
+  cancel = () => {
+      this.setState({ productInEdit: undefined });
+  }
+
+  insert = () => {
+      this.setState({ productInEdit: { } });
+  }
 
   render() {
     const { users } = this.state;

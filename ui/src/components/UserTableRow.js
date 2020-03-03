@@ -2,6 +2,10 @@ import React from 'react';
 // import { render } from 'react-dom';
 import { slideDown, slideUp } from './anim';
 import '../css/UserTableRow.css';
+import { MachineData } from './MachinesData';
+import MachinesEditForm from './MachinesEditForm';
+import MachinesButtons from './MachinesButtons';
+
 
 export default class UserTableRow extends React.Component {
   state = { expanded: false }
@@ -31,7 +35,10 @@ export default class UserTableRow extends React.Component {
       <td>{user.machineID}</td>
         <td>{user.vendor}</td>
         <td>{user.location.street}</td>
-        <td><p id = "p2" style = {{backgroundColor: user.status_color}}>&nbsp;</p></td>
+        <td><p id = "p2" style = {{backgroundColor: user.status_color}} cell = {MachinesButtons(this.edit, this.remove)}>&nbsp;  
+        
+        
+        </p></td>
       </tr>,
       this.state.expanded && (
         <tr className="expandable" key="tr-expander">
