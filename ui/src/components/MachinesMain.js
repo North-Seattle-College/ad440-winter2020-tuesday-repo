@@ -13,6 +13,18 @@ export default class MachinesMain extends React.Component {
         products: MachineData.slice(0, 12),
         productInEdit: undefined
     };
+ 
+    componentDidMount() {
+        // Simple GET request using fetch
+        fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ==')
+        .then((response) => response.text())
+        .then((responseText) => {
+            console.log(JSON.parse(responseText));
+        })
+        .catch((error) => {
+            console.log("reset client error-------",error);
+       });
+    }
 
 /*state of the edited machine*/
 
