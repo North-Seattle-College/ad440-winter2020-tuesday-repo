@@ -8,18 +8,22 @@ import '../css/MachinesMain.css';
 
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
+const machineData = [];
 export default class MachinesMain extends React.Component {
     state = {
         products: MachineData.slice(0, 12),
-        productInEdit: undefined
+        productInEdit: undefined,
+        items: []
     };
  
     componentDidMount() {
         // Simple GET request using fetch
         fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ==')
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((responseText) => {
-            console.log(JSON.parse(responseText));
+            console.log(responseText[0]);
+            this.setState({items: responseText});
+            console.log(this.state)
         })
         .catch((error) => {
             console.log("reset client error-------",error);
