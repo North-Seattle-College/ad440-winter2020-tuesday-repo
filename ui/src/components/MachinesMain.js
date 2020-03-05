@@ -33,7 +33,7 @@ export default class MachinesMain extends React.Component {
             cleanData.push({
                 id: items[i].MachineID,
                 vendor: items[i].VendorID,
-                adress: items[i].LocationID,
+                address: items[i].LocationID,
                 model: items[i].Model,
                 status: "not reported"
             })
@@ -143,9 +143,6 @@ export default class MachinesMain extends React.Component {
                     <Column field="address" title="Address" />
                     <Column field="model" title="Model"/>
                     <Column field="status" title="Status" />
-                    <Column field="blah" title="bblah" />
-                    <Column field="blah" title="bladfdsafh" />
-                    <Column field="blah" title="bblafdsarhtrhh" />
                     <Column
                         title="Edit"
                         cell={MachinesButtons(this.edit, this.remove)}
