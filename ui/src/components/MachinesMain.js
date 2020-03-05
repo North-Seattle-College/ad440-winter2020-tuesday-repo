@@ -55,22 +55,9 @@ export default class MachinesMain extends React.Component {
             console.log("Responce ", responseText);
             console.log(responseText);
         }
-        )
-        .then(
-            this.setState({items: machineData}),
-            machineData.forEach(machine => {
-                console.log("machine ", machine.VendorID)
-                cleanData.push({
-                    id: machine.MachineID,
-                })
-             }))
-            
-        . then(
-                console.log("State items are ", this.state.items)
-        )
-            
+        )   
         .catch((error) => {
-            console.log("reset client error-------",error);
+            console.log("Error encountered: ",error);
        });
 
        
