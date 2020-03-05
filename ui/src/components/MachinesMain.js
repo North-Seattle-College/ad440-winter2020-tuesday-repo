@@ -52,7 +52,7 @@ export default class MachinesMain extends React.Component {
         .then((response) => response.json())
         .then((responseText) => {
             this.setState({items: responseText})
-            console.log("State items ", this.state.items);
+            console.log("Responce ", responseText);
             console.log(responseText);
         }
         )
@@ -127,7 +127,7 @@ export default class MachinesMain extends React.Component {
                 <Grid
                     // data={this.buildMachinesForTable(this.state.items)}
                     data = {dataY}
-                    style={{ height: '420px' }}
+                    style={{ height: '620px' }}
                 >
                     <GridToolbar>
                         <button
