@@ -2,6 +2,8 @@ import logging
 import pyodbc
 import azure.functions as func
 import os
+import mysql.connector 
+from mysql.connector import errorcode
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -9,59 +11,40 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     
     try:
         # connect to database
-        logging.info('Starting connection to database...')
+        logging.debug('Starting connection to database...')
         conn = pyodbc.connect(os.environ['ConnString'])
         cursor = conn.cursor()
         logging.info('Connected to database')  
-    except:
-        # connection failed
-        logging.exception("Database connection failed")
-
-    try:
+    
         # read JSON body
         req_body = req.get_json()
         logging.info('Content of JSON body: ' + str(req_body))
         
-        try:
-            # check for duplicate MachineID
-            logging.info('Checking for duplicate machine...')
-            cursor.execute('SELECT COUNT (*) FROM [dbo].[Machines] WHERE MachineID= ?', (req_body['MachineID']))
-            result = cursor.fetchone()
-            found = result[0]
-        except:
-            #Duplicate check failed
-            logging.exception('Duplicate check failed')
+        # insert data into SQL
+        cursor.execute(
+            '''INSERT INTO [dbo].[Machines] (Model, ModelNum, ModelPhoto, SerialNum, VendorID, LocationID)
+            VALUES (?,?,?,?,?,?)''', (req_body['Model'], req_body['ModelNum'], req_body['ModelPhoto'], req_body['SerialNum'], req_body['VendorID'], req_body['LocationID'])
+            )
 
-        if found == 0:                 
-            # no duplicate MachineID was found
-            logging.info('No duplicate found. \nInserting new Machine...')
-
-            try:
-                # insert data into SQL
-                cursor.execute(
-                    '''INSERT INTO [dbo].[Machines] (Model, ModelNum, ModelPhoto, SerialNum, VendorID, LocationID)
-                    VALUES (?,?,?,?,?,?)''', (req_body['Model'], req_body['ModelNum'], req_body['ModelPhoto'], req_body['SerialNum'], req_body['VendorID'], req_body['LocationID'])
-                    )
-            except:
-                # data insert failed
-                logging.exception('Failed to insert new Machine')
-
-            try:
-                # commit data to database
-                conn.commit()
-            except:
-                # data commit failed
-                logging.exception('Failed to commit new machine')
-                
-        else:
-            # duplicate found in database
-            logging.info('Machine already exists in database')
+        # commit data to database
+        logging.info('Commiting new machine ID to database')
+        conn.commit()
+        logging.info('Commit complete')
 
         # POST request successful
         logging.info('Http trigger request complete')
         return func.HttpResponse(f"Successful request")
+
+    # except mysql.connector.Error as err:
+    #     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+    #         return func.HttpResponse('Something is wrong with user name or password')
+    #     elif err.errno == errorcode.ER_BAD_DB_ERROR:
+    #         return func.HttpResponse('Database does not exist')
+    #     else:
+    #         return func.HttpResponse('Connection failed: '+str(err))
     except ValueError:
         pass
+
 
      # no POST request was made
     logging.info("No POST request was made")
