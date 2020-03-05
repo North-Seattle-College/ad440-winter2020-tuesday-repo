@@ -8,26 +8,72 @@ import '../css/MachinesMain.css';
 
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
-const machineData = [];
+
+
+// array to hold machines extracted from fetching
+let machineData = [];
+const cleanData = [];
+
 export default class MachinesMain extends React.Component {
     state = {
         products: MachineData.slice(0, 12),
         productInEdit: undefined,
         items: []
     };
+
+
+    buildMachinesForTable = (items) => {
+        // MachineID: 1
+        // VendorID: 0
+        // LocationID: 1010
+        // Model: "Joses Model", 
+        // status: undefined
+        for (var i = 0; i< items.length; i++){
+
+            cleanData.push({
+                id: items[i].MachineID,
+                vendor: items[i].VendorID,
+                adress: items[i].LocationID,
+                model: items[i].Model,
+                status: "not reported"
+            })
+        }
+
+        return cleanData;
+    }
+
+  
+
  
     componentDidMount() {
         // Simple GET request using fetch
-        fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ==')
+        fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ=='
+        , {method: "GET"})
         .then((response) => response.json())
         .then((responseText) => {
-            console.log(responseText[0]);
-            this.setState({items: responseText});
-            console.log(this.state)
-        })
+            this.setState({items: responseText})
+            console.log("State items ", this.state.items);
+            console.log(responseText);
+        }
+        )
+        .then(
+            this.setState({items: machineData}),
+            machineData.forEach(machine => {
+                console.log("machine ", machine.VendorID)
+                cleanData.push({
+                    id: machine.MachineID,
+                })
+             }))
+            
+        . then(
+                console.log("State items are ", this.state.items)
+        )
+            
         .catch((error) => {
             console.log("reset client error-------",error);
        });
+
+       
     }
 
 /*state of the edited machine*/
@@ -69,10 +115,18 @@ export default class MachinesMain extends React.Component {
     }
 /*this part renders the table*/
     render() {
-        return (
+        const dataX = this.state.items
+        const dataY =  this.buildMachinesForTable(dataX)
+        console.log("Render state dataX " , dataX);
+        console.log("Render state dataY " , dataY);
+        // const it = this.state.items;
+        // const newArray = this.buildMachinesForTable(it);
+        // console.log("New Array ", newArray);
+         return (
             <div >
                 <Grid
-                    data={this.state.products}
+                    // data={this.buildMachinesForTable(this.state.items)}
+                    data = {dataY}
                     style={{ height: '420px' }}
                 >
                     <GridToolbar>
@@ -87,7 +141,11 @@ export default class MachinesMain extends React.Component {
                     <Column field="id" title="ID" width="50px" />
                     <Column field="vendor" title="Vendor" />
                     <Column field="address" title="Address" />
+                    <Column field="model" title="Model"/>
                     <Column field="status" title="Status" />
+                    <Column field="blah" title="bblah" />
+                    <Column field="blah" title="bladfdsafh" />
+                    <Column field="blah" title="bblafdsarhtrhh" />
                     <Column
                         title="Edit"
                         cell={MachinesButtons(this.edit, this.remove)}
