@@ -1,31 +1,33 @@
-//Created by Siergiey \
+
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { MachineData } from './MachinesData';
 import MachinesEditForm from './MachinesEditForm';
+import MachinesDetailsForm from './MachinesDetailsForm';
 import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
 
-//This is the main component that is responsible for importing all the components
-//to generate the machines table
 export default class MachinesMain extends React.Component {
     state = {
         products: MachineData.slice(0, 12),
         productInEdit: undefined
+        
     };
-
-/*state of the edited machine*/
 
     edit = (dataItem) => {
         this.setState({ productInEdit: this.cloneProduct(dataItem) });
     }
-/*state of the removed machines*/
+    details = (dataItem) => {
+    this.setState({ productInDetails: this.cloneProduct(dataItem) });
+    }
+
     remove = (dataItem) => {
         this.setState({
             products: this.state.products.filter(p => p.id !== dataItem.id)
         });
     }
-/*state of the saved machine*/
+
     save = () => {
         const dataItem = this.state.productInEdit;
         const products = this.state.products.slice();
@@ -43,15 +45,19 @@ export default class MachinesMain extends React.Component {
             productInEdit: undefined
         });
     }
-/*what happens when we cancel the action*/
+
     cancel = () => {
         this.setState({ productInEdit: undefined });
+    }
+    
+    Details = () => {
+        this.setState({ productInDetails: undefined });
     }
 
     insert = () => {
         this.setState({ productInEdit: { } });
     }
-/*this part renders the table*/
+
     render() {
         return (
             <div >
@@ -63,21 +69,21 @@ export default class MachinesMain extends React.Component {
                         <button
                             onClick={this.insert}
                             className="k-button"
-                        >
-                            Add New
-                        </button>
+                        >Add New</button>
+            
+            
                     </GridToolbar>
-                    {/*names for the columns*/}
-                    <Column field="id" title="ID" width="50px" />
+                    <Column field="id" title="ID" width="75px" />
                     <Column field="vendor" title="Vendor" />
-                    <Column field="address" title="Address" />
-                    <Column field="status" title="Status" />
-                    <Column
-                        title="Edit"
-                        cell={MachinesButtons(this.edit, this.remove)}
+                    <Column field="street" title="Address" />
+                    <Column field="status_desc" title="Status" />
+                    <Column title="Edit Remove Details"
+                        cell={MachinesButtons(this.edit, this.remove, this.details)}
                     />
                 </Grid>
                 {this.state.productInEdit && <MachinesEditForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
+            
+                {this.state.productInDetails && <MachinesDetailsForm dataItem={this.state.productInDetails} save={this.save} cancel={this.cancel}/>}
             </div>
         );
     }
@@ -101,3 +107,5 @@ export default class MachinesMain extends React.Component {
         return Object.assign(newProduct, source);
     }
 }
+
+
