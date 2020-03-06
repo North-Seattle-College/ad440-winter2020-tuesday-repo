@@ -12,31 +12,25 @@ import '../css/MachinesMain.css';
 //to generate the machines table
 
 
-// array to hold machines extracted from fetching
-let machineData = [];
-const cleanData = [];
-
 export default class MachinesMain extends React.Component {
     state = {
         products: MachineData.slice(0, 12),
         productInEdit: undefined,
-        items: []
+        machines: [], 
+        isError: false,
     };
 
-
-    buildMachinesForTable = (items) => {
-        // MachineID: 1
-        // VendorID: 0
-        // LocationID: 1010
-        // Model: "Joses Model",
-        // status: undefined
-        for (var i = 0; i< items.length; i++){
-
+    /* Author Iryna 
+    * Builds machine array with only necessary details about each machine for the table rows
+    */
+    buildMachinesForTable = (machines) => {
+        const cleanData = [];
+        for (var i = 0; i< machines.length; i++){
             cleanData.push({
-                id: items[i].MachineID,
-                vendor: items[i].VendorID,
-                address: items[i].LocationID,
-                model: items[i].Model,
+                id: machines[i].MachineID,
+                vendor: machines[i].VendorID,
+                address: machines[i].LocationID,
+                model: machines[i].Model,
                 status: "not reported"
             })
         }
@@ -46,7 +40,13 @@ export default class MachinesMain extends React.Component {
 
 
 
-
+   /**
+    * Author - Iryna
+    * Fetches the database request data after the react component has mounted.
+    * Sets the state 
+    * Handles seveal errors 
+    * 
+    */ 
    async componentDidMount() {
         // Simple GET request using fetch
 
@@ -56,19 +56,25 @@ export default class MachinesMain extends React.Component {
             const response = await fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ=='
         , {method: "GET"})
              // resolving promise into json format
-             const responseText = await response.json()
-
-             this.setState({items: responseText})
-            console.log("Responce ", responseText);
-        // error handling - case if the responce is not received or bad responce receved, for example
-        // text string instead of json        
-        if (!response.ok) {
-            throw Error(response.statusText);
-          }
+             const responseJson = await response.json()
+             this.setState({machines: responseJson})
+            console.log("Responce ", responseJson);
+            // error handling - bad responce receved, for example text string instead of json        
+            if (!response.ok) {
+                this.setState({isError: true});
+                throw Error(response.responseJson);           
+            }
          //error handling - catching the network error
-        } catch(error){
-            console.log("Error encountered: ",error);
-       }
+        } catch (error) {
+            // hadling network error
+            this.setState({isError: true})
+            if (error.message === 'Timeout' 
+              || error.message === 'Network request failed') {
+              // retry
+            } else {
+              throw error; // rethrow other unexpected errors
+            }
+        }
     }
 
 /*state of the edited machine*/
@@ -117,18 +123,23 @@ export default class MachinesMain extends React.Component {
     }
 
     render() {
-        const dataX = this.state.items
-        const dataY =  this.buildMachinesForTable(dataX)
-        console.log("Render state dataX " , dataX);
-        console.log("Render state dataY " , dataY);
-        // const it = this.state.items;
-        // const newArray = this.buildMachinesForTable(it);
-        // console.log("New Array ", newArray);
+        if (this.state.isError) {
+            return (
+              <div>
+                <h2 style = {{color: "grey", margin: "50px"}}>Sorry, something went wrong</h2>
+                </div>
+            )
+        }
+        console.log("Is the state in error: " , this.state.isError)
+        const machinesData = this.state.machines
+        const  machinesCleanData =  this.buildMachinesForTable(machinesData)
+       // console.log("Render state dataX " , machinesData);
+       // console.log("Render state dataY " , machinesCleanData);
+
          return (
             <div >
                 <Grid
-                    // data={this.buildMachinesForTable(this.state.items)}
-                    data = {dataY}
+                    data = {machinesCleanData}
                     style={{ height: '620px' }}
                 >
                     <GridToolbar>
