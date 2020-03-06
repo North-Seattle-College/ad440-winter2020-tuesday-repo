@@ -6,6 +6,7 @@ import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
 export default class MachinesDetailsForm extends React.Component {
   constructor(props) {
       super(props);
+      // TODO - REPLACE THE DATAITEM WITH THE DATA FROM THE DATABASE
       this.state = {
           productInDetails: this.props.dataItem || null
       };

@@ -47,22 +47,28 @@ export default class MachinesMain extends React.Component {
 
 
 
-    componentDidMount() {
+   async componentDidMount() {
         // Simple GET request using fetch
-        fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ=='
+
+        // wrapping in the try/catch block to handle network errors
+        try {
+            // fetching async promise
+            const response = await fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ=='
         , {method: "GET"})
-        .then((response) => response.json())
-        .then((responseText) => {
-            this.setState({items: responseText})
+             // resolving promise into json format
+             const responseText = await response.json()
+
+             this.setState({items: responseText})
             console.log("Responce ", responseText);
-            console.log(responseText);
-        }
-        )
-        .catch((error) => {
+        // error handling - case if the responce is not received or bad responce receved, for example
+        // text string instead of json        
+        if (!response.ok) {
+            throw Error(response.statusText);
+          }
+         //error handling - catching the network error
+        } catch(error){
             console.log("Error encountered: ",error);
-       });
-
-
+       }
     }
 
 /*state of the edited machine*/
