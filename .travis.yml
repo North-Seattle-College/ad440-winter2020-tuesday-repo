@@ -2,8 +2,6 @@ language: generic
 dist: trusty
 sudo: required
 
-services: az
-
 branches:
   only:
     - feature-thomas-task194
