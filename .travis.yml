@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "8"
+  - "stable"
 dist: trusty
 sudo: required
 
@@ -18,19 +18,32 @@ before_install:
   - curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
   - sudo apt-get update
   - sudo apt-get install apt-transport-https azure-cli
-  - az login -u $AZ_LOGIN_NAME -p $AZ_PASSWORD --service-principal --tenant $AZ_TENANT > /dev/null 2>&1
+  - az login -u $AZ_LOGIN_NAME -p $AZ_PASSWORD --service-principal --tenant $AZ_TENANT
 
 cache:
   directories:
     - node_modules
 
 script:
-  - ng build --prod --no-progress
+  - npm test
+  - npm run build
 
 after_success:
   - az storage blob upload-batch -d \$web -s ./dist/azure-blob
-
-# addons:
-#   hosts:
-#   - travis.test
-#   - joshkalderimis.com
+#
+# language: node_js
+# node_js:
+#   - "stable"
+# cache:
+#   directories:
+#   - node_modules
+# script:
+#   - npm test
+#   - npm run build
+# deploy:
+#   provider: pages
+#   skip_cleanup: true
+#   github_token: $github_token
+#   local_dir: build
+#   on:
+#     branch: feature-thomas-task194 #master
