@@ -6,36 +6,33 @@ import json
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
+    logging.info('Starting Python HTTP trigger function request')
+    logger = logging.getLogger(__name__)
+
 
     try:
         #database connection 
         conct = pyodbc.connect(os.environ['ConnString'])
+        
         cursor = conct.cursor()
         #query to select everything from the Machines table and put results in a tuple then convert tuples into dictionary
-        rows = cursor.execute('''SELECT * FROM [dbo].[Machines]''').fetchall()
+        qry = cursor.execute('''SELECT * FROM [dbo].[Machines]''').fetchall()
         column_names = [column[0] for column in cursor.description]
-        rows = [dict(zip(column_names, row)) for row in rows]
+        rows = [dict(zip(column_names, row)) for row in qry]
 
         conct.commit()
-
-        #json.dumps to create JSON string
-        return func.HttpResponse(json.dumps(rows))
+        
+        #logging 
+        logging.info("Database connection successful") 
+        logging.info("Database query successful")    
+        logging.info("Python HTTP trigger function request successful")
+        return func.HttpResponse(json.dumps(rows)) #json.dumps to create JSON string
     except:
-        logging.exception("Database connection failed")    
+        #logging
+        logger.error("Database connection failed")
+        logger.debug("Database query unsuccessful")
+        logger.info("Python HTTP trigger function request unsuccessful")
+
 
     
-    try:
-       
-        req_body = req.get_json()
-        logging.info(req_body) 
-        #if request is successful this success message will show
-        return func.HttpResponse(f"Successful request")
-    except ValueError:
-        pass
-    #if request is not successful this error will show
-    logging.info("No GET request was made")
-    return func.HttpResponse(
-        "Please pass a name on the query string or in the request body",
-        status_code=400
-        )       
