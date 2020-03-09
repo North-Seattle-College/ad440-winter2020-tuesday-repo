@@ -6,10 +6,9 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "methods": [
-        "get"
-      ]
-    },
+      "methods": ["get"],
+      "route": "machines/{MachineID}"
+      },
     {
       "type": "http",
       "direction": "out",
