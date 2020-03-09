@@ -16,16 +16,12 @@ before_install:
   - sudo apt-get install apt-transport-https azure-cli
   - az login -u $AZ_LOGIN_NAME -p $AZ_PASSWORD --tenant $AZ_TENANT #--service-principal
 
-#changes the directory over to the ui folder
-before script:
-  - cd ui
-  - npm install
-# cache:
-#   directories:
-#     - node_modules
+cache:
+  directories:
+    - node_modules
 
 script:
-  - npm start
+  - ng build --prod --no-progress
 
 after_success:
   - az storage blob upload-batch --account-name $AZ_STORAGE -d \$web -s ./dist/azure-blob
