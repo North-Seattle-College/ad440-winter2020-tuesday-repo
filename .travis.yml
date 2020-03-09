@@ -22,10 +22,15 @@ cache:
     - node_modules
 
 script:
-  - ng build --prod --no-progress
+  - npm test
+  - npm run build
 
-after_success:
-  - az storage blob upload-batch --account-name $AZ_STORAGE -d \$web -s ./dist/azure-blob
+deploy:
+  provider: azure_web_apps
+  username: $AZ_LOGIN_NAME              # If AZURE_WA_USERNAME isn't set
+  password: $AZ_PASSWORD                # If AZURE_WA_PASSWORD isn't set
+  site: https://www.1edusite.com/       # If AZURE_WA_SITE isn't set
+  #slot: azure_deployment_slotname       # (optional) If AZURE_WA_SLOT isn't set
 
 # language: node_js
 # node_js:
