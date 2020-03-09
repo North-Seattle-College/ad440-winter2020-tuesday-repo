@@ -4,6 +4,7 @@
 
 //Here I imported libraries in order to create tabs
 import React from "react";
+import ErrorBoundary from './ErrorBoundary';
 import {
     useTabState,
     Tab as BaseTab,
@@ -66,13 +67,15 @@ export default function PageTabs() {
         <Tab className = "tabwidth12" stopId="tab12">Tab 12</Tab>
 
 <TabPanel stopId="tab1">
-      <MachinesMain/>
+      
+      
+      <ErrorBoundary><MachinesMain/></ErrorBoundary>
       </TabPanel>
 
 <TabPanel stopId="tab2">
       <h2>Machines List</h2>
-      <GlobalFilter/>
-      <UserTableFrame/>
+      <ErrorBoundary><GlobalFilter/></ErrorBoundary>
+      <ErrorBoundary><UserTableFrame/></ErrorBoundary>
       </TabPanel>
 
       <TabPanel stopId="tab3">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
