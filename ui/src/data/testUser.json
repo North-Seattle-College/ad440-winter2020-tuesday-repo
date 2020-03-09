@@ -1,0 +1,192 @@
+{
+  "results": [
+    {
+      "machineID": "1001",
+      "vendor": "Microsoft",
+      "model": "Bravilor Sego",
+      "status_color": "Red",
+      "status_desc": "broken",
+      "gender": "male",
+      "name": {
+        "title": "mr",
+        "first": "brad",
+        "last": "gibson"
+      },
+      "location": {
+        "street": "9278 new road",
+        "city": "kilcoole",
+        "state": "waterford",
+        "postcode": "93027",
+        "coordinates": {
+          "latitude": "20.9267",
+          "longitude": "-7.9310"
+        }
+      },
+      "email": "brad.gibson@example.com",
+      "phone": "011-962-7516",
+      "cell": "081-454-0666",
+      "picture": {
+        "large": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/Bravilor-Sego.jpg",
+        "medium": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/Bravilor-Sego.jpg",
+        "thumbnail": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/Bravilor-Sego.jpg"
+      }
+  },{
+    "machineID": "1002",
+    "vendor": "North Seattle College",
+    "model": "de Jong DUKE Varea",
+    "status_color": "Yellow",
+    "status_desc": "possible motor wear",
+    "gender": "male",
+    "name": {
+      "title": "mr",
+      "first": "joe",
+      "last": "bewford"
+    },
+    "location": {
+      "street": "5778 old road",
+      "city": "kilcoole",
+      "state": "waterford",
+      "postcode": "93027",
+      "coordinates": {
+        "latitude": "20.9267",
+        "longitude": "-7.9310"
+      }
+    },
+    "email": "joe.bewford@example.com",
+    "phone": "206-962-7516",
+    "cell": "206-454-0666",
+    "picture": {
+        "large": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg",
+        "medium": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg",
+        "thumbnail": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg"
+      }
+  },{
+    "machineID": "1003",
+    "vendor": "Amazon",
+    "model": "Serenade",
+    "status_color": "Green",
+    "status_desc": "working",
+    "gender": "male",
+    "name": {
+      "title": "mr",
+      "first": "tom",
+      "last": "plum"
+    },
+    "location": {
+      "street": "628 average road",
+      "city": "kilcoole",
+      "state": "waterford",
+      "postcode": "93027",
+      "coordinates": {
+        "latitude": "20.9267",
+        "longitude": "-7.9310"
+      }
+    },
+    "email": "tom.plum@example.com",
+    "phone": "011-962-7516",
+    "cell": "081-454-0666",
+    "picture": {
+      "large": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg",
+      "medium": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg",
+      "thumbnail": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg"
+    }
+},{
+  "machineID": "1004",
+  "vendor": "Microsoft",
+  "model": "Bravilor Sego",
+  "status_color": "Red",
+  "status_desc": "broken",
+  "gender": "male",
+  "name": {
+    "title": "mr",
+    "first": "brad",
+    "last": "gibson"
+  },
+  "location": {
+    "street": "9278 new road",
+    "city": "kilcoole",
+    "state": "waterford",
+    "postcode": "93027",
+    "coordinates": {
+      "latitude": "20.9267",
+      "longitude": "-7.9310"
+    }
+  },
+  "email": "brad.gibson@example.com",
+  "phone": "011-962-7516",
+  "cell": "081-454-0666",
+  "picture": {
+    "large": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/Bravilor-Sego.jpg",
+    "medium": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/Bravilor-Sego.jpg",
+    "thumbnail": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/Bravilor-Sego.jpg"
+  }
+},{
+"machineID": "1005",
+"vendor": "North Seattle College",
+"model": "de Jong DUKE Varea",
+"status_color": "Yellow",
+"status_desc": "possible motor wear",
+"gender": "male",
+"name": {
+  "title": "mr",
+  "first": "joe",
+  "last": "bewford"
+},
+"location": {
+  "street": "5778 old road",
+  "city": "kilcoole",
+  "state": "waterford",
+  "postcode": "93027",
+  "coordinates": {
+    "latitude": "20.9267",
+    "longitude": "-7.9310"
+  }
+},
+"email": "joe.bewford@example.com",
+"phone": "206-962-7516",
+"cell": "206-454-0666",
+"picture": {
+    "large": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg",
+    "medium": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg",
+    "thumbnail": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg"
+  }
+},{
+"machineID": "1006",
+"vendor": "Amazon",
+"model": "Serenade",
+"status_color": "Green",
+"status_desc": "working",
+"gender": "male",
+"name": {
+  "title": "mr",
+  "first": "tom",
+  "last": "plum"
+},
+"location": {
+  "street": "628 average road",
+  "city": "kilcoole",
+  "state": "waterford",
+  "postcode": "93027",
+  "coordinates": {
+    "latitude": "20.9267",
+    "longitude": "-7.9310"
+  }
+},
+"email": "tom.plum@example.com",
+"phone": "011-962-7516",
+"cell": "081-454-0666",
+"picture": {
+  "large": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg",
+  "medium": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg",
+  "thumbnail": "https://www.potogoldcoffee.com/wp-content/uploads/2020/01/de-Jong-DUKE-Varea-1.jpg"
+  }
+}
+
+  ],
+  "info": {
+    "seed": "fea8be3e64777240",
+    "results": 1,
+    "page": 1,
+    "version": "1.3"
+  }
+}
