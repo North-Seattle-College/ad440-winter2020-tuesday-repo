@@ -15,6 +15,7 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install apt-transport-https azure-cli
   - az login -u $AZ_LOGIN_NAME -p $AZ_PASSWORD --tenant $AZ_TENANT #--service-principal
+  - cd ui
 
 cache:
   directories:
