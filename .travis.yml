@@ -8,11 +8,6 @@ branches:
   only:
     - feature-thomas-task194
 
-#changes the directory over to the ui folder
-before script:
-  - cd ui
-
-#Hard coding only for testing
 before_install:
   - AZ_REPO=$(lsb_release -cs)
   - echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
@@ -21,16 +16,22 @@ before_install:
   - sudo apt-get install apt-transport-https azure-cli
   - az login -u $AZ_LOGIN_NAME -p $AZ_PASSWORD --tenant $AZ_TENANT #--service-principal
 
-cache:
-  directories:
-    - node_modules
+#changes the directory over to the ui folder
+before script:
+  - cd ui
+
+# cache:
+#   directories:
+#     - node_modules
+
+install:
+  - npm install
 
 script:
-  - npm test
-  - npm run build
+  - npm start
 
 after_success:
-  - az storage blob upload-batch -d \$web -s ./dist/azure-blob
+  - az storage blob upload-batch --account-name $AZ_STORAGE -d \$web -s ./dist/azure-blob
 
 # language: node_js
 # node_js:
