@@ -3,6 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SideNav from './components/SideNav';
 import PageTabs from './components/PageTabs';
 import Login from './components/Login';
+import ErrorBoundary from './components/ErrorBoundary';
 
 
 import './css/App.css';
@@ -20,11 +21,11 @@ export default  class App extends React.Component {
         <div className="top-bar">
         </div>
             <div className="login">
-                < Login />
+<ErrorBoundary>< Login /></ErrorBoundary>
             </div>
             <MuiThemeProvider>
-                <SideNav/>
-                <PageTabs/>
+<ErrorBoundary><SideNav/></ErrorBoundary>
+<ErrorBoundary><PageTabs/></ErrorBoundary>
             </MuiThemeProvider>
         </div>
       );
