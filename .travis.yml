@@ -13,6 +13,9 @@ before_install:
 
 deploy:
   provider: azure_web_apps
+  username: $AZ_LOGIN_NAME
+  password: $AZ_PASSWORD
+  site: api.1edusite.com
   on:
     feature-jose-task157
     feature-kiara-task192
