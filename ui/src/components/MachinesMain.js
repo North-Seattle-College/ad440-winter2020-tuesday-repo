@@ -7,6 +7,7 @@ import MachinesEditForm from './MachinesEditForm';
 import MachinesDetailsForm from './MachinesDetailsForm';
 import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
+import ApiUrl from "./ApiUrl";
 
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
@@ -16,11 +17,11 @@ export default class MachinesMain extends React.Component {
     state = {
         products: MachineData.slice(0, 12),
         productInEdit: undefined,
-        machines: [], 
+        machines: [],
         isError: false,
     };
 
-    /* Author Iryna 
+    /* Author Iryna
     * Builds machine array with only necessary details about each machine for the table rows
     */
     buildMachinesForTable = (machines) => {
@@ -43,17 +44,17 @@ export default class MachinesMain extends React.Component {
    /**
     * Author - Iryna
     * Fetches the database request data after the react component has mounted.
-    * Sets the state 
-    * Handles seveal errors 
-    * 
-    */ 
+    * Sets the state
+    * Handles seveal errors
+    *
+    */
    async componentDidMount() {
     // Simple GET request using fetch
 
     // wrapping in the try/catch block to handle network errors
     try {
         // fetching async promise
-        const response = await fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ=='
+        const response = await fetch(ApiUrl.Base
     , {
         method: "GET",
         headers: {
@@ -70,18 +71,18 @@ export default class MachinesMain extends React.Component {
             // resolving promise into json format
             const responseJson = await response.json()
             this.setState({machines: responseJson})
-            console.log("Responce ", responseJson);  
-                    
-            // error handling - bad responce receved, for example text string instead of json        
+            console.log("Responce ", responseJson);
+
+            // error handling - bad responce receved, for example text string instead of json
         }catch (error) {
             this.setState({isError: true})
         }
-      
+
      //error handling - catching the network error
     } catch (error) {
         // hadling network error
         this.setState({isError: true})
-        if (error.message === 'Timeout' 
+        if (error.message === 'Timeout'
           || error.message === 'Network request failed') {
           // retry
         } else {
