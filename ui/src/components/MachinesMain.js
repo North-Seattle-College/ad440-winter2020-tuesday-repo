@@ -48,35 +48,47 @@ export default class MachinesMain extends React.Component {
     * 
     */ 
    async componentDidMount() {
-        // Simple GET request using fetch
+    // Simple GET request using fetch
 
-        // wrapping in the try/catch block to handle network errors
+    // wrapping in the try/catch block to handle network errors
+    try {
+        // fetching async promise
+        const response = await fetch('https://san-fun-usw2-task156.azurewebsites.net/api/machines/{MachineID}?code=0QZ7re1VjAXWcYWew1lSfKQWIqEHoE4nVMjoQNyXiajBryooiiz3ZQ=='
+    , {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'mode': 'cors',
+          }});
+
+         // error handling of responce with 500 status
+         // which will not return json
         try {
-            // fetching async promise
-            const response = await fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ=='
-        , {method: "GET"})
-             // resolving promise into json format
-             const responseJson = await response.json()
-             this.setState({machines: responseJson})
-            console.log("Responce ", responseJson);
+
+            console.log("Responce falty possibly ", response)
+            // resolving promise into json format
+            const responseJson = await response.json()
+            this.setState({machines: responseJson})
+            console.log("Responce ", responseJson);  
+                    
             // error handling - bad responce receved, for example text string instead of json        
-            if (!response.ok) {
-                this.setState({isError: true});
-                throw Error(response.responseJson);           
-            }
-         //error handling - catching the network error
-        } catch (error) {
-            // hadling network error
+        }catch (error) {
             this.setState({isError: true})
-            if (error.message === 'Timeout' 
-              || error.message === 'Network request failed') {
-              // retry
-            } else {
-              throw error; // rethrow other unexpected errors
-            }
+        }
+      
+     //error handling - catching the network error
+    } catch (error) {
+        // hadling network error
+        this.setState({isError: true})
+        if (error.message === 'Timeout' 
+          || error.message === 'Network request failed') {
+          // retry
+        } else {
+          throw error; // rethrow other unexpected errors
         }
     }
-
+}
 /*state of the edited machine*/
 
     edit = (dataItem) => {
