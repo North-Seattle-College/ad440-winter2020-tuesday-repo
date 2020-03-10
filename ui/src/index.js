@@ -1,8 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import errorHandlerReducer from './components/ErrorHandling/ErrorHandlerReducer';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+
+
 import App from './App';
 
 import * as serviceWorker from './serviceWorker';
+
+const rootReducers = combineReducers({
+    errorHandler: errorHandlerReducer
+})
+ 
+const store = createStore(rootReducers, applyMiddleware(thunk));
 
 ReactDOM.render(<App />, document.getElementById('root'));
 //ReactDOM.render(<ToggleSwitch />, document.getElementById('root'));

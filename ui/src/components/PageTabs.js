@@ -4,7 +4,7 @@
 
 //Here I imported libraries in order to create tabs
 import React from "react";
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from './ErrorHandling/ErrorBoundary';
 import {
     useTabState,
     Tab as BaseTab,
