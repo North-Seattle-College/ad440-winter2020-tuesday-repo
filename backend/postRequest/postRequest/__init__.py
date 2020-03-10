@@ -5,20 +5,20 @@ import os
 import mysql.connector 
 from mysql.connector import errorcode
 
-
 def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.basicConfig(level=logging.DEBUG)    
     logging.info('Python HTTP trigger function processed a request.')
-    
+
     try:
         # connect to database
         logging.debug('Starting connection to database...')
         conn = pyodbc.connect(os.environ['ConnString'])
         cursor = conn.cursor()
-        logging.info('Connected to database')  
+        logging.debug('Connected to database')  
     
         # read JSON body
         req_body = req.get_json()
-        logging.info('Content of JSON body: ' + str(req_body))
+        logging.debug('Content of JSON body: ' + str(req_body))
         
         # insert data into SQL
         cursor.execute(
@@ -27,23 +27,24 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             )
 
         # commit data to database
-        logging.info('Commiting new machine ID to database')
+        logging.debug('Commiting new machine ID to database')
         conn.commit()
-        logging.info('Commit complete')
+        logging.debug('Commit complete')
 
         # POST request successful
         logging.info('Http trigger request complete')
         return func.HttpResponse(f"Successful request")
 
-    # except mysql.connector.Error as err:
-    #     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-    #         return func.HttpResponse('Something is wrong with user name or password')
-    #     elif err.errno == errorcode.ER_BAD_DB_ERROR:
-    #         return func.HttpResponse('Database does not exist')
-    #     else:
-    #         return func.HttpResponse('Connection failed: '+str(err))
-    except ValueError:
-        pass
+    except mysql.connector.Error as err:
+        logging.error('connection failed:' +str(err))
+        return func.HttpResponse('Connection failed: '+str(err))
+    except SyntaxError as err:
+        logging.error('something wrong with the syntax:' +str(err))
+        return func.HttpResponse('An error in python syntax: ' +str(err))
+    except NotImplementedError as err:
+        logging.error('methods need to be implemented: '+str(err))
+        return func.HttpResponse('One or more methods need to be implemented: '+str(err))
+    
 
 
      # no POST request was made
