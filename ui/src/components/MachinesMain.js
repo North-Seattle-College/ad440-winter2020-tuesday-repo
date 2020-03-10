@@ -53,7 +53,7 @@ export default class MachinesMain extends React.Component {
     // wrapping in the try/catch block to handle network errors
     try {
         // fetching async promise
-        const response = await fetch('https://san-fun-usw2-task156.azurewebsites.net/api/machines/{MachineID}?code=0QZ7re1VjAXWcYWew1lSfKQWIqEHoE4nVMjoQNyXiajBryooiiz3ZQ=='
+        const response = await fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ=='
     , {
         method: "GET",
         headers: {
