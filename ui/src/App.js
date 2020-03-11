@@ -10,6 +10,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
 
+
 import './css/App.css';
 
 /**
@@ -33,6 +34,7 @@ export default  class App extends React.Component {
        
 <ErrorBoundary><SideNav/></ErrorBoundary>
 <ErrorBoundary><PageTabs/></ErrorBoundary>
+
             </MuiThemeProvider>
         </div>
       );
