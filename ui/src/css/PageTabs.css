@@ -1,16 +1,18 @@
 .tabs{
-    background-color: lightgrey;
-    width: 70%;
-    margin-left:2.5%;
-    margin-right: 2%;
+    background-color: white;
+    width: 69.5%;
     height: 50%;
-    min-height:250px;
-    height: 700px;
-    float:left;
-
+    height: 100%;
+    border: 1px solid #e5e5e5;
+    float: left;
+    margin-left: 2px;
 }
 
 .tab1{
     width:300px;
     position: relative;
+}
+
+.tabwidth1, .tabwidth2, .tabwidth3, .tabwidth4, .tabwidth5, .tabwidth6, .tabwidth7, .tabwidth8, .tabwidth9, .tabwidth10, .tabwidth11, .tabwidth12{
+    width: 8.33%;
 }

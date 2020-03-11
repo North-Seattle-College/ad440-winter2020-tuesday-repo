@@ -1,46 +1,34 @@
 .sidenav {
-    position: relative;
-    background: #FFE9E9 !important;
-    padding: 50px;
-    padding-bottom: 25%;
+    background-color: #000000 !important;
+    padding: 50px 0px;
+    /* padding-bottom: 25%; */
     height: 100%;
-    width: 25%;
+    width: 30%;
     min-width:100px;
     float:left;
 }
-.content-wrapper {
+
+/* .relative-nav-wrapper.button {
+    padding: 10px 0px;
+} */
+
+/* .content-wrapper {
   position: relative;
   height: 100%;
-}
-.relative-logo-wrapper {
+} */
+/* .relative-logo-wrapper {
   position: relative;
   height: 100px;
 
 
-}
-.relative-nav-wrapper {
+} */
+/* .relative-nav-wrapper {
   position: relative;
   height: 100%;
   width: 100%;
-}
-.avatar {
-  position: absolute;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-.avi-border {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-.initial {
-  font-size: 50px;
-  height: 50px;
-  color: black;
-  font-family: 'Helvetica';
-}
-.name {
+} */
+
+/* .name {
   font-size: 24px;
   color: black;
-}
+} */

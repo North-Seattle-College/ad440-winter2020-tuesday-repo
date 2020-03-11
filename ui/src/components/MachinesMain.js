@@ -4,17 +4,103 @@ import ReactDOM from 'react-dom';
 import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { MachineData } from './MachinesData';
 import MachinesEditForm from './MachinesEditForm';
+import MachinesDetailsForm from './MachinesDetailsForm';
 import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
+import ApiUrl from "./ApiUrl";
+
+//This is the main component that is responsible for importing all the components
+//to generate the machines table
+
 
 export default class MachinesMain extends React.Component {
     state = {
         products: MachineData.slice(0, 12),
-        productInEdit: undefined
+        productInEdit: undefined,
+        machines: [],
+        isError: false,
     };
+
+    /* Author Iryna
+    * Builds machine array with only necessary details about each machine for the table rows
+    */
+    buildMachinesForTable = (machines) => {
+        const cleanData = [];
+        for (var i = 0; i< machines.length; i++){
+            cleanData.push({
+              id: machines[i].MachineID,
+                  vendor: machines[i].VendorID,
+                  address: machines[i].LocationID,
+                  model: machines[i].Model,
+                  modelnum : machines[i].ModelNum,
+                  serialnum : machines[i].SerialNum,
+                  locationID : machines[i].LocationID,
+                  images : machines[i].ModelPhoto,
+                  status: "not reported"
+            })
+        }
+
+        return cleanData;
+    }
+
+
+
+   /**
+    * Author - Iryna
+    * Fetches the database request data after the react component has mounted.
+    * Sets the state
+    * Handles seveal errors
+    *
+    */
+   async componentDidMount() {
+    // Simple GET request using fetch
+
+    // wrapping in the try/catch block to handle network errors
+    try {
+        // fetching async promise
+        const response = await fetch(ApiUrl.Base
+    , {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'mode': 'cors',
+          }});
+
+         // error handling of responce with 500 status
+         // which will not return json
+        try {
+
+            console.log("Responce falty possibly ", response)
+            // resolving promise into json format
+            const responseJson = await response.json()
+            this.setState({machines: responseJson})
+            console.log("Responce ", responseJson);
+
+            // error handling - bad responce receved, for example text string instead of json
+        }catch (error) {
+            this.setState({isError: true})
+        }
+
+     //error handling - catching the network error
+    } catch (error) {
+        // hadling network error
+        this.setState({isError: true})
+        if (error.message === 'Timeout'
+          || error.message === 'Network request failed') {
+          // retry
+        } else {
+          throw error; // rethrow other unexpected errors
+        }
+    }
+}
+/*state of the edited machine*/
 
     edit = (dataItem) => {
         this.setState({ productInEdit: this.cloneProduct(dataItem) });
+    }
+    details = (dataItem) => {
+    this.setState({ productInDetails: this.cloneProduct(dataItem) });
     }
 
     remove = (dataItem) => {
@@ -45,35 +131,54 @@ export default class MachinesMain extends React.Component {
         this.setState({ productInEdit: undefined });
     }
 
+    Details = () => {
+        this.setState({ productInDetails: undefined });
+    }
+
     insert = () => {
         this.setState({ productInEdit: { } });
     }
 
     render() {
-        return (
+        if (this.state.isError) {
+            return (
+              <div>
+                <h2 style = {{color: "grey", margin: "50px"}}>Sorry, something went wrong</h2>
+                </div>
+            )
+        }
+        console.log("Is the state in error: " , this.state.isError)
+        const machinesData = this.state.machines
+        const  machinesCleanData =  this.buildMachinesForTable(machinesData)
+       // console.log("Render state dataX " , machinesData);
+       // console.log("Render state dataY " , machinesCleanData);
+
+         return (
             <div >
                 <Grid
-                    data={this.state.products}
-                    style={{ height: '420px' }}
+                    data = {machinesCleanData}
+                    style={{ height: '620px' }}
                 >
                     <GridToolbar>
                         <button
                             onClick={this.insert}
                             className="k-button"
-                        >
-                            Add New
-                        </button>
+                        >Add New</button>
+
+
                     </GridToolbar>
-                    <Column field="id" title="ID" width="50px" />
+                    <Column field="id" title="ID" width="75px" />
                     <Column field="vendor" title="Vendor" />
                     <Column field="address" title="Address" />
+                    <Column field="model" title="Model"/>
                     <Column field="status" title="Status" />
-                    <Column
-                        title="Edit"
-                        cell={MachinesButtons(this.edit, this.remove)}
+                    <Column title="Edit Remove Details"
+                        cell={MachinesButtons(this.edit, this.remove, this.details)}
                     />
                 </Grid>
                 {this.state.productInEdit && <MachinesEditForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
+
+                {this.state.productInDetails && <MachinesDetailsForm dataItem={this.state.productInDetails} save={this.save} cancel={this.cancel}/>}
             </div>
         );
     }
@@ -97,5 +202,3 @@ export default class MachinesMain extends React.Component {
         return Object.assign(newProduct, source);
     }
 }
-
-

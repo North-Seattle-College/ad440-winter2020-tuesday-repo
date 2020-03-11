@@ -1,4 +1,3 @@
-
 .table-container{
     margin-top: 5%;
     margin-bottom: 20px;
@@ -10,7 +9,7 @@
     height: 1000px;
     background-color: #fffdfa;
     display: inline-block;
-    width: 75%;
+    width: 70%;
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -21,7 +20,7 @@
     float: left;
     margin: 5px 0 9px 20px;
   }
-  
+
   table {
     display: inline;
       position: relative;
@@ -34,23 +33,19 @@
       margin: 5px;
       border-radius: 15px;
       overflow: hidden;
-  } 
-  
+  }
+
   th,td {
         margin: auto;
         width: 20%;
         padding: 0.8rem;
-        border-bottom: 1px solid gray;     
+        border-bottom: 1px solid gray;
       }
-  
+
   tr:last-child td {
     border-bottom: none;
   }
-  
+
   tr:last-child {
     line-height: 0.5;
   }
-  
-
-
-
