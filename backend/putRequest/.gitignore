@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 .azure-functions-core-tools
 testFunction.http
+test.log
 # C extensions
 *.so
 
