@@ -1,3 +1,2 @@
 azure-functions
 pyodbc
-mysql.connector 

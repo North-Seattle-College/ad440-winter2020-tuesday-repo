@@ -2,11 +2,14 @@ import logging
 import pyodbc
 import azure.functions as func
 import os
-import mysql.connector 
-from mysql.connector import errorcode
+
+# log config
+for handler in logging.root.handlers[:]:
+    logging.root.removeHandler(handler)
+logging.basicConfig(filename='logsFile.log', level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
+
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.basicConfig(level=logging.DEBUG)    
     logging.info('Python HTTP trigger function processed a request.')
 
     try:
@@ -31,21 +34,21 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         conn.commit()
         logging.debug('Commit complete')
 
+        # close connection
+        conn.close()
         # POST request successful
         logging.info('Http trigger request complete')
         return func.HttpResponse(f"Successful request")
 
-    except mysql.connector.Error as err:
-        logging.error('connection failed:' +str(err))
-        return func.HttpResponse('Connection failed: '+str(err))
-    except SyntaxError as err:
-        logging.error('something wrong with the syntax:' +str(err))
-        return func.HttpResponse('An error in python syntax: ' +str(err))
-    except NotImplementedError as err:
-        logging.error('methods need to be implemented: '+str(err))
-        return func.HttpResponse('One or more methods need to be implemented: '+str(err))
-    
-
+    except ValueError as jerr:
+        logging.error("Incorrect JSON format " + str(jerr))
+        return func.HttpResponse('Incorrect JSON format')
+    except pyodbc.DatabaseError as derr:
+        logging.error("Connection to the database failed " + str(derr))
+        return func.HttpResponse('Connection failed')
+    except pyodbc.ProgrammingError as perr:
+        logging.error("Your record could not be added " + str(perr))
+        return func.HttpResponse('Machine could not be added')
 
      # no POST request was made
     logging.info("No POST request was made")
