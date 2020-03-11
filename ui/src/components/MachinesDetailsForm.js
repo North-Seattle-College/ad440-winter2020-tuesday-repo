@@ -31,60 +31,90 @@ export default class MachinesDetailsForm extends React.Component {
   render() {
       return (
         <Dialog
-            onClose={this.props.cancel}
-        >
-            <form onSubmit={this.handleSubmit}>
-                                <div style={{ marginBottom: '1rem' }}>
-                    <label>
-                    Image<br />
-        
-                  <img src={this.state.productInDetails.thumbnail} />
-
-                   
-                    </label></div>
-                
-                <div style={{ marginBottom: '1rem' }}>
-                    <label>
-                    <b>Vendor</b><br />
-{this.state.productInDetails.vendor || ''}
-
-                    </label></div>
-
-                  
-                      <div style={{ marginBottom: '1rem' }}>  
-                    <label>
-                    <b>Address</b><br />
-      {this.state.productInDetails.street || ''}
-
-                    </label>
-                </div>
-            
-                    <label>
-                    <b>City</b><br />
-{this.state.productInDetails.city || ''}
- 
-                    </label>
-                
-                                                <div style={{ marginBottom: '1rem' }}>  
-                    <label>
-                    <b>Status</b><br />
-{this.state.productInDetails.status_desc || ''}
-
-                    </label>
-                </div>
+              onClose={this.props.cancel}
+          >
+              <form onSubmit={this.handleSubmit}>
 
 
-            </form>
+              <div style={{ marginBottom: '1rem' }}>
+                      <label>
+                  <b>  Image</b>
 
-                      <DialogActionsBar>
-                <button
-                    className="k-button"
-                    onClick={this.props.cancel}>Cancel</button>
-                
+                    <img src={this.state.productInDetails.serialnum} />
 
-            </DialogActionsBar>
-        </Dialog>
+
+                      </label></div>
+
+
+                                      <div style={{ marginBottom: '1rem' }}>
+                                          <label>
+                                          <b>ModelNum</b><br />
+                      {this.state.productInDetails.modelnum || ''}
+
+                                          </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                                                              <label>
+                                                              <b>LocationID</b><br />
+                                          {this.state.productInDetails.locationID || ''}
+
+                                                              </label></div>
+
+
+
+
+                    <div style={{ marginBottom: '1rem' }}>
+
+                      <label>
+                      <b>Model</b><br />
+  {this.state.productInDetails.model || ''}
+
+                      </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                      <label>
+                      <b>Status</b><br />
+  {this.state.productInDetails.status || ''}
+
+                      </label><br /><br />
+
+
+                      <div style={{ marginBottom: '1rem' }}>
+                                          <label>
+                                          <b>Address</b><br />
+                            {this.state.productInDetails.address || ''}
+
+                                          </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                              <label>
+                              <b>SerialNum</b><br />
+
+                            {this.state.productInDetails.serialnum || ''}
+
+
+                              </label></div>
+                              </div>
+                              <div style={{ marginBottom: '1rem' }}>
+                                  <label>
+                                  <b>Vendor</b><br />
+                            {this.state.productInDetails.vender || ''}
+
+                                  </label></div>
+
+
+
+              </form>
+
+                        <DialogActionsBar>
+                        <button
+                            className="k-button"
+                            onClick={this.props.cancel}>Cancel</button>
+
+
+
+
+              </DialogActionsBar>
+          </Dialog>
     );
   }
 }
-

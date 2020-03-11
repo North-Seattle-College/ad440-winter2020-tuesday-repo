@@ -33,8 +33,8 @@ export default class MachinesEditForm extends React.Component {
             onClose={this.props.cancel}
         >
             <form onSubmit={this.handleSubmit}>
-                
-                
+
+
                 <div style={{ marginBottom: '1rem' }}>
                     <label>
                     Vendor<br />
@@ -46,41 +46,41 @@ export default class MachinesEditForm extends React.Component {
                     />
                     </label></div>
 
-                  
-                      <div style={{ marginBottom: '1rem' }}>  
+
+                      <div style={{ marginBottom: '1rem' }}>
                     <label>
                     Address<br />
                     <Input
                         type="text"
                         name="street"
-                        value={this.state.productInEdit.street || ''}
+                        value={this.state.productInEdit.address || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label>
                 </div>
-                                      <div style={{ marginBottom: '1rem' }}>  
+                                      <div style={{ marginBottom: '1rem' }}>
                     <label>
                     Status<br />
                     <Input
                         type="text"
                         name="status_desc"
-                        value={this.state.productInEdit.status_desc || ''}
+                        value={this.state.productInEdit.status || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label>
-          
+
                 </div>
 
 
 
-                
+
 
             </form>
             <DialogActionsBar>
                 <button
                     className="k-button"
                     onClick={this.props.cancel}>Cancel</button>
-                
+
             <button
                     className="k-button k-primary"
                     onClick={this.props.save}>Save</button>
@@ -89,4 +89,3 @@ export default class MachinesEditForm extends React.Component {
     );
   }
 }
-
