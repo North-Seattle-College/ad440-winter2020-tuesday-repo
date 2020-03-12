@@ -6,6 +6,12 @@ import React, { Component } from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import '../css/SideNav.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 //Class for the navigation
 class SideNav extends Component {
@@ -34,21 +40,22 @@ class SideNav extends Component {
         <div className="relative-nav-wrapper">
 
         {/*This part responsible for creating buttons for the side navigation */}
-        <div>
+        <Router>
+        <Link to="/Home"><div>
         <FlatButton
         style={styles.tabLink}
         label="Home"
         labelStyle={styles.tabLabel}
         fullWidth/>
-        </div>
+        </div></Link>
 
-        <div>
+        <Link to="About"><div>
         <FlatButton
         style={styles.tabLink}
         label="About"
         labelStyle={styles.tabLabel}
         fullWidth/>
-        </div>
+        </div></Link>
 
         <div>
         <FlatButton
@@ -89,6 +96,22 @@ class SideNav extends Component {
         labelStyle={styles.tabLabel}
         fullWidth/>
         </div>
+        
+            <Switch>
+          <Route exact path="/Home">
+        <Home/>
+            
+          </Route>
+          <Route path="/About">
+        <About/>
+            
+          </Route>
+
+        </Switch>
+    
+    </Router>
+        
+        
 
         </div>
 
@@ -101,3 +124,19 @@ class SideNav extends Component {
   }
 }
 export default SideNav;
+
+function Home() {
+  return (
+    <div>
+      <h2>Home</h2>
+    </div>
+  );
+}
+
+function About() {
+  return (
+    <div>
+      <h2>About</h2>
+    </div>
+  );
+}
