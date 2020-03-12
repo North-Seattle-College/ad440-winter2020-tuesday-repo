@@ -58,7 +58,7 @@ export default class MachinesMain extends React.Component {
     // wrapping in the try/catch block to handle network errors
     try {
         // fetching async promise
-        const response = await fetch(ApiUrl.Base
+        const response = await fetch(ApiUrl
     , {
         method: "GET",
         headers: {
