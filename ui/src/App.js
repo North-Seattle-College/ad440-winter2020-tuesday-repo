@@ -4,7 +4,7 @@ import SideNav from './components/SideNav';
 import PageTabs from './components/PageTabs';
 import Login from './components/Login';
 import ErrorBoundary from './components/ErrorHandling/ErrorBoundary';
-import InternalServer from './components/ErrorHandling/InternalServer';
+
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 

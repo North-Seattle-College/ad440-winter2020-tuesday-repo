@@ -114,7 +114,7 @@ export default class MachinesMain extends React.Component {
         this.setState({ productInEdit: undefined });
     }
 
-    Details = () => {
+    cancel = () => {
         this.setState({ productInDetails: undefined });
     }
 
