@@ -7,6 +7,7 @@ import MachinesEditForm from './MachinesEditForm';
 import MachinesDetailsForm from './MachinesDetailsForm';
 import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
+import ApiUrl from "./ApiUrl";
 
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
@@ -16,22 +17,26 @@ export default class MachinesMain extends React.Component {
     state = {
         products: MachineData.slice(0, 12),
         productInEdit: undefined,
-        machines: [], 
+        machines: [],
         isError: false,
     };
 
-    /* Author Iryna 
+    /* Author Iryna
     * Builds machine array with only necessary details about each machine for the table rows
     */
     buildMachinesForTable = (machines) => {
         const cleanData = [];
         for (var i = 0; i< machines.length; i++){
             cleanData.push({
-                id: machines[i].MachineID,
-                vendor: machines[i].VendorID,
-                address: machines[i].LocationID,
-                model: machines[i].Model,
-                status: "not reported"
+              id: machines[i].MachineID,
+                  vendor: machines[i].VendorID,
+                  address: machines[i].LocationID,
+                  model: machines[i].Model,
+                  modelnum : machines[i].ModelNum,
+                  serialnum : machines[i].SerialNum,
+                  locationID : machines[i].LocationID,
+                  images : machines[i].ModelPhoto,
+                  status: "not reported"
             })
         }
 
@@ -43,40 +48,52 @@ export default class MachinesMain extends React.Component {
    /**
     * Author - Iryna
     * Fetches the database request data after the react component has mounted.
-    * Sets the state 
-    * Handles seveal errors 
-    * 
-    */ 
+    * Sets the state
+    * Handles seveal errors
+    *
+    */
    async componentDidMount() {
-        // Simple GET request using fetch
+    // Simple GET request using fetch
 
-        // wrapping in the try/catch block to handle network errors
+    // wrapping in the try/catch block to handle network errors
+    try {
+        // fetching async promise
+        const response = await fetch(ApiUrl
+    , {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'mode': 'cors',
+          }});
+
+         // error handling of responce with 500 status
+         // which will not return json
         try {
-            // fetching async promise
-            const response = await fetch('https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/getMachine?code=14B1U2/gQPU6sRlIfwDt2iaVsaSCfTuccDvM1YgEDAbQrDzLQjWQyQ=='
-        , {method: "GET"})
-             // resolving promise into json format
-             const responseJson = await response.json()
-             this.setState({machines: responseJson})
+
+            console.log("Responce falty possibly ", response)
+            // resolving promise into json format
+            const responseJson = await response.json()
+            this.setState({machines: responseJson})
             console.log("Responce ", responseJson);
-            // error handling - bad responce receved, for example text string instead of json        
-            if (!response.ok) {
-                this.setState({isError: true});
-                throw Error(response.responseJson);           
-            }
-         //error handling - catching the network error
-        } catch (error) {
-            // hadling network error
+
+            // error handling - bad responce receved, for example text string instead of json
+        }catch (error) {
             this.setState({isError: true})
-            if (error.message === 'Timeout' 
-              || error.message === 'Network request failed') {
-              // retry
-            } else {
-              throw error; // rethrow other unexpected errors
-            }
+        }
+
+     //error handling - catching the network error
+    } catch (error) {
+        // hadling network error
+        this.setState({isError: true})
+        if (error.message === 'Timeout'
+          || error.message === 'Network request failed') {
+          // retry
+        } else {
+          throw error; // rethrow other unexpected errors
         }
     }
-
+}
 /*state of the edited machine*/
 
     edit = (dataItem) => {

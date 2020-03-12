@@ -32,8 +32,8 @@ export default class MachinesDetailsForm extends React.Component {
       return (
         <Dialog
 
-           
-          onClose={this.props.cancel}
+              onClose={this.props.cancel}
+
           >
               <form onSubmit={this.handleSubmit}>
 
@@ -107,7 +107,7 @@ export default class MachinesDetailsForm extends React.Component {
           </DialogActionsBar>
           </Dialog>
 
+
     );
   }
 }
-
