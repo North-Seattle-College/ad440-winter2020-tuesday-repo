@@ -3,12 +3,6 @@ import pyodbc
 import azure.functions as func
 import os
 
-# log config
-for handler in logging.root.handlers[:]:
-    logging.root.removeHandler(handler)
-logging.basicConfig(filename='logsFile.log', level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
-
-
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
