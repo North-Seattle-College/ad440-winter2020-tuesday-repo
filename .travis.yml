@@ -2,9 +2,9 @@ language: node_js
 node_js:
   - 12.16.1
 
-# cache:
-#   directories:
-#   - "ui/node_modules"
+cache:
+  directories:
+  - "ui/node_modules"
 
 script:
-  - "devops\azure-TravisCI\deploy_storage.ps1"
+  - powershell .\devops\azure-TravisCI\deploy_storage.ps1
