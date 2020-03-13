@@ -6,10 +6,8 @@ cache:
   directories:
   - "ui/node_modules"
 
-before script:
-  - cd ui
-
 script:
+  - cd ui
   - npm run build
 
 # deploy:
