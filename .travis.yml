@@ -2,14 +2,12 @@ language: node_js
 node_js:
   - 12.16.1
 
-before cache:
-  - cd ui
-
 cache:
   directories:
-  - node_modules
+  - "ui/node_modules"
 
 script:
+  - cd ui
   - npm run build
 
 # deploy:
