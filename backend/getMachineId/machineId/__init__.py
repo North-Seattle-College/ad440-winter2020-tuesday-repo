@@ -10,7 +10,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         #connect to database
         # Setting connection to the database via key vault connection string.
         conn = pyodbc.connect(os.environ['ConnString'])
-        logging.info("Connection complete")
+        logging.info("Connected to database")
         cursor = conn.cursor()
     
         #variable for machine id parameter 
@@ -25,7 +25,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         column_names = [column[0] for column in cursor.description]
         result = [dict(zip(column_names, rows))]
         
-        
         #commit the query 
         conn.commit()
         
@@ -33,15 +32,26 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps(result))
     
         #disconnect database
+        cursor.close()
         conn.close()
+        logging.info("Connection to database closed")
         
-    except Exception as e:
-        #connection failed
-        logging.exception("Connection failed" + str(e))
-        pass
+    #connection failed error  
+    except pyodbc.DatabaseError:
+        logging.error("Could not connect to database")
     
-    logging.info('Not a GET request')
-    #return func.HttpResponse(
-         #“Please pass a GET request”,
-            #status_code=400
-    #)
+    #machine id not found error
+    except TypeError:
+        logging.error("Machine ID not found")
+    
+    #invalid input
+    except ValueError:
+        logging.debug("Invaled input")
+        
+  
+        
+        
+    
+        
+    
+    
