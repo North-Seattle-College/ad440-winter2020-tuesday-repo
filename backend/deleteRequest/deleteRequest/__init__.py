@@ -17,7 +17,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         print(e)
         pass
     
-    # This stament checks for a PUT request.
+    # This stament checks for a DELETE request.
     if (req.method == "DELETE"):
         try:
             # check JSON body request
@@ -25,20 +25,24 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             logging.info(req_body)
             print(req_body)
 
-            # updates a Machine 
-            cursor.execute(''' DELETE [dbo].[Machines] 
-            SET Model = ?, ModelNum = ?, ModelPhoto = ?, SerialNum = ?, VendorID = ?, LocationID = ?  WHERE MachineID = ? ''', 
+            # deletes a Machine 
+            cursor.execute(''' DELETE FROM [dbo].[Machines]
+            Model = ?, ModelNum = ?, ModelPhoto = ?, SerialNum = ?, VendorID = ?, LocationID = ?  WHERE MachineID = ? ''', 
             (req_body['Model'], req_body['ModelNum'], req_body['ModelPhoto'], req_body['SerialNum'], req_body['VendorID'], req_body['LocationID'], req_body['MachineID'])
-            )               
+            )
+
+            # clean up               
             conn.commit()
-            logging.info("record successfuly updated") 
+            cursor.close()
+            conn.close()
+            logging.info("Machine successfully deleted") 
                 
             return func.HttpResponse(f"successful request")
         except Exception as e:
             logging.error("Connecting to the database failed" + str(e))
             print(str(e))
             pass
-    # it returns an error Http code that is not a PUT request.
+    # it returns an error Http code that is not a DELETE request.
     else:
         logging.info("Not a DELETE request...")
         # returns a Http 400 status bad request.
