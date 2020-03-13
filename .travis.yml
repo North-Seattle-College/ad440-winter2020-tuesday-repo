@@ -6,8 +6,11 @@ cache:
   directories:
   - "ui/node_modules"
 
-script:
+before_install:
   - cd ui
+
+script:
+  - npm test
   - npm run build
 
 # deploy:
