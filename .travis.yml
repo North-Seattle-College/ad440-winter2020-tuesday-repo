@@ -7,4 +7,4 @@ cache:
   - "ui/node_modules"
 
 script:
-  - devops/azure-TravisCI/deploy_storage.ps1
+  - pwsh "devops\azure-TravisCI\deploy_storage.ps1"
