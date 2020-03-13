@@ -10,8 +10,9 @@ before_install:
   - cd ui
 
 script:
-  - CI = false npm test
-  - CI = false npm run build
+  - CI = false
+  - npm test
+  - npm run build
 
 # deploy:
 #   provider: azure_web_apps
