@@ -2,12 +2,12 @@ language: node_js
 node_js:
   - "stable"
 
+before install:
+  - cd ui
+
 cache:
   directories:
   - node_modules
-
-before script:
-  - cd ui
 
 script:
   - npm run build
