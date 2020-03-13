@@ -1,49 +1,22 @@
 language: node_js
 node_js:
   - "stable"
-dist: trusty
-sudo: required
-
-branches:
-  only:
-    - feature-thomas-task194
-
-before_install:
-  # - AZ_REPO=$(lsb_release -cs)
-  # - echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
-  # - curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-  # - sudo apt-get update
-  # - sudo apt-get install apt-transport-https azure-cli
-  # - az login -u $AZ_LOGIN_NAME -p $AZ_PASSWORD --tenant $AZ_TENANT #--service-principal
-  - cd ui
 
 cache:
   directories:
-    - node_modules
+  - node_modules
+
+before script:
+  - cd ui
 
 script:
+  - npm test
   - npm run build
 
 deploy:
   provider: azure_web_apps
-  username: $AZ_LOGIN_NAME              # If AZURE_WA_USERNAME isn't set
-  password: $AZ_PASSWORD                # If AZURE_WA_PASSWORD isn't set
-  site: https://www.1edusite.com/       # If AZURE_WA_SITE isn't set
-  #slot: azure_deployment_slotname       # (optional) If AZURE_WA_SLOT isn't set
-
-# language: node_js
-# node_js:
-#   - "stable"
-# cache:
-#   directories:
-#   - node_modules
-# script:
-#   - npm test
-#   - npm run build
-# deploy:
-#   provider: pages
-#   skip_cleanup: true
-#   github_token: $github_token
-#   local_dir: build
-#   on:
-#     branch: feature-thomas-task194 #master
+  username: AZ_LOGIN_NAME       # Currently user profile, needs to be updated
+  password: AZ_PASSWORD         # Currently user profile, needs to be updated
+  local_dir: build
+  on:
+    branch: feature-thomas-task194 #will say master after testing
