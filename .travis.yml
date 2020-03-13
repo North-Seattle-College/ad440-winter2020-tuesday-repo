@@ -6,18 +6,5 @@ cache:
   directories:
   - "ui/node_modules"
 
-before_install:
-  - cd ui
-
 script:
-  - CI = false
-  - npm test
-  - npm run build
-
-# deploy:
-#   provider: azure_web_apps
-#   username: AZ_LOGIN_NAME       # Currently user profile, needs to be updated
-#   password: AZ_PASSWORD         # Currently user profile, needs to be updated
-#   local_dir: build
-#   on:
-#     branch: feature-thomas-task194 #will say master after testing
+  - devops/azure-TravisCI/deploy_storage.ps1
