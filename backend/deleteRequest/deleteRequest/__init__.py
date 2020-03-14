@@ -22,9 +22,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             cursor = conn.cursor()
 
             # deletes a Machine 
-            cursor.execute(''' DELETE FROM [dbo].[Machines]
-            Model = ?, ModelNum = ?, ModelPhoto = ?, SerialNum = ?, VendorID = ?, LocationID = ?  WHERE MachineID = ? ''', 
-            (req_body['Model'], req_body['ModelNum'], req_body['ModelPhoto'], req_body['SerialNum'], req_body['VendorID'], req_body['LocationID'], req_body['MachineID'])
+            cursor.execute(''' DELETE FROM [dbo].[Machines] WHERE MachineID = ? ''',
+            (req_body['MachineID'])
             )
 
             # clean up               
@@ -45,8 +44,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             cursor.rollback()
             pass
         finally:
-            logging.info("record successfuly updated")
+            logging.info("record successfuly deleted")
             logging.info("Closing connection to the database ...")
+    
     
     # returns a Http 400 status bad request. 
     return func.HttpResponse(
