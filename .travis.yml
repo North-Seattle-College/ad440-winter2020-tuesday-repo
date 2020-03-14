@@ -5,7 +5,3 @@ node_js:
 cache:
   directories:
   - "ui/node_modules"
-
-script:
-  - powershell Write-Output "hello world"
-  - powershell ".\devops\azure-TravisCI\deploy_storage.ps1"
