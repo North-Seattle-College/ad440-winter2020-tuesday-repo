@@ -9,6 +9,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     try:
         # connect to database
         logging.debug('Starting connection to database...')
+        logging.log(10,'starting conn...')
         conn = pyodbc.connect(os.environ['ConnString'])
         cursor = conn.cursor()
         logging.debug('Connected to database')  
@@ -30,6 +31,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
         # close connection
         conn.close()
+        
         # POST request successful
         logging.info('Http trigger request complete')
         return func.HttpResponse(f"Successful request")
