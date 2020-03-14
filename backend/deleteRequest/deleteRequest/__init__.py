@@ -17,7 +17,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         print(e)
         pass
     
-    # This stament checks for a DELETE request.
+    # Check for a DELETE request.
     if (req.method == "DELETE"):
         try:
             # check JSON body request
@@ -51,7 +51,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             status_code=400
             )
     
-    # retuerns a Http 400 status bad request. 
+    # returns a Http 400 status bad request. 
     return func.HttpResponse(
         "Please pass a DELETE request on the query string or in the request body",
         status_code=400
