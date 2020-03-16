@@ -16,16 +16,41 @@ export default class MachinesEditForm extends React.Component {
 
   onDialogInputChange = (event) => {
       let target = event.target;
+      console.log("Target" , target)
       const value = target.type === 'checkbox' ? target.checked : target.value;
-      const name = target.props ? target.props.name : target.name;
+      console.log("Target Value ", value );
+      const propertyName = target.props ? target.props.name : target.name;
+      console.log ("On DialogInput Change name ", propertyName);
 
-      const edited = this.state.productInEdit;
-      edited[name] = value;
+      const editedProperty = this.state.productInEdit;
+      console.log ("edited property: ", editedProperty );
+      console.log("Edited adress ", editedProperty.address, "Edited name ", editedProperty.name, "Edited status ", editedProperty.status);
+      console.log("Product in Edit = this.dataItem ", this.state);
+      //if(target.props.name === "name"){
+        editedProperty[propertyName] = value;
+        console.log("editedProperty[name]: ", editedProperty[propertyName])
+      //}
+
+      if(target.props.name === "street"){
+        editedProperty.address = value;
+      }
+
+      if(target.props.name == "status_desc"){
+        editedProperty.status = value;
+      }
+      
+
+      console.log("Edited[name] ," , editedProperty[propertyName])
 
       this.setState({
-          productInEdit: edited
+          productInEdit: editedProperty
       });
   }
+
+//   onDialogInputChange = (event) => {
+
+
+//   }
 
   render() {
       return (
@@ -33,7 +58,6 @@ export default class MachinesEditForm extends React.Component {
             onClose={this.props.cancel}
         >
             <form onSubmit={this.handleSubmit}>
-
 
                 <div style={{ marginBottom: '1rem' }}>
                     <label>
@@ -70,11 +94,6 @@ export default class MachinesEditForm extends React.Component {
                     </label>
 
                 </div>
-
-
-
-
-
             </form>
             <DialogActionsBar>
                 <button

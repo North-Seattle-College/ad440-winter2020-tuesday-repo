@@ -111,15 +111,19 @@ export default class MachinesMain extends React.Component {
 
     save = () => {
         const dataItem = this.state.productInEdit;
+        console.log("productInEdit ", this.state.productInEdit);
         const products = this.state.products.slice();
         const isNewProduct = dataItem.id === undefined;
+        console.log("Data item id ", dataItem.id);
 
-        if (isNewProduct) {
-            products.unshift(this.newProduct(dataItem));
-        } else {
-            const index = products.findIndex(p => p.id === dataItem.id);
-            products.splice(index, 1, dataItem);
-        }
+
+
+        // if (isNewProduct) {
+        //     products.unshift(this.newProduct(dataItem));
+        // } else {
+        //     const index = products.findIndex(p => p.id === dataItem.id);
+        //     products.splice(index, 1, dataItem);
+        // }
 
         this.setState({
             products: products,
@@ -131,9 +135,9 @@ export default class MachinesMain extends React.Component {
         this.setState({ productInEdit: undefined });
     }
 
-    cancel = () => {
-        this.setState({ productInDetails: undefined });
-    }
+    // cancel = () => {
+    //     this.setState({ productInDetails: undefined });
+    // }
 
     insert = () => {
         this.setState({ productInEdit: { } });
@@ -159,6 +163,7 @@ export default class MachinesMain extends React.Component {
                     data = {machinesCleanData}
                     style={{ height: '620px' }}
                 >
+                    {/* Add New Machine button */}
                     <GridToolbar>
                         <button
                             onClick={this.insert}
@@ -190,15 +195,15 @@ export default class MachinesMain extends React.Component {
         return Object.assign({}, product);
     }
 
-    newProduct(source) {
-        const id = this.state.products.reduce((acc, current) => Math.max(acc, current.id || 0), 0) + 1;
-        const newProduct = {
-            id: id,
-            vendor: '',
-            address: '',
-            status: ''
-        };
+    // newProduct(source) {
+    //     const id = this.state.products.reduce((acc, current) => Math.max(acc, current.id || 0), 0) + 1;
+    //     const newProduct = {
+    //         id: id,
+    //         vendor: '',
+    //         address: '',
+    //         status: ''
+    //     };
 
-        return Object.assign(newProduct, source);
-    }
+    //     return Object.assign(newProduct, source);
+    // }
 }
