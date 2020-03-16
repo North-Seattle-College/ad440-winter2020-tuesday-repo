@@ -6,6 +6,7 @@ import Login from './components/Login';
 import ErrorBoundary from './components/ErrorHandling/ErrorBoundary';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import MachinesMain from './components/MachinesMain';
 
 
 
@@ -33,7 +34,8 @@ export default  class App extends React.Component {
         {/*  <Route path="/500" component={InternalServer} /> */}
        
 <ErrorBoundary><SideNav/></ErrorBoundary>
-<ErrorBoundary><PageTabs/></ErrorBoundary>
+          <ErrorBoundary><MachinesMain/></ErrorBoundary>
+
 
             </MuiThemeProvider>
         </div>
