@@ -3,6 +3,7 @@
 import React from 'react';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
+import {Link} from 'react-router';
 
 export default class MachinesDetailsForm extends React.Component {
   constructor(props) {
@@ -38,14 +39,16 @@ export default class MachinesDetailsForm extends React.Component {
               <form onSubmit={this.handleSubmit}>
 
 
-            <div style={{ marginBottom: '1rem' }}>
-                
-          <label>        
-          <b>Image</b>
-          <img src={this.state.productInDetails.serialnum} />
-          </label></div>
+          
+          <div style={{ marginBottom: '1rem', float:'left', width:400, marginRight:50}}>
+        
+          {this.state.productInDetails.images
+          ? <img style={{width:400}} src={this.state.productInDetails.images}/>
+          : <img style={{width:400}} src='https://media.4rgos.it/i/Argos/8477958_R_Z001A?w=750&h=440&qlt=70'/> }         
+          
+          </div>
 
-
+            <div style={{float:'right'}}>
             <div style={{ marginBottom: '1rem' }}>
                                           
           <label>                                
@@ -93,10 +96,11 @@ export default class MachinesDetailsForm extends React.Component {
          
           <label>   
           <b>Vendor</b><br />    
-          {this.state.productInDetails.vender || ''}        
+          {this.state.productInDetails.vendor || ''}        
           </label></div>
-          
+          </div>
           </form>
+          
 
         <DialogActionsBar>
         <button
@@ -111,3 +115,5 @@ export default class MachinesDetailsForm extends React.Component {
     );
   }
 }
+
+
