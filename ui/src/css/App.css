@@ -2,6 +2,7 @@
     margin: auto;
     max-width: 100%;
     text-align: center;
+    background-color: black;
 }
 
 /* .top-bar {
@@ -19,6 +20,13 @@
 }
 
 .top-bar {
+    background-color: #142709;
+    width: 100%;
+    height: 56px;
+    float: center;
+}
+
+.bottom-bar {
     background-color: #142709;
     width: 100%;
     height: 56px;
