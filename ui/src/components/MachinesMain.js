@@ -108,28 +108,65 @@ export default class MachinesMain extends React.Component {
             products: this.state.products.filter(p => p.id !== dataItem.id)
         });
     }
-
+  /**
+   * Sends POST request to the database
+   */
     save = () => {
+        console.log("Save started")
         const dataItem = this.state.productInEdit;
+        console.log("This state productInEdit is: ", this.state.productInEdit)
         console.log("productInEdit ", this.state.productInEdit);
         const products = this.state.products.slice();
         const isNewProduct = dataItem.id === undefined;
         console.log("Data item id ", dataItem.id);
+        console.log("isNewProduct ", isNewProduct);
 
 
-
-        // if (isNewProduct) {
-        //     products.unshift(this.newProduct(dataItem));
-        // } else {
-        //     const index = products.findIndex(p => p.id === dataItem.id);
-        //     products.splice(index, 1, dataItem);
-        // }
+        if (isNewProduct) {
+            // do POST here
+            // no need to have macchine ID entered, as it should be auto-incremented
+           // fetch()
+            //products.unshift(this.newProduct(dataItem));
+            console.log("Data item id ", dataItem);
+        } else {
+            const index = products.findIndex(p => p.id === dataItem.id);
+            products.splice(index, 1, dataItem);
+        }
 
         this.setState({
             products: products,
             productInEdit: undefined
         });
     }
+
+    /**
+   * Sends POST request to the database
+   */
+  saveNewItem = () => {
+    console.log("Save started")
+    const dataItem = this.state.productInEdit;
+    console.log("This state productInEdit is: ", this.state.productInEdit)
+    console.log("productInEdit ", this.state.productInEdit);
+    const products = this.state.products.slice();
+    const isNewProduct = dataItem.id === undefined;
+    console.log("Data item id ", dataItem.id);
+
+
+
+    if (isNewProduct) {
+        // do POST here
+       // fetch()
+        products.unshift(this.newProduct(dataItem));
+    } else {
+        const index = products.findIndex(p => p.id === dataItem.id);
+        products.splice(index, 1, dataItem);
+    }
+
+    this.setState({
+        products: products,
+        productInEdit: undefined
+    });
+}
 
     cancel = () => {
         this.setState({ productInEdit: undefined });

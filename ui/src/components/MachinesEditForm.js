@@ -28,6 +28,8 @@ export default class MachinesEditForm extends React.Component {
         
         editedProperty[propertyName] = value;
         console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
+
+        
     //  if(target.props.name === "vendor"){
     //     editedProperty[vendor] = value;
     //  }
