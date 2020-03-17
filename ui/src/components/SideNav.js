@@ -18,7 +18,7 @@ class SideNav extends Component {
   render() {
     const styles = {
       tabLink: {
-        height: 50,
+        height: 60,
       },
       tabLabel: {
         fontSize: 28,
@@ -96,22 +96,22 @@ class SideNav extends Component {
         labelStyle={styles.tabLabel}
         fullWidth/>
         </div>
-        
+
             <Switch>
           <Route exact path="/Home">
         <Home/>
-            
+
           </Route>
           <Route path="/About">
         <About/>
-            
+
           </Route>
 
         </Switch>
-    
+
     </Router>
-        
-        
+
+
 
         </div>
 
