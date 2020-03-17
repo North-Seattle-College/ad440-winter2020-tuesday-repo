@@ -9,6 +9,7 @@ import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
 import ApiUrl from "./ApiUrl";
 import GlobalFilter from "./GlobalFilter"
+import MachinesSaveNewForm from "./MachinesSaveNewForm"
 
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
@@ -230,7 +231,7 @@ export default class MachinesMain extends React.Component {
                 </Grid>
                 {/* Pass the form type here throught a boolean or string */}
                 {this.state.productInEdit && <MachinesEditForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
-
+                {this.state.productInEdit && <MachinesSaveNewForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
                 {this.state.productInDetails && <MachinesDetailsForm dataItem={this.state.productInDetails} save={this.save} cancel={this.cancel}/>}
             </div>
         );
