@@ -8,6 +8,7 @@ import MachinesDetailsForm from './MachinesDetailsForm';
 import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
 import ApiUrl from "./ApiUrl";
+import GlobalFilter from "./GlobalFilter"
 
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
@@ -160,13 +161,22 @@ export default class MachinesMain extends React.Component {
                     style={{ height: '620px' }}
                 >
                     <GridToolbar>
-                        <button
-                            onClick={this.insert}
-                            className="k-button"
-                        >Add New</button>
+                        <div class = "tableHeader">
+                            <div class = "tableTitle">
+                                <h1 class = "editHeader">Machine List</h1>
+                            </div>
 
+                            <div class = "addNewButton">
+                                <button
+                                    onClick={this.insert}
+                                    className="k-button">Add New</button>
+                            </div>
 
-                    </GridToolbar>
+                            <div class = "searchField">
+                                <GlobalFilter/>
+                            </div>
+                        </div>
+    </GridToolbar>
                     <Column field="id" title="ID" width="75px" />
                     <Column field="vendor" title="Vendor" />
                     <Column field="address" title="Address" />
