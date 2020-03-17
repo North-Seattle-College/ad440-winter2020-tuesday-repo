@@ -5,11 +5,6 @@ import Login from './components/Login';
 import ErrorBoundary from './components/ErrorHandling/ErrorBoundary';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import MachinesMain from './components/MachinesMain';
-
-
-
-
-
 import './css/App.css';
 
 /**
@@ -36,6 +31,8 @@ export default  class App extends React.Component {
 
 
             </MuiThemeProvider>
+            <div className="bottom-bar">
+            </div>
         </div>
       );
     }
