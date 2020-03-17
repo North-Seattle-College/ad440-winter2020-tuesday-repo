@@ -218,6 +218,7 @@ export default class MachinesMain extends React.Component {
                         cell={MachinesButtons(this.edit, this.remove, this.details)}
                     />
                 </Grid>
+                {/* Pass the form type here throught a boolean or string */}
                 {this.state.productInEdit && <MachinesEditForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
 
                 {this.state.productInDetails && <MachinesDetailsForm dataItem={this.state.productInDetails} save={this.save} cancel={this.cancel}/>}

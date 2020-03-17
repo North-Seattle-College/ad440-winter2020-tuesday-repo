@@ -6,6 +6,7 @@ import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
 export default class MachinesEditForm extends React.Component {
   constructor(props) {
       super(props);
+      // have a state say if its a edit or save form
       this.state = {
           productInEdit: this.props.dataItem || null
       };
