@@ -20,25 +20,24 @@ export default class MachinesEditForm extends React.Component {
       const value = target.type === 'checkbox' ? target.checked : target.value;
       console.log("Target Value ", value );
       const propertyName = target.props ? target.props.name : target.name;
-      console.log ("On DialogInput Change name ", propertyName);
 
       const editedProperty = this.state.productInEdit;
       console.log ("edited property: ", editedProperty );
       console.log("Edited adress ", editedProperty.address, "Edited name ", editedProperty.name, "Edited status ", editedProperty.status);
       console.log("Product in Edit = this.dataItem ", this.state);
-      //if(target.props.name === "name"){
+        
         editedProperty[propertyName] = value;
-        console.log("editedProperty[name]: ", editedProperty[propertyName])
-      //}
+        console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
+    //  if(target.props.name === "vendor"){
+    //     editedProperty[vendor] = value;
+    //  }
 
-      if(target.props.name === "street"){
-        editedProperty.address = value;
-      }
-
-      if(target.props.name == "status_desc"){
-        editedProperty.status = value;
-      }
-      
+    //   if(target.props.name === "street"){
+    //     editedProperty.address = value;
+    //   }
+    //   if(target.props.name == "status_desc"){
+    //     editedProperty.status = value;
+    //   }
 
       console.log("Edited[name] ," , editedProperty[propertyName])
 
@@ -46,11 +45,6 @@ export default class MachinesEditForm extends React.Component {
           productInEdit: editedProperty
       });
   }
-
-//   onDialogInputChange = (event) => {
-
-
-//   }
 
   render() {
       return (
@@ -76,7 +70,7 @@ export default class MachinesEditForm extends React.Component {
                     Address<br />
                     <Input
                         type="text"
-                        name="street"
+                        name="address"
                         value={this.state.productInEdit.address || ''}
                         onChange={this.onDialogInputChange}
                     />
@@ -87,7 +81,7 @@ export default class MachinesEditForm extends React.Component {
                     Status<br />
                     <Input
                         type="text"
-                        name="status_desc"
+                        name="status"
                         value={this.state.productInEdit.status || ''}
                         onChange={this.onDialogInputChange}
                     />
