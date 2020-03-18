@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
-import { Input } from '@progress/kendo-react-inputs';
+import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
 
-export default class MachinesEditForm extends React.Component {
+export default class MachinesSaveNewForm extends React.Component {
   constructor(props) {
       super(props);
       // have a state say if its a edit or save form
@@ -26,21 +26,13 @@ export default class MachinesEditForm extends React.Component {
       console.log ("edited property: ", editedProperty );
       console.log("Edited adress ", editedProperty.address, "Edited name ", editedProperty.name, "Edited status ", editedProperty.status);
       console.log("Product in Edit = this.dataItem ", this.state);
+
+       
         
-        editedProperty[propertyName] = value;
+     editedProperty[propertyName] = value;
+        
+        
         console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
-
-        
-    //  if(target.props.name === "vendor"){
-    //     editedProperty[vendor] = value;
-    //  }
-
-    //   if(target.props.name === "street"){
-    //     editedProperty.address = value;
-    //   }
-    //   if(target.props.name == "status_desc"){
-    //     editedProperty.status = value;
-    //   }
 
       console.log("Edited[name] ," , editedProperty[propertyName])
 
@@ -61,8 +53,8 @@ export default class MachinesEditForm extends React.Component {
                     Vendor<br />
                     <Input
                         type="text"
-                        name="vendor"
-                        value={this.state.productInEdit.vendor || ''}
+                        name="VendorID"
+                        value={this.state.productInEdit.VendorID || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
@@ -73,24 +65,59 @@ export default class MachinesEditForm extends React.Component {
                     Address<br />
                     <Input
                         type="text"
-                        name="address"
-                        value={this.state.productInEdit.address || ''}
+                        name="LocationID"
+                        value={this.state.productInEdit.LocationID || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label>
                 </div>
-                                      <div style={{ marginBottom: '1rem' }}>
+
+                 <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Status<br />
+                    Model<br />
                     <Input
                         type="text"
-                        name="status"
-                        value={this.state.productInEdit.status || ''}
+                        name="Model"
+                        value={this.state.productInEdit.Model || ''}
                         onChange={this.onDialogInputChange}
                     />
-                    </label>
+                    </label></div>
 
-                </div>
+
+                <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Model Number<br />
+                    <Input
+                        type="text"
+                        name="ModelNum"
+                        value={this.state.productInEdit.ModelNum || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Serial Number<br />
+                    <Input
+                        type="text"
+                        name="SerialNum"
+                        value={this.state.productInEdit.SerialNum || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Model photo<br />
+                    <Input
+                        type="text"
+                        name="ModelPhoto"
+                        value={this.state.productInEdit.ModelPhoto || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+                  
             </form>
             <DialogActionsBar>
                 <button

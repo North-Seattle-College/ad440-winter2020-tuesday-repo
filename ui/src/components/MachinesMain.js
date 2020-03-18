@@ -9,6 +9,7 @@ import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
 import ApiUrl from "./ApiUrl";
 import GlobalFilter from "./GlobalFilter"
+import MachinesSaveNewForm from "./MachinesSaveNewForm"
 
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
@@ -109,14 +110,38 @@ export default class MachinesMain extends React.Component {
             products: this.state.products.filter(p => p.id !== dataItem.id)
         });
     }
-
+  /**
+   * Sends POST request to the database
+   */
     save = () => {
+        console.log("Save started")
         const dataItem = this.state.productInEdit;
+        console.log("This state productInEdit is: ", this.state.productInEdit)
+        console.log("productInEdit ", this.state.productInEdit);
         const products = this.state.products.slice();
         const isNewProduct = dataItem.id === undefined;
+        console.log("Data item id ", dataItem.id);
+        console.log("isNewProduct ", isNewProduct);
+      
 
-        if (isNewProduct) {
-            products.unshift(this.newProduct(dataItem));
+        if (isNewProduct) {            
+            // do POST here
+            // no need to have macchine ID entered, as it should be auto-incremented
+            console.log ("Machines Main productInEdit: ", this.state.productInEdit)
+            console.log("Json stringify ", JSON.stringify(dataItem))
+            if(!dataItem.ModelPhoto){
+                dataItem.ModelPhoto = ""
+           }
+            fetch('https://ken-fun-feat-usw2-task60.azurewebsites.net/api/postrequest?code=j6x7Br2k3VLjoFakea3fWXG35G6vZJnal/uFWmO7kbv2S141bbLczg=='
+            , {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',                  
+                  },
+                body: JSON.stringify(dataItem),
+            });
+
+            console.log("Data item id ", dataItem);
         } else {
             const index = products.findIndex(p => p.id === dataItem.id);
             products.splice(index, 1, dataItem);
@@ -128,13 +153,42 @@ export default class MachinesMain extends React.Component {
         });
     }
 
+    /**
+   * Sends POST request to the database
+   */
+  saveNewItem = () => {
+    console.log("Save started")
+    const dataItem = this.state.productInEdit;
+    console.log("This state productInEdit is: ", this.state.productInEdit)
+    console.log("productInEdit ", this.state.productInEdit);
+    const products = this.state.products.slice();
+    const isNewProduct = dataItem.id === undefined;
+    console.log("Data item id ", dataItem.id);
+
+
+
+    if (isNewProduct) {
+        // do POST here
+       // fetch()
+        products.unshift(this.newProduct(dataItem));
+    } else {
+        const index = products.findIndex(p => p.id === dataItem.id);
+        products.splice(index, 1, dataItem);
+    }
+
+    this.setState({
+        products: products,
+        productInEdit: undefined
+    });
+}
+
     cancel = () => {
         this.setState({ productInEdit: undefined });
     }
 
-    cancel = () => {
-        this.setState({ productInDetails: undefined });
-    }
+    // cancel = () => {
+    //     this.setState({ productInDetails: undefined });
+    // }
 
     insert = () => {
         this.setState({ productInEdit: { } });
@@ -160,6 +214,7 @@ export default class MachinesMain extends React.Component {
                     data = {machinesCleanData}
                     style={{ height: '620px' }}
                 >
+                    {/* Add New Machine button */}
                     <GridToolbar>
                         <div class = "tableHeader">
                             <div class = "tableTitle">
@@ -186,8 +241,9 @@ export default class MachinesMain extends React.Component {
                         cell={MachinesButtons(this.edit, this.remove, this.details)}
                     />
                 </Grid>
+                {/* Pass the form type here throught a boolean or string */}
                 {this.state.productInEdit && <MachinesEditForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
-
+                {this.state.productInEdit && <MachinesSaveNewForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
                 {this.state.productInDetails && <MachinesDetailsForm dataItem={this.state.productInDetails} save={this.save} cancel={this.cancel}/>}
             </div>
         );
@@ -200,15 +256,15 @@ export default class MachinesMain extends React.Component {
         return Object.assign({}, product);
     }
 
-    newProduct(source) {
-        const id = this.state.products.reduce((acc, current) => Math.max(acc, current.id || 0), 0) + 1;
-        const newProduct = {
-            id: id,
-            vendor: '',
-            address: '',
-            status: ''
-        };
+    // newProduct(source) {
+    //     const id = this.state.products.reduce((acc, current) => Math.max(acc, current.id || 0), 0) + 1;
+    //     const newProduct = {
+    //         id: id,
+    //         vendor: '',
+    //         address: '',
+    //         status: ''
+    //     };
 
-        return Object.assign(newProduct, source);
-    }
+    //     return Object.assign(newProduct, source);
+    // }
 }
