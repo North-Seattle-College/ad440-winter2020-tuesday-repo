@@ -21,7 +21,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         cursor = conct.cursor()
         logging.debug("Database connection successful")
         #query to select everything from the Machines table and put results in a tuple then convert tuples into dictionary
-        qry = cursor.execute('''SELECT * FROM [dbo].[Machines]''').fetchall()
+        qry = cursor.execute('''SELECT * FROM [dbo].[Machines] INNER JOIN [dbo].[Vendors] ON [dbo].[Machines].VendorId = [dbo].[Vendors].VendorId INNER JOIN [dbo].[Locations] ON [dbo].[Machines].LocationId = [dbo].[Locations].LocationId''').fetchall()
         logging.debug("Database query successful")
         column_names = [column[0] for column in cursor.description]
         rows = [dict(zip(column_names, row)) for row in qry]
