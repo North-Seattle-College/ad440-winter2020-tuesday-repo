@@ -122,12 +122,22 @@ export default class MachinesMain extends React.Component {
         const isNewProduct = dataItem.id === undefined;
         console.log("Data item id ", dataItem.id);
         console.log("isNewProduct ", isNewProduct);
-
+      
 
         if (isNewProduct) {
+            
             // do POST here
             // no need to have macchine ID entered, as it should be auto-incremented
-           // fetch()
+            console.log ("Machines Main productInEdit: ", this.state.productInEdit)
+            console.log("Json stringify ", JSON.stringify(this.state.productInEdit))
+            fetch('https://ken-fun-feat-usw2-task60.azurewebsites.net/api/postrequest?code=j6x7Br2k3VLjoFakea3fWXG35G6vZJnal/uFWmO7kbv2S141bbLczg=='
+            , {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',                  
+                  },
+                body: JSON.stringify(this.state.productInEdit),
+            });
             //products.unshift(this.newProduct(dataItem));
             console.log("Data item id ", dataItem);
         } else {

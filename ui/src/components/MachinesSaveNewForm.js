@@ -49,8 +49,8 @@ export default class MachinesSaveNewForm extends React.Component {
                     Vendor<br />
                     <Input
                         type="text"
-                        name="vendor"
-                        value={this.state.productInEdit.vendor || ''}
+                        name="VendorID"
+                        value={this.state.productInEdit.VendorID || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
@@ -61,21 +61,33 @@ export default class MachinesSaveNewForm extends React.Component {
                     Address<br />
                     <Input
                         type="text"
-                        name="address"
-                        value={this.state.productInEdit.address || ''}
+                        name="LocationID"
+                        value={this.state.productInEdit.LocationID || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label>
                 </div>
 
                  {/* New fields */}
+                 <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Model<br />
+                    <Input
+                        type="text"
+                        name="Model"
+                        value={this.state.productInEdit.Model || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+
                 <div style={{ marginBottom: '1rem' }}>
                     <label>
                     Model Number<br />
                     <Input
                         type="text"
-                        name="modelnum"
-                        value={this.state.productInEdit.modelnum || ''}
+                        name="ModelNum"
+                        value={this.state.productInEdit.ModelNum || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
@@ -86,8 +98,8 @@ export default class MachinesSaveNewForm extends React.Component {
                     Serial Number<br />
                     <Input
                         type="text"
-                        name="serialnum"
-                        value={this.state.productInEdit.serialnum || ''}
+                        name="SerialNum"
+                        value={this.state.productInEdit.SerialNum || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
@@ -97,8 +109,8 @@ export default class MachinesSaveNewForm extends React.Component {
                     Model photo<br />
                     <Input
                         type="text"
-                        name="modelphoto"
-                        value={this.state.productInEdit.modelphoto || ''}
+                        name="ModelPhoto"
+                        value={this.state.productInEdit.ModelPhoto || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
