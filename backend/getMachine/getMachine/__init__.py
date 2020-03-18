@@ -4,9 +4,12 @@ import pyodbc
 import os
 import json
 
+def logmain(logger):
+    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.ERROR)
+
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     #logging.Logger.root.level = 10
     logging.info('Starting Python HTTP trigger function request')
     #logger = logging.getLogger(__name__)
@@ -28,11 +31,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         #logging 
         logging.info("Python HTTP trigger function request successful")
         return func.HttpResponse(json.dumps(rows)) #json.dumps to create JSON string
-    except ConnectionError as connerr:
+    except pyodbc.interfaceerror as connerr:
         logging.error("Database connection failed" + str(connerr))
-    except SyntaxError as synerr:
+    except pyodbc.operationalerror as synerr:
         logging.error("Database query failed" + str(synerr))
-    except Exception as ex:
-        logging.info("Python HTTP trigger function request unsuccessful" + str(ex)) 
+    except pyodbc.Error as err:
+        logging.info("Python HTTP trigger function request unsuccessful" +  str(err))    
+
 
     

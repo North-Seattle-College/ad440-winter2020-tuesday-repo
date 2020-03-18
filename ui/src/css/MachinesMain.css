@@ -17,6 +17,37 @@ my-app {
     padding: 30px;
 }
 
+.tableHeader {
+    display:inline-block;
+    width: 100%;
+}
+
+.editHeader {
+    margin: auto;
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+.tableTitle {
+    width: 30%;
+    float: left;
+
+}
+
+.addNewButton {
+    width: 19%;
+    float:left;
+    padding: 16px 0px 12px 10px;
+    text-align: left;
+}
+
+.searchField {
+    width: 40%;
+    float: right;
+    padding: 13px 0px 13px 0px;
+}
+
 @keyframes k-loading-animation  {
     0% {
         transform: rotate(0deg);

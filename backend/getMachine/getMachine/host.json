@@ -8,7 +8,10 @@
   "logging": {
     "fileLoggingMode": "always",
     "logLevel": {
-      "default": "Debug"
+        "default": "Information",
+        "Host.Results": "Error",
+        "Function": "Debug",
+        "Host.Aggregator": "Debug"
     }
-  }
+}
 }

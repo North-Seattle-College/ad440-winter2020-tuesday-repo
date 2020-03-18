@@ -5,49 +5,50 @@ import pyodbc
 
 # main method takes an Http request as parameter.
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info(req.__dict__)
+    logging.info('Python HTTP trigger function processed a request.')
 
-    try:
-        # Setting connection to the database via key vault connection string.
-        conn = pyodbc.connect(os.environ['ConnString'])
-        logging.info("Connection complete")
-        cursor = conn.cursor()
-    except Exception as e:
-        logging.error("Connection to db failed" + str(e))
-        print(e)
-        pass
-    
-    # This stament checks for a PUT request.
+    # Check for a DELETE request.
     if (req.method == "DELETE"):
         try:
             # check JSON body request
             req_body = req.get_json()
-            logging.info(req_body)
-            print(req_body)
+            logging.info("Getting the json body.")
+            logging.debug(req_body)
 
-            # updates a Machine 
-            cursor.execute(''' DELETE [dbo].[Machines] 
-            SET Model = ?, ModelNum = ?, ModelPhoto = ?, SerialNum = ?, VendorID = ?, LocationID = ?  WHERE MachineID = ? ''', 
-            (req_body['Model'], req_body['ModelNum'], req_body['ModelPhoto'], req_body['SerialNum'], req_body['VendorID'], req_body['LocationID'], req_body['MachineID'])
-            )               
+            # Setting connection to the database via key vault connection string.
+            conn = pyodbc.connect(os.environ['ConnString'])
+            logging.debug(conn)
+            logging.info("Connection complete")
+            cursor = conn.cursor()
+
+            # deletes a Machine 
+            cursor.execute(''' DELETE FROM [dbo].[Machines] WHERE MachineID = ? ''',
+            (req_body['MachineID'])
+            )
+
+            # clean up               
             conn.commit()
-            logging.info("record successfuly updated") 
+            cursor.close()
+            conn.close()
+            logging.info("Machine successfully deleted") 
                 
             return func.HttpResponse(f"successful request")
-        except Exception as e:
-            logging.error("Connecting to the database failed" + str(e))
-            print(str(e))
+        except ValueError as e:
+            logging.error("Invalid json format " + str(e))
+            pass # invalid json
+        except Exception as err:
+            logging.error("String connection to the database failed " + str(err))
             pass
-    # it returns an error Http code that is not a PUT request.
-    else:
-        logging.info("Not a DELETE request...")
-        # returns a Http 400 status bad request.
-        return func.HttpResponse(
-            'Request was not a DELETE',
-            status_code=400
-            )
+        except pyodbc.DatabaseError as em:
+            logging.error("Something went wrong with the database " + str(em))
+            cursor.rollback()
+            pass
+        finally:
+            logging.info("record successfuly deleted")
+            logging.info("Closing connection to the database ...")
     
-    # retuerns a Http 400 status bad request. 
+    
+    # returns a Http 400 status bad request. 
     return func.HttpResponse(
         "Please pass a DELETE request on the query string or in the request body",
         status_code=400
