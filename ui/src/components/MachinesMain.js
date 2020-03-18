@@ -130,6 +130,9 @@ export default class MachinesMain extends React.Component {
             // no need to have macchine ID entered, as it should be auto-incremented
             console.log ("Machines Main productInEdit: ", this.state.productInEdit)
             console.log("Json stringify ", JSON.stringify(this.state.productInEdit))
+            if(!this.state.productInEdit.ModelPhoto){
+                this.state.productInEdit.ModelPhoto = "no photo test"
+           }
             fetch('https://ken-fun-feat-usw2-task60.azurewebsites.net/api/postrequest?code=j6x7Br2k3VLjoFakea3fWXG35G6vZJnal/uFWmO7kbv2S141bbLczg=='
             , {
                 method: "POST",

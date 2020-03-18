@@ -26,8 +26,12 @@ export default class MachinesSaveNewForm extends React.Component {
       console.log ("edited property: ", editedProperty );
       console.log("Edited adress ", editedProperty.address, "Edited name ", editedProperty.name, "Edited status ", editedProperty.status);
       console.log("Product in Edit = this.dataItem ", this.state);
+
+       
         
-        editedProperty[propertyName] = value;
+     editedProperty[propertyName] = value;
+        
+        
         console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
 
       console.log("Edited[name] ," , editedProperty[propertyName])
