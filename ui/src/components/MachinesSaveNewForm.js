@@ -72,7 +72,6 @@ export default class MachinesSaveNewForm extends React.Component {
                     </label>
                 </div>
 
-                 {/* New fields */}
                  <div style={{ marginBottom: '1rem' }}>
                     <label>
                     Model<br />
@@ -118,22 +117,7 @@ export default class MachinesSaveNewForm extends React.Component {
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
-                   
-
-                    {/* End of New fields */}
                   
-                                      <div style={{ marginBottom: '1rem' }}>
-                    <label>
-                    Status<br />
-                    <Input
-                        type="text"
-                        name="status"
-                        value={this.state.productInEdit.status || ''}
-                        onChange={this.onDialogInputChange}
-                    />
-                    </label>
-
-                </div>
             </form>
             <DialogActionsBar>
                 <button

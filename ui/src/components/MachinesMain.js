@@ -124,14 +124,13 @@ export default class MachinesMain extends React.Component {
         console.log("isNewProduct ", isNewProduct);
       
 
-        if (isNewProduct) {
-            
+        if (isNewProduct) {            
             // do POST here
             // no need to have macchine ID entered, as it should be auto-incremented
             console.log ("Machines Main productInEdit: ", this.state.productInEdit)
-            console.log("Json stringify ", JSON.stringify(this.state.productInEdit))
-            if(!this.state.productInEdit.ModelPhoto){
-                this.state.productInEdit.ModelPhoto = "no photo test"
+            console.log("Json stringify ", JSON.stringify(dataItem))
+            if(!dataItem.ModelPhoto){
+                dataItem.ModelPhoto = ""
            }
             fetch('https://ken-fun-feat-usw2-task60.azurewebsites.net/api/postrequest?code=j6x7Br2k3VLjoFakea3fWXG35G6vZJnal/uFWmO7kbv2S141bbLczg=='
             , {
@@ -139,9 +138,9 @@ export default class MachinesMain extends React.Component {
                 headers: {
                     'Content-Type': 'application/json',                  
                   },
-                body: JSON.stringify(this.state.productInEdit),
+                body: JSON.stringify(dataItem),
             });
-            //products.unshift(this.newProduct(dataItem));
+
             console.log("Data item id ", dataItem);
         } else {
             const index = products.findIndex(p => p.id === dataItem.id);
