@@ -17,8 +17,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         # read JSON body
         req_body = req.get_json()
         logging.debug('Content of JSON body: ' + str(req_body))
-
-        logging.debug('Content of JSON body model ', req_body['ModelNum']);
         
         # insert data into SQL
         cursor.execute(
