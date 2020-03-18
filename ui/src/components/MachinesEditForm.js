@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
-import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
+import { Input } from '@progress/kendo-react-inputs';
 
 export default class MachinesEditForm extends React.Component {
   constructor(props) {
