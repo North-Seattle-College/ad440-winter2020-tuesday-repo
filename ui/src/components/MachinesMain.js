@@ -81,18 +81,20 @@ export default class MachinesMain extends React.Component {
           throw error; // rethrow other unexpected errors
         }
     }
-    /* Delete api ***/
-    function deletemachine(id) {
-      if(window.confirm('are you sure ?'))
-      {
-        fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/deleteRequest?MachineID='+id,{
-          method:'DELETE',
-          header:{'Accept':'application/json',
-          'Content-Type': 'application/json'
 
-        }
-        })
+
+  }
+  /******************************* Delete api *************** ***/
+ deletemachine(id) {
+    if(window.confirm('are you sure ?'))
+    {
+      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/deleteRequest?MachineID='+id,{
+        method:'DELETE',
+        header:{'Accept':'application/json',
+        'Content-Type': 'application/json'
+
       }
+      })
     }
   }
 
@@ -188,6 +190,7 @@ export default class MachinesMain extends React.Component {
                     />
 
                 </Grid>
+
                 {this.state.productInEdit && <MachinesEditForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
 
               {this.state.productInDetails && <MachinesDetailsForm dataItem={this.state.productInDetails} save={this.save} cancel={this.cancel}/>}

@@ -19,8 +19,7 @@ export default function MachinesButtons(edit, remove, details) {
                       <button
                                     className="k-primary k-button k-grid-edit-command"
                                     onClick={()=> this.deletemachine(this.props.dataItem.id)}>DELETE</button>
-
-                    
+                                    
 
 
 &nbsp;
