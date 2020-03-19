@@ -2,6 +2,7 @@
 node_modules
 proxies.json
 .funcignore
+.vscode
 azure-functions-core-tools
 scripts/flow/*/.flowconfig
 *~
@@ -23,7 +24,7 @@ chrome-user-data
 *.sublime-project
 *.sublime-workspace
 .idea
-.vscode
+
 *.iml
 
 *.swp
