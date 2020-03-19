@@ -7,14 +7,16 @@ import time
 # main method takes an Http request as parameter.
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-    
+
     # This stament checks for a PUT request.
     if (req.method == "PUT"):
         try:
+            
             # check JSON body request
             req_body = req.get_json()
             logging.info("Getting the json body." + str(req_body))
             logging.debug(req_body)
+            print(req_body)
 
             # Setting connection to the database via key vault connection string.
             conn = pyodbc.connect(os.environ['ConnString'])
