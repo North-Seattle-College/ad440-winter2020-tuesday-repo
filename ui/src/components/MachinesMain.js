@@ -183,12 +183,14 @@ export default class MachinesMain extends React.Component {
 }
 
     cancel = () => {
-        this.setState({ productInEdit: undefined });
+        // checking which of edit or details window  is open
+        if(this.state.productInEdit){
+            this.setState({ productInEdit: undefined });
+        } else if(this.state.productInDetails) {
+            this.setState({ productInDetails: undefined })
+        }
+        
     }
-
-    // cancel = () => {
-    //     this.setState({ productInDetails: undefined });
-    // }
 
     insert = () => {
         this.setState({ productInEdit: { } });
@@ -205,8 +207,6 @@ export default class MachinesMain extends React.Component {
         console.log("Is the state in error: " , this.state.isError)
         const machinesData = this.state.machines
         const  machinesCleanData =  this.buildMachinesForTable(machinesData)
-       // console.log("Render state dataX " , machinesData);
-       // console.log("Render state dataY " , machinesCleanData);
 
          return (
             <div >
