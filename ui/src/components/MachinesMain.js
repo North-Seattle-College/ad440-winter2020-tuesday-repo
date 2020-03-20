@@ -96,6 +96,20 @@ export default class MachinesMain extends React.Component {
         }
     }
 }
+
+/********************delete api  **********************/
+deletemachine(id) {
+    if(window.confirm('are you sure ?'))
+    {
+      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/deleteRequest?MachineID='+id,{
+        method:'DELETE',
+        header:{'Accept':'application/json',
+        'Content-Type': 'application/json'
+
+      }
+      })
+    }
+  }
 /*state of the edited machine*/
 
     edit = (dataItem) => {
@@ -105,11 +119,11 @@ export default class MachinesMain extends React.Component {
     this.setState({ productInDetails: this.cloneProduct(dataItem) });
     }
 
-    remove = (dataItem) => {
-        this.setState({
-            products: this.state.products.filter(p => p.id !== dataItem.id)
-        });
-    }
+  //  remove = (dataItem) => {
+    //    this.setState({
+      //      products: this.state.products.filter(p => p.id !== dataItem.id)
+        //});
+    //}
   /**
    * Sends POST request to the database
    */
@@ -122,9 +136,9 @@ export default class MachinesMain extends React.Component {
         const isNewProduct = dataItem.id === undefined;
         console.log("Data item id ", dataItem.id);
         console.log("isNewProduct ", isNewProduct);
-      
 
-        if (isNewProduct) {            
+
+        if (isNewProduct) {
             // do POST here
             // no need to have macchine ID entered, as it should be auto-incremented
             console.log ("Machines Main productInEdit: ", this.state.productInEdit)
@@ -136,7 +150,7 @@ export default class MachinesMain extends React.Component {
             , {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',                  
+                    'Content-Type': 'application/json',
                   },
                 body: JSON.stringify(dataItem),
             });
@@ -189,7 +203,7 @@ export default class MachinesMain extends React.Component {
         } else if(this.state.productInDetails) {
             this.setState({ productInDetails: undefined })
         }
-        
+
     }
 
     insert = () => {
@@ -238,7 +252,7 @@ export default class MachinesMain extends React.Component {
                     <Column field="model" title="Model"/>
                     <Column field="status" title="Status" />
                     <Column title="Edit Remove Details"
-                        cell={MachinesButtons(this.edit, this.remove, this.details)}
+                        cell={MachinesButtons(this.edit, this.deletemachine, this.details)}
                     />
                 </Grid>
                 {/* Pass the form type here throught a boolean or string */}
