@@ -11,6 +11,7 @@ export default function MachinesButtons(edit, deletemachine, details) {
                 <td>
                     <button
                         className="k-primary k-button k-grid-edit-command"
+                        onClick={() => { edit(this.props.dataItem);
                                        }}>Edit</button>
 
                                         &nbsp;
