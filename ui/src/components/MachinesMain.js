@@ -30,7 +30,7 @@ export default class MachinesMain extends React.Component {
         { color: 'red' }
     ];
 
-    MyCustomCell = (props) => <CustomStatusCell {...props} myProp = {this.customData}
+    MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customData} 
     />
 
     /* Author Iryna
@@ -49,7 +49,7 @@ export default class MachinesMain extends React.Component {
                   locationID : machines[i].LocationID,
                   images : machines[i].ModelPhoto,                
                   statusDesc: machines[i].StatusDescription,
-                 // status: machines[i].Status
+                  status: machines[i].Status
                  //status: true
             })
         }
