@@ -13,7 +13,7 @@ export default class CustomStatusCell extends React.Component {
        console.log("dataItem[this.props.field]: ", this.props.dataItem[this.props.field])
         return (
             <td style={{ color: value ? this.props.myProp[0].color : this.props.myProp[1].color }}> {
-                (value === null) ? '' : this.props.dataItem[this.props.field].toString()}
+                (value === null) ? '' : this.props.dataItem[this.props.field]}
             </td>
         );
     }

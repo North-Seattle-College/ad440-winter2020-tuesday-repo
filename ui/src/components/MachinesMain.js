@@ -26,6 +26,7 @@ export default class MachinesMain extends React.Component {
 
     customData = [
         { color: 'green' },
+        { color: 'yellow' },
         { color: 'red' }
     ];
 
@@ -46,9 +47,10 @@ export default class MachinesMain extends React.Component {
                   modelnum : machines[i].ModelNum,
                   serialnum : machines[i].SerialNum,
                   locationID : machines[i].LocationID,
-                  images : machines[i].ModelPhoto,
-                 // status: machines[i].StatusDescription
-                 status: true
+                  images : machines[i].ModelPhoto,                
+                  statusDesc: machines[i].StatusDescription,
+                 // status: machines[i].Status
+                 //status: true
             })
         }
 
@@ -246,8 +248,8 @@ export default class MachinesMain extends React.Component {
                     <Column field="vendor" title="Vendor" />
                     <Column field="address" title="Address" />
                     <Column field="model" title="Model"/>
-                    <Column field="status" title="Status" 
-                        field = "status"
+                    <Column field="statusDesc" title="Status" 
+                       // field = "status"
                         cell = {this.MyCustomCell}
                                  />
                     
