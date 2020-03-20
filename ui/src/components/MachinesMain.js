@@ -10,6 +10,7 @@ import '../css/MachinesMain.css';
 import ApiUrl from "./ApiUrl";
 import GlobalFilter from "./GlobalFilter"
 import MachinesSaveNewForm from "./MachinesSaveNewForm"
+import CustomStatusCell from "./CustomStatusCell"
 
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
@@ -22,6 +23,14 @@ export default class MachinesMain extends React.Component {
         machines: [],
         isError: false,
     };
+
+    customData = [
+        { color: 'green' },
+        { color: 'red' }
+    ];
+
+    MyCustomCell = (props) => <CustomStatusCell {...props} myProp = {this.customData}
+    />
 
     /* Author Iryna
     * Builds machine array with only necessary details about each machine for the table rows
@@ -38,7 +47,8 @@ export default class MachinesMain extends React.Component {
                   serialnum : machines[i].SerialNum,
                   locationID : machines[i].LocationID,
                   images : machines[i].ModelPhoto,
-                  status: machines[i].StatusDescription
+                 // status: machines[i].StatusDescription
+                 status: true
             })
         }
 
@@ -236,7 +246,11 @@ export default class MachinesMain extends React.Component {
                     <Column field="vendor" title="Vendor" />
                     <Column field="address" title="Address" />
                     <Column field="model" title="Model"/>
-                    <Column field="status" title="Status" />
+                    <Column field="status" title="Status" 
+                        field = "status"
+                        cell = {this.MyCustomCell}
+                                 />
+                    
                     <Column title="Edit Remove Details"
                         cell={MachinesButtons(this.edit, this.remove, this.details)}
                     />
