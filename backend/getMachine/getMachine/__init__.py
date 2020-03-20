@@ -26,6 +26,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         column_names = [column[0] for column in cursor.description]
         rows = [dict(zip(column_names, row)) for row in qry]
 
+        #commit and close connection
         conct.commit()
         
         #logging 

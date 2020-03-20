@@ -41,12 +41,18 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         logging.error("Could not connect to database")
     
     #machine id not found error
-    except TypeError:
-        logging.error("Machine ID not found")
+    except TypeError as terr:
+        logging.error("Machine ID not found" + str(terr))
+        return func.HttpResponse("Machine ID not found: ",status_code=500)
     
     #invalid input
-    except ValueError:
-        logging.debug("Invaled input")
+    except ValueError as verr:
+        logging.debug("Invaled input"+str(verr))
+        return func.HttpResponse('Incorrect JSON format',status_code=400)
+        
+    except Exception as err:
+        logging.error("String connection to the database failed " + str(err))
+        return func.HttpResponse('Connection failed',status_code=500)
         
   
         
