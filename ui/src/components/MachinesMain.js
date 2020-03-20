@@ -30,7 +30,7 @@ export default class MachinesMain extends React.Component {
         const cleanData = [];
         for (var i = 0; i< machines.length; i++){
             cleanData.push({
-              id: machines[i].MachineID,
+                  id: machines[i].MachineID,
                   vendor: machines[i].VendorID,
                   address: machines[i].LocationID,
                   model: machines[i].Model,
@@ -38,7 +38,7 @@ export default class MachinesMain extends React.Component {
                   serialnum : machines[i].SerialNum,
                   locationID : machines[i].LocationID,
                   images : machines[i].ModelPhoto,
-                  status: "not reported"
+                  status: machines[i].StatusDescription
             })
         }
 
