@@ -10,11 +10,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # Check for a DELETE request.
     if (req.method == "DELETE"):
         try:
-            # check JSON body request
-            req_body = req.get_json()
-            logging.info("Getting the json body.")
-            logging.debug(req_body)
+            # check url parameter for machineID
+            machineID = req.params.get('MachineID')
+            logging.info("Getting machine id from url.")
+            logging.debug(machineID)
 
+            
             # Setting connection to the database via key vault connection string.
             conn = pyodbc.connect(os.environ['ConnString'])
             logging.debug(conn)
@@ -23,7 +24,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             # deletes a Machine 
             cursor.execute(''' DELETE FROM [dbo].[Machines] WHERE MachineID = ? ''',
-            (req_body['MachineID'])
+            (machineID)
             )
 
             # clean up               
@@ -31,11 +32,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             cursor.close()
             conn.close()
             logging.info("Machine successfully deleted") 
-                
+
             return func.HttpResponse(f"successful request")
         except ValueError as e:
-            logging.error("Invalid json format " + str(e))
-            pass # invalid json
+            logging.error("No parameter passed in the URL" + str(e))
+            pass
         except Exception as err:
             logging.error("String connection to the database failed " + str(err))
             pass
@@ -46,7 +47,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         finally:
             logging.info("record successfuly deleted")
             logging.info("Closing connection to the database ...")
-    
     
     # returns a Http 400 status bad request. 
     return func.HttpResponse(
