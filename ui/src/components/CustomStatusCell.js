@@ -10,30 +10,16 @@ export default class CustomStatusCell extends React.Component {
         
         const statusCategory = this.props.dataItem.status;
         return (
-
-            <div style={{ borderRadius: '6px', 
+<td style = {{ textAlign: "center", left: 'auto', right: 'auto'}}>
+            <div style={{ borderRadius: '6px',  lineHeight: "30px", width: "80%", 
+            marginLeft: '10%',
             backgroundColor: statusCategory ? 
                     statusCategory === "green" ? this.props.myColorsProp[0].color : 
                     statusCategory === "yellow" ? this.props.myColorsProp[1].color : 
                     this.props.myColorsProp[2].color : null}}> {
-                (statusCategory === null) ? '' : this.props.dataItem.statusDesc}
-
-                 <td>
-            </td>
-
-            </div>
-            // <div style={{ borderRadius: '6px', 
-            // backgroundColor: statusCategory ? 
-            //         statusCategory === "green" ? this.props.myColorsProp[0].color : 
-            //         statusCategory === "yellow" ? this.props.myColorsProp[1].color : 
-            //         this.props.myColorsProp[2].color : null : null }}> {
-            //     (statusCategory === null) ? '' : this.props.dataItem.statusDesc}
-
-            //      <td>
-            // </td>
-
-            // </div>
-           
+                (statusCategory === null) ? '' : this.props.dataItem.statusDesc}             
+</div>
+            </td>          
         );
     }
 }
