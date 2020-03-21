@@ -37,3 +37,6 @@ export default  class App extends React.Component {
       );
     }
 }
+
+setTimeout(() => {
+    window.location.reload(true);}, 60000);
