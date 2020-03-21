@@ -44,14 +44,13 @@ export default class MachinesMain extends React.Component {
                   vendor: machines[i].VendorID,
                   address: machines[i].LocationID,
                   model: machines[i].Model,
-                  modelnum : machines[i].ModelNum,
-                  serialnum : machines[i].SerialNum,
-                  locationID : machines[i].LocationID,
+                  modelnum: machines[i].ModelNum,
+                  serialnum: machines[i].SerialNum,
+                  locationID: machines[i].LocationID,
                   location: machines[i].LocationName,
-                  images : machines[i].ModelPhoto,                
-                  statusDesc: "",
-                  status: machines[i].Status
-                 //status: true
+                  images: machines[i].ModelPhoto, 
+                  status : machines[i].Status,               
+                  statusDesc: machines[i].StatusDescription
             })
         }
 
@@ -234,6 +233,7 @@ deletemachine(id) {
         console.log("Is the state in error: " , this.state.isError)
         const machinesData = this.state.machines
         const  machinesCleanData =  this.buildMachinesForTable(machinesData)
+        console.log("machinesCleanData in render: " , machinesCleanData)
 
          return (
             <div >
@@ -264,7 +264,7 @@ deletemachine(id) {
                     <Column field="address" title="Location" />
                     <Column field="location" title="Location Name" />
                     <Column field="model" title="Model"/>
-                    <Column field="statusDesc" title="Status" 
+                    <Column field="status" title="Status" 
                        // field = "status"
                         cell = {this.MyCustomCell}
                                  />

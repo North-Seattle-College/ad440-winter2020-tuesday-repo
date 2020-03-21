@@ -16,8 +16,6 @@ export default class CustomStatusCell extends React.Component {
                     statusCategory === "green" ? this.props.myColorsProp[0].color : 
                     statusCategory === "yellow" ? this.props.myColorsProp[1].color : 
                     this.props.myColorsProp[2].color : null}}> 
-                    {
-                (statusCategory === null) ? '' : this.props.dataItem.statusDesc}             
 </div>
             </td>          
         );
