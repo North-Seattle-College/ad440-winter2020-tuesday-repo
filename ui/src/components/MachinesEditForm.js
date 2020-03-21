@@ -8,61 +8,63 @@ export default class MachinesEditForm extends React.Component {
       super(props);
       // have a state say if its a edit or save form
       this.state = {
-          productInEdit: this.props.dataItem || null
+          productInRealEdit: this.props.dataItem || null
       };
+      // prints the dataitem json
+      console.log("this.props.dataItem ", this.props.dataItem);
   }
   handleSubmit(event) {
       event.preventDefault();
   }
 
+  
+
+ 
+
   onDialogInputChange = (event) => {
+    console.log(" On change this.props.dataItem ", this.props.dataItem);
       let target = event.target;
       console.log("Target" , target)
       const value = target.type === 'checkbox' ? target.checked : target.value;
       console.log("Target Value ", value );
       const propertyName = target.props ? target.props.name : target.name;
 
-      const editedProperty = this.state.productInEdit;
-      console.log ("edited property: ", editedProperty );
-      console.log("Edited adress ", editedProperty.address, "Edited name ", editedProperty.name, "Edited status ", editedProperty.status);
+      const editedProperty = this.state.productInRealEdit;
+      
+    //   console.log ("edited property: ", editedProperty );
+    //   console.log("Edited adress ", editedProperty.address, "Edited name ", editedProperty.name, "Edited status ", editedProperty.status);
       console.log("Product in Edit = this.dataItem ", this.state);
         
-        editedProperty[propertyName] = value;
-        console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
+       editedProperty[propertyName] = value;
+       editedProperty.MachineID = 55;
 
-        
-    //  if(target.props.name === "vendor"){
-    //     editedProperty[vendor] = value;
-    //  }
-
-    //   if(target.props.name === "street"){
-    //     editedProperty.address = value;
-    //   }
-    //   if(target.props.name == "status_desc"){
-    //     editedProperty.status = value;
-    //   }
+       console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
 
       console.log("Edited[name] ," , editedProperty[propertyName])
+      
 
       this.setState({
-          productInEdit: editedProperty
+        productInRealEdit: this.props.dataItem
       });
   }
 
   render() {
+   
       return (
         <Dialog
-            onClose={this.props.cancel}
+            onClose={this.props.cancel
+            
+            }
         >
             <form onSubmit={this.handleSubmit}>
 
-                <div style={{ marginBottom: '1rem' }}>
+            <div style={{ marginBottom: '1rem' }}>
                     <label>
                     Vendor<br />
                     <Input
                         type="text"
-                        name="vendor"
-                        value={this.state.productInEdit.vendor || ''}
+                        name="VendorID"
+                        value={this.state.productInRealEdit.VendorID || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
@@ -73,24 +75,59 @@ export default class MachinesEditForm extends React.Component {
                     Address<br />
                     <Input
                         type="text"
-                        name="address"
-                        value={this.state.productInEdit.address || ''}
+                        name="LocationID"
+                        value={this.state.productInRealEdit.LocationID || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label>
                 </div>
-                                      <div style={{ marginBottom: '1rem' }}>
+
+                 <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Status<br />
+                    Model<br />
                     <Input
                         type="text"
-                        name="status"
-                        value={this.state.productInEdit.status || ''}
+                        name="Model"
+                        value={this.state.productInRealEdit.Model || ''}
                         onChange={this.onDialogInputChange}
                     />
-                    </label>
+                    </label></div>
 
-                </div>
+
+                <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Model Number<br />
+                    <Input
+                        type="text"
+                        name="ModelNum"
+                        value={this.state.productInRealEdit.ModelNum || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Serial Number<br />
+                    <Input
+                        type="text"
+                        name="SerialNum"
+                        value={this.state.productInRealEdit.SerialNum || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Model photo<br />
+                    <Input
+                        type="text"
+                        name="ModelPhoto"
+                        value={this.state.productInRealEdit.ModelPhoto || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+                  
             </form>
             <DialogActionsBar>
                 <button
@@ -99,7 +136,7 @@ export default class MachinesEditForm extends React.Component {
 
             <button
                     className="k-button k-primary"
-                    onClick={this.props.save}>Save</button>
+                    onClick={()=> this.props.edit(this.props.dataItem.id)}>Edit</button>
             </DialogActionsBar>
         </Dialog>
     );

@@ -23,6 +23,7 @@ export default class MachinesMain extends React.Component {
     state = {
         products: MachineData.slice(0, 12),
         productInEdit: undefined,
+        productInRealEdit: undefined,
         machines: [],
         isError: false,
     };
@@ -125,22 +126,62 @@ deletemachine(id) {
       }).then(refreshPage);
     }
   }
+
 /*state of the edited machine*/
 
-    edit = (dataItem) => {
-        this.setState({ productInEdit: this.cloneProduct(dataItem) });
+    edit = (id) => {
+        console.log("Edit started")       
+        //const dataItem = this.state.productInEdit;
+        console.log("This state productInEdit in the Edit method is: ", this.state.productInRealEdit)
+        console.log("productInEdit in the Edit method ", this.state.productInRealEdit);
+        //const isNewProduct = dataItem.id === undefined;
+        console.log("Data item in Edit ", id);
+        //console.log("isNewProduct Edit ", isNewProduct);
+        console.log ("Machines Main productInEdit: ", this.state.productInRealEdit)
+         console.log("Json stringify ", JSON.stringify(this.state.productInRealEdit))
+        
+       
+            fetch('https://jos-rg-fun-usw2-task62.azurewebsites.net/api/putRequest'
+            , {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                  },
+                body: JSON.stringify(this.state.productInRealEdit),
+
+            }).then((response) => response.text())
+            .then((data) => {
+              console.log('Success:', data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+
+       // this.setState({ productInEdit: this.cloneProduct(dataItem) });
+
+       this.setState({
+        
+        productInRealEdit: undefined
+    });
+
+        console.log("This state product in real edit: ", this.state.productInRealEdit);
+    //}
     }
+
+
+
+
+    /**
+     * Shows details of selected machine
+     */
     details = (dataItem) => {
+
     this.setState({ productInDetails: this.cloneProduct(dataItem) });
     }
 
-  //  remove = (dataItem) => {
-    //    this.setState({
-      //      products: this.state.products.filter(p => p.id !== dataItem.id)
-        //});
-    //}
+  
   /**
-   * Sends POST request to the database
+   * Sends POST request to the database after the user clicks SAve button
    */
     save = () => {
         console.log("Save started")
@@ -185,44 +226,60 @@ deletemachine(id) {
     /**
    * Sends POST request to the database
    */
-  saveNewItem = () => {
-    console.log("Save started")
-    const dataItem = this.state.productInEdit;
-    console.log("This state productInEdit is: ", this.state.productInEdit)
-    console.log("productInEdit ", this.state.productInEdit);
-    const products = this.state.products.slice();
-    const isNewProduct = dataItem.id === undefined;
-    console.log("Data item id ", dataItem.id);
+//   saveNewItem = () => {
+//     console.log("Save started")
+//     const dataItem = this.state.productInEdit;
+//     console.log("This state productInEdit is: ", this.state.productInEdit)
+//     console.log("productInEdit ", this.state.productInEdit);
+//     const products = this.state.products.slice();
+//     const isNewProduct = dataItem.id === undefined;
+//     console.log("Data item id ", dataItem.id);
+//     if (isNewProduct) {
+//         // do POST here
+//        // fetch()
+//         products.unshift(this.newProduct(dataItem));
+//     } else {
+//         const index = products.findIndex(p => p.id === dataItem.id);
+//         products.splice(index, 1, dataItem);
+//     }
 
-
-
-    if (isNewProduct) {
-        // do POST here
-       // fetch()
-        products.unshift(this.newProduct(dataItem));
-    } else {
-        const index = products.findIndex(p => p.id === dataItem.id);
-        products.splice(index, 1, dataItem);
-    }
-
-    this.setState({
-        products: products,
-        productInEdit: undefined
-    });
-}
+//     this.setState({
+//         products: products,
+//         productInEdit: undefined
+//     });
+// }
 
     cancel = () => {
         // checking which of edit or details window  is open
         if(this.state.productInEdit){
             this.setState({ productInEdit: undefined });
+        }else if(this.state.productInRealEdit && !this.state.productInEdit){
+            this.setState({productInRealEdit: undefined});
+        
         } else if(this.state.productInDetails) {
             this.setState({ productInDetails: undefined })
         }
 
     }
 
+
+    // cancelEdit = () => {
+    //     // checking which of edit or details window  is open
+    //     if(this.state.productInRealEdit){
+    //         this.setState({ productInRealEdit: undefined });
+    //     } else if(this.state.productInDetails) {
+    //         this.setState({ productInDetails: undefined })
+    //     }
+
+    // }
+
+
     insert = () => {
         this.setState({ productInEdit: { } });
+    }
+
+    openEditForm = () => {
+        this.setState({ productInRealEdit: { } });
     }
 
     render() {
@@ -236,7 +293,7 @@ deletemachine(id) {
         console.log("Is the state in error: " , this.state.isError)
         const machinesData = this.state.machines
         const  machinesCleanData =  this.buildMachinesForTable(machinesData)
-        console.log("machinesCleanData in render: " , machinesCleanData)
+        // console.log("machinesCleanData in render: " , machinesCleanData)
 
          return (
             <div >
@@ -266,19 +323,28 @@ deletemachine(id) {
                     <Column field="vendor" title="Vendor" />
                     <Column field="address" title="Location" />
                     <Column field="location" title="Location Name" />
-                    <Column field="model" title="Model"/>
+                    <Column field="model" title="Model"
+                    
+                    // cell = {<button
+                    //     onClick={this.insert}
+                    //     className="k-button">Edit</button>}
+                       />
                     <Column field="status" title="Status"
                        // field = "status"
                         cell = {this.MyCustomCell}
                                  />
 
                     <Column title="Edit Remove Details"
-                        cell={MachinesButtons(this.edit, this.deletemachine, this.details)}
+                        cell={MachinesButtons(this.openEditForm, this.deletemachine, this.details)}
+                            
                     />
+                    
                 </Grid>
                 {/* Pass the form type here throught a boolean or string */}
-                {this.state.productInEdit && <MachinesEditForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
+                {this.state.productInRealEdit && <MachinesEditForm dataItem={this.state.productInRealEdit} edit ={this.edit} cancel={this.cancel}/>} ||
+
                 {this.state.productInEdit && <MachinesSaveNewForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
+                {/* {this.state.productInRealEdit && <MachinesEditForm dataItem={this.state.productInRealEdit} save={this.edit} cancel={this.cancel}/>} || */}
                 {this.state.productInDetails && <MachinesDetailsForm dataItem={this.state.productInDetails} save={this.save} cancel={this.cancel}/>}
             </div>
         );
