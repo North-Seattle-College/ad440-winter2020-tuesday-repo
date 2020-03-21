@@ -15,6 +15,9 @@ import CustomStatusCell from "./CustomStatusCell"
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
 
+function refreshPage() {
+    window.location.reload(true);
+}
 
 export default class MachinesMain extends React.Component {
     state = {
@@ -30,7 +33,7 @@ export default class MachinesMain extends React.Component {
         { color: 'red' }
     ];
 
-    MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customData} 
+    MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customData}
     />
 
     /* Author Iryna
@@ -48,8 +51,8 @@ export default class MachinesMain extends React.Component {
                   serialnum: machines[i].SerialNum,
                   locationID: machines[i].LocationID,
                   location: machines[i].LocationName,
-                  images: machines[i].ModelPhoto, 
-                  status : machines[i].Status,               
+                  images: machines[i].ModelPhoto,
+                  status : machines[i].Status,
                   statusDesc: machines[i].StatusDescription
             })
         }
@@ -119,7 +122,7 @@ deletemachine(id) {
         'Content-Type': 'application/json'
 
       }
-      })
+      }).then(refreshPage);
     }
   }
 /*state of the edited machine*/
@@ -264,11 +267,11 @@ deletemachine(id) {
                     <Column field="address" title="Location" />
                     <Column field="location" title="Location Name" />
                     <Column field="model" title="Model"/>
-                    <Column field="status" title="Status" 
+                    <Column field="status" title="Status"
                        // field = "status"
                         cell = {this.MyCustomCell}
                                  />
-                    
+
                     <Column title="Edit Remove Details"
                         cell={MachinesButtons(this.edit, this.deletemachine, this.details)}
                     />
