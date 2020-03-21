@@ -29,14 +29,21 @@ export default class MachinesMain extends React.Component {
         for (var i = 0; i< machines.length; i++){
             cleanData.push({
               id: machines[i].MachineID,
-                  vendor: machines[i].VendorID,
+                  vendor: machines[i].Vendor,
                   address: machines[i].LocationID,
+                  street: machines[i].StreetAddress,
+                  city: machines[i].City,
+                  state: machines[i].State,
+                  zip: machines[i].ZipCode,
+                  phone: machines[i].PhoneNum,
                   model: machines[i].Model,
                   modelnum : machines[i].ModelNum,
                   serialnum : machines[i].SerialNum,
                   locationID : machines[i].LocationID,
                   images : machines[i].ModelPhoto,
-                  status: "not reported"
+                  status: machines[i].Status,
+                  statusDesc: machines[i].StatusDescription
+                  
             })
         }
 
