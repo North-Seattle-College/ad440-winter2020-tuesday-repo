@@ -47,8 +47,9 @@ export default class MachinesMain extends React.Component {
                   modelnum : machines[i].ModelNum,
                   serialnum : machines[i].SerialNum,
                   locationID : machines[i].LocationID,
+                  location: machines[i].LocationName,
                   images : machines[i].ModelPhoto,                
-                  statusDesc: machines[i].StatusDescription,
+                  statusDesc: "",
                   status: machines[i].Status
                  //status: true
             })
@@ -260,7 +261,8 @@ deletemachine(id) {
     </GridToolbar>
                     <Column field="id" title="ID" width="75px" />
                     <Column field="vendor" title="Vendor" />
-                    <Column field="address" title="Address" />
+                    <Column field="address" title="Location" />
+                    <Column field="location" title="Location Name" />
                     <Column field="model" title="Model"/>
                     <Column field="statusDesc" title="Status" 
                        // field = "status"
