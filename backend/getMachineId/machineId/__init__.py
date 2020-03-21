@@ -38,7 +38,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         
     #connection failed error  
     except pyodbc.DatabaseError:
-        logging.error("Could not connect to database")
+        logging.error("Could not connect to database")  
     
     #machine id not found error
     except TypeError as terr:
@@ -53,10 +53,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as err:
         logging.error("String connection to the database failed " + str(err))
         return func.HttpResponse('Connection failed',status_code=500)
-        
-  
-        
-        
     
         
     
