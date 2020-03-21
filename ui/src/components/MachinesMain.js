@@ -10,6 +10,7 @@ import '../css/MachinesMain.css';
 import ApiUrl from "./ApiUrl";
 import GlobalFilter from "./GlobalFilter"
 import MachinesSaveNewForm from "./MachinesSaveNewForm"
+import CustomStatusCell from "./CustomStatusCell"
 
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
@@ -23,6 +24,15 @@ export default class MachinesMain extends React.Component {
         isError: false,
     };
 
+    customData = [
+        { color: 'green' },
+        { color: 'yellow' },
+        { color: 'red' }
+    ];
+
+    MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customData} 
+    />
+
     /* Author Iryna
     * Builds machine array with only necessary details about each machine for the table rows
     */
@@ -30,15 +40,17 @@ export default class MachinesMain extends React.Component {
         const cleanData = [];
         for (var i = 0; i< machines.length; i++){
             cleanData.push({
-              id: machines[i].MachineID,
+                  id: machines[i].MachineID,
                   vendor: machines[i].VendorID,
                   address: machines[i].LocationID,
                   model: machines[i].Model,
                   modelnum : machines[i].ModelNum,
                   serialnum : machines[i].SerialNum,
                   locationID : machines[i].LocationID,
-                  images : machines[i].ModelPhoto,
-                  status: "not reported"
+                  images : machines[i].ModelPhoto,                
+                  statusDesc: machines[i].StatusDescription,
+                  status: machines[i].Status
+                 //status: true
             })
         }
 
@@ -250,7 +262,11 @@ deletemachine(id) {
                     <Column field="vendor" title="Vendor" />
                     <Column field="address" title="Address" />
                     <Column field="model" title="Model"/>
-                    <Column field="status" title="Status" />
+                    <Column field="statusDesc" title="Status" 
+                       // field = "status"
+                        cell = {this.MyCustomCell}
+                                 />
+                    
                     <Column title="Edit Remove Details"
                         cell={MachinesButtons(this.edit, this.deletemachine, this.details)}
                     />
