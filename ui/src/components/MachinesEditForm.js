@@ -36,6 +36,8 @@ export default class MachinesEditForm extends React.Component {
       console.log("Product in Edit = this.dataItem ", this.state);
         
        editedProperty[propertyName] = value;
+
+       //----******---TEMPOPARY HARDCODING THE MACHINE ID  -/
        editedProperty.MachineID = 55;
 
        console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
