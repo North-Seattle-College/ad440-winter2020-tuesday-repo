@@ -88,12 +88,10 @@ export default class MachinesMain extends React.Component {
          // error handling of responce with 500 status
          // which will not return json
         try {
-
-            console.log("Responce falty possibly ", response)
             // resolving promise into json format
             const responseJson = await response.json()
             this.setState({machines: responseJson})
-            console.log("Responce ", responseJson);
+           // console.log("Responce ", responseJson);
 
             // error handling - bad responce receved, for example text string instead of json
         }catch (error) {
