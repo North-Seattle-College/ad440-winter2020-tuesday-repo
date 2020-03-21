@@ -132,13 +132,18 @@ deletemachine(id) {
     edit = (id) => {
         console.log("Edit started")       
         //const dataItem = this.state.productInEdit;
-        console.log("This state productInEdit in the Edit method is: ", this.state.productInRealEdit)
-        console.log("productInEdit in the Edit method ", this.state.productInRealEdit);
+        //console.log("This state productInEdit in the Edit method is: ", this.state.productInRealEdit)
+        const machine = this.state.productInRealEdit;
+        console.log("productInEdit in the Edit method ", machine);
         //const isNewProduct = dataItem.id === undefined;
         console.log("Data item in Edit ", id);
         //console.log("isNewProduct Edit ", isNewProduct);
-        console.log ("Machines Main productInEdit: ", this.state.productInRealEdit)
-         console.log("Json stringify ", JSON.stringify(this.state.productInRealEdit))
+        //console.log ("Machines Main productInEdit: ", this.state.productInRealEdit)
+         console.log("Json stringify ", JSON.stringify(machine))
+
+         if(!machine.ModelPhoto){
+            machine.ModelPhoto = ""
+       }
         
        
             fetch('https://jos-rg-fun-usw2-task62.azurewebsites.net/api/putRequest'
