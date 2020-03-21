@@ -1,6 +1,6 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { MachineData } from './MachinesData';
 import MachinesEditForm from './MachinesEditForm';
@@ -8,10 +8,16 @@ import MachinesDetailsForm from './MachinesDetailsForm';
 import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
 import ApiUrl from "./ApiUrl";
+import GlobalFilter from "./GlobalFilter"
+import MachinesSaveNewForm from "./MachinesSaveNewForm"
+import CustomStatusCell from "./CustomStatusCell"
 
 //This is the main component that is responsible for importing all the components
 //to generate the machines table
 
+function refreshPage() {
+    window.location.reload(true);
+}
 
 export default class MachinesMain extends React.Component {
     state = {
@@ -21,6 +27,15 @@ export default class MachinesMain extends React.Component {
         isError: false,
     };
 
+    customData = [
+        { color: 'green' },
+        { color: 'yellow' },
+        { color: 'red' }
+    ];
+
+    MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customData}
+    />
+
     /* Author Iryna
     * Builds machine array with only necessary details about each machine for the table rows
     */
@@ -28,8 +43,9 @@ export default class MachinesMain extends React.Component {
         const cleanData = [];
         for (var i = 0; i< machines.length; i++){
             cleanData.push({
-              id: machines[i].MachineID,
-                  vendor: machines[i].Vendor,
+
+                  id: machines[i].MachineID,
+                  vendor: machines[i].VendorID,
                   address: machines[i].LocationID,
                   street: machines[i].StreetAddress,
                   city: machines[i].City,
@@ -37,13 +53,15 @@ export default class MachinesMain extends React.Component {
                   zip: machines[i].ZipCode,
                   phone: machines[i].PhoneNum,
                   model: machines[i].Model,
-                  modelnum : machines[i].ModelNum,
-                  serialnum : machines[i].SerialNum,
-                  locationID : machines[i].LocationID,
-                  images : machines[i].ModelPhoto,
-                  status: machines[i].Status,
+
+                  modelnum: machines[i].ModelNum,
+                  serialnum: machines[i].SerialNum,
+                  locationID: machines[i].LocationID,
+                  location: machines[i].LocationName,
+                  images: machines[i].ModelPhoto,
+                  status : machines[i].Status,
                   statusDesc: machines[i].StatusDescription
-                  
+
             })
         }
 
@@ -101,6 +119,20 @@ export default class MachinesMain extends React.Component {
         }
     }
 }
+
+/********************delete api  **********************/
+deletemachine(id) {
+    if(window.confirm('are you sure ?'))
+    {
+      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/deleteRequest?MachineID='+id,{
+        method:'DELETE',
+        header:{'Accept':'application/json',
+        'Content-Type': 'application/json'
+
+      }
+      }).then(refreshPage);
+    }
+  }
 /*state of the edited machine*/
 
     edit = (dataItem) => {
@@ -110,19 +142,43 @@ export default class MachinesMain extends React.Component {
     this.setState({ productInDetails: this.cloneProduct(dataItem) });
     }
 
-    remove = (dataItem) => {
-        this.setState({
-            products: this.state.products.filter(p => p.id !== dataItem.id)
-        });
-    }
-
+  //  remove = (dataItem) => {
+    //    this.setState({
+      //      products: this.state.products.filter(p => p.id !== dataItem.id)
+        //});
+    //}
+  /**
+   * Sends POST request to the database
+   */
     save = () => {
+        console.log("Save started")
         const dataItem = this.state.productInEdit;
+        console.log("This state productInEdit is: ", this.state.productInEdit)
+        console.log("productInEdit ", this.state.productInEdit);
         const products = this.state.products.slice();
         const isNewProduct = dataItem.id === undefined;
+        console.log("Data item id ", dataItem.id);
+        console.log("isNewProduct ", isNewProduct);
+
 
         if (isNewProduct) {
-            products.unshift(this.newProduct(dataItem));
+            // do POST here
+            // no need to have macchine ID entered, as it should be auto-incremented
+            console.log ("Machines Main productInEdit: ", this.state.productInEdit)
+            console.log("Json stringify ", JSON.stringify(dataItem))
+            if(!dataItem.ModelPhoto){
+                dataItem.ModelPhoto = ""
+           }
+            fetch('https://ken-fun-feat-usw2-task60.azurewebsites.net/api/postrequest?code=j6x7Br2k3VLjoFakea3fWXG35G6vZJnal/uFWmO7kbv2S141bbLczg=='
+            , {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                  },
+                body: JSON.stringify(dataItem),
+            });
+
+            console.log("Data item id ", dataItem);
         } else {
             const index = products.findIndex(p => p.id === dataItem.id);
             products.splice(index, 1, dataItem);
@@ -134,12 +190,43 @@ export default class MachinesMain extends React.Component {
         });
     }
 
-    cancel = () => {
-        this.setState({ productInEdit: undefined });
+    /**
+   * Sends POST request to the database
+   */
+  saveNewItem = () => {
+    console.log("Save started")
+    const dataItem = this.state.productInEdit;
+    console.log("This state productInEdit is: ", this.state.productInEdit)
+    console.log("productInEdit ", this.state.productInEdit);
+    const products = this.state.products.slice();
+    const isNewProduct = dataItem.id === undefined;
+    console.log("Data item id ", dataItem.id);
+
+
+
+    if (isNewProduct) {
+        // do POST here
+       // fetch()
+        products.unshift(this.newProduct(dataItem));
+    } else {
+        const index = products.findIndex(p => p.id === dataItem.id);
+        products.splice(index, 1, dataItem);
     }
 
+    this.setState({
+        products: products,
+        productInEdit: undefined
+    });
+}
+
     cancel = () => {
-        this.setState({ productInDetails: undefined });
+        // checking which of edit or details window  is open
+        if(this.state.productInEdit){
+            this.setState({ productInEdit: undefined });
+        } else if(this.state.productInDetails) {
+            this.setState({ productInDetails: undefined })
+        }
+
     }
 
     insert = () => {
@@ -157,8 +244,7 @@ export default class MachinesMain extends React.Component {
         console.log("Is the state in error: " , this.state.isError)
         const machinesData = this.state.machines
         const  machinesCleanData =  this.buildMachinesForTable(machinesData)
-       // console.log("Render state dataX " , machinesData);
-       // console.log("Render state dataY " , machinesCleanData);
+        console.log("machinesCleanData in render: " , machinesCleanData)
 
          return (
             <div >
@@ -166,25 +252,41 @@ export default class MachinesMain extends React.Component {
                     data = {machinesCleanData}
                     style={{ height: '620px' }}
                 >
+                    {/* Add New Machine button */}
                     <GridToolbar>
-                        <button
-                            onClick={this.insert}
-                            className="k-button"
-                        >Add New</button>
+                        <div class = "tableHeader">
+                            <div class = "tableTitle">
+                                <h1 class = "editHeader">Machine List</h1>
+                            </div>
 
+                            <div class = "addNewButton">
+                                <button
+                                    onClick={this.insert}
+                                    className="k-button">Add New</button>
+                            </div>
 
-                    </GridToolbar>
+                            <div class = "searchField">
+                                <GlobalFilter/>
+                            </div>
+                        </div>
+    </GridToolbar>
                     <Column field="id" title="ID" width="75px" />
                     <Column field="vendor" title="Vendor" />
-                    <Column field="address" title="Address" />
+                    <Column field="address" title="Location" />
+                    <Column field="location" title="Location Name" />
                     <Column field="model" title="Model"/>
-                    <Column field="status" title="Status" />
+                    <Column field="status" title="Status"
+                       // field = "status"
+                        cell = {this.MyCustomCell}
+                                 />
+
                     <Column title="Edit Remove Details"
-                        cell={MachinesButtons(this.edit, this.remove, this.details)}
+                        cell={MachinesButtons(this.edit, this.deletemachine, this.details)}
                     />
                 </Grid>
+                {/* Pass the form type here throught a boolean or string */}
                 {this.state.productInEdit && <MachinesEditForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
-
+                {this.state.productInEdit && <MachinesSaveNewForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
                 {this.state.productInDetails && <MachinesDetailsForm dataItem={this.state.productInDetails} save={this.save} cancel={this.cancel}/>}
             </div>
         );
@@ -197,15 +299,15 @@ export default class MachinesMain extends React.Component {
         return Object.assign({}, product);
     }
 
-    newProduct(source) {
-        const id = this.state.products.reduce((acc, current) => Math.max(acc, current.id || 0), 0) + 1;
-        const newProduct = {
-            id: id,
-            vendor: '',
-            address: '',
-            status: ''
-        };
+    // newProduct(source) {
+    //     const id = this.state.products.reduce((acc, current) => Math.max(acc, current.id || 0), 0) + 1;
+    //     const newProduct = {
+    //         id: id,
+    //         vendor: '',
+    //         address: '',
+    //         status: ''
+    //     };
 
-        return Object.assign(newProduct, source);
-    }
+    //     return Object.assign(newProduct, source);
+    // }
 }

@@ -21,7 +21,9 @@ MachineID int not null identity(1,1) primary key,
 Model varchar(255) not null,
 ModelNum varchar(255) not null,
 SerialNum varchar(255) not null,
-ModelPhoto varchar(500) null,	
+ModelPhoto varchar(500) null,
+Status varchar(255) null,
+StatusDescription varchar(255) null,
 VendorID int not null FOREIGN KEY REFERENCES Vendors(VendorID),
 LocationID int not null FOREIGN KEY REFERENCES Locations(LocationID)
 );

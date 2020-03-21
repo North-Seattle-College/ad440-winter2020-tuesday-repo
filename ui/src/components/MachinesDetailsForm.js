@@ -2,8 +2,8 @@
 //This component is responsible for rendering a pop-up window with machine details.
 import React from 'react';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
-import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
-import {Link} from 'react-router';
+// import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
+// import {Link} from 'react-router';
 
 export default class MachinesDetailsForm extends React.Component {
   constructor(props) {
@@ -41,19 +41,19 @@ export default class MachinesDetailsForm extends React.Component {
 
 
 
-          <div style={{ marginBottom: '1rem', float:'left', maxHeight:400, marginRight:50, }}>
+          <div style={{ marginBottom: '1rem', float:'left', width:400, marginRight:50}}>
 
           {this.state.productInDetails.images
-          ? <img style={{width:400}} alt = "" src={this.state.productInDetails.images}  />
-          : <img style={{width:400}} alt = "" src='https://media.4rgos.it/i/Argos/8477958_R_Z001A?w=750&h=440&qlt=70' /> }
+          ? <img style={{width:400}} alt = "" src={this.state.productInDetails.images} />
+          : <img style={{width:400}} alt = "" src='https://media.4rgos.it/i/Argos/8477958_R_Z001A?w=750&h=440&qlt=70'/> }
 
 
           </div>
 
             <div style={{float:'right', maxWidth:'60%'}}>
             <div style={{ marginBottom: '1rem' }}>
-                                          
-          <label>                                
+
+          <label>
           <b>ModelNum</b><br />
           {this.state.productInDetails.modelnum || ''}
           </label> 
@@ -84,8 +84,13 @@ export default class MachinesDetailsForm extends React.Component {
 
 
 
+          <label>
+          <b>Model</b><br />
+          {this.state.productInDetails.model || ''}
+          </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-          <div>
+
+
 
           <label>
           <b>Status</b><br />
@@ -94,10 +99,16 @@ export default class MachinesDetailsForm extends React.Component {
           
           </label></div>
 
-     
+
+          <div style={{ marginBottom: '1rem' }}>
+
+          <label>
+          <b>Address</b><br />
+          {this.state.productInDetails.address || ''}
+          </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
-                              
+
           <label>
           <b>SerialNum</b><br />
           {this.state.productInDetails.serialnum || ''}
@@ -113,15 +124,23 @@ export default class MachinesDetailsForm extends React.Component {
           </label>
 
           </div>
-                 </div>
-          
+
+
+          <div style={{ marginBottom: '1rem' }}>
+
+          <label>
+          <b>Vendor</b><br />
+          {this.state.productInDetails.vendor || ''}
+          </label></div>
+          </div>
+
           </form>
-          
+
 
         <DialogActionsBar>
         <button
         className="k-button"
-        
+
           onClick={this.props.cancel}>Cancel</button>
 
           </DialogActionsBar>
@@ -131,5 +150,3 @@ export default class MachinesDetailsForm extends React.Component {
     );
   }
 }
-
-
