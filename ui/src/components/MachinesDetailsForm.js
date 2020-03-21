@@ -44,9 +44,10 @@ export default class MachinesDetailsForm extends React.Component {
           <div style={{ marginBottom: '1rem', float:'left', maxHeight:400, marginRight:50, }}>
 
           {this.state.productInDetails.images
-          ? <img style={{width:400}} src={this.state.productInDetails.images}/>
-          : <img style={{width:400}} src='https://media.4rgos.it/i/Argos/8477958_R_Z001A?w=750&h=440&qlt=70'/> }         
-          
+          ? <img style={{width:400}} alt = "" src={this.state.productInDetails.images}  />
+          : <img style={{width:400}} alt = "" src='https://media.4rgos.it/i/Argos/8477958_R_Z001A?w=750&h=440&qlt=70' /> }
+
+
           </div>
 
             <div style={{float:'right', maxWidth:'60%'}}>
