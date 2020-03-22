@@ -21,7 +21,7 @@ export default function MachinesButtons(openEditForm, deletemachine, details) {
 
                       <button
                                             className="k-primary k-button k-grid-edit-command"
-                                            onClick={()=> deletemachine(this.props.dataItem.MachineID)}>remove</button>
+                                            onClick={()=> deletemachine(this.props.dataItem.MachineID)}>Remove</button>
 
 
 &nbsp;

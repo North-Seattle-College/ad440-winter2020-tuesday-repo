@@ -132,7 +132,7 @@ deletemachine(id) {
       }).then((response) => response.text())
       .then((data) => {
         console.log('Success:', data);
-      }).then(refreshPage)
+      })//.then(refreshPage)
       .catch((error) => {
         console.error('Error:', error);
       })
@@ -222,7 +222,7 @@ deletemachine(id) {
         console.log("productInEdit ", this.state.productInEdit);
         const products = this.state.products.slice();
         const isNewProduct = dataItem.id === undefined;
-        console.log("Data item id ", dataItem.id);
+        console.log("Data item ", JSON.stringify(dataItem));
         console.log("isNewProduct ", isNewProduct);
 
 
@@ -230,10 +230,11 @@ deletemachine(id) {
             // do POST here
             // no need to have macchine ID entered, as it should be auto-incremented
             console.log ("Machines Main productInEdit: ", this.state.productInEdit)
-            console.log("Json stringify ", JSON.stringify(dataItem))
             if(!dataItem.ModelPhoto){
                 dataItem.ModelPhoto = ""
            }
+
+           console.log("Json stringify ", JSON.stringify(dataItem))
             fetch('https://ken-fun-feat-usw2-task60.azurewebsites.net/api/postrequest?code=j6x7Br2k3VLjoFakea3fWXG35G6vZJnal/uFWmO7kbv2S141bbLczg=='
             , {
                 method: "POST",
