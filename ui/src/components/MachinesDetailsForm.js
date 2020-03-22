@@ -54,7 +54,7 @@ export default class MachinesDetailsForm extends React.Component {
       
      const mystyle = {
       color: "black",
-      backgroundColor:"${this.state.productInDetails.Status}$",
+      backgroundColor:"${this.state.productInDetails.status}$",
       padding: "10px",
       fontFamily: "Arial"
      };
@@ -73,10 +73,10 @@ export default class MachinesDetailsForm extends React.Component {
 
           <div style={{ marginBottom: '1rem', float:'left', width:400, marginRight:50}}>
 
-          {this.state.productInDetails.ModelPhoto===" " || this.state.productInDetails.ModelPhoto===null ||
-          this.state.productInDetails.ModelPhoto==="null"
+          {this.state.productInDetails.images===" " || this.state.productInDetails.images===null ||
+          this.state.productInDetails.images==="null"
           ? <img style={{width:400}} alt = "" src='https://images-na.ssl-images-amazon.com/images/I/81s%2Btw0hwzL.__AC_SY300_QL70_ML2_.jpg'/>
-          : <img style={{width:400}} alt = "" src={this.state.productInDetails.ModelPhoto} />}
+          : <img style={{width:400}} alt = "" src={this.state.productInDetails.images} />}
 
 
           </div>
@@ -86,19 +86,19 @@ export default class MachinesDetailsForm extends React.Component {
 
           <label>
           <b>ModelNum</b><br />
-          {this.state.productInDetails.ModelNum || ''}
+          {this.state.productInDetails.modelnum || ''}
           </label> 
                     <div >
           <label>
           <b>Model</b><br />
-          {this.state.productInDetails.Model || ''}
+          {this.state.productInDetails.model || ''}
           </label></div>
 
           <div>
 
             <label>
             <b>LocationID</b><br/>
-            {this.state.productInDetails.LocationID || ''}
+            {this.state.productInDetails.address || ''}
             </label></div>
                     
           <div >
@@ -135,7 +135,7 @@ export default class MachinesDetailsForm extends React.Component {
 
           <label>
           <b>SerialNum</b><br />
-          {this.state.productInDetails.SerialNum || ''}
+          {this.state.productInDetails.serialnum || ''}
           </label></div>
 
    
@@ -144,7 +144,7 @@ export default class MachinesDetailsForm extends React.Component {
 
           <label>
           <b>Vendor</b><br />
-          {this.state.productInDetails.VendorID || ''}
+          {this.state.productInDetails.vendor || ''}
           </label>
 
           </div>
