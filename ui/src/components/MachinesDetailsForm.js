@@ -40,30 +40,48 @@ export default class MachinesDetailsForm extends React.Component {
 
 
 
+
           <div style={{ marginBottom: '1rem', float:'left', width:400, marginRight:50}}>
 
           {this.state.productInDetails.images
           ? <img style={{width:400}} alt = "" src={this.state.productInDetails.images} />
           : <img style={{width:400}} alt = "" src='https://media.4rgos.it/i/Argos/8477958_R_Z001A?w=750&h=440&qlt=70'/> }
 
+
           </div>
 
-            <div style={{float:'right'}}>
+            <div style={{float:'right', maxWidth:'60%'}}>
             <div style={{ marginBottom: '1rem' }}>
 
           <label>
           <b>ModelNum</b><br />
           {this.state.productInDetails.modelnum || ''}
-          </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </label> 
+                    <div >
+          <label>
+          <b>Model</b><br />
+          {this.state.productInDetails.model || ''}
+          </label></div>
 
+          <div>
 
             <label>
-            <b>LocationID</b><br />
-            {this.state.productInDetails.locationID || ''}
+            <b>LocationID</b><br/>
+            {this.state.productInDetails.address || ''}
             </label></div>
+                    
+          <div >
+          <label>
+          <b>Address</b><br />
+          {this.state.productInDetails.street || ''}<br/>
+          {this.state.productInDetails.city || ''}{", "}  
+          {this.state.productInDetails.state || ''}{" "}
+          {this.state.productInDetails.zip || ''}<br/>
+          {<b>Phone: </b>}{this.state.productInDetails.phone || ''}<br/>
+          </label></div>
 
 
-          <div style={{ marginBottom: '1rem' }}>
+
 
 
           <label>
@@ -73,10 +91,14 @@ export default class MachinesDetailsForm extends React.Component {
 
 
 
+
           <label>
           <b>Status</b><br />
-          {this.state.productInDetails.status || ''}
-          </label><br /><br />
+          {this.state.productInDetails.status || ''}<br/>
+          {this.state.productInDetails.statusDesc || ''}
+          
+          </label></div>
+
 
           <div style={{ marginBottom: '1rem' }}>
 
@@ -86,11 +108,23 @@ export default class MachinesDetailsForm extends React.Component {
           </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
+
           <label>
           <b>SerialNum</b><br />
           {this.state.productInDetails.serialnum || ''}
           </label></div>
+
+   
+
+          <div >
+
+          <label>
+          <b>Vendor</b><br />
+          {this.state.productInDetails.vendor || ''}
+          </label>
+
           </div>
+
 
           <div style={{ marginBottom: '1rem' }}>
 
@@ -99,6 +133,7 @@ export default class MachinesDetailsForm extends React.Component {
           {this.state.productInDetails.vendor || ''}
           </label></div>
           </div>
+
           </form>
 
 
