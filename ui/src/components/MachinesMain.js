@@ -134,7 +134,7 @@ deletemachine(id) {
       }).then(refreshPage)
       .catch((error) => {
         console.error('Error:', error);
-      })//.then(refreshPage);
+      })
     }
   }
 

@@ -54,7 +54,7 @@ export default class MachinesDetailsForm extends React.Component {
       
      const mystyle = {
       color: "black",
-      backgroundColor:"${this.state.productInDetails.Status}$",
+      backgroundColor:"${this.state.productInDetails.status}$",
       padding: "10px",
       fontFamily: "Arial"
      };
