@@ -109,6 +109,28 @@ export default class MachinesEditForm extends React.Component {
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
+
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Status<br />
+                    <Input
+                        type="text"
+                        name="Status"
+                        value={this.state.productInRealEdit.Status || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                      Status Desccription <br />
+                    <Input
+                        type="text"
+                        name="StatusDescription"
+                        value={this.state.productInRealEdit.StatusDescription || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
                   
             </form>
             <DialogActionsBar>

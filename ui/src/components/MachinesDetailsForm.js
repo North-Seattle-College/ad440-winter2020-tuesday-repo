@@ -116,13 +116,13 @@ export default class MachinesDetailsForm extends React.Component {
           <label>
           <b>Status</b><br />
           
-         <div style={{backgroundColor:"{this.state.productInDetails.status}"}}>
+         <div style={{backgroundColor:"{this.state.productInDetails.Status}"}}>
         
           
-             {this.state.productInDetails.status}<br/>
+             {this.state.productInDetails.Status}<br/>
       </div>
           
-          {this.state.productInDetails.statusDesc || ''}
+          {this.state.productInDetails.StatusDescription || ''}
           
           </label></div>
 

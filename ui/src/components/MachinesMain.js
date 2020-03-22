@@ -61,8 +61,8 @@ export default class MachinesMain extends React.Component {
                   LocationID: machines[i].LocationID,
                   LocationName: machines[i].LocationName,
                   ModelPhoto: machines[i].ModelPhoto,
-                  status : machines[i].Status,
-                  statusDesc: machines[i].StatusDescription
+                  Status : machines[i].Status,
+                  StatusDescription: machines[i].StatusDescription
 
             })
         }
@@ -171,6 +171,8 @@ deletemachine(id) {
         tempEditProduct.ModelNum = wholeProductInfo.ModelNum;
         tempEditProduct.SerialNum = wholeProductInfo.SerialNum;
         tempEditProduct.ModelPhoto = wholeProductInfo.ModelPhoto;
+        tempEditProduct.Status = wholeProductInfo.Status;
+        tempEditProduct.StatusDescription = wholeProductInfo.StatusDescription;
 
 
         console.log(" tempEditProduct ", tempEditProduct)
@@ -288,12 +290,6 @@ deletemachine(id) {
  */
     openEditForm = (id, dataItem) => {
 
-
-
-        // this.setState({ 
-        //     productInEdit: this.cloneProduct(id),
-        //     editedProductID : id 
-        // });
         
         console.log("Open Edit Form id : ", id);
         console.log("Data Item Open edit form ", dataItem )
