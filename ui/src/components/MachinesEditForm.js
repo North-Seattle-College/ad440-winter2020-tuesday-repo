@@ -22,11 +22,10 @@ export default class MachinesEditForm extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const propertyName = target.props ? target.props.name : target.name;
 
-      const editedProperty = this.state.productInRealEdit;
+    const editedProperty = this.state.productInRealEdit;
         
        editedProperty[propertyName] = value;
        editedProperty.MachineID = this.props.dataItem.MachineID;
-      
 
       this.setState({
         productInRealEdit: this.props.dataItem

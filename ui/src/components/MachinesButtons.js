@@ -13,15 +13,15 @@ export default function MachinesButtons(openEditForm, deletemachine, details) {
                     <button
                         className="k-primary k-button k-grid-edit-command"
                         onClick={() => {
-                            openEditForm(this.props.dataItem.id)
-                             console.log("openEditForm(this.props.dataItem.id): ", this.props.dataItem.id)}
+                            openEditForm(this.props.dataItem.MachineID, this.props.dataItem)
+                             console.log("openEditForm(this.props.dataItem.id): ", this.props.dataItem.MachineID)}
                                        }>Edit</button>
 
                                         &nbsp;
 
                       <button
                                             className="k-primary k-button k-grid-edit-command"
-                                            onClick={()=> deletemachine(this.props.dataItem.id)}>remove</button>
+                                            onClick={()=> deletemachine(this.props.dataItem.MachineID)}>remove</button>
 
 
 &nbsp;
