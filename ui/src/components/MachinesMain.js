@@ -131,7 +131,7 @@ deletemachine(id) {
       }).then((response) => response.text())
       .then((data) => {
         console.log('Success:', data);
-      })//.then(refreshPage)
+      }).then(refreshPage)
       .catch((error) => {
         console.error('Error:', error);
       })//.then(refreshPage);
@@ -187,7 +187,7 @@ deletemachine(id) {
             }).then((response) => response.text())
             .then((data) => {
               console.log('Success:', data);
-            })//.then(refreshPage)
+            }).then(refreshPage)
             .catch((error) => {
               console.error('Error:', error);
             });
