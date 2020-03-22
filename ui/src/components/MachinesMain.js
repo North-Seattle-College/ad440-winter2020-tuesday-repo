@@ -132,7 +132,7 @@ deletemachine(id) {
       }).then((response) => response.text())
       .then((data) => {
         console.log('Success:', data);
-      })//.then(refreshPage)
+      }).then(refreshPage)
       .catch((error) => {
         console.error('Error:', error);
       })
@@ -192,7 +192,7 @@ deletemachine(id) {
             }).then((response) => response.text())
             .then((data) => {
               console.log('Success:', data);
-            })//.then(refreshPage)
+            }).then(refreshPage)
             .catch((error) => {
               console.error('Error:', error);
             });
@@ -297,7 +297,6 @@ deletemachine(id) {
         this.setState(
             { 
               productInRealEdit: this.cloneProduct(dataItem),
-                //productInRealEdit: { },
               editedProductID : id}
               );
     }
@@ -341,7 +340,7 @@ deletemachine(id) {
     </GridToolbar>
                     <Column field="MachineID" title="ID" width="75px" />
                     <Column field="VendorID" title="Vendor" />
-                    <Column field="LocationID" title="Location" />
+                    <Column field="LocationID" title="Location ID" />
                     <Column field="LocationName" title="Location Name" />
                     <Column field="Model" title="Model"
                     
