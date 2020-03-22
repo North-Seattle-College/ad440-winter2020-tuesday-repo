@@ -42,7 +42,7 @@ export default class MachinesEditForm extends React.Component {
 
             <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Vendor<br />
+                    Vendor ID<br />
                     <Input
                         type="text"
                         name="VendorID"
@@ -54,7 +54,7 @@ export default class MachinesEditForm extends React.Component {
 
                       <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Address<br />
+                    Location ID<br />
                     <Input
                         type="text"
                         name="LocationID"
