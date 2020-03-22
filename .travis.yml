@@ -2,8 +2,6 @@ language: generic
 dist: trusty
 sudo: required
 
-
-
 deploy:
   provider: azure_web_apps
   username: $AZ_LOGIN_NAME
