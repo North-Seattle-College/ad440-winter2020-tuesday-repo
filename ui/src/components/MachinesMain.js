@@ -47,7 +47,7 @@ export default class MachinesMain extends React.Component {
             cleanData.push({
 
                   id: machines[i].MachineID,
-                  vendor: machines[i].VendorID,
+                  vendor: machines[i].Vendor,
                   address: machines[i].LocationID,
                   street: machines[i].StreetAddress,
                   city: machines[i].City,

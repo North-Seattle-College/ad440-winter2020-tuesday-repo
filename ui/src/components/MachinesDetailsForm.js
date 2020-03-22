@@ -1,17 +1,36 @@
 //Created by Siergiey and edited by Abdi
 //This component is responsible for rendering a pop-up window with machine details.
 import React from 'react';
+import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 // import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
 // import {Link} from 'react-router';
+import CustomStatusCell from "./CustomStatusCell"
+
+
+
 
 export default class MachinesDetailsForm extends React.Component {
+    
+    
+
   constructor(props) {
       super(props);
       this.state = {
           productInDetails: this.props.dataItem || null
       };
   }
+    
+        customData = [
+        { color: 'green' },
+        { color: 'yellow' },
+        { color: 'red' }
+    ];
+
+    MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customData}
+    />
+    
+    
   handleSubmit(event) {
       event.preventDefault();
   }
@@ -28,8 +47,19 @@ export default class MachinesDetailsForm extends React.Component {
           productInDetails: edited
       });
   }
+  
+ 
 
   render() {
+      
+     const mystyle = {
+      color: "black",
+      backgroundColor:"${this.state.productInDetails.status}$",
+      padding: "10px",
+      fontFamily: "Arial"
+     };
+      
+      
       return (
         <Dialog
 
@@ -45,7 +75,7 @@ export default class MachinesDetailsForm extends React.Component {
 
           {this.state.productInDetails.images
           ? <img style={{width:400}} alt = "" src={this.state.productInDetails.images} />
-          : <img style={{width:400}} alt = "" src='https://media.4rgos.it/i/Argos/8477958_R_Z001A?w=750&h=440&qlt=70'/> }
+          : <img style={{width:400}} alt = "" src='https://images-na.ssl-images-amazon.com/images/I/81s%2Btw0hwzL.__AC_SY300_QL70_ML2_.jpg'/> }
 
 
           </div>
@@ -82,19 +112,14 @@ export default class MachinesDetailsForm extends React.Component {
 
 
 
-
-
-          <label>
-          <b>Model</b><br />
-          {this.state.productInDetails.model || ''}
-          </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-
-
           <label>
           <b>Status</b><br />
-          {this.state.productInDetails.status || ''}<br/>
+          
+         <div style={{backgroundColor:`$"{this.state.productInDetails.status}"`}}>
+        
+             {this.state.productInDetails.status}<br/>
+      </div>
+          
           {this.state.productInDetails.statusDesc || ''}
           
           </label></div>
@@ -102,10 +127,7 @@ export default class MachinesDetailsForm extends React.Component {
 
           <div style={{ marginBottom: '1rem' }}>
 
-          <label>
-          <b>Address</b><br />
-          {this.state.productInDetails.address || ''}
-          </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 
 
 
 
@@ -125,13 +147,6 @@ export default class MachinesDetailsForm extends React.Component {
 
           </div>
 
-
-          <div style={{ marginBottom: '1rem' }}>
-
-          <label>
-          <b>Vendor</b><br />
-          {this.state.productInDetails.vendor || ''}
-          </label></div>
           </div>
 
           </form>
