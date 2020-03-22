@@ -46,21 +46,21 @@ export default class MachinesMain extends React.Component {
         for (var i = 0; i< machines.length; i++){
             cleanData.push({
 
-                  id: machines[i].MachineID,
-                  vendor: machines[i].Vendor,
-                  address: machines[i].LocationID,
+                  MachineID: machines[i].MachineID,
+                  VendorID: machines[i].Vendor,
+                  LocationID: machines[i].LocationID,
                   street: machines[i].StreetAddress,
                   city: machines[i].City,
                   state: machines[i].State,
                   zip: machines[i].ZipCode,
                   phone: machines[i].PhoneNum,
-                  model: machines[i].Model,
+                  Model: machines[i].Model,
 
-                  modelnum: machines[i].ModelNum,
-                  serialnum: machines[i].SerialNum,
-                  locationID: machines[i].LocationID,
-                  location: machines[i].LocationName,
-                  images: machines[i].ModelPhoto,
+                  ModelNum: machines[i].ModelNum,
+                  SerialNum: machines[i].SerialNum,
+                  LocationID: machines[i].LocationID,
+                  LocationName: machines[i].LocationName,
+                  ModelPhoto: machines[i].ModelPhoto,
                   status : machines[i].Status,
                   statusDesc: machines[i].StatusDescription
 
@@ -129,7 +129,7 @@ deletemachine(id) {
         'Content-Type': 'application/json'
 
       }
-      }).then(refreshPage);
+      })//.then(refreshPage);
     }
   }
 
@@ -148,8 +148,24 @@ deletemachine(id) {
         console.log("machine.MachineID: ", machine.MachineID)
         console.log("Machine in the Edit method ", machine);
 
-        console.log("Machine is: ", machine)
-        console.log("Json stringify ", JSON.stringify(machine))
+       // console.log("Machine is: ", machine)
+       // console.log("Json stringify ", JSON.stringify(machine))
+        console.log("JSON.stringify(this.state.productInRealEdit): ", JSON.stringify(this.state.productInRealEdit))
+        const wholeProductInfo = this.state.productInRealEdit;
+        
+        const tempEditProduct = {};
+
+        tempEditProduct.MachineID = wholeProductInfo.MachineID;
+        tempEditProduct.VendorID = wholeProductInfo.VendorID;
+        tempEditProduct.LocationID = wholeProductInfo.LocationID;
+        tempEditProduct.Model = wholeProductInfo.Model;
+        tempEditProduct.ModelNum = wholeProductInfo.ModelNum;
+        tempEditProduct.SerialNum = wholeProductInfo.SerialNum;
+        tempEditProduct.ModelPhoto = wholeProductInfo.ModelPhoto;
+
+
+        console.log(" tempEditProduct ", tempEditProduct)
+
 
          if(!machine.ModelPhoto){
             machine.ModelPhoto = " "
@@ -160,12 +176,12 @@ deletemachine(id) {
                 headers: {
                     'Content-Type': 'application/json',
                   },
-                body: JSON.stringify(this.state.productInRealEdit),
+                body: JSON.stringify(tempEditProduct),
 
             }).then((response) => response.text())
             .then((data) => {
               console.log('Success:', data);
-            }).then(refreshPage)
+            })//.then(refreshPage)
             .catch((error) => {
               console.error('Error:', error);
             });
@@ -319,17 +335,17 @@ deletemachine(id) {
                             </div>
                         </div>
     </GridToolbar>
-                    <Column field="id" title="ID" width="75px" />
-                    <Column field="vendor" title="Vendor" />
-                    <Column field="address" title="Location" />
-                    <Column field="location" title="Location Name" />
-                    <Column field="model" title="Model"
+                    <Column field="MachineID" title="ID" width="75px" />
+                    <Column field="VendorID" title="Vendor" />
+                    <Column field="LocationID" title="Location" />
+                    <Column field="LocationName" title="Location Name" />
+                    <Column field="Model" title="Model"
                     
                     // cell = {<button
                     //     onClick={this.insert}
                     //     className="k-button">Edit</button>}
                        />
-                    <Column field="status" title="Status"
+                    <Column field="Status" title="Status"
                        // field = "status"
                         cell = {this.MyCustomCell}
                                  />
@@ -348,7 +364,7 @@ deletemachine(id) {
     }
 
     dialogTitle() {
-        return `${this.state.productInEdit.id === undefined ? 'Add' : 'Edit'} product`;
+        return `${this.state.productInEdit.MachineID === undefined ? 'Add' : 'Edit'} product`;
     }
     cloneProduct(product) {
         return Object.assign({}, product);

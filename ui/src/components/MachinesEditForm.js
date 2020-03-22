@@ -26,7 +26,6 @@ export default class MachinesEditForm extends React.Component {
         
        editedProperty[propertyName] = value;
        editedProperty.MachineID = this.props.dataItem.MachineID;
-      
 
       this.setState({
         productInRealEdit: this.props.dataItem
