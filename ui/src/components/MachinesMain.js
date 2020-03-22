@@ -158,6 +158,8 @@ deletemachine(id) {
         console.log("JSON.stringify(this.state.productInRealEdit): ", JSON.stringify(this.state.productInRealEdit))
         const wholeProductInfo = this.state.productInRealEdit;
         
+
+        //-----THIS IS TEMPORARY DATA STRUCTURE TO MATCH THE PUT API BODY */
         const tempEditProduct = {};
 
         // TODO - make copying efficioent
