@@ -32,7 +32,7 @@ export default class MachinesSaveNewForm extends React.Component {
      editedProperty[propertyName] = value;
         
         
-        console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
+    // console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
 
       console.log("Edited[name] ," , editedProperty[propertyName])
 
@@ -42,6 +42,7 @@ export default class MachinesSaveNewForm extends React.Component {
   }
 
   render() {
+    
       return (
         <Dialog
             onClose={this.props.cancel}
