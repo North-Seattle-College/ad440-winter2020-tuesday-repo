@@ -73,9 +73,10 @@ export default class MachinesDetailsForm extends React.Component {
 
           <div style={{ marginBottom: '1rem', float:'left', width:400, marginRight:50}}>
 
-          {this.state.productInDetails.images
-          ? <img style={{width:400}} alt = "" src={this.state.productInDetails.images} />
-          : <img style={{width:400}} alt = "" src='https://images-na.ssl-images-amazon.com/images/I/81s%2Btw0hwzL.__AC_SY300_QL70_ML2_.jpg'/> }
+          {this.state.productInDetails.images===" " || this.state.productInDetails.images===null ||
+          this.state.productInDetails.images==="null"
+          ? <img style={{width:400}} alt = "" src='https://images-na.ssl-images-amazon.com/images/I/81s%2Btw0hwzL.__AC_SY300_QL70_ML2_.jpg'/>
+          : <img style={{width:400}} alt = "" src={this.state.productInDetails.images} />}
 
 
           </div>
@@ -115,8 +116,9 @@ export default class MachinesDetailsForm extends React.Component {
           <label>
           <b>Status</b><br />
           
-         <div style={{backgroundColor:`$"{this.state.productInDetails.status}"`}}>
+         <div style={{backgroundColor:"{this.state.productInDetails.status}"}}>
         
+          
              {this.state.productInDetails.status}<br/>
       </div>
           
