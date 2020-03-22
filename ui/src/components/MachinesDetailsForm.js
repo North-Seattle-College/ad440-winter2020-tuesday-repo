@@ -54,7 +54,7 @@ export default class MachinesDetailsForm extends React.Component {
       
      const mystyle = {
       color: "black",
-      backgroundColor:"${this.state.productInDetails.status}$",
+      backgroundColor:"${this.state.productInDetails.Status}$",
       padding: "10px",
       fontFamily: "Arial"
      };
@@ -119,7 +119,7 @@ export default class MachinesDetailsForm extends React.Component {
          <div style={{backgroundColor:"{this.state.productInDetails.status}"}}>
         
           
-             {this.state.productInDetails.Status}<br/>
+             {this.state.productInDetails.status}<br/>
       </div>
           
           {this.state.productInDetails.statusDesc || ''}
