@@ -46,20 +46,21 @@ export default class MachinesMain extends React.Component {
         for (var i = 0; i< machines.length; i++){
             cleanData.push({
 
-                  MachineID: machines[i].MachineID,
-                  VendorID: machines[i].Vendor,
-                  LocationID: machines[i].LocationID,
+                  id: machines[i].MachineID,
+                  vendor: machines[i].Vendor,
+                  address: machines[i].LocationID,
                   street: machines[i].StreetAddress,
                   city: machines[i].City,
                   state: machines[i].State,
                   zip: machines[i].ZipCode,
                   phone: machines[i].PhoneNum,
-                  Model: machines[i].Model,
-                  ModelNum: machines[i].ModelNum,
-                  SerialNum: machines[i].SerialNum,
-                  LocationID: machines[i].LocationID,
-                  LocationName: machines[i].LocationName,
-                  ModelPhoto: machines[i].ModelPhoto,
+                  model: machines[i].Model,
+
+                  modelnum: machines[i].ModelNum,
+                  serialnum: machines[i].SerialNum,
+                  locationID: machines[i].LocationID,
+                  location: machines[i].LocationName,
+                  images: machines[i].ModelPhoto,
                   status : machines[i].Status,
                   statusDesc: machines[i].StatusDescription
 
@@ -128,19 +129,13 @@ deletemachine(id) {
         'Content-Type': 'application/json'
 
       }
-      }).then((response) => response.text())
-      .then((data) => {
-        console.log('Success:', data);
-      }).then(refreshPage)
-      .catch((error) => {
-        console.error('Error:', error);
-      })//.then(refreshPage);
+      }).then(refreshPage);
     }
   }
 
 /**
  * Edit machine method
- * Author - Iryna Sherepot
+ * 
  * After the request was processed, it changes the item in edit state to undefined and 
  * the dialog window disapears
  */ 
@@ -153,25 +148,8 @@ deletemachine(id) {
         console.log("machine.MachineID: ", machine.MachineID)
         console.log("Machine in the Edit method ", machine);
 
-       // console.log("Machine is: ", machine)
-       // console.log("Json stringify ", JSON.stringify(machine))
-        console.log("JSON.stringify(this.state.productInRealEdit): ", JSON.stringify(this.state.productInRealEdit))
-        const wholeProductInfo = this.state.productInRealEdit;
-        
-        const tempEditProduct = {};
-
-        // TODO - make copying efficioent
-        tempEditProduct.MachineID = wholeProductInfo.MachineID;
-        tempEditProduct.VendorID = wholeProductInfo.VendorID;
-        tempEditProduct.LocationID = wholeProductInfo.LocationID;
-        tempEditProduct.Model = wholeProductInfo.Model;
-        tempEditProduct.ModelNum = wholeProductInfo.ModelNum;
-        tempEditProduct.SerialNum = wholeProductInfo.SerialNum;
-        tempEditProduct.ModelPhoto = wholeProductInfo.ModelPhoto;
-
-
-        console.log(" tempEditProduct ", tempEditProduct)
-
+        console.log("Machine is: ", machine)
+        console.log("Json stringify ", JSON.stringify(machine))
 
          if(!machine.ModelPhoto){
             machine.ModelPhoto = " "
@@ -182,7 +160,7 @@ deletemachine(id) {
                 headers: {
                     'Content-Type': 'application/json',
                   },
-                body: JSON.stringify(tempEditProduct),
+                body: JSON.stringify(this.state.productInRealEdit),
 
             }).then((response) => response.text())
             .then((data) => {
@@ -272,34 +250,15 @@ deletemachine(id) {
     insert = () => {
         this.setState({ productInEdit: { } });
     }
-
-// old edit method that displayed current product details in edit screen 
-/*state of the edited machine*/
-// edit = (dataItem) => {
-//     this.setState({ productInEdit: this.cloneProduct(dataItem) });
-// }
-
-
  /**
  * Opens the edit dialog by setting the product in edit to empty
  * It takes the id as a parameter 
  */
-    openEditForm = (id, dataItem) => {
-
-
-
-        // this.setState({ 
-        //     productInEdit: this.cloneProduct(id),
-        //     editedProductID : id 
-        // });
-        
+    openEditForm = (id) => {
         console.log("Open Edit Form id : ", id);
-        console.log("Data Item Open edit form ", dataItem )
         
         this.setState(
-            { 
-              productInRealEdit: this.cloneProduct(dataItem),
-                //productInRealEdit: { },
+            { productInRealEdit: { },
               editedProductID : id}
               );
     }
@@ -341,17 +300,17 @@ deletemachine(id) {
                             </div>
                         </div>
     </GridToolbar>
-                    <Column field="MachineID" title="ID" width="75px" />
-                    <Column field="VendorID" title="Vendor" />
-                    <Column field="LocationID" title="Location" />
-                    <Column field="LocationName" title="Location Name" />
-                    <Column field="Model" title="Model"
+                    <Column field="id" title="ID" width="75px" />
+                    <Column field="vendor" title="Vendor" />
+                    <Column field="address" title="Location" />
+                    <Column field="location" title="Location Name" />
+                    <Column field="model" title="Model"
                     
                     // cell = {<button
                     //     onClick={this.insert}
                     //     className="k-button">Edit</button>}
                        />
-                    <Column field="Status" title="Status"
+                    <Column field="status" title="Status"
                        // field = "status"
                         cell = {this.MyCustomCell}
                                  />
@@ -370,7 +329,7 @@ deletemachine(id) {
     }
 
     dialogTitle() {
-        return `${this.state.productInEdit.MachineID === undefined ? 'Add' : 'Edit'} product`;
+        return `${this.state.productInEdit.id === undefined ? 'Add' : 'Edit'} product`;
     }
     cloneProduct(product) {
         return Object.assign({}, product);
