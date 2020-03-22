@@ -12,7 +12,9 @@ export default function MachinesButtons(openEditForm, deletemachine, details) {
                 <td>
                     <button
                         className="k-primary k-button k-grid-edit-command"
-                        onClick={() => {openEditForm()}
+                        onClick={() => {
+                            openEditForm(this.props.dataItem.id)
+                             console.log("openEditForm(this.props.dataItem.id): ", this.props.dataItem.id)}
                                        }>Edit</button>
 
                                         &nbsp;

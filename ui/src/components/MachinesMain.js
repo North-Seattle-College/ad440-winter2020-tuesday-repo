@@ -26,6 +26,7 @@ export default class MachinesMain extends React.Component {
         productInRealEdit: undefined,
         machines: [],
         isError: false,
+        editedProductID: undefined
     };
 
     customData = [
@@ -61,8 +62,6 @@ export default class MachinesMain extends React.Component {
         return cleanData;
     }
 
-
-
    /**
     * Author - Iryna
     * Fetches the database request data after the react component has mounted.
@@ -72,7 +71,6 @@ export default class MachinesMain extends React.Component {
     */
    async componentDidMount() {
     // Simple GET request using fetch
-
     // wrapping in the try/catch block to handle network errors
     try {
         // fetching async promise
@@ -111,8 +109,10 @@ export default class MachinesMain extends React.Component {
     }
 }
 
-/********************delete api  **********************/
+/********************Delete api  **********************/
 deletemachine(id) {
+
+    console.log("Delete id is ", id);
     if(window.confirm('are you sure ?'))
     {
       fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/deleteRequest?MachineID='+id,{
@@ -125,25 +125,27 @@ deletemachine(id) {
     }
   }
 
-/*state of the edited machine*/
-
-    edit = (id) => {
-        console.log("Edit started")       
-        //const dataItem = this.state.productInEdit;
-        //console.log("This state productInEdit in the Edit method is: ", this.state.productInRealEdit)
+/**
+ * Edit machine method
+ * 
+ * After the request was processed, it changes the item in edit state to undefined and 
+ * the dialog window disapears
+ */ 
+    edit = (editedProductID) => {
+        console.log("Edit started")  
+        console.log("EditedProduceID : ", editedProductID)     
+        console.log("State ", this.state)
         const machine = this.state.productInRealEdit;
-        console.log("productInEdit in the Edit method ", machine);
-        //const isNewProduct = dataItem.id === undefined;
-        console.log("Data item in Edit ", id);
-        //console.log("isNewProduct Edit ", isNewProduct);
-        //console.log ("Machines Main productInEdit: ", this.state.productInRealEdit)
-         console.log("Json stringify ", JSON.stringify(machine))
+        machine.MachineID = this.state.editedProductID;
+        console.log("machine.MachineID: ", machine.MachineID)
+        console.log("Machine in the Edit method ", machine);
+
+        console.log("Machine is: ", machine)
+        console.log("Json stringify ", JSON.stringify(machine))
 
          if(!machine.ModelPhoto){
-            machine.ModelPhoto = ""
-       }
-        
-       
+            machine.ModelPhoto = " "
+        }    
             fetch('https://jos-rg-fun-usw2-task62.azurewebsites.net/api/putRequest'
             , {
                 method: "PUT",
@@ -155,22 +157,18 @@ deletemachine(id) {
             }).then((response) => response.text())
             .then((data) => {
               console.log('Success:', data);
-            })
+            }).then(refreshPage)
             .catch((error) => {
               console.error('Error:', error);
             });
 
-       // this.setState({ productInEdit: this.cloneProduct(dataItem) });
-
-       this.setState({
-        
+       this.setState({     
         productInRealEdit: undefined
     });
 
         console.log("This state product in real edit: ", this.state.productInRealEdit);
     //}
     }
-
 
 
 
@@ -226,31 +224,6 @@ deletemachine(id) {
         });
     }
 
-    /**
-   * Sends POST request to the database
-   */
-//   saveNewItem = () => {
-//     console.log("Save started")
-//     const dataItem = this.state.productInEdit;
-//     console.log("This state productInEdit is: ", this.state.productInEdit)
-//     console.log("productInEdit ", this.state.productInEdit);
-//     const products = this.state.products.slice();
-//     const isNewProduct = dataItem.id === undefined;
-//     console.log("Data item id ", dataItem.id);
-//     if (isNewProduct) {
-//         // do POST here
-//        // fetch()
-//         products.unshift(this.newProduct(dataItem));
-//     } else {
-//         const index = products.findIndex(p => p.id === dataItem.id);
-//         products.splice(index, 1, dataItem);
-//     }
-
-//     this.setState({
-//         products: products,
-//         productInEdit: undefined
-//     });
-// }
 
     cancel = () => {
         // checking which of edit or details window  is open
@@ -266,23 +239,20 @@ deletemachine(id) {
     }
 
 
-    // cancelEdit = () => {
-    //     // checking which of edit or details window  is open
-    //     if(this.state.productInRealEdit){
-    //         this.setState({ productInRealEdit: undefined });
-    //     } else if(this.state.productInDetails) {
-    //         this.setState({ productInDetails: undefined })
-    //     }
-
-    // }
-
-
     insert = () => {
         this.setState({ productInEdit: { } });
     }
-
-    openEditForm = () => {
-        this.setState({ productInRealEdit: { } });
+ /**
+ * Opens the edit dialog by setting the product in edit to empty
+ * It takes the id as a parameter 
+ */
+    openEditForm = (id) => {
+        console.log("Open Edit Form id : ", id);
+        
+        this.setState(
+            { productInRealEdit: { },
+              editedProductID : id}
+              );
     }
 
     render() {
@@ -340,15 +310,12 @@ deletemachine(id) {
                     <Column title="Edit Remove Details"
                         cell={MachinesButtons(this.openEditForm, this.deletemachine, this.details)}
                             
-                    />
-                    
+                    />                  
                 </Grid>
                 {/* Pass the form type here throught a boolean or string */}
-                {this.state.productInRealEdit && <MachinesEditForm dataItem={this.state.productInRealEdit} edit ={this.edit} cancel={this.cancel}/>} ||
-
-                {this.state.productInEdit && <MachinesSaveNewForm dataItem={this.state.productInEdit} save={this.save} cancel={this.cancel}/>}
-                {/* {this.state.productInRealEdit && <MachinesEditForm dataItem={this.state.productInRealEdit} save={this.edit} cancel={this.cancel}/>} || */}
-                {this.state.productInDetails && <MachinesDetailsForm dataItem={this.state.productInDetails} save={this.save} cancel={this.cancel}/>}
+                {this.state.productInRealEdit && <MachinesEditForm    dataItem={this.state.productInRealEdit} edit ={this.edit} cancel={this.cancel}/>}
+                {this.state.productInEdit     && <MachinesSaveNewForm dataItem={this.state.productInEdit}     save={this.save}  cancel={this.cancel}/>}
+                {this.state.productInDetails  && <MachinesDetailsForm dataItem={this.state.productInDetails}  save={this.save}  cancel={this.cancel}/>}
             </div>
         );
     }
@@ -360,15 +327,4 @@ deletemachine(id) {
         return Object.assign({}, product);
     }
 
-    // newProduct(source) {
-    //     const id = this.state.products.reduce((acc, current) => Math.max(acc, current.id || 0), 0) + 1;
-    //     const newProduct = {
-    //         id: id,
-    //         vendor: '',
-    //         address: '',
-    //         status: ''
-    //     };
-
-    //     return Object.assign(newProduct, source);
-    // }
 }
