@@ -250,15 +250,34 @@ deletemachine(id) {
     insert = () => {
         this.setState({ productInEdit: { } });
     }
+
+// old edit method that displayed current product details in edit screen 
+/*state of the edited machine*/
+// edit = (dataItem) => {
+//     this.setState({ productInEdit: this.cloneProduct(dataItem) });
+// }
+
+
  /**
  * Opens the edit dialog by setting the product in edit to empty
  * It takes the id as a parameter 
  */
-    openEditForm = (id) => {
+    openEditForm = (id, dataItem) => {
+
+
+
+        // this.setState({ 
+        //     productInEdit: this.cloneProduct(id),
+        //     editedProductID : id 
+        // });
+        
         console.log("Open Edit Form id : ", id);
+        console.log("Data Item Open edit form ", dataItem )
         
         this.setState(
-            { productInRealEdit: { },
+            { 
+              productInRealEdit: this.cloneProduct(dataItem),
+                //productInRealEdit: { },
               editedProductID : id}
               );
     }
