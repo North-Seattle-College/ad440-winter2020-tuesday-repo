@@ -47,7 +47,8 @@ export default class MachinesMain extends React.Component {
             cleanData.push({
 
                   MachineID: machines[i].MachineID,
-                  VendorID: machines[i].Vendor,
+                  VendorID: machines[i].VendorID,
+                  Vendor: machines[i].Vendor,
                   LocationID: machines[i].LocationID,
                   street: machines[i].StreetAddress,
                   city: machines[i].City,
@@ -96,7 +97,7 @@ export default class MachinesMain extends React.Component {
             // resolving promise into json format
             const responseJson = await response.json()
             this.setState({machines: responseJson})
-           // console.log("Responce ", responseJson);
+            console.log("Responce ", responseJson);
 
             // error handling - bad responce receved, for example text string instead of json
         }catch (error) {
@@ -189,7 +190,7 @@ deletemachine(id) {
             }).then((response) => response.text())
             .then((data) => {
               console.log('Success:', data);
-            }).then(refreshPage)
+            })//.then(refreshPage)
             .catch((error) => {
               console.error('Error:', error);
             });
@@ -201,8 +202,6 @@ deletemachine(id) {
         console.log("This state product in real edit: ", this.state.productInRealEdit);
     //}
     }
-
-
 
     /**
      * Shows details of selected machine
