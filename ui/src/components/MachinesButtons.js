@@ -13,15 +13,17 @@ export default function MachinesButtons(openEditForm, deletemachine, details) {
                     <button
                         className="k-primary k-button k-grid-edit-command"
                         onClick={() => {
-                            openEditForm(this.props.dataItem.MachineID, this.props.dataItem)
-                             console.log("openEditForm(this.props.dataItem.id): ", this.props.dataItem.MachineID)}
+                            openEditForm(this.props.dataItem.id)
+                             console.log("openEditForm(this.props.dataItem.id): ", this.props.dataItem.id)}
                                        }>Edit</button>
 
                                         &nbsp;
 
                       <button
                                             className="k-primary k-button k-grid-edit-command"
+feature-display-current-machineinfo-when-edit-opens-iryna-ui
                                             onClick={()=> deletemachine(this.props.dataItem.MachineID)}>Remove</button>
+
 
 
 &nbsp;

@@ -45,7 +45,6 @@ export default class MachinesMain extends React.Component {
         const cleanData = [];
         for (var i = 0; i< machines.length; i++){
             cleanData.push({
-
                   MachineID: machines[i].MachineID,
                   VendorID: machines[i].VendorID,
                   Vendor: machines[i].Vendor,
@@ -129,6 +128,7 @@ deletemachine(id) {
         'Content-Type': 'application/json'
 
       }
+
       }).then((response) => response.text())
       .then((data) => {
         console.log('Success:', data);
@@ -136,12 +136,13 @@ deletemachine(id) {
       .catch((error) => {
         console.error('Error:', error);
       })
+
     }
   }
 
 /**
  * Edit machine method
- * Author - Iryna Sherepot
+ * 
  * After the request was processed, it changes the item in edit state to undefined and 
  * the dialog window disapears
  */ 
@@ -153,6 +154,7 @@ deletemachine(id) {
         machine.MachineID = this.state.editedProductID;
         console.log("machine.MachineID: ", machine.MachineID)
         console.log("Machine in the Edit method ", machine);
+
 
        // console.log("Machine is: ", machine)
        // console.log("Json stringify ", JSON.stringify(machine))
@@ -187,7 +189,7 @@ deletemachine(id) {
                 headers: {
                     'Content-Type': 'application/json',
                   },
-                body: JSON.stringify(tempEditProduct),
+                body: JSON.stringify(this.state.productInRealEdit),
 
             }).then((response) => response.text())
             .then((data) => {
@@ -276,27 +278,20 @@ deletemachine(id) {
     insert = () => {
         this.setState({ productInEdit: { } });
     }
-
-// old edit method that displayed current product details in edit screen 
-/*state of the edited machine*/
-// edit = (dataItem) => {
-//     this.setState({ productInEdit: this.cloneProduct(dataItem) });
-// }
-
-
  /**
  * Opens the edit dialog by setting the product in edit to empty
  * It takes the id as a parameter 
  */
+
     openEditForm = (id, dataItem) => {
 
-        
         console.log("Open Edit Form id : ", id);
-        console.log("Data Item Open edit form ", dataItem )
         
         this.setState(
+
             { 
               productInRealEdit: this.cloneProduct(dataItem),
+
               editedProductID : id}
               );
     }
@@ -338,17 +333,19 @@ deletemachine(id) {
                             </div>
                         </div>
     </GridToolbar>
+
                     <Column field="MachineID" title="ID" width="75px" />
                     <Column field="VendorID" title="Vendor" />
                     <Column field="LocationID" title="Location ID" />
                     <Column field="LocationName" title="Location Name" />
                     <Column field="Model" title="Model"
+
                     
                     // cell = {<button
                     //     onClick={this.insert}
                     //     className="k-button">Edit</button>}
                        />
-                    <Column field="Status" title="Status"
+                    <Column field="status" title="Status"
                        // field = "status"
                         cell = {this.MyCustomCell}
                                  />
@@ -367,7 +364,7 @@ deletemachine(id) {
     }
 
     dialogTitle() {
-        return `${this.state.productInEdit.MachineID === undefined ? 'Add' : 'Edit'} product`;
+        return `${this.state.productInEdit.id === undefined ? 'Add' : 'Edit'} product`;
     }
     cloneProduct(product) {
         return Object.assign({}, product);
