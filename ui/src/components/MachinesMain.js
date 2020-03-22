@@ -55,7 +55,6 @@ export default class MachinesMain extends React.Component {
                   zip: machines[i].ZipCode,
                   phone: machines[i].PhoneNum,
                   Model: machines[i].Model,
-
                   ModelNum: machines[i].ModelNum,
                   SerialNum: machines[i].SerialNum,
                   LocationID: machines[i].LocationID,
@@ -129,13 +128,19 @@ deletemachine(id) {
         'Content-Type': 'application/json'
 
       }
+      }).then((response) => response.text())
+      .then((data) => {
+        console.log('Success:', data);
+      })//.then(refreshPage)
+      .catch((error) => {
+        console.error('Error:', error);
       })//.then(refreshPage);
     }
   }
 
 /**
  * Edit machine method
- * 
+ * Author - Iryna Sherepot
  * After the request was processed, it changes the item in edit state to undefined and 
  * the dialog window disapears
  */ 
@@ -155,6 +160,7 @@ deletemachine(id) {
         
         const tempEditProduct = {};
 
+        // TODO - make copying efficioent
         tempEditProduct.MachineID = wholeProductInfo.MachineID;
         tempEditProduct.VendorID = wholeProductInfo.VendorID;
         tempEditProduct.LocationID = wholeProductInfo.LocationID;
