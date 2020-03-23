@@ -19,4 +19,4 @@ before install:
 script:
   - unset CI
   - npm run build
-  - ./devops/azure-TravisCI/deploy_storage.ps1
+  - devops/azure-TravisCI/deploy_storage.ps1
