@@ -17,4 +17,5 @@ before install:
 
 #testing to see if npm commands work
 script:
-  - CI = false npm run build
+  - unset CI
+  - npm run build
