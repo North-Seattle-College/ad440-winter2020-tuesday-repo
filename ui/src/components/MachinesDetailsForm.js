@@ -53,10 +53,8 @@ export default class MachinesDetailsForm extends React.Component {
   render() {
       
      const mystyle = {
-      color: "black",
-      backgroundColor:"${this.state.productInDetails.status}$",
-      padding: "10px",
-      fontFamily: "Arial"
+         width:200,
+         textAlign:'left'
      };
       
       
@@ -74,34 +72,41 @@ export default class MachinesDetailsForm extends React.Component {
           <div style={{ marginBottom: '1rem', float:'left', width:400, marginRight:50}}>
 
           {this.state.productInDetails.ModelPhoto===" " || this.state.productInDetails.ModelPhoto===null ||
-          this.state.productInDetails.ModelPhoto==="null"
+          this.state.productInDetails.ModelPhoto==="null"||
+          this.state.productInDetails.ModelPhoto===" null"
           ? <img style={{width:400}} alt = "" src='https://images-na.ssl-images-amazon.com/images/I/81s%2Btw0hwzL.__AC_SY300_QL70_ML2_.jpg'/>
           : <img style={{width:400}} alt = "" src={this.state.productInDetails.ModelPhoto} />}
 
 
           </div>
 
-            <div style={{float:'right', maxWidth:'60%'}}>
-            <div style={{ marginBottom: '1rem' }}>
+        <div style={{float:'right', maxWidth:'60%', width:200, textAlign:'left'}}>
+            
 
+          <div>
           <label>
           <b>ModelNum</b><br />
           {this.state.productInDetails.ModelNum || ''}
           </label> 
-                    <div >
+          </div>
+          
+          
+          <div>
           <label>
           <b>Model</b><br />
           {this.state.productInDetails.Model || ''}
-          </label></div>
+          </label>
+          </div>
 
           <div>
-
-            <label>
-            <b>LocationID</b><br/>
-            {this.state.productInDetails.LocationID || ''}
-            </label></div>
+          <label>
+          <b>LocationID</b><br/>
+          {this.state.productInDetails.LocationID || ''}
+          </label>
+          </div>
                     
-          <div >
+         
+          <div>
           <label>
           <b>Address</b><br />
           {this.state.productInDetails.street || ''}<br/>
@@ -109,47 +114,36 @@ export default class MachinesDetailsForm extends React.Component {
           {this.state.productInDetails.state || ''}{" "}
           {this.state.productInDetails.zip || ''}<br/>
           {<b>Phone: </b>}{this.state.productInDetails.phone || ''}<br/>
-          </label></div>
+          </label>
+          </div>
 
 
 
+          <div>
           <label>
           <b>Status</b><br />
-          
-         <div style={{backgroundColor:"{this.state.productInDetails.Status}"}}>
-        
-          
-             {this.state.productInDetails.Status}<br/>
-      </div>
-          
+          {this.state.productInDetails.Status}<br/>
           {this.state.productInDetails.StatusDescription || ''}
-          
-          </label></div>
+          </label>
+          </div>
 
-
-          <div style={{ marginBottom: '1rem' }}>
-
- 
-
-
-
+          <div>
           <label>
           <b>SerialNum</b><br />
           {this.state.productInDetails.SerialNum || ''}
-          </label></div>
+          </label>
+          </div>
 
-   
-
-          <div >
-
+          <div>
           <label>
           <b>Vendor</b><br />
-          {this.state.productInDetails.VendorID || ''}
+          {this.state.productInDetails.Vendor || ''}
           </label>
-
           </div>
 
           </div>
+
+
 
           </form>
 
