@@ -12,10 +12,7 @@ branches:
 before install:
   - cd ui
 
-#saves the node modules to save time loading ci
-cache:
-  directories:
-  - "node_modules"
-
+#testing to see if npm commands work
 script:
-  - npm run test
+  - npm install
+  - npm start
