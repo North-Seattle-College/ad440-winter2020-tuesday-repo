@@ -19,21 +19,22 @@ def main(event: func.EventGridEvent):
         'event_test' : 'test string'
             
     }) 
+    #Parse json string from simulated device to get only the information needed
     test= json.loads(result)
     test2= test['data']['body']['MachineID']
     test3=test['data']['body']
     logging.info(test2)
 
     #Decide what function (GET/PUT/POST) the info goes to
-   # url = f'https://san-fun-usw2-task156.azurewebsites.net/api/machines/{test2}?code=0QZ7re1VjAXWcYWew1lSfKQWIqEHoE4nVMjoQNyXiajBryooiiz3ZQ=='
-    getURL = os.environ["GetEndpoint"]   
-
+    #GetEndpoint replaces the GET URL which is hidden in Cloud, test2 takes the place of {MachineID} in URL
+    getURL = os.environ["GetEndpoint"]
     if requests.get(getURL) == 200 or 202: 
+        logging.debug("If response is not successful, check GET URL function to make sure it's working properly")
         #If URL doesn't give back a 404, make a GET request
         response = requests.get(getURL)
         logging.info(response.text)
         
-    #url = requests.put('https://jos-rg-fun-usw2-task62.azurewebsites.net/api/putRequest', json=test2)
+        #PutEndpoints replaces the PUT URL and json=test3 is passed in after URL
         putURL = os.environ["PutEndpoint"]
         #If URL gives a 500 response, make an update/PUT request
         if response == 200 or 202: 
@@ -43,6 +44,7 @@ def main(event: func.EventGridEvent):
         logging.debug("Got response 404.")
     #Otherwise, create a message with a POST request
     else: 
+        #PostEndpoint replaces the POST URL and json=test3 is passed in after URL
         postURL = os.environ["PostEndpoint"]
         response = requests.post(postURL, json= test3)
         logging.info(response.text)
