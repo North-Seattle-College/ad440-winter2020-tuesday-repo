@@ -22,11 +22,10 @@ export default class MachinesEditForm extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const propertyName = target.props ? target.props.name : target.name;
 
-      const editedProperty = this.state.productInRealEdit;
+    const editedProperty = this.state.productInRealEdit;
         
        editedProperty[propertyName] = value;
        editedProperty.MachineID = this.props.dataItem.MachineID;
-      
 
       this.setState({
         productInRealEdit: this.props.dataItem
@@ -43,7 +42,7 @@ export default class MachinesEditForm extends React.Component {
 
             <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Vendor<br />
+                    Vendor ID<br />
                     <Input
                         type="text"
                         name="VendorID"
@@ -55,7 +54,7 @@ export default class MachinesEditForm extends React.Component {
 
                       <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Address<br />
+                    Location ID<br />
                     <Input
                         type="text"
                         name="LocationID"
@@ -107,6 +106,28 @@ export default class MachinesEditForm extends React.Component {
                         type="text"
                         name="ModelPhoto"
                         value={this.state.productInRealEdit.ModelPhoto || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Status<br />
+                    <Input
+                        type="text"
+                        name="Status"
+                        value={this.state.productInRealEdit.Status || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                      Status Desccription <br />
+                    <Input
+                        type="text"
+                        name="StatusDescription"
+                        value={this.state.productInRealEdit.StatusDescription || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
