@@ -54,7 +54,9 @@ export default class MachinesDetailsForm extends React.Component {
       
      const mystyle = {
          width:200,
-         textAlign:'left'
+         height:40,
+         borderRadius:10
+         
      };
       
       
@@ -82,7 +84,14 @@ export default class MachinesDetailsForm extends React.Component {
 
         <div style={{float:'right', maxWidth:'60%', width:200, textAlign:'left'}}>
             
-
+          <div>
+          <label>
+          <b>MachineID</b><br />
+          {this.state.productInDetails.MachineID || ''}
+          </label> 
+          </div>
+          
+          
           <div>
           <label>
           <b>ModelNum</b><br />
@@ -97,6 +106,13 @@ export default class MachinesDetailsForm extends React.Component {
           {this.state.productInDetails.Model || ''}
           </label>
           </div>
+          
+          <div>
+          <label>
+          <b>SerialNum</b><br />
+          {this.state.productInDetails.SerialNum || ''}
+          </label>
+          </div>
 
           <div>
           <label>
@@ -104,7 +120,13 @@ export default class MachinesDetailsForm extends React.Component {
           {this.state.productInDetails.LocationID || ''}
           </label>
           </div>
-                    
+                  
+          <div>
+          <label>
+          <b>Vendor</b><br />
+          {this.state.productInDetails.Vendor || ''}
+          </label>
+          </div>
          
           <div>
           <label>
@@ -117,36 +139,30 @@ export default class MachinesDetailsForm extends React.Component {
           </label>
           </div>
 
-
-
-          <div>
+          <div>          
           <label>
           <b>Status</b><br />
-          {this.state.productInDetails.Status}<br/>
+
+              
+          {this.state.productInDetails.Status===null
+          ? <img style={mystyle} src="" />
+          : this.state.productInDetails.Status.toLowerCase()==='green' 
+          ? <img style={mystyle} src={require('./colors/green.png')} />
+          :this.state.productInDetails.Status.toLowerCase()==='yellow'
+          ? <img style={mystyle} src={require('./colors/yellow.png')} />
+          : this.state.productInDetails.Status.toLowerCase()==='red'
+          ? <img style={mystyle} src={require('./colors/red.png')} />
+          : <img style={mystyle} src={require('./colors/red.png')} />
+          } <br/>
+              
           {this.state.productInDetails.StatusDescription || ''}
-          </label>
-          </div>
-
-          <div>
-          <label>
-          <b>SerialNum</b><br />
-          {this.state.productInDetails.SerialNum || ''}
-          </label>
-          </div>
-
-          <div>
-          <label>
-          <b>Vendor</b><br />
-          {this.state.productInDetails.Vendor || ''}
+          
           </label>
           </div>
 
           </div>
-
-
 
           </form>
-
 
         <DialogActionsBar>
         <button
