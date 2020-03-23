@@ -15,8 +15,7 @@ branches:
 before install:
   - cd ui
 
-#testing to see if npm commands work
+#run the build setup in travis ci
 script:
   - unset CI
-  - npm run build
-  - pwsh ./deploy_storage.ps1
+  - npm test
