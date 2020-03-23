@@ -73,9 +73,11 @@ export default class MachinesDetailsForm extends React.Component {
 
           <div style={{ marginBottom: '1rem', float:'left', width:400, marginRight:50}}>
 
-          {this.state.productInDetails.ModelPhoto===" " || this.state.productInDetails.ModelPhoto===null ||
+          {this.state.productInDetails.ModelPhoto===" " || 
+          this.state.productInDetails.ModelPhoto===null ||
           this.state.productInDetails.ModelPhoto==="null"||
-          this.state.productInDetails.ModelPhoto===" null"
+          this.state.productInDetails.ModelPhoto===" null"||
+          this.state.productInDetails.ModelPhoto.includes("http")===false
           ? <img style={{width:400}} alt = "" src='https://images-na.ssl-images-amazon.com/images/I/81s%2Btw0hwzL.__AC_SY300_QL70_ML2_.jpg'/>
           : <img style={{width:400}} alt = "" src={this.state.productInDetails.ModelPhoto} />}
 
