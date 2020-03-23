@@ -1,15 +1,10 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SideNav from './components/SideNav';
-import PageTabs from './components/PageTabs';
 import Login from './components/Login';
 import ErrorBoundary from './components/ErrorHandling/ErrorBoundary';
-import InternalServer from './components/ErrorHandling/InternalServer';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
-
-
-
+// import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import MachinesMain from './components/MachinesMain';
 import './css/App.css';
 
 /**
@@ -28,13 +23,20 @@ export default  class App extends React.Component {
 <ErrorBoundary>< Login /></ErrorBoundary>
             </div>
             <MuiThemeProvider>
-          
+
         {/*  <Route path="/500" component={InternalServer} /> */}
-       
+
 <ErrorBoundary><SideNav/></ErrorBoundary>
-<ErrorBoundary><PageTabs/></ErrorBoundary>
+          <ErrorBoundary><MachinesMain/></ErrorBoundary>
+
+
             </MuiThemeProvider>
+            <div className="bottom-bar">
+            </div>
         </div>
       );
     }
 }
+
+setTimeout(() => {
+    window.location.reload(true);}, 60000);

@@ -1,0 +1,23 @@
+// Cross-Origin Resource Sharing (CORS) is a mechanism to 
+// secure the cross-origin request and data transfer between 
+// the browser and the server.
+
+{
+    "IsEncrypted": false,
+    "Values": {
+      "FUNCTIONS_WORKER_RUNTIME": "<language worker>",
+      "AzureWebJobsStorage": "<connection-string>",
+      "AzureWebJobsDashboard": "<connection-string>",
+      "MyBindingConnection": "<binding-connection-string>"
+    },
+    "Host": {
+      "LocalHttpPort": 7071,
+      "CORS": "*",
+      "CORSCredentials": false
+    },
+    "ConnectionStrings": {
+      "SQLConnectionString": "<sqlclient-connection-string>"
+    }
+  }
+  
+

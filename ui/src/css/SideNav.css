@@ -1,9 +1,9 @@
 .sidenav {
     background-color: #000000 !important;
-    padding: 50px 0px;
+    padding: 100px 0px;
     /* padding-bottom: 25%; */
-    height: 100%;
-    width: 30%;
+    height: 620px;
+    width: 20%;
     min-width:100px;
     float:left;
 }

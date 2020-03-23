@@ -3,12 +3,6 @@ import pyodbc
 import azure.functions as func
 import os
 
-# log config
-for handler in logging.root.handlers[:]:
-    logging.root.removeHandler(handler)
-logging.basicConfig(filename='logsFile.log', level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
-
-
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
@@ -36,19 +30,23 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
         # close connection
         conn.close()
+        
         # POST request successful
         logging.info('Http trigger request complete')
         return func.HttpResponse(f"Successful request")
 
     except ValueError as jerr:
         logging.error("Incorrect JSON format " + str(jerr))
-        return func.HttpResponse('Incorrect JSON format')
+        return func.HttpResponse('Incorrect JSON format',status_code=400)
+    except Exception as err:
+        logging.error("String connection to the database failed " + str(err))
+        return func.HttpResponse('Connection failed',status_code=500)
     except pyodbc.DatabaseError as derr:
-        logging.error("Connection to the database failed " + str(derr))
-        return func.HttpResponse('Connection failed')
+        logging.error("Database failed " + str(derr))
+        return func.HttpResponse('Database failed',status_code=500)
     except pyodbc.ProgrammingError as perr:
         logging.error("Your record could not be added " + str(perr))
-        return func.HttpResponse('Machine could not be added')
+        return func.HttpResponse('Machine could not be added',status_code=500)
 
      # no POST request was made
     logging.info("No POST request was made")
