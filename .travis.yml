@@ -14,5 +14,4 @@ before install:
 
 #testing to see if npm commands work
 script:
-  - npm install
-  - npm start
+  - npm run build
