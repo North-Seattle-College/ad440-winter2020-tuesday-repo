@@ -117,7 +117,7 @@ export default class MachinesMain extends React.Component {
     }
 }
 
-/********************Delete api  **********************/
+/******************** DELETE API  **********************/
 deletemachine(id) {
 
     console.log("Delete id is ", id);
