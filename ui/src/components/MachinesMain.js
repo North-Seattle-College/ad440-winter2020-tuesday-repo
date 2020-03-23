@@ -121,7 +121,7 @@ export default class MachinesMain extends React.Component {
 deletemachine(id) {
 
     console.log("Delete id is ", id);
-    if(window.confirm('are you sure ?'))
+    if(window.confirm('Are you sure you want to DELETE Machine ID #' + id + '?'))
     {
       fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/deleteRequest/'+id,{
         method:'DELETE',
