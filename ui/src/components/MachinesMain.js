@@ -341,13 +341,13 @@ deletemachine(id) {
                     <Column field="MachineID" title="ID" width="75px" />
                     <Column field="VendorID" title="Vendor" width="150px"/>
                     <Column field="LocationID" title="Location ID"  width="150px"/>
-                    <Column field="LocationName" title="Location Name"  width="120px"/>
+                    <Column field="LocationName" title="Location Name"  width="150px"/>
                     <Column field="Model" title="Model"
 
                     // cell = {<button
                     //     onClick={this.insert}
                     //     className="k-button">Edit</button>}
-                       width="150px"/>
+                       width="120px"/>
                     <Column field="Status" title="Status"
                        // field = "status"
                         cell = {this.MyCustomCell}
