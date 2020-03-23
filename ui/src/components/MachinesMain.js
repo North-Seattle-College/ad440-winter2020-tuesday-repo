@@ -58,7 +58,7 @@ export default class MachinesMain extends React.Component {
                   Model: machines[i].Model,
                   ModelNum: machines[i].ModelNum,
                   SerialNum: machines[i].SerialNum,
-                  LocationID: machines[i].LocationID,
+                  // LocationID: machines[i].LocationID,
                   LocationName: machines[i].LocationName,
                   ModelPhoto: machines[i].ModelPhoto,
                   Status : machines[i].Status,
@@ -121,9 +121,9 @@ export default class MachinesMain extends React.Component {
 deletemachine(id) {
 
     console.log("Delete id is ", id);
-    if(window.confirm('Are you sure you want to DELETE Machine ID #' + id + '?'))
+    if(window.confirm('DELETE Machine ID #' + id + '?'))
     {
-      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/deleteRequest/'+id,{
+      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/machines/'+id,{
         method:'DELETE',
         header:{'Accept':'application/json',
         'Content-Type': 'application/json'
