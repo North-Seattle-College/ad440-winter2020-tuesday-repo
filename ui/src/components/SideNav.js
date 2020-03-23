@@ -3,22 +3,26 @@
 
 //Here I imported libraries in order to create the side navigation
 import React, { Component } from 'react';
-import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import '../css/SideNav.css';
-import logo from './logo.png';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 //Class for the navigation
 class SideNav extends Component {
   render() {
     const styles = {
       tabLink: {
-        height: 50,
+        height: 60,
       },
       tabLabel: {
         fontSize: 28,
-        color: 'black',
+        color: 'white',
         textTransform: 'none',
       }
     };
@@ -26,89 +30,112 @@ class SideNav extends Component {
       <div>
 
         <Paper
-        zDepth={1}
         className="sidenav"
+        zDepth={0}
         children= {
 
         <div className="content-wrapper">
 
-        <center>
-        <div className="relative-logo-wrapper">
-
-        {/*This part os responsible for placing the logo on the page*/}
-        <img src={logo} className="logo" alt="logo"/>
-        </div>
-        </center>
 
         <div className="relative-nav-wrapper">
-        <center>
-
-        <div>
-        {/*This part is responsible for the title */}
-        <span className="name">PotO'Gold</span>
-
-        </div>
-        </center>
-
-        <br/>
-        <Divider/>
 
         {/*This part responsible for creating buttons for the side navigation */}
-        <div>
+        <Router>
+        <Link to="/Home"><div>
         <FlatButton
         style={styles.tabLink}
         label="Home"
         labelStyle={styles.tabLabel}
         fullWidth/>
-        </div>
+        </div></Link>
 
-        <div>
+        <Link to="About"><div>
         <FlatButton
         style={styles.tabLink}
         label="About"
         labelStyle={styles.tabLabel}
         fullWidth/>
-        </div>
+        </div></Link>
 
-        <div>
+        <Link to="Roasters"><div>
         <FlatButton
         style={styles.tabLink}
         label="Roasters"
         labelStyle={styles.tabLabel}
         fullWidth/>
-        </div>
+        </div></Link>
 
-        <div>
+        <Link to="Equipment"><div>
         <FlatButton
         style={styles.tabLink}
         label="Equipment"
         labelStyle={styles.tabLabel}
         fullWidth/>
-        </div>
+        </div></Link>
 
-        <div>
+        <Link to="Snacks"><div>
         <FlatButton
         style={styles.tabLink}
         label="Snacks"
         labelStyle={styles.tabLabel}
         fullWidth/>
-        </div>
+        </div></Link>
 
-        <div>
+        <Link to="Services"><div>
         <FlatButton
         style={styles.tabLink}
         label="Services"
         labelStyle={styles.tabLabel}
         fullWidth/>
-        </div>
+        </div></Link>
 
-        <div>
+        <Link to="Quote"><div>
         <FlatButton
         style={styles.tabLink}
         label="Quote"
         labelStyle={styles.tabLabel}
         fullWidth/>
-        </div>
+        </div></Link>
+
+            <Switch>
+          <Route exact path="/Home">
+            <Home/>
+          </Route>
+
+          <Route path="/About">
+            <About/>
+          </Route>
+
+          <Route path="/Roasters">
+            <Roasters/>
+          </Route>
+
+          <Route path="/Equipment">
+            <Equipment/>
+          </Route>
+
+          <Route path="/Snacks">
+            <Snacks/>
+          </Route>
+
+          <Route path="/Services">
+            <Services/>
+          </Route>
+
+          <Route path="/Quote">
+            <Quote/>
+          </Route>
+
+
+
+
+
+
+        </Switch>
+
+    </Router>
+
+
 
         </div>
 
@@ -121,3 +148,59 @@ class SideNav extends Component {
   }
 }
 export default SideNav;
+
+function Home() {
+  return (
+    <div>
+      <h2>Home</h2>
+    </div>
+  );
+}
+
+function About() {
+  return (
+    <div>
+      <h2>About</h2>
+    </div>
+  );
+}
+
+function Roasters() {
+  return (
+    <div>
+      <h2>Roasters</h2>
+    </div>
+  );
+}
+
+function Equipment() {
+  return (
+    <div>
+      <h2>Equipment</h2>
+    </div>
+  );
+}
+
+function Snacks() {
+  return (
+    <div>
+      <h2>Snacks</h2>
+    </div>
+  );
+}
+
+function Services() {
+  return (
+    <div>
+      <h2>Services</h2>
+    </div>
+  );
+}
+
+function Quote() {
+  return (
+    <div>
+      <h2>Quote</h2>
+    </div>
+  );
+}

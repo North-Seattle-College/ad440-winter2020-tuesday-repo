@@ -1,94 +1,148 @@
 
 import React from 'react';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
-import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
+import { Input } from '@progress/kendo-react-inputs';
 
 export default class MachinesEditForm extends React.Component {
   constructor(props) {
       super(props);
+      // have a state say if its a edit or save form
       this.state = {
-          productInEdit: this.props.dataItem || null
-      };
+          productInRealEdit: this.props.dataItem || null,
+          dataItemID: this.props.dataItem.MachineID
+      };    
   }
   handleSubmit(event) {
       event.preventDefault();
   }
 
-  onDialogInputChange = (event) => {
-      let target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-      const name = target.props ? target.props.name : target.name;
 
-      const edited = this.state.productInEdit;
-      edited[name] = value;
+  onDialogInputChange = (event) => {
+    let target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const propertyName = target.props ? target.props.name : target.name;
+
+    const editedProperty = this.state.productInRealEdit;
+        
+       editedProperty[propertyName] = value;
+       editedProperty.MachineID = this.props.dataItem.MachineID;
 
       this.setState({
-          productInEdit: edited
+        productInRealEdit: this.props.dataItem
       });
   }
 
   render() {
+   
       return (
         <Dialog
             onClose={this.props.cancel}
         >
             <form onSubmit={this.handleSubmit}>
-                
-                
-                <div style={{ marginBottom: '1rem' }}>
+
+            <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Vendor<br />
+                    Vendor ID<br />
                     <Input
                         type="text"
-                        name="vendor"
-                        value={this.state.productInEdit.vendor || ''}
+                        name="VendorID"
+                        value={this.state.productInRealEdit.VendorID || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
 
-                  
-                      <div style={{ marginBottom: '1rem' }}>  
+
+                      <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Address<br />
+                    Location ID<br />
                     <Input
                         type="text"
-                        name="address"
-                        value={this.state.productInEdit.address || ''}
+                        name="LocationID"
+                        value={this.state.productInRealEdit.LocationID || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label>
                 </div>
-                                      <div style={{ marginBottom: '1rem' }}>  
+
+                 <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Model<br />
+                    <Input
+                        type="text"
+                        name="Model"
+                        value={this.state.productInRealEdit.Model || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+
+                <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Model Number<br />
+                    <Input
+                        type="text"
+                        name="ModelNum"
+                        value={this.state.productInRealEdit.ModelNum || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Serial Number<br />
+                    <Input
+                        type="text"
+                        name="SerialNum"
+                        value={this.state.productInRealEdit.SerialNum || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                    Model photo<br />
+                    <Input
+                        type="text"
+                        name="ModelPhoto"
+                        value={this.state.productInRealEdit.ModelPhoto || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+
+                    <div style={{ marginBottom: '1rem' }}>
                     <label>
                     Status<br />
                     <Input
                         type="text"
-                        name="status"
-                        value={this.state.productInEdit.status || ''}
+                        name="Status"
+                        value={this.state.productInRealEdit.Status || ''}
                         onChange={this.onDialogInputChange}
                     />
-                    </label>
-                </div>
+                    </label></div>
 
-                
-
+                    <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                      Status Desccription <br />
+                    <Input
+                        type="text"
+                        name="StatusDescription"
+                        value={this.state.productInRealEdit.StatusDescription || ''}
+                        onChange={this.onDialogInputChange}
+                    />
+                    </label></div>
+                  
             </form>
             <DialogActionsBar>
                 <button
                     className="k-button"
-                    onClick={this.props.cancel}
-                >
-                    Cancel
-                </button>
-                <button
+                    onClick={this.props.cancel}>Cancel</button>
+
+            <button
                     className="k-button k-primary"
-                    onClick={this.props.save}
-                >
-                    Save
-                </button>
+                    onClick={()=> this.props.edit(this.props.editedProductID)}>Edit</button>
             </DialogActionsBar>
         </Dialog>
     );
   }
 }
-

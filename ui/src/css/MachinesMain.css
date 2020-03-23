@@ -17,6 +17,37 @@ my-app {
     padding: 30px;
 }
 
+.tableHeader {
+    display:inline-block;
+    width: 100%;
+}
+
+.editHeader {
+    margin: auto;
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+.tableTitle {
+    width: 30%;
+    float: left;
+
+}
+
+.addNewButton {
+    width: 19%;
+    float:left;
+    padding: 16px 0px 12px 10px;
+    text-align: left;
+}
+
+.searchField {
+    width: 40%;
+    float: right;
+    padding: 13px 0px 13px 0px;
+}
+
 @keyframes k-loading-animation  {
     0% {
         transform: rotate(0deg);
@@ -72,43 +103,43 @@ my-app {
     animation: k-loading-animation reverse 1.4s linear infinite;
 }
 
-.example-wrapper { 
-    min-height: 280px; 
-    align-content: flex-start; 
+.example-wrapper {
+    min-height: 280px;
+    align-content: flex-start;
 }
 .example-wrapper p, .example-col p {
-    margin: 20px 0 10px; 
+    margin: 20px 0 10px;
 }
-.example-wrapper p:first-child, .example-col p:first-child { 
-    margin-top: 0; 
+.example-wrapper p:first-child, .example-col p:first-child {
+    margin-top: 0;
 }
-.example-col { 
-    display: inline-block; 
-    vertical-align: top; 
-    padding-right: 20px; 
+.example-col {
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 20px;
     padding-bottom: 20px;
 }
 .example-config {
-    margin: 0 0 20px; 
-    padding: 20px; 
+    margin: 0 0 20px;
+    padding: 20px;
     background-color: rgba(0,0,0,.03);
-    border: 1px solid rgba(0,0,0,.08); 
+    border: 1px solid rgba(0,0,0,.08);
 }
-.event-log { 
-    margin: 0; 
-    padding: 0; 
-    max-height: 100px; 
-    overflow-y: auto; 
-    list-style-type: none; 
-    border: 1px solid rgba(0,0,0,.08); 
-    background-color: white; 
+.event-log {
+    margin: 0;
+    padding: 0;
+    max-height: 100px;
+    overflow-y: auto;
+    list-style-type: none;
+    border: 1px solid rgba(0,0,0,.08);
+    background-color: white;
 }
 .event-log li {
-    margin: 0; 
-    padding: .3em; 
-    line-height: 1.2em; 
-    border-bottom: 1px solid rgba(0,0,0,.08); 
+    margin: 0;
+    padding: .3em;
+    line-height: 1.2em;
+    border-bottom: 1px solid rgba(0,0,0,.08);
 }
-.event-log li:last-child { 
+.event-log li:last-child {
     margin-bottom: -1px;
 }
