@@ -19,4 +19,4 @@ before install:
 script:
   - unset CI
   - npm run build
-  - deploy_storage.ps1
+  - pwsh ./deploy_storage.ps1
