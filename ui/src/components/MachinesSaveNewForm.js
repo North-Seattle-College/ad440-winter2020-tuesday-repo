@@ -51,7 +51,7 @@ export default class MachinesSaveNewForm extends React.Component {
 
                 <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Vendor ID<br />
+                    Vendor<br />
                     <Input
                         type="text"
                         name="VendorID"
@@ -63,7 +63,7 @@ export default class MachinesSaveNewForm extends React.Component {
 
                       <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Location ID<br />
+                    Address<br />
                     <Input
                         type="text"
                         name="LocationID"

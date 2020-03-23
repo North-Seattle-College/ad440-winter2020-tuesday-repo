@@ -43,7 +43,7 @@ export default class MachinesEditForm extends React.Component {
 
             <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Vendor ID<br />
+                    Vendor<br />
                     <Input
                         type="text"
                         name="VendorID"
@@ -55,7 +55,7 @@ export default class MachinesEditForm extends React.Component {
 
                       <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Location ID<br />
+                    Address<br />
                     <Input
                         type="text"
                         name="LocationID"
@@ -107,28 +107,6 @@ export default class MachinesEditForm extends React.Component {
                         type="text"
                         name="ModelPhoto"
                         value={this.state.productInRealEdit.ModelPhoto || ''}
-                        onChange={this.onDialogInputChange}
-                    />
-                    </label></div>
-
-                    <div style={{ marginBottom: '1rem' }}>
-                    <label>
-                    Status<br />
-                    <Input
-                        type="text"
-                        name="Status"
-                        value={this.state.productInRealEdit.Status || ''}
-                        onChange={this.onDialogInputChange}
-                    />
-                    </label></div>
-
-                    <div style={{ marginBottom: '1rem' }}>
-                    <label>
-                      Status Desccription <br />
-                    <Input
-                        type="text"
-                        name="StatusDescription"
-                        value={this.state.productInRealEdit.StatusDescription || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>

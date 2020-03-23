@@ -45,23 +45,24 @@ export default class MachinesMain extends React.Component {
         const cleanData = [];
         for (var i = 0; i< machines.length; i++){
             cleanData.push({
-                  MachineID: machines[i].MachineID,
-                  VendorID: machines[i].VendorID,
-                  Vendor: machines[i].Vendor,
-                  LocationID: machines[i].LocationID,
+
+                  id: machines[i].MachineID,
+                  vendor: machines[i].Vendor,
+                  address: machines[i].LocationID,
                   street: machines[i].StreetAddress,
                   city: machines[i].City,
                   state: machines[i].State,
                   zip: machines[i].ZipCode,
                   phone: machines[i].PhoneNum,
-                  Model: machines[i].Model,
-                  ModelNum: machines[i].ModelNum,
-                  SerialNum: machines[i].SerialNum,
-                  LocationID: machines[i].LocationID,
-                  LocationName: machines[i].LocationName,
-                  ModelPhoto: machines[i].ModelPhoto,
-                  Status : machines[i].Status,
-                  StatusDescription: machines[i].StatusDescription
+                  model: machines[i].Model,
+
+                  modelnum: machines[i].ModelNum,
+                  serialnum: machines[i].SerialNum,
+                  locationID: machines[i].LocationID,
+                  location: machines[i].LocationName,
+                  images: machines[i].ModelPhoto,
+                  status : machines[i].Status,
+                  statusDesc: machines[i].StatusDescription
 
             })
         }
@@ -96,7 +97,7 @@ export default class MachinesMain extends React.Component {
             // resolving promise into json format
             const responseJson = await response.json()
             this.setState({machines: responseJson})
-            console.log("Responce ", responseJson);
+           // console.log("Responce ", responseJson);
 
             // error handling - bad responce receved, for example text string instead of json
         }catch (error) {
@@ -128,15 +129,7 @@ deletemachine(id) {
         'Content-Type': 'application/json'
 
       }
-
-      }).then((response) => response.text())
-      .then((data) => {
-        console.log('Success:', data);
-      }).then(refreshPage)
-      .catch((error) => {
-        console.error('Error:', error);
-      })
-
+      }).then(refreshPage);
     }
   }
 
@@ -155,30 +148,8 @@ deletemachine(id) {
         console.log("machine.MachineID: ", machine.MachineID)
         console.log("Machine in the Edit method ", machine);
 
-
-       // console.log("Machine is: ", machine)
-       // console.log("Json stringify ", JSON.stringify(machine))
-        console.log("JSON.stringify(this.state.productInRealEdit): ", JSON.stringify(this.state.productInRealEdit))
-        const wholeProductInfo = this.state.productInRealEdit;
-        
-
-        //-----THIS IS TEMPORARY DATA STRUCTURE TO MATCH THE PUT API BODY */
-        const tempEditProduct = {};
-
-        // TODO - make copying efficioent
-        tempEditProduct.MachineID = wholeProductInfo.MachineID;
-        tempEditProduct.VendorID = wholeProductInfo.VendorID;
-        tempEditProduct.LocationID = wholeProductInfo.LocationID;
-        tempEditProduct.Model = wholeProductInfo.Model;
-        tempEditProduct.ModelNum = wholeProductInfo.ModelNum;
-        tempEditProduct.SerialNum = wholeProductInfo.SerialNum;
-        tempEditProduct.ModelPhoto = wholeProductInfo.ModelPhoto;
-        tempEditProduct.Status = wholeProductInfo.Status;
-        tempEditProduct.StatusDescription = wholeProductInfo.StatusDescription;
-
-
-        console.log(" tempEditProduct ", tempEditProduct)
-
+        console.log("Machine is: ", machine)
+        console.log("Json stringify ", JSON.stringify(machine))
 
          if(!machine.ModelPhoto){
             machine.ModelPhoto = " "
@@ -207,6 +178,8 @@ deletemachine(id) {
     //}
     }
 
+
+
     /**
      * Shows details of selected machine
      */
@@ -226,7 +199,7 @@ deletemachine(id) {
         console.log("productInEdit ", this.state.productInEdit);
         const products = this.state.products.slice();
         const isNewProduct = dataItem.id === undefined;
-        console.log("Data item ", JSON.stringify(dataItem));
+        console.log("Data item id ", dataItem.id);
         console.log("isNewProduct ", isNewProduct);
 
 
@@ -234,11 +207,10 @@ deletemachine(id) {
             // do POST here
             // no need to have macchine ID entered, as it should be auto-incremented
             console.log ("Machines Main productInEdit: ", this.state.productInEdit)
+            console.log("Json stringify ", JSON.stringify(dataItem))
             if(!dataItem.ModelPhoto){
                 dataItem.ModelPhoto = ""
            }
-
-           console.log("Json stringify ", JSON.stringify(dataItem))
             fetch('https://ken-fun-feat-usw2-task60.azurewebsites.net/api/postrequest?code=j6x7Br2k3VLjoFakea3fWXG35G6vZJnal/uFWmO7kbv2S141bbLczg=='
             , {
                 method: "POST",
@@ -282,16 +254,11 @@ deletemachine(id) {
  * Opens the edit dialog by setting the product in edit to empty
  * It takes the id as a parameter 
  */
-
-    openEditForm = (id, dataItem) => {
-
+    openEditForm = (id) => {
         console.log("Open Edit Form id : ", id);
         
         this.setState(
-
-            { 
-              productInRealEdit: this.cloneProduct(dataItem),
-
+            { productInRealEdit: { },
               editedProductID : id}
               );
     }
@@ -333,13 +300,11 @@ deletemachine(id) {
                             </div>
                         </div>
     </GridToolbar>
-
-                    <Column field="MachineID" title="ID" width="75px" />
-                    <Column field="VendorID" title="Vendor" />
-                    <Column field="LocationID" title="Location ID" />
-                    <Column field="LocationName" title="Location Name" />
-                    <Column field="Model" title="Model"
-
+                    <Column field="id" title="ID" width="75px" />
+                    <Column field="vendor" title="Vendor" />
+                    <Column field="address" title="Location" />
+                    <Column field="location" title="Location Name" />
+                    <Column field="model" title="Model"
                     
                     // cell = {<button
                     //     onClick={this.insert}
