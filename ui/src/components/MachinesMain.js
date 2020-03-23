@@ -8,7 +8,7 @@ import MachinesDetailsForm from './MachinesDetailsForm';
 import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
 import ApiUrl from "./ApiUrl";
-import GlobalFilter from "./GlobalFilter"
+//import GlobalFilter from "./GlobalFilter"
 import MachinesSaveNewForm from "./MachinesSaveNewForm"
 import CustomStatusCell from "./CustomStatusCell"
 
@@ -58,7 +58,7 @@ export default class MachinesMain extends React.Component {
                   Model: machines[i].Model,
                   ModelNum: machines[i].ModelNum,
                   SerialNum: machines[i].SerialNum,
-                  LocationID: machines[i].LocationID,
+                  // LocationID: machines[i].LocationID,
                   LocationName: machines[i].LocationName,
                   ModelPhoto: machines[i].ModelPhoto,
                   Status : machines[i].Status,
@@ -121,9 +121,9 @@ export default class MachinesMain extends React.Component {
 deletemachine(id) {
 
     console.log("Delete id is ", id);
-    if(window.confirm('are you sure ?'))
+    if(window.confirm('DELETE Machine ID #' + id + '?'))
     {
-      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/deleteRequest/'+id,{
+      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/machines/'+id,{
         method:'DELETE',
         header:{'Accept':'application/json',
         'Content-Type': 'application/json'
@@ -334,24 +334,24 @@ deletemachine(id) {
                             </div>
 
                             <div class = "searchField">
-                                <GlobalFilter/>
+
                             </div>
                         </div>
     </GridToolbar>
                     <Column field="MachineID" title="ID" width="75px" />
-                    <Column field="VendorID" title="Vendor" />
-                    <Column field="LocationID" title="Location ID" />
-                    <Column field="LocationName" title="Location Name" />
+                    <Column field="VendorID" title="Vendor" width="150px"/>
+                    <Column field="LocationID" title="Location ID"  width="150px"/>
+                    <Column field="LocationName" title="Location Name"  width="150px"/>
                     <Column field="Model" title="Model"
 
                     // cell = {<button
                     //     onClick={this.insert}
                     //     className="k-button">Edit</button>}
-                       />
+                       width="120px"/>
                     <Column field="Status" title="Status"
                        // field = "status"
                         cell = {this.MyCustomCell}
-                                 />
+                                 width="150px"/>
 
                     <Column title="Edit Remove Details"
                         cell={MachinesButtons(this.openEditForm, this.deletemachine, this.details)}

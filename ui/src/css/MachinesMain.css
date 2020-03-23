@@ -37,9 +37,9 @@ my-app {
 
 .addNewButton {
     width: 19%;
-    float:left;
+    float:right;
     padding: 16px 0px 12px 10px;
-    text-align: left;
+    text-align: right 20px;
 }
 
 .searchField {
