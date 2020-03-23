@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
-import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
+// import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
+import { Input } from '@progress/kendo-react-inputs';
 
 export default class MachinesSaveNewForm extends React.Component {
   constructor(props) {
@@ -27,12 +28,12 @@ export default class MachinesSaveNewForm extends React.Component {
       console.log("Edited adress ", editedProperty.address, "Edited name ", editedProperty.name, "Edited status ", editedProperty.status);
       console.log("Product in Edit = this.dataItem ", this.state);
 
-       
-        
+
+
      editedProperty[propertyName] = value;
-        
-        
-        console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
+
+
+    // console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
 
       console.log("Edited[name] ," , editedProperty[propertyName])
 
@@ -42,6 +43,7 @@ export default class MachinesSaveNewForm extends React.Component {
   }
 
   render() {
+
       return (
         <Dialog
             onClose={this.props.cancel}
@@ -50,7 +52,7 @@ export default class MachinesSaveNewForm extends React.Component {
 
                 <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Vendor<br />
+                    Vendor ID<br />
                     <Input
                         type="text"
                         name="VendorID"
@@ -62,7 +64,7 @@ export default class MachinesSaveNewForm extends React.Component {
 
                       <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Address<br />
+                    Location ID<br />
                     <Input
                         type="text"
                         name="LocationID"
@@ -117,7 +119,7 @@ export default class MachinesSaveNewForm extends React.Component {
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
-                  
+
             </form>
             <DialogActionsBar>
                 <button
