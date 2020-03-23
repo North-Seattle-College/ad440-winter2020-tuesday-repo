@@ -143,6 +143,20 @@ export default class MachinesDetailsForm extends React.Component {
           <label>
           <b>Status</b><br />
 
+          {this.state.productInDetails.Status}<br/>
+          {this.state.productInDetails.StatusDescription.charAt(0).toUpperCase() +
+           this.state.productInDetails.StatusDescription.slice(1) || ''}
+          </label>
+          </div>
+
+          <div>
+          <label>
+          <b>SerialNum</b><br />
+          {this.state.productInDetails.SerialNum || ''}
+          </label>
+          </div>
+
+
               
           {this.state.productInDetails.Status===null
           ? <img style={mystyle} src="" />
