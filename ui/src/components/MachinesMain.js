@@ -8,7 +8,7 @@ import MachinesDetailsForm from './MachinesDetailsForm';
 import MachinesButtons from './MachinesButtons';
 import '../css/MachinesMain.css';
 import ApiUrl from "./ApiUrl";
-import GlobalFilter from "./GlobalFilter"
+//import GlobalFilter from "./GlobalFilter"
 import MachinesSaveNewForm from "./MachinesSaveNewForm"
 import CustomStatusCell from "./CustomStatusCell"
 
@@ -258,19 +258,19 @@ deletemachine(id) {
                             </div>
 
                             <div class = "searchField">
-                                <GlobalFilter/>
+
                             </div>
                         </div>
     </GridToolbar>
                     <Column field="id" title="ID" width="75px" />
-                    <Column field="vendor" title="Vendor" />
-                    <Column field="address" title="Location" />
-                    <Column field="location" title="Location Name" />
-                    <Column field="model" title="Model"/>
+                    <Column field="vendor" title="Vendor" width="150px" />
+                    <Column field="address" title="Location" width="150px"/>
+                    <Column field="location" title="Location Name"  width="150px"/>
+                    <Column field="model" title="Model" width="130px"/>
                     <Column field="status" title="Status"
                        // field = "status"
                         cell = {this.MyCustomCell}
-                                 />
+                                 width="150px"/>
 
                     <Column title="Edit Remove Details"
                         cell={MachinesButtons(this.edit, this.deletemachine, this.details)}
