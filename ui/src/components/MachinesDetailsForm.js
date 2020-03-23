@@ -53,8 +53,10 @@ export default class MachinesDetailsForm extends React.Component {
   render() {
       
      const mystyle = {
-         width:200, 
-         textAlign:'left'
+      color: "black",
+      backgroundColor:"${this.state.productInDetails.status}$",
+      padding: "10px",
+      fontFamily: "Arial"
      };
       
       
@@ -71,11 +73,8 @@ export default class MachinesDetailsForm extends React.Component {
 
           <div style={{ marginBottom: '1rem', float:'left', width:400, marginRight:50}}>
 
-          {this.state.productInDetails.images===" " ||
-          this.state.productInDetails.images==="" ||
-          this.state.productInDetails.images===null ||
-          this.state.productInDetails.images==="null" ||
-          this.state.productInDetails.images===' "null"'
+          {this.state.productInDetails.images===" " || this.state.productInDetails.images===null ||
+          this.state.productInDetails.images==="null"
           ? <img style={{width:400}} alt = "" src='https://images-na.ssl-images-amazon.com/images/I/81s%2Btw0hwzL.__AC_SY300_QL70_ML2_.jpg'/>
           : <img style={{width:400}} alt = "" src={this.state.productInDetails.images} />}
 
@@ -86,26 +85,23 @@ export default class MachinesDetailsForm extends React.Component {
             <div style={{ marginBottom: '1rem' }}>
 
           <label>
-          <div style={mystyle}>
           <b>ModelNum</b><br />
           {this.state.productInDetails.modelnum || ''}
-          </div>
           </label> 
-        
-          <div style={mystyle}>
+                    <div >
           <label>
           <b>Model</b><br />
           {this.state.productInDetails.model || ''}
           </label></div>
 
-          <div style={mystyle}>
+          <div>
 
             <label>
             <b>LocationID</b><br/>
             {this.state.productInDetails.address || ''}
             </label></div>
                     
-          <div style={mystyle}>
+          <div >
           <label>
           <b>Address</b><br />
           {this.state.productInDetails.street || ''}<br/>
@@ -118,27 +114,20 @@ export default class MachinesDetailsForm extends React.Component {
 
 
           <label>
-          <div style={mystyle}>
           <b>Status</b><br />
-          </div>
           
-
-         <div style={mystyle}>
-
+         <div style={{backgroundColor:"{this.state.productInDetails.Status}"}}>
         
           
              {this.state.productInDetails.Status}<br/>
       </div>
-
-          <div style={mystyle}>
-          {this.state.productInDetails.statusDesc || ''}
-          </div>
-
+          
+          {this.state.productInDetails.StatusDescription || ''}
           
           </label></div>
 
 
-          <div style={mystyle}>
+          <div style={{ marginBottom: '1rem' }}>
 
  
 
@@ -151,7 +140,7 @@ export default class MachinesDetailsForm extends React.Component {
 
    
 
-          <div style={mystyle}>
+          <div >
 
           <label>
           <b>Vendor</b><br />
