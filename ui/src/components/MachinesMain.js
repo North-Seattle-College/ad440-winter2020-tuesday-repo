@@ -123,7 +123,7 @@ deletemachine(id) {
     console.log("Delete id is ", id);
     if(window.confirm('are you sure ?'))
     {
-      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/deleteRequest?MachineID='+id,{
+      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/deleteRequest/'+id,{
         method:'DELETE',
         header:{'Accept':'application/json',
         'Content-Type': 'application/json'
@@ -142,12 +142,12 @@ deletemachine(id) {
 /**
  * Edit machine method
  * Author - Iryna Sherepot
- * After the request was processed, it changes the item in edit state to undefined and 
+ * After the request was processed, it changes the item in edit state to undefined and
  * the dialog window disapears
- */ 
+ */
     edit = (editedProductID) => {
-        console.log("Edit started")  
-        console.log("EditedProduceID : ", editedProductID)     
+        console.log("Edit started")
+        console.log("EditedProduceID : ", editedProductID)
         console.log("State ", this.state)
         const machine = this.state.productInRealEdit;
         machine.MachineID = this.state.editedProductID;
@@ -158,7 +158,7 @@ deletemachine(id) {
        // console.log("Json stringify ", JSON.stringify(machine))
         console.log("JSON.stringify(this.state.productInRealEdit): ", JSON.stringify(this.state.productInRealEdit))
         const wholeProductInfo = this.state.productInRealEdit;
-        
+
 
         //-----THIS IS TEMPORARY DATA STRUCTURE TO MATCH THE PUT API BODY */
         const tempEditProduct = {};
@@ -180,7 +180,7 @@ deletemachine(id) {
 
          if(!machine.ModelPhoto){
             machine.ModelPhoto = " "
-        }    
+        }
             fetch('https://jos-rg-fun-usw2-task62.azurewebsites.net/api/putRequest'
             , {
                 method: "PUT",
@@ -197,7 +197,7 @@ deletemachine(id) {
               console.error('Error:', error);
             });
 
-       this.setState({     
+       this.setState({
         productInRealEdit: undefined
     });
 
@@ -213,7 +213,7 @@ deletemachine(id) {
     this.setState({ productInDetails: this.cloneProduct(dataItem) });
     }
 
-  
+
   /**
    * Sends POST request to the database after the user clicks SAve button
    */
@@ -265,7 +265,7 @@ deletemachine(id) {
             this.setState({ productInEdit: undefined });
         }else if(this.state.productInRealEdit && !this.state.productInEdit){
             this.setState({productInRealEdit: undefined});
-        
+
         } else if(this.state.productInDetails) {
             this.setState({ productInDetails: undefined })
         }
@@ -277,7 +277,7 @@ deletemachine(id) {
         this.setState({ productInEdit: { } });
     }
 
-// old edit method that displayed current product details in edit screen 
+// old edit method that displayed current product details in edit screen
 /*state of the edited machine*/
 // edit = (dataItem) => {
 //     this.setState({ productInEdit: this.cloneProduct(dataItem) });
@@ -286,16 +286,16 @@ deletemachine(id) {
 
  /**
  * Opens the edit dialog by setting the product in edit to empty
- * It takes the id as a parameter 
+ * It takes the id as a parameter
  */
     openEditForm = (id, dataItem) => {
 
-        
+
         console.log("Open Edit Form id : ", id);
         console.log("Data Item Open edit form ", dataItem )
-        
+
         this.setState(
-            { 
+            {
               productInRealEdit: this.cloneProduct(dataItem),
               editedProductID : id}
               );
@@ -343,7 +343,7 @@ deletemachine(id) {
                     <Column field="LocationID" title="Location ID" />
                     <Column field="LocationName" title="Location Name" />
                     <Column field="Model" title="Model"
-                    
+
                     // cell = {<button
                     //     onClick={this.insert}
                     //     className="k-button">Edit</button>}
@@ -355,8 +355,8 @@ deletemachine(id) {
 
                     <Column title="Edit Remove Details"
                         cell={MachinesButtons(this.openEditForm, this.deletemachine, this.details)}
-                            
-                    />                  
+
+                    />
                 </Grid>
                 {/* Pass the form type here throught a boolean or string */}
                 {this.state.productInRealEdit && <MachinesEditForm    dataItem={this.state.productInRealEdit} edit ={this.edit} cancel={this.cancel}/>}
