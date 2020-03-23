@@ -10,7 +10,7 @@ export default class MachinesEditForm extends React.Component {
       this.state = {
           productInRealEdit: this.props.dataItem || null,
           dataItemID: this.props.dataItem.MachineID
-      };    
+      };
   }
   handleSubmit(event) {
       event.preventDefault();
@@ -23,7 +23,7 @@ export default class MachinesEditForm extends React.Component {
     const propertyName = target.props ? target.props.name : target.name;
 
     const editedProperty = this.state.productInRealEdit;
-        
+
        editedProperty[propertyName] = value;
        editedProperty.MachineID = this.props.dataItem.MachineID;
 
@@ -33,7 +33,7 @@ export default class MachinesEditForm extends React.Component {
   }
 
   render() {
-   
+
       return (
         <Dialog
             onClose={this.props.cancel}
@@ -49,10 +49,8 @@ export default class MachinesEditForm extends React.Component {
                         value={this.state.productInRealEdit.VendorID || ''}
                         onChange={this.onDialogInputChange}
                     />
-                    </label></div>
-
-
-                      <div style={{ marginBottom: '1rem' }}>
+                    </label>
+                    &nbsp;
                     <label>
                     Location ID<br />
                     <Input
@@ -64,6 +62,7 @@ export default class MachinesEditForm extends React.Component {
                     </label>
                 </div>
 
+
                  <div style={{ marginBottom: '1rem' }}>
                     <label>
                     Model<br />
@@ -73,10 +72,8 @@ export default class MachinesEditForm extends React.Component {
                         value={this.state.productInRealEdit.Model || ''}
                         onChange={this.onDialogInputChange}
                     />
-                    </label></div>
-
-
-                <div style={{ marginBottom: '1rem' }}>
+                    </label>
+                    &nbsp;
                     <label>
                     Model Number<br />
                     <Input
@@ -97,9 +94,8 @@ export default class MachinesEditForm extends React.Component {
                         value={this.state.productInRealEdit.SerialNum || ''}
                         onChange={this.onDialogInputChange}
                     />
-                    </label></div>
-
-                    <div style={{ marginBottom: '1rem' }}>
+                    </label>
+                    &nbsp;
                     <label>
                     Model photo<br />
                     <Input
@@ -119,9 +115,8 @@ export default class MachinesEditForm extends React.Component {
                         value={this.state.productInRealEdit.Status || ''}
                         onChange={this.onDialogInputChange}
                     />
-                    </label></div>
-
-                    <div style={{ marginBottom: '1rem' }}>
+                    </label>
+                    &nbsp;
                     <label>
                       Status Desccription <br />
                     <Input
@@ -131,13 +126,13 @@ export default class MachinesEditForm extends React.Component {
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
-                  
+
             </form>
             <DialogActionsBar>
                 <button
                     className="k-button"
                     onClick={this.props.cancel}>Cancel</button>
-
+&nbsp;
             <button
                     className="k-button k-primary"
                     onClick={()=> this.props.edit(this.props.editedProductID)}>Edit</button>

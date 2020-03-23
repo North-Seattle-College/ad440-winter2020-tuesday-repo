@@ -1,8 +1,7 @@
 
 import React from 'react';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
-// import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
-import { Input } from '@progress/kendo-react-inputs';
+import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
 
 export default class MachinesSaveNewForm extends React.Component {
   constructor(props) {
@@ -33,7 +32,7 @@ export default class MachinesSaveNewForm extends React.Component {
      editedProperty[propertyName] = value;
 
 
-    // console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
+        console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
 
       console.log("Edited[name] ," , editedProperty[propertyName])
 
@@ -43,7 +42,6 @@ export default class MachinesSaveNewForm extends React.Component {
   }
 
   render() {
-
       return (
         <Dialog
             onClose={this.props.cancel}
@@ -52,7 +50,7 @@ export default class MachinesSaveNewForm extends React.Component {
 
                 <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Vendor ID<br />
+                    Vendor<br />
                     <Input
                         type="text"
                         name="VendorID"
@@ -64,7 +62,7 @@ export default class MachinesSaveNewForm extends React.Component {
 
                       <div style={{ marginBottom: '1rem' }}>
                     <label>
-                    Location ID<br />
+                    Address<br />
                     <Input
                         type="text"
                         name="LocationID"
