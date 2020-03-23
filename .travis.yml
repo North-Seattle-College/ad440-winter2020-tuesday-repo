@@ -2,7 +2,13 @@ language: node_js
 node_js:
   - 12.16.1
 
-#changes direcotry to the ui branch for website updates
+#only updates on commits from this brannch and master
+branches:
+  only:
+    - master
+    - stor-dev-westus2
+
+#changes directory to the ui branch for website updates
 before install:
   - cd ui
 
@@ -10,3 +16,6 @@ before install:
 cache:
   directories:
   - "node_modules"
+
+script:
+  - npm run test
