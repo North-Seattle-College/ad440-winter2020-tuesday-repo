@@ -2,10 +2,13 @@ language: node_js
 node_js:
   - 12.16.1
 
+#stores npm data to speed up ci
+cache: npm
+
 #only updates on commits from this brannch and master
 branches:
   only:
-    - master
+    - develop
     - stor-dev-westus2
 
 #changes directory to the ui branch for website updates
