@@ -28,16 +28,22 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
         #commit and close connection
         conct.commit()
+        conct.close()
         
         #logging 
         logging.info("Python HTTP trigger function request successful")
         return func.HttpResponse(json.dumps(rows)) #json.dumps to create JSON string
     except pyodbc.interfaceerror as connerr:
         logging.error("Database connection failed" + str(connerr))
+        return func.HttpResponse('Connection failed',status_code=500)
     except pyodbc.operationalerror as synerr:
         logging.error("Database query failed" + str(synerr))
+        return func.HttpResponse('Database query failed: ',status_code=500)
     except pyodbc.Error as err:
         logging.info("Python HTTP trigger function request unsuccessful" +  str(err))    
-
+        return func.HttpResponse('Unsuccessful request',status_code=500)
+    except Exception as eerr:
+        logging.error("String connection to the database failed " + str(eerr))
+        return func.HttpResponse('Connection failed',status_code=500)
 
     

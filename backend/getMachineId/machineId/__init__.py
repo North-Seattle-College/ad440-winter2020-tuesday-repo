@@ -27,14 +27,15 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         
         #commit the query 
         conn.commit()
-        
-        #return the query 
-        return func.HttpResponse(json.dumps(result))
-    
+            
         #disconnect database
         cursor.close()
         conn.close()
         logging.info("Connection to database closed")
+        
+        #return the query 
+        return func.HttpResponse(json.dumps(result))
+
         
     #connection failed error  
     except pyodbc.DatabaseError:
