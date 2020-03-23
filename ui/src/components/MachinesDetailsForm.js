@@ -144,7 +144,7 @@ export default class MachinesDetailsForm extends React.Component {
           <b>Status</b><br />
           
           {this.state.productInDetails.Status===null
-          ? <img style={mystyle} src="" />
+          ? <img style={mystyle} src={require('./colors/white.png')} />
           : this.state.productInDetails.Status.toLowerCase()==='green' 
           ? <img style={mystyle} src={require('./colors/green.png')} />
           :this.state.productInDetails.Status.toLowerCase()==='yellow'
