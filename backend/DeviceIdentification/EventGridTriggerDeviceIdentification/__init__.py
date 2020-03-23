@@ -26,7 +26,7 @@ def main(event: func.EventGridEvent):
 
     #Decide what function (GET/PUT/POST) the info goes to
    # url = f'https://san-fun-usw2-task156.azurewebsites.net/api/machines/{test2}?code=0QZ7re1VjAXWcYWew1lSfKQWIqEHoE4nVMjoQNyXiajBryooiiz3ZQ=='
-    getURL = os.environ["GetEndpoint"]
+    getURL = os.environ["GetEndpoint"]   
 
     if requests.get(getURL) == 200 or 202: 
         #If URL doesn't give back a 404, make a GET request
