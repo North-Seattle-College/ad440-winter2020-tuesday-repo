@@ -142,22 +142,7 @@ export default class MachinesDetailsForm extends React.Component {
           <div>          
           <label>
           <b>Status</b><br />
-
-          {this.state.productInDetails.Status}<br/>
-          {this.state.productInDetails.StatusDescription.charAt(0).toUpperCase() +
-           this.state.productInDetails.StatusDescription.slice(1) || ''}
-          </label>
-          </div>
-
-          <div>
-          <label>
-          <b>SerialNum</b><br />
-          {this.state.productInDetails.SerialNum || ''}
-          </label>
-          </div>
-
-
-              
+          
           {this.state.productInDetails.Status===null
           ? <img style={mystyle} src="" />
           : this.state.productInDetails.Status.toLowerCase()==='green' 
@@ -168,10 +153,11 @@ export default class MachinesDetailsForm extends React.Component {
           ? <img style={mystyle} src={require('./colors/red.png')} />
           : <img style={mystyle} src={require('./colors/red.png')} />
           } <br/>
-              
+
           {this.state.productInDetails.StatusDescription || ''}
-          
-          </label>
+         
+      </label>
+      
           </div>
 
           </div>
