@@ -123,7 +123,8 @@ export default class MachinesDetailsForm extends React.Component {
           <label>
           <b>Status</b><br />
           {this.state.productInDetails.Status}<br/>
-          {this.state.productInDetails.StatusDescription || ''}
+          {this.state.productInDetails.StatusDescription.charAt(0).toUpperCase() +
+           this.state.productInDetails.StatusDescription.slice(1) || ''}
           </label>
           </div>
 
