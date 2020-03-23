@@ -7,7 +7,7 @@
       "direction": "in",
       "name": "req",
       "methods": ["get"],
-      "route": "machines/{MachineID}"
+      "route": "v1/machines/{id:int?}"
       },
     {
       "type": "http",

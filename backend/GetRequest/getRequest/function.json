@@ -6,7 +6,8 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "methods": ["get", "post", "put"]
+      "methods": ["get", "post", "put"],
+      "route": "v1/machines/{id:int?}"
     },
     {
       "type": "http",
