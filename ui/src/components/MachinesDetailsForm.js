@@ -1,7 +1,7 @@
 //Created by Siergiey and edited by Abdi
 //This component is responsible for rendering a pop-up window with machine details.
 import React from 'react';
-import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
+// import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 // import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
 // import {Link} from 'react-router';
@@ -11,8 +11,8 @@ import CustomStatusCell from "./CustomStatusCell"
 
 
 export default class MachinesDetailsForm extends React.Component {
-    
-    
+
+
 
   constructor(props) {
       super(props);
@@ -20,7 +20,7 @@ export default class MachinesDetailsForm extends React.Component {
           productInDetails: this.props.dataItem || null
       };
   }
-    
+
         customData = [
         { color: 'green' },
         { color: 'yellow' },
@@ -29,8 +29,8 @@ export default class MachinesDetailsForm extends React.Component {
 
     MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customData}
     />
-    
-    
+
+
   handleSubmit(event) {
       event.preventDefault();
   }
@@ -47,17 +47,17 @@ export default class MachinesDetailsForm extends React.Component {
           productInDetails: edited
       });
   }
-  
- 
+
+
 
   render() {
-      
-     const mystyle = {
-         width:200,
-         textAlign:'left'
-     };
-      
-      
+
+     // const mystyle = {
+     //     width:200,
+     //     textAlign:'left'
+     // };
+
+
       return (
         <Dialog
 
@@ -81,16 +81,16 @@ export default class MachinesDetailsForm extends React.Component {
           </div>
 
         <div style={{float:'right', maxWidth:'60%', width:200, textAlign:'left'}}>
-            
+
 
           <div>
           <label>
           <b>ModelNum</b><br />
           {this.state.productInDetails.ModelNum || ''}
-          </label> 
+          </label>
           </div>
-          
-          
+
+
           <div>
           <label>
           <b>Model</b><br />
@@ -104,13 +104,13 @@ export default class MachinesDetailsForm extends React.Component {
           {this.state.productInDetails.LocationID || ''}
           </label>
           </div>
-                    
-         
+
+
           <div>
           <label>
           <b>Address</b><br />
           {this.state.productInDetails.street || ''}<br/>
-          {this.state.productInDetails.city || ''}{", "}  
+          {this.state.productInDetails.city || ''}{", "}
           {this.state.productInDetails.state || ''}{" "}
           {this.state.productInDetails.zip || ''}<br/>
           {<b>Phone: </b>}{this.state.productInDetails.phone || ''}<br/>
