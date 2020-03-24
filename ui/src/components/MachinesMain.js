@@ -20,6 +20,9 @@ function refreshPage() {
 }
 
 export default class MachinesMain extends React.Component {
+
+    gridWidth = 600;
+
     state = {
         products: MachineData.slice(0, 12),
         productInEdit: undefined,
@@ -39,7 +42,9 @@ export default class MachinesMain extends React.Component {
     />
 
 
-
+    setPercentage = (percentage) => {
+        return Math.round(this.gridWidth / 100) * percentage;
+    }
 
     /* Author Iryna
     * Builds machine array with only necessary details about each machine for the table rows
@@ -351,22 +356,22 @@ deletemachine(id) {
                             </div>
                         </div>
     </GridToolbar>
-                    <Column field="MachineID" title="ID" width="75px" />
-                    <Column field="VendorID" title="Vendor" width="150px"/>
-                    <Column field="LocationID" title="Location ID"  width="150px"/>
-                    <Column field="LocationName" title="Location Name"  width="150px"/>
-                    <Column field="Model" title="Model"
+                    <Column field="MachineID" title="ID" width={this.setPercentage(20)} />
+                    <Column field="VendorID" title="Vendor" width={this.setPercentage(30)}/>
+                    <Column field="LocationID" title="Location ID" width={this.setPercentage(35)} />
+                    <Column field="LocationName" title="Location Name" width={this.setPercentage(45)}/>
+                    <Column field="Model" title="Model" width={this.setPercentage(50)}
 
                     // cell = {<button
                     //     onClick={this.insert}
                     //     className="k-button">Edit</button>}
-                       width="120px"/>
-                    <Column field="Status" title="Status"
+                      />
+                    <Column field="Status" title="Status" width={this.setPercentage(35)}
                        // field = "status"
                         cell = {this.MyCustomCell}
-                                 width="150px"/>
+                                />
 
-                    <Column title="Edit Remove Details"
+                    <Column title="Edit Remove Details" width={this.setPercentage(71) }
                         cell={MachinesButtons(this.openEditForm, this.deletemachine, this.details)}
 
                     />
