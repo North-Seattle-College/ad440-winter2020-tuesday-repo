@@ -11,23 +11,30 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # This stament checks for a PUT request.
     if (req.method == "PUT"):
         try:
-            
             # check JSON body request
             req_body = req.get_json()
-            logging.info("Getting the json body." + str(req_body))
             logging.debug(req_body)
-            print(req_body)
 
             # Setting connection to the database via key vault connection string.
             conn = pyodbc.connect(os.environ['ConnString'])
-            logging.info("Connection complete" + str(conn))
+            logging.info(conn)
+            logging.info("Connection complete")
             logging.debug(conn)
             cursor = conn.cursor()
 
             #updates a Machine
             cursor.execute(''' UPDATE [dbo].[Machines]
-            SET Model = ?, ModelNum = ?, ModelPhoto = ?, SerialNum = ?, VendorID = ?, LocationID = ?  WHERE MachineID = ? ''',
-            (req_body['Model'], req_body['ModelNum'], req_body['ModelPhoto'], req_body['SerialNum'], req_body['VendorID'], req_body['LocationID'], req_body['MachineID']))
+            SET Model = ?, ModelNum = ?, SerialNum = ?, VendorID = ?, LocationID = ?, 
+            ModelPhoto = ?, Status = ?, StatusDescription = ?  WHERE MachineID = ? ''',
+            (req_body['Model'], 
+            req_body['ModelNum'], 
+            req_body['SerialNum'], 
+            req_body['VendorID'], 
+            req_body['LocationID'],
+            req_body['ModelPhoto'],
+            req_body['Status'],
+            req_body['StatusDescription'],
+            req_body['MachineID']))
             conn.commit()
             logging.debug("Machine successfully updated")
             conn.close()
