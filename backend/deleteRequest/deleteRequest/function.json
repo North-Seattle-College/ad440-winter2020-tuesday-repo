@@ -7,7 +7,7 @@
       "direction": "in",
       "name": "req",
       "methods": ["delete"],
-      "route": "deleteRequest/{MachineID:int?}"
+      "route": "v1/machines/{MachineID:int?}"
     },
     {
       "type": "http",
