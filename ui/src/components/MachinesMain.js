@@ -38,6 +38,9 @@ export default class MachinesMain extends React.Component {
     MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customData}
     />
 
+
+    
+
     /* Author Iryna
     * Builds machine array with only necessary details about each machine for the table rows
     */
@@ -82,7 +85,7 @@ export default class MachinesMain extends React.Component {
     // wrapping in the try/catch block to handle network errors
     try {
         // fetching async promise
-        const response = await fetch(ApiUrl
+        const response = await fetch("https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/v1/machines"
     , {
         method: "GET",
         headers: {
@@ -115,6 +118,8 @@ export default class MachinesMain extends React.Component {
           throw error; // rethrow other unexpected errors
         }
     }
+    
+    //this.refreshTimer();
 }
 
 /******************** DELETE API  **********************/
@@ -123,7 +128,7 @@ deletemachine(id) {
     console.log("Delete id is ", id);
     if(window.confirm('DELETE Machine ID #' + id + '?'))
     {
-      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/machines/'+id,{
+      fetch('https://maria-fun-usw2-task141.azurewebsites.net/api/v1/machines/'+id,{
         method:'DELETE',
         header:{'Accept':'application/json',
         'Content-Type': 'application/json'
@@ -177,11 +182,13 @@ deletemachine(id) {
 
         console.log(" tempEditProduct ", tempEditProduct)
 
+        
+
 
          if(!machine.ModelPhoto){
             machine.ModelPhoto = " "
         }
-            fetch('https://jos-rg-fun-usw2-task62.azurewebsites.net/api/putRequest'
+            fetch('https://jos-rg-fun-usw2-task62.azurewebsites.net/api/v1/machines'
             , {
                 method: "PUT",
                 headers: {
@@ -237,13 +244,19 @@ deletemachine(id) {
            }
 
            console.log("Json stringify ", JSON.stringify(dataItem))
-            fetch('https://ken-fun-feat-usw2-task60.azurewebsites.net/api/postrequest?code=j6x7Br2k3VLjoFakea3fWXG35G6vZJnal/uFWmO7kbv2S141bbLczg=='
+            fetch('https://ken-fun-feat-usw2-task60.azurewebsites.net/api/v1/machines'
             , {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                   },
                 body: JSON.stringify(dataItem),
+            }).then((response) => response.text())
+            .then((data) => {
+              console.log('Success:', data);
+            }).then(refreshPage)
+            .catch((error) => {
+              console.error('Error:', error);
             });
 
             console.log("Data item id ", dataItem);
@@ -372,5 +385,21 @@ deletemachine(id) {
     cloneProduct(product) {
         return Object.assign({}, product);
     }
+
+
+    // refreshTimer(){
+    //     if(this.state.productInRealEdit || this.state.productInEdit || this.state.productInDetails){
+    //         console.log("this.state.productInRealEdit ", this.state.productInRealEdit)
+    //         console.log("this.state.productInEdit ", this.state.productInEdit)
+    //         console.log("this.state.productInDetails", this.state.productInDetails)
+    //         setTimeout(() => {
+    //                 window.location.reload(true);
+    //             }, 20000);
+    //         }
+    // }
+
+    
+
+   
 
 }
