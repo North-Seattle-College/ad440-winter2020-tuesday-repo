@@ -27,6 +27,6 @@ jobs:
 
 deploy:
   provider: azure_web_apps
-  username: AZ_LOGIN
-  password: AZ_PASSWORD
+  username: AZ_WEBAPP_LOGIN_NAME
+  password: AZ_WEBAPP_PASSWORD
   site: PoG-WebApp
