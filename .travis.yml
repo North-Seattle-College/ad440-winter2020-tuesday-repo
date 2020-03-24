@@ -19,3 +19,8 @@ before install:
 script:
   - unset CI
   - npm test
+
+deploy:
+  provider: azure_web_apps
+  username: AZ_LOGIN_NAME       # If AZURE_WA_USERNAME isn't set
+  password: AZ_PASSWORD         # If AZURE_WA_PASSWORD isn't set
