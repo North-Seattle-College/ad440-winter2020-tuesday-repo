@@ -15,7 +15,7 @@ CONNECTION_STRING = "HostName=bet-rg-feat-usw2-task2.azure-devices.net;DeviceId=
 
 # Define the JSON message to send to IoT Hub.
 BROKEN_WATER = ['All Okay', 'Failed']
-WATER_FLOW_ISSUE = ['Failed', 'Bad', 'Okay', 'Good', 'Excelent']
+WATER_FLOW_ISSUE = ['Failed', 'Bad', 'Okay', 'Good', 'Excellent']
 MISSING_COFFEE = ['Coffee Okay', 'Out Of Coffee']
 weights1 = [0.8, 0.2]
 weights2 = [0.05, 0.05, 0.2, 0.3, 0.4]
