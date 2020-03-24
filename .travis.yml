@@ -20,13 +20,12 @@ jobs:
       script:
         - unset CI
         # - npm run build  #build the current UI storage for displying in browser
+      deploy:
+        provider: azure_web_apps
+        username: AZ_WEBAPP_LOGIN_NAME
+        password: AZ_WEBAPP_PASSWORD
+        site: PoG-WebApp
       after script:
         - cd ..
     # stage
     # stage
-
-deploy:
-  provider: azure_web_apps
-  username: AZ_WEBAPP_LOGIN_NAME
-  password: AZ_WEBAPP_PASSWORD
-  site: PoG-WebApp
