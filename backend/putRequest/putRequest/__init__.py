@@ -13,13 +13,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         try:
             # check JSON body request
             req_body = req.get_json()
-            logging.info("Getting the json body." + str(req_body))
             logging.debug(req_body)
-            print(req_body)
 
             # Setting connection to the database via key vault connection string.
             conn = pyodbc.connect(os.environ['ConnString'])
-            logging.info("Connection complete" + str(conn))
+            logging.info(conn)
+            logging.info("Connection complete")
             logging.debug(conn)
             cursor = conn.cursor()
 
