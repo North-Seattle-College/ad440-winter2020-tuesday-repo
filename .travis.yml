@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - 12.16.1
+
+#stores npm data to speed up ci
+cache: npm
+
+#only updates on commits from this branch, develop and master
+branches:
+  only:
+    - master
+    - develop
+    - stor-dev-westus2
+
+jobs:
+  include:
+    # this is the stage that test the storage build
+    - stage: test storage and update static web build (virtual)
+      before install: cd ui
+      script:
+        - unset CI
+        - npm run build  #build the current UI storage for displying in browser
+      after script:
+        - cd ..
+    # stage
+    # stage
