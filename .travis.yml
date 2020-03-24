@@ -25,7 +25,7 @@ jobs:
         username: AZ_WEBAPP_LOGIN_NAME
         password: AZ_WEBAPP_PASSWORD
         site: PoG-WebApp
-      after script:
-        - cd ..
+      # after script:
+      #   - cd ..
     # stage
     # stage
