@@ -19,7 +19,7 @@ jobs:
       before install: cd ui
       script:
         - unset CI
-        - npm run build  #build the current UI storage for displying in browser
+        # - npm run build  #build the current UI storage for displying in browser
       after script:
         - cd ..
     # stage
