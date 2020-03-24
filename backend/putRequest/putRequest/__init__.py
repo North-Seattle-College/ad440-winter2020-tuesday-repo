@@ -11,7 +11,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # This stament checks for a PUT request.
     if (req.method == "PUT"):
         try:
-            
             # check JSON body request
             req_body = req.get_json()
             logging.info("Getting the json body." + str(req_body))
@@ -26,8 +25,17 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             #updates a Machine
             cursor.execute(''' UPDATE [dbo].[Machines]
-            SET Model = ?, ModelNum = ?, ModelPhoto = ?, SerialNum = ?, VendorID = ?, LocationID = ?  WHERE MachineID = ? ''',
-            (req_body['Model'], req_body['ModelNum'], req_body['ModelPhoto'], req_body['SerialNum'], req_body['VendorID'], req_body['LocationID'], req_body['MachineID']))
+            SET Model = ?, ModelNum = ?, SerialNum = ?, VendorID = ?, LocationID = ?, 
+            ModelPhoto = ?, Status = ?, StatusDescription = ?  WHERE MachineID = ? ''',
+            (req_body['Model'], 
+            req_body['ModelNum'], 
+            req_body['SerialNum'], 
+            req_body['VendorID'], 
+            req_body['LocationID'],
+            req_body['ModelPhoto'],
+            req_body['Status'],
+            req_body['StatusDescription'],
+            req_body['MachineID']))
             conn.commit()
             logging.debug("Machine successfully updated")
             conn.close()
