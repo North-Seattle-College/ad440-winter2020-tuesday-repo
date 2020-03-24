@@ -19,6 +19,7 @@ jobs:
       before install: cd ui
       script:
         - unset CI
+        - echo "skip testing"
         # - npm run build  #build the current UI storage for displying in browser
       deploy:
         provider: azure_web_apps
