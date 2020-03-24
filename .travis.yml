@@ -12,11 +12,21 @@ branches:
     - develop
     - stor-dev-westus2
 
-#changes directory to the ui branch for website updates
-before install:
-  - cd ui
+######This is what the code looks like before the switchover
 
-#run the build setup in travis ci and remove warnings as errors
-script:
-  - unset CI
-  - npm run build
+# #changes directory to the ui branch for website updates
+# before install:
+#   - cd ui
+#
+# #run the build setup in travis ci and remove warnings as errors
+# script:
+#   - unset CI
+#   - npm run build
+
+jobs:
+  include:
+    - stage: test storage
+      before install: cd ui
+      script:
+        - unset CI
+        - npm run build
