@@ -20,6 +20,7 @@ script:
   - unset CI
   - npm test
 
+#checking to see if this works
 deploy:
   provider: azure_web_apps
   username: AZ_LOGIN_NAME       # If AZURE_WA_USERNAME isn't set
