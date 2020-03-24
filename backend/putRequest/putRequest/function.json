@@ -9,7 +9,11 @@
       "methods": [
         "put"
       ],
+<<<<<<< HEAD
+      "route": "v1/machines/{id:int?}"
+=======
       "route": "v1/machines"
+>>>>>>> 065c39d10628b24e0d03b5738a2cc51bec1b7c10
     },
     {
       "type": "http",
