@@ -16,7 +16,11 @@ branches:
 before install:
   - cd ui
 
+<<<<<<< HEAD
 #run the build setup in travis ci and remove warnings as errors
+=======
+#run the build setup in travis ci, skip tests and remove warnings as errors
+>>>>>>> 7c745a4016937bab0fe3fae3f22380740c767279
 script:
   - unset CI
   - npm run build
