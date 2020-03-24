@@ -5,9 +5,10 @@ node_js:
 #stores npm data to speed up ci
 cache: npm
 
-#only updates on commits from this brannch and master
+#only updates on commits from this branch, develop and master
 branches:
   only:
+    - master
     - develop
     - stor-dev-westus2
 
@@ -15,14 +16,8 @@ branches:
 before install:
   - cd ui
 
-#run the build setup in travis ci
+#run the build setup in travis ci, skip tests and remove warnings as errors
 script:
   - echo "skipping tests"
   - unset CI
-#   - npm test
-
-#checking to see if this works
-deploy:
-  provider: azure_web_apps
-  username: AZ_LOGIN_NAME       # If AZURE_WA_USERNAME isn't set
-  password: AZ_PASSWORD         # If AZURE_WA_PASSWORD isn't set
+  - npm run build
