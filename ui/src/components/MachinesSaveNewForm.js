@@ -1,52 +1,62 @@
 
 import React from 'react';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
+// import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
 import { Input } from '@progress/kendo-react-inputs';
 
-export default class MachinesEditForm extends React.Component {
+export default class MachinesSaveNewForm extends React.Component {
   constructor(props) {
       super(props);
       // have a state say if its a edit or save form
       this.state = {
-          productInRealEdit: this.props.dataItem || null,
-          dataItemID: this.props.dataItem.MachineID
-      };    
+          productInEdit: this.props.dataItem || null
+      };
   }
   handleSubmit(event) {
       event.preventDefault();
   }
 
-
   onDialogInputChange = (event) => {
-    let target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const propertyName = target.props ? target.props.name : target.name;
+      let target = event.target;
+      console.log("Target" , target)
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      console.log("Target Value ", value );
+      const propertyName = target.props ? target.props.name : target.name;
 
-    const editedProperty = this.state.productInRealEdit;
-        
-       editedProperty[propertyName] = value;
-       editedProperty.MachineID = this.props.dataItem.MachineID;
+      const editedProperty = this.state.productInEdit;
+      console.log ("edited property: ", editedProperty );
+      console.log("Edited adress ", editedProperty.address, "Edited name ", editedProperty.name, "Edited status ", editedProperty.status);
+      console.log("Product in Edit = this.dataItem ", this.state);
+
+
+
+     editedProperty[propertyName] = value;
+
+
+    // console.log("editedProperty[propertyName]: ", editedProperty[propertyName])
+
+      console.log("Edited[name] ," , editedProperty[propertyName])
 
       this.setState({
-        productInRealEdit: this.props.dataItem
+          productInEdit: editedProperty
       });
   }
 
   render() {
-   
+
       return (
         <Dialog
             onClose={this.props.cancel}
         >
             <form onSubmit={this.handleSubmit}>
 
-            <div style={{ marginBottom: '1rem' }}>
+                <div style={{ marginBottom: '1rem' }}>
                     <label>
                     Vendor ID<br />
                     <Input
                         type="text"
                         name="VendorID"
-                        value={this.state.productInRealEdit.VendorID || ''}
+                        value={this.state.productInEdit.VendorID || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
@@ -58,7 +68,7 @@ export default class MachinesEditForm extends React.Component {
                     <Input
                         type="text"
                         name="LocationID"
-                        value={this.state.productInRealEdit.LocationID || ''}
+                        value={this.state.productInEdit.LocationID || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label>
@@ -70,7 +80,7 @@ export default class MachinesEditForm extends React.Component {
                     <Input
                         type="text"
                         name="Model"
-                        value={this.state.productInRealEdit.Model || ''}
+                        value={this.state.productInEdit.Model || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
@@ -82,7 +92,7 @@ export default class MachinesEditForm extends React.Component {
                     <Input
                         type="text"
                         name="ModelNum"
-                        value={this.state.productInRealEdit.ModelNum || ''}
+                        value={this.state.productInEdit.ModelNum || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
@@ -94,7 +104,7 @@ export default class MachinesEditForm extends React.Component {
                     <Input
                         type="text"
                         name="SerialNum"
-                        value={this.state.productInRealEdit.SerialNum || ''}
+                        value={this.state.productInEdit.SerialNum || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
@@ -105,33 +115,11 @@ export default class MachinesEditForm extends React.Component {
                     <Input
                         type="text"
                         name="ModelPhoto"
-                        value={this.state.productInRealEdit.ModelPhoto || ''}
+                        value={this.state.productInEdit.ModelPhoto || ''}
                         onChange={this.onDialogInputChange}
                     />
                     </label></div>
 
-                    <div style={{ marginBottom: '1rem' }}>
-                    <label>
-                    Status<br />
-                    <Input
-                        type="text"
-                        name="Status"
-                        value={this.state.productInRealEdit.Status || ''}
-                        onChange={this.onDialogInputChange}
-                    />
-                    </label></div>
-
-                    <div style={{ marginBottom: '1rem' }}>
-                    <label>
-                      Status Desccription <br />
-                    <Input
-                        type="text"
-                        name="StatusDescription"
-                        value={this.state.productInRealEdit.StatusDescription || ''}
-                        onChange={this.onDialogInputChange}
-                    />
-                    </label></div>
-                  
             </form>
             <DialogActionsBar>
                 <button
@@ -140,7 +128,7 @@ export default class MachinesEditForm extends React.Component {
 
             <button
                     className="k-button k-primary"
-                    onClick={()=> this.props.edit(this.props.editedProductID)}>Edit</button>
+                    onClick={this.props.save}>Save</button>
             </DialogActionsBar>
         </Dialog>
     );

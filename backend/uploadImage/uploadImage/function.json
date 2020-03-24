@@ -6,8 +6,9 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "methods": ["delete"],
-      "route": "deleteRequest/{MachineID:int?}"
+      "methods": [
+        "post"
+      ]
     },
     {
       "type": "http",

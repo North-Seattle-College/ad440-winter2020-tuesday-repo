@@ -2,12 +2,12 @@
   "scriptFile": "__init__.py",
   "bindings": [
     {
-      "authLevel": "anonymous",
+      "authLevel": "function",
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
       "methods": ["delete"],
-      "route": "deleteRequest/{MachineID:int?}"
+      "route": "machines/{machineID}"
     },
     {
       "type": "http",

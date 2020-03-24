@@ -1,0 +1,239 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vault_name": {
+            "type": "String",
+            "metadata": {
+                "description": "this is the name of the key vault, retrieved from parameters.json file"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.KeyVault/vaults",
+            "apiVersion": "2016-10-01",
+            "name": "[parameters('vault_name')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "sku": {
+                    "family": "A",
+                    "name": "Standard"
+                },
+                "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                "accessPolicies": [
+                    {
+                        "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                        "objectId": "18f01152-a989-452d-8b1e-c5d0435723d6",
+                        "permissions": {
+                            "keys": [],
+                            "secrets": [
+                                "Get",
+                                "List",
+                                "Set",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore",
+                                "Purge"
+                            ],
+                            "certificates": []
+                        }
+                    },
+                    {
+                        "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                        "objectId": "61a9fbef-ce0e-470a-abd5-5298fa1f5ba9",
+                        "permissions": {
+                            "keys": [],
+                            "secrets": [
+                                "Get"
+                            ],
+                            "certificates": []
+                        }
+                    },
+                    {
+                        "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                        "objectId": "d00f48eb-bf33-49a4-9c40-3f526f748d8c",
+                        "permissions": {
+                            "keys": [],
+                            "secrets": [
+                                "Get",
+                                "List",
+                                "Set",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore"
+                            ],
+                            "certificates": []
+                        }
+                    },
+                    {
+                        "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                        "objectId": "352fb92f-adf0-4c30-b1c6-071ccda2984c",
+                        "permissions": {
+                            "keys": [],
+                            "secrets": [
+                                "Get"
+                            ],
+                            "certificates": []
+                        }
+                    },
+                    {
+                        "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                        "objectId": "dbf3e1f9-4af1-4fe2-8d44-72acb4ef1dae",
+                        "permissions": {
+                            "keys": [
+                                "Get"
+                            ],
+                            "secrets": [
+                                "Get"
+                            ],
+                            "certificates": []
+                        }
+                    },
+                    {
+                        "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                        "objectId": "95502750-7e3f-4bdc-afae-f9909eff6f78",
+                        "permissions": {
+                            "keys": [
+                                "Get"
+                            ],
+                            "secrets": [
+                                "Get",
+                                "List",
+                                "Set",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore",
+                                "Purge"
+                            ],
+                            "certificates": []
+                        }
+                    },
+                    {
+                        "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                        "objectId": "ce7c3f75-47bd-4dda-8b0a-d61b16aeddcf",
+                        "permissions": {
+                            "keys": [],
+                            "secrets": [
+                                "Get"
+                            ],
+                            "certificates": []
+                        }
+                    },
+                    {
+                        "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                        "objectId": "33f0be3d-466f-4b93-9eea-16ee8838dff5",
+                        "permissions": {
+                            "keys": [],
+                            "secrets": [
+                                "Get",
+                                "List",
+                                "Set",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore"
+                            ],
+                            "certificates": []
+                        }
+                    },
+                    {
+                        "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                        "objectId": "bd384ed7-e228-4906-802e-4eb2127ba269",
+                        "applicationId": "8602e328-9b72-4f2d-a4ae-1387d013a2b3",
+                        "permissions": {
+                            "keys": [
+                                "Get",
+                                "List",
+                                "Update",
+                                "Create",
+                                "Import",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore"
+                            ],
+                            "secrets": [
+                                "Get",
+                                "List",
+                                "Set",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore"
+                            ],
+                            "certificates": [
+                                "Get",
+                                "List",
+                                "Update",
+                                "Create",
+                                "Import",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore",
+                                "ManageContacts",
+                                "ManageIssuers",
+                                "GetIssuers",
+                                "ListIssuers",
+                                "SetIssuers",
+                                "DeleteIssuers"
+                            ]
+                        }
+                    },
+                    {
+                        "tenantId": "08c1c649-bfdd-439e-8e5b-5ff31c72ce4e",
+                        "objectId": "2228df66-2218-468c-8cee-7bae011d4d9c",
+                        "permissions": {
+                            "keys": [
+                                "Get",
+                                "List",
+                                "Update",
+                                "Create",
+                                "Import",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore"
+                            ],
+                            "secrets": [
+                                "Get",
+                                "List",
+                                "Set",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore"
+                            ],
+                            "certificates": [
+                                "Get",
+                                "List",
+                                "Update",
+                                "Create",
+                                "Import",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore",
+                                "ManageContacts",
+                                "ManageIssuers",
+                                "GetIssuers",
+                                "ListIssuers",
+                                "SetIssuers",
+                                "DeleteIssuers"
+                            ]
+                        }
+                    }
+                ],
+                "enabledForDeployment": false,
+                "enabledForDiskEncryption": true,
+                "enabledForTemplateDeployment": true,
+                "enableSoftDelete": true
+            }
+        }
+    ]
+}

@@ -1,16 +1,36 @@
-
+//Created by Siergiey and edited by Abdi
+//This component is responsible for rendering a pop-up window with machine details.
 import React from 'react';
+// import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
-import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
+// import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
+// import {Link} from 'react-router';
+import CustomStatusCell from "./CustomStatusCell"
+
+
+
 
 export default class MachinesDetailsForm extends React.Component {
+
+
+
   constructor(props) {
       super(props);
-      // TODO - REPLACE THE DATAITEM WITH THE DATA FROM THE DATABASE
       this.state = {
           productInDetails: this.props.dataItem || null
       };
   }
+
+        customData = [
+        { color: 'green' },
+        { color: 'yellow' },
+        { color: 'red' }
+    ];
+
+    MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customData}
+    />
+
+
   handleSubmit(event) {
       event.preventDefault();
   }
@@ -28,93 +48,116 @@ export default class MachinesDetailsForm extends React.Component {
       });
   }
 
+
+
   render() {
+
+     // const mystyle = {
+     //     width:200,
+     //     textAlign:'left'
+     // };
+
+
       return (
         <Dialog
+
               onClose={this.props.cancel}
+
           >
               <form onSubmit={this.handleSubmit}>
 
 
-              <div style={{ marginBottom: '1rem' }}>
-                      <label>
-                  <b>  Image</b>
-
-                    <img src={this.state.productInDetails.serialnum} />
 
 
-                      </label></div>
+          <div style={{ marginBottom: '1rem', float:'left', width:400, marginRight:50}}>
+
+          {this.state.productInDetails.ModelPhoto===" " || this.state.productInDetails.ModelPhoto===null ||
+          this.state.productInDetails.ModelPhoto==="null"||
+          this.state.productInDetails.ModelPhoto===" null"
+          ? <img style={{width:400}} alt = "" src='https://images-na.ssl-images-amazon.com/images/I/81s%2Btw0hwzL.__AC_SY300_QL70_ML2_.jpg'/>
+          : <img style={{width:400}} alt = "" src={this.state.productInDetails.ModelPhoto} />}
 
 
-                                      <div style={{ marginBottom: '1rem' }}>
-                                          <label>
-                                          <b>ModelNum</b><br />
-                      {this.state.productInDetails.modelnum || ''}
+          </div>
 
-                                          </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style={{float:'right', maxWidth:'60%', width:200, textAlign:'left'}}>
 
 
-                                                              <label>
-                                                              <b>LocationID</b><br />
-                                          {this.state.productInDetails.locationID || ''}
-
-                                                              </label></div>
-
-
-
-
-                    <div style={{ marginBottom: '1rem' }}>
-
-                      <label>
-                      <b>Model</b><br />
-  {this.state.productInDetails.model || ''}
-
-                      </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div>
+          <label>
+          <b>ModelNum</b><br />
+          {this.state.productInDetails.ModelNum || ''}
+          </label>
+          </div>
 
 
-                      <label>
-                      <b>Status</b><br />
-  {this.state.productInDetails.status || ''}
+          <div>
+          <label>
+          <b>Model</b><br />
+          {this.state.productInDetails.Model || ''}
+          </label>
+          </div>
 
-                      </label><br /><br />
-
-
-                      <div style={{ marginBottom: '1rem' }}>
-                                          <label>
-                                          <b>Address</b><br />
-                            {this.state.productInDetails.address || ''}
-
-                                          </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                              <label>
-                              <b>SerialNum</b><br />
-
-                            {this.state.productInDetails.serialnum || ''}
+          <div>
+          <label>
+          <b>LocationID</b><br/>
+          {this.state.productInDetails.LocationID || ''}
+          </label>
+          </div>
 
 
-                              </label></div>
-                              </div>
-                              <div style={{ marginBottom: '1rem' }}>
-                                  <label>
-                                  <b>Vendor</b><br />
-                            {this.state.productInDetails.vender || ''}
-
-                                  </label></div>
+          <div>
+          <label>
+          <b>Address</b><br />
+          {this.state.productInDetails.street || ''}<br/>
+          {this.state.productInDetails.city || ''}{", "}
+          {this.state.productInDetails.state || ''}{" "}
+          {this.state.productInDetails.zip || ''}<br/>
+          {<b>Phone: </b>}{this.state.productInDetails.phone || ''}<br/>
+          </label>
+          </div>
 
 
 
-              </form>
+          <div>
+          <label>
+          <b>Status</b><br />
+          {this.state.productInDetails.Status}<br/>
+          {this.state.productInDetails.StatusDescription || ''}
+          </label>
+          </div>
 
-                        <DialogActionsBar>
-                        <button
-                            className="k-button"
-                            onClick={this.props.cancel}>Cancel</button>
+          <div>
+          <label>
+          <b>SerialNum</b><br />
+          {this.state.productInDetails.SerialNum || ''}
+          </label>
+          </div>
+
+          <div>
+          <label>
+          <b>Vendor</b><br />
+          {this.state.productInDetails.Vendor || ''}
+          </label>
+          </div>
+
+          </div>
 
 
 
+          </form>
 
-              </DialogActionsBar>
+
+        <DialogActionsBar>
+        <button
+        className="k-button"
+
+          onClick={this.props.cancel}>Cancel</button>
+
+          </DialogActionsBar>
           </Dialog>
+
+
     );
   }
 }
