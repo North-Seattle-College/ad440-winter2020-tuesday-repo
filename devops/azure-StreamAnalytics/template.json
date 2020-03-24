@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"owner": {
+			"type": "String",
+			"metadata": {
+				"description": "current user name"
+			}
+		},
+		"email": {
+			"type": "String",
+			"metadata": {
+				"description": "current user email"
+			}
+		},
+		"jobName": {
+			"type": "String",
+			"metadata": {
+				"description": "name of the current streaming job"
+			}
+		}
+	},
+	"variables": {},
+	"resources": [{
+			"type": "Microsoft.StreamAnalytics/streamingjobs",
+			"apiVersion": "2016-03-01",
+			"name": "[parameters('jobName')]",
+			"location": "[resourceGroup().location]",
+			"tags": {
+				"Owner": "[parameters('owner')]",
+				"Application": "Pot-O-Gold",
+				"OwnerEmail ": "[parameters('email')]"
+			},
+			"properties": {
+				"sku": {
+					"name": "Standard"
+				},
+				"eventsOutOfOrderPolicy": "Adjust",
+				"outputErrorPolicy": "Stop",
+				"eventsOutOfOrderMaxDelayInSeconds": 0,
+				"eventsLateArrivalMaxDelayInSeconds": 5,
+				"dataLocale": "en-US",
+				"compatibilityLevel": "1.1"
+			}
+		}
+	],
+	"outputs": {
+		"someRGoutput": {
+			"value": "[resourceId('Microsoft.StreamAnalytics/streamingjobs', parameters('jobName'))]",
+			"type": "string"
+		}
+	}
+}
