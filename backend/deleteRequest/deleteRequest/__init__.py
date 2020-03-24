@@ -10,13 +10,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # Check for a DELETE request.
     if (req.method == "DELETE"):
         try:
-            # check url parameter for machineID
-            machineID = req.params.get('MachineID')
+            # Get url parameter for machineID
+            machineID = req.route_params.get('MachineID')
             logging.info("Getting machine id from url.")
             logging.debug(machineID)
-
             
-            # Setting connection to the database via key vault connection string.
+            # Set connection to the database
             conn = pyodbc.connect(os.environ['ConnString'])
             logging.debug(conn)
             logging.info("Connection complete")
@@ -35,7 +34,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             return func.HttpResponse(f"successful request")
         except ValueError as e:
-            logging.error("No parameter passed in the URL" + str(e))
+            logging.error("Incorrect value passed in the URL" + str(e))
             pass
         except Exception as err:
             logging.error("String connection to the database failed " + str(err))
