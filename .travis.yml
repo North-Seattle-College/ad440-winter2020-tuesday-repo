@@ -10,7 +10,7 @@ branches:
   only:
     - master
     - develop
-    - stor-dev-westus2
+    - sto-ci-westus2
 
 jobs:
   include:
@@ -24,3 +24,9 @@ jobs:
         - cd ..
     # stage
     # stage
+
+deploy:
+  provider: azure_web_apps
+  username: AZ_LOGIN
+  password: AZ_PASSWORD
+  site: PoG-WebApp
