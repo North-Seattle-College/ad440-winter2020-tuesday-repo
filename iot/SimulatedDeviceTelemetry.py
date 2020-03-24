@@ -33,8 +33,10 @@ def iothub_client_telemetry_sample_run():
 
         while True:
             # Build the message with simulated telemetry values.
-            valve = str(random.choices(VALVE_STATUS)).strip('[]')
-            hose = str(random.choices(HOSE_PRESSURE)).strip('[]')
+            str_valve = str(random.choices(VALVE_STATUS)).strip("'[]'")
+            valve = f'"{str_valve}"'
+            str_hose = str(random.choices(HOSE_PRESSURE)).strip("'[]'")
+            hose = f'"{str_hose}"'
             machineId = MACHINEID
             msg_txt_formatted = MSG_TXT.format(machineId=machineId, valve_status=valve, hose_status=hose)
             message = Message(msg_txt_formatted)
