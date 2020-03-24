@@ -39,7 +39,7 @@ export default class MachinesMain extends React.Component {
     />
 
 
-    
+
 
     /* Author Iryna
     * Builds machine array with only necessary details about each machine for the table rows
@@ -85,7 +85,7 @@ export default class MachinesMain extends React.Component {
     // wrapping in the try/catch block to handle network errors
     try {
         // fetching async promise
-        const response = await fetch("https://kiara-fun-feat-usw2-task155.azurewebsites.net/api/v1/machines"
+        const response = await fetch(ApiUrl
     , {
         method: "GET",
         headers: {
@@ -118,7 +118,7 @@ export default class MachinesMain extends React.Component {
           throw error; // rethrow other unexpected errors
         }
     }
-    
+
     //this.refreshTimer();
 }
 
@@ -182,7 +182,7 @@ deletemachine(id) {
 
         console.log(" tempEditProduct ", tempEditProduct)
 
-        
+
 
 
          if(!machine.ModelPhoto){
@@ -398,8 +398,8 @@ deletemachine(id) {
     //         }
     // }
 
-    
 
-   
+
+
 
 }
