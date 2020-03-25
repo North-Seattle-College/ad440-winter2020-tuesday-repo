@@ -16,10 +16,11 @@ jobs:
   include:
     # -------------------------------------------------------------------------
     - stage: test storage and update static web build
-      before install: cd ui
       script:
-        - unset CI
         - echo "skip testing"
+      before deploy:
+        - cd ui
+        - unset CI
       deploy:
         provider: azure_web_apps
         username: AZ_WEBAPP_LOGIN_NAME
