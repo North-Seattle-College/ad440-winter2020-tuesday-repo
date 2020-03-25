@@ -19,7 +19,6 @@ jobs:
       script:
         - echo "skip testing"
       before deploy:
-        # - cd ui
         - unset CI
       deploy:
         provider: azure_web_apps
