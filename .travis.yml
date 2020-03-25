@@ -21,6 +21,7 @@ jobs:
       before deploy:
         - unset CI
       deploy:
+        before install: cd ui
         provider: azure_web_apps
         username: AZ_WEBAPP_LOGIN_NAME
         password: AZ_WEBAPP_PASSWORD
