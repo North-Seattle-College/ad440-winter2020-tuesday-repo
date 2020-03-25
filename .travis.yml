@@ -26,6 +26,7 @@ jobs:
         username: AZ_WEBAPP_LOGIN_NAME
         password: AZ_WEBAPP_PASSWORD
         site: PoG-WebApp
+        local_dir: ui
         on:
           - sto-ci-westus2
     # -------------------------------------------------------------------------
