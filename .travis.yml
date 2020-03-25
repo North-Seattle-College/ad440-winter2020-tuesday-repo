@@ -24,27 +24,12 @@ jobs:
     #   after script:
     #     - cd ..
     # -------------------------------------------------------------------------
-    - build-and-deploy:
-      runs-on: ubuntu-latest
-      steps:
-      # checkout the repo
-      - name: 'Checkout Github Action'
-        uses: actions/checkout@develop
-      # - name: Setup Node 10.x
-      #   uses: actions/setup-node@v1
-      #   with:
-      #     node-version: '10.x'
-      - name: 'npm install, build, and test'
-        run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
-
-      - name: 'Run Azure webapp deploy action using publish profile credentials'
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: PoG-WebApp
-          publish-profile: AZ_WEBAPP_PUBLISH_SETTINGS
+    - stage: deploy the site to www site
+      deploy:
+        provider: azure_web_apps
+        username: AZ_WEBAPP_LOGIN_NAME
+        password: AZ_WEBAPP_PASSWORD
+        site: PoG-WebApp
     # -------------------------------------------------------------------------
     # stage
     # -------------------------------------------------------------------------
