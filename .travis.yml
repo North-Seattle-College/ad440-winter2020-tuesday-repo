@@ -15,16 +15,16 @@ branches:
 jobs:
   include:
     # -------------------------------------------------------------------------
-    # this is the stage that test the storage build
-    # - stage: test storage and update static web build (virtual)
-    #   before install: cd ui
-    #   script:
-    #     - unset CI
-    #     - npm run build  #build the current UI storage for displying in browser
+    #this is the stage that test the storage build
+    - stage: test storage and update static web build (virtual)
+      before install: cd ui
+      script:
+        - unset CI
+        # - npm run build  #build the current UI storage for displying in browser
     #   after script:
     #     - cd ..
     # -------------------------------------------------------------------------
-    build-and-deploy:
+    - build-and-deploy:
       runs-on: ubuntu-latest
       steps:
       # checkout the repo
