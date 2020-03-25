@@ -35,18 +35,18 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         logging.info('Http trigger request complete')
         return func.HttpResponse(f"Successful request")
 
-    except ValueError as jerr:
-        logging.error("Incorrect JSON format " + str(jerr))
-        return func.HttpResponse('Incorrect JSON format',status_code=400)
-    except Exception as err:
-        logging.error("String connection to the database failed " + str(err))
-        return func.HttpResponse('Connection failed',status_code=500)
     except pyodbc.DatabaseError as derr:
         logging.error("Database failed " + str(derr))
         return func.HttpResponse('Database failed',status_code=500)
     except pyodbc.ProgrammingError as perr:
         logging.error("Your record could not be added " + str(perr))
         return func.HttpResponse('Machine could not be added',status_code=500)
+    except ValueError as jerr:
+        logging.error("Incorrect JSON format " + str(jerr))
+        return func.HttpResponse('Incorrect JSON format',status_code=400)
+    except Exception as err:
+        logging.error("String connection to the database failed " + str(err))
+        return func.HttpResponse('Connection failed',status_code=500)
 
      # no POST request was made
     logging.info("No POST request was made")
