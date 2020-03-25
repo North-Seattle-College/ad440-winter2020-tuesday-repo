@@ -19,7 +19,9 @@ jobs:
       script:
         - echo "skip testing"
         - unset CI
-      before deploy: cd ui
+      before deploy:
+        - cd ui
+        - echo $PWD
       deploy:
         provider: azure_web_apps
         username: AZ_WEBAPP_LOGIN_NAME
