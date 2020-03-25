@@ -15,14 +15,11 @@ branches:
 jobs:
   include:
     # -------------------------------------------------------------------------
-    #this is the stage that test the storage build
-    - stage: test storage and update static web build (virtual)
+    - stage: test storage and update static web build
       before install: cd ui
       script:
         - unset CI
         # - npm run build  #build the current UI storage for displying in browser
-    #   after script:
-    #     - cd ..
     # -------------------------------------------------------------------------
     - stage: deploy the site to www site
       deploy:
@@ -30,6 +27,10 @@ jobs:
         username: AZ_WEBAPP_LOGIN_NAME
         password: AZ_WEBAPP_PASSWORD
         site: PoG-WebApp
+    # -------------------------------------------------------------------------
+    # -stage: change directory back to root
+    #   after script:
+    #     - cd ..
     # -------------------------------------------------------------------------
     # stage
     # -------------------------------------------------------------------------
