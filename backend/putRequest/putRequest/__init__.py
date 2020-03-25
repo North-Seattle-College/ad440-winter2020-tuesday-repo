@@ -42,12 +42,21 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         except ValueError as e:
             logging.error("Invalid json format " + str(e))
             pass # invalid json
+        except pyodbc.InterfaceError as e:
+            logging.error("Database connection failed " + str(e))
+            pass
         except Exception as err:
             logging.error("String connection to the database failed " + str(err))
             pass
         except pyodbc.DatabaseError as em:
             logging.error("Something went wrong with the database " + str(em))
             cursor.rollback()
+            pass
+        except pyodbc.OperationalError as e:
+            logging.error("Operational error")
+            pass
+        except pyodbc.ProgrammingError as e:
+            logging.error("Programming error")
             pass
         finally:
             logging.info("Closing connection to the database ...")

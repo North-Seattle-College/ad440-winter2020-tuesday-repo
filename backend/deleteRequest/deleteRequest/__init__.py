@@ -34,14 +34,22 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             return func.HttpResponse(f"successful request")
         except ValueError as e:
-            logging.error("Incorrect value passed in the URL" + str(e))
+            logging.error("Incorrect value passed in the URL " + str(e))
             pass
-        except Exception as err:
-            logging.error("String connection to the database failed " + str(err))
+        except pyodbc.InterfaceError as e:
+            logging.error("Database connection failed " + str(e))
             pass
-        except pyodbc.DatabaseError as em:
-            logging.error("Something went wrong with the database " + str(em))
-            cursor.rollback()
+        except Exception as e:
+            logging.error("String connection to the database failed " + str(e))
+            pass
+        except pyodbc.DatabaseError as e:
+            logging.error("Something went wrong with the database " + str(e))
+            pass
+        except pyodbc.OperationalError as e:
+            logging.error("Operational error")
+            pass
+        except pyodbc.ProgrammingError as e:
+            logging.error("Programming error")
             pass
         finally:
             logging.info("record successfuly deleted")
