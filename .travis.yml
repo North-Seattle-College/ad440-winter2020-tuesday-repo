@@ -43,7 +43,7 @@ jobs:
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
         with:
-          app-name: node-rn
+          app-name: PoG-WebApp
           publish-profile: AZ_WEBAPP_PUBLISH_SETTINGS
     # -------------------------------------------------------------------------
     # stage
