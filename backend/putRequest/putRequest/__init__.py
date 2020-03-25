@@ -36,21 +36,38 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             req_body['StatusDescription'],
             req_body['MachineID']))
             conn.commit()
-            logging.debug("Machine successfully updated")
             conn.close()
             return func.HttpResponse(f"successful request")
         except ValueError as e:
             logging.error("Invalid json format " + str(e))
             pass # invalid json
-        except Exception as err:
-            logging.error("String connection to the database failed " + str(err))
+        except pyodbc.DatabaseError as e:
+            logging.error("Something went wrong with the database")
             pass
-        except pyodbc.DatabaseError as em:
-            logging.error("Something went wrong with the database " + str(em))
-            cursor.rollback()
+        except pyodbc.InterfaceError as e:
+            logging.error("Database connection failed")
+            pass
+        except pyodbc.DataError as e:
+            logging.error("Problem processing the data")
+            pass
+        except pyodbc.InternalError as e:
+            logging.error("Internal error with the database")
+            pass
+        except pyodbc.OperationalError as e:
+            logging.error("Unexpected disconnect, memory allocation, or selected database may not exist")
+            pass
+        except pyodbc.NotSupportedError as e:
+            logging.error("Api or method is not supported")
+            pass
+        except pyodbc.ProgrammingError as e:
+            logging.error("Programming errort, check database inputs")
+            pass
+        except Exception as e:
+            logging.error("Unknown error occurred")
             pass
         finally:
-            logging.info("Closing connection to the database ...")
+            logging.info("Machine successfuly deleted")
+            logging.info("Closing connection to the database...")
 
     # retuerns a Http 400 status.
     return func.HttpResponse(

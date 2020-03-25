@@ -28,24 +28,42 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             # clean up               
             conn.commit()
+            logging.debug("")
             cursor.close()
             conn.close()
-            logging.info("Machine successfully deleted") 
 
             return func.HttpResponse(f"successful request")
-        except ValueError as e:
-            logging.error("Incorrect value passed in the URL" + str(e))
-            pass
-        except Exception as err:
-            logging.error("String connection to the database failed " + str(err))
-            pass
-        except pyodbc.DatabaseError as em:
-            logging.error("Something went wrong with the database " + str(em))
-            cursor.rollback()
-            pass
-        finally:
-            logging.info("record successfuly deleted")
-            logging.info("Closing connection to the database ...")
+        except pyodbc.DatabaseError as e:
+            logging.error("Something went wrong with the database")
+            
+        except pyodbc.InterfaceError as e:
+            logging.error("Database connection failed")
+            
+        except pyodbc.DataError as e:
+            logging.error("Problem processing the data")
+            
+        except pyodbc.InputError as e:
+            logging.error("MachineID not found", str(e))
+            return func.HttpResponse("MachineID not found: ", status_code=400)
+
+        except pyodbc.InternalError as e:
+            logging.error("Internal error with the database")
+            return func.HttpResponse("MachineID not found: ", status_code=500)
+            
+        except pyodbc.OperationalError as e:
+            logging.error("Unexpected disconnect, memory allocation, or selected database may not exist")
+            
+        except pyodbc.NotSupportedError as e:
+            logging.error("Api or method is not supported")
+            
+        except pyodbc.ProgrammingError as e:
+            logging.error("Programming errort, check database inputs")
+            
+        except Exception as e:
+            logging.error("Unknown error occurred")
+        
+        logging.info("Machine successfuly deleted")
+        logging.info("Closing connection to the database...")
     
     # returns a Http 400 status bad request. 
     return func.HttpResponse(
