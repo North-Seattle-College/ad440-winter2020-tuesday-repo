@@ -22,6 +22,8 @@ jobs:
         # - npm run build  #build the current UI storage for displying in browser
     # -------------------------------------------------------------------------
     - stage: deploy the site to www site
+      script:
+        - echo "skip testing"
       deploy:
         provider: azure_web_apps
         username: AZ_WEBAPP_LOGIN_NAME
