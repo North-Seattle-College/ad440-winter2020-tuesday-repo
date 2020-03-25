@@ -10,7 +10,7 @@ branches:
   only:
     - master
     - develop
-    - stor-dev-westus2
+    - sto-ci-westus2
 
 jobs:
   include:
