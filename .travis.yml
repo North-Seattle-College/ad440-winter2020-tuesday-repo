@@ -29,6 +29,8 @@ jobs:
         username: AZ_WEBAPP_LOGIN_NAME
         password: AZ_WEBAPP_PASSWORD
         site: PoG-WebApp
+        on:
+          - sto-ci-westus2
     # -------------------------------------------------------------------------
     # -stage: change directory back to root
     #   after script:
