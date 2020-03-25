@@ -18,10 +18,9 @@ jobs:
     - stage: test storage and update static web build
       script:
         - echo "skip testing"
-      before deploy:
         - unset CI
+      before deploy: cd ui
       deploy:
-        script: cd ui
         provider: azure_web_apps
         username: AZ_WEBAPP_LOGIN_NAME
         password: AZ_WEBAPP_PASSWORD
