@@ -10,23 +10,43 @@ branches:
   only:
     - master
     - develop
-    - sto-ci-westus2
+    - stor-dev-westus2
 
 jobs:
   include:
+    # -------------------------------------------------------------------------
     # this is the stage that test the storage build
-    - stage: test storage and update static web build (virtual)
-      before install: cd ui
-      script:
-        - unset CI
-        - echo "skip testing"
-        # - npm run build  #build the current UI storage for displying in browser
-      deploy:
-        provider: azure_web_apps
-        username: AZ_WEBAPP_LOGIN_NAME
-        password: AZ_WEBAPP_PASSWORD
-        site: PoG-WebApp
-      # after script:
-      #   - cd ..
+    # - stage: test storage and update static web build (virtual)
+    #   before install: cd ui
+    #   script:
+    #     - unset CI
+    #     - npm run build  #build the current UI storage for displying in browser
+    #   after script:
+    #     - cd ..
+    # -------------------------------------------------------------------------
+    build-and-deploy:
+      runs-on: ubuntu-latest
+      steps:
+      # checkout the repo
+      - name: 'Checkout Github Action'
+        uses: actions/checkout@develop
+      # - name: Setup Node 10.x
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: '10.x'
+      - name: 'npm install, build, and test'
+        run: |
+          npm install
+          npm run build --if-present
+          npm run test --if-present
+
+      - name: 'Run Azure webapp deploy action using publish profile credentials'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: node-rn
+          publish-profile: AZ_WEBAPP_PUBLISH_SETTINGS
+    # -------------------------------------------------------------------------
     # stage
+    # -------------------------------------------------------------------------
     # stage
+    # -------------------------------------------------------------------------
