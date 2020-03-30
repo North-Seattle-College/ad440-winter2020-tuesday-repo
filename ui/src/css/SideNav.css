@@ -1,0 +1,34 @@
+.sidenav {
+    background-color: #000000 !important;
+    padding: 100px 0px;
+    /* padding-bottom: 25%; */
+    height: 620px;
+    width: 20%;
+    min-width:100px;
+    float:left;
+}
+
+/* .relative-nav-wrapper.button {
+    padding: 10px 0px;
+} */
+
+/* .content-wrapper {
+  position: relative;
+  height: 100%;
+} */
+/* .relative-logo-wrapper {
+  position: relative;
+  height: 100px;
+
+
+} */
+/* .relative-nav-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+} */
+
+/* .name {
+  font-size: 24px;
+  color: black;
+} */

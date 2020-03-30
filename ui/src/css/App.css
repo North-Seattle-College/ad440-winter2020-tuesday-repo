@@ -1,0 +1,54 @@
+.App {
+    margin: auto;
+    max-width: 100%;
+    text-align: center;
+    background-color: black;
+}
+
+/* .top-bar {
+    width: 100%;
+    height:45px;
+    background-color: #142709;
+    margin: 100px;
+} */
+
+.login {
+  background-color: #FEF6E9;
+  width: 100%;
+  height: 125px;
+  float: center;
+}
+
+.top-bar {
+    background-color: #142709;
+    width: 100%;
+    height: 56px;
+    float: center;
+}
+
+.bottom-bar {
+    background-color: #142709;
+    width: 100%;
+    height: 56px;
+    float: center;
+}
+
+.btn{
+  border: 2px solid #142709;
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  float: right;
+  margin-right: 60px;
+  -ms-transform: translateY(-50%);
+  transform: translateY(105%);
+  display:inline;
+  border-radius: 15px;
+}
+
+img.logo {
+    float: left;
+    margin: 15px 25px;
+}

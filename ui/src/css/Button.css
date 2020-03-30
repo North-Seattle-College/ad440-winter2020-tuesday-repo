@@ -1,0 +1,19 @@
+/**
+    This is a cSS for the left-side buttons
+*/
+.work-areas{
+  width: 90%;
+  box-sizing: border-box;
+  background-color: white;
+  border: none;
+  padding: 15px 15px 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10% 10% 40% 10%;
+  height: 120px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 15px;
+}

@@ -1,0 +1,64 @@
+{
+  "name": "ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@progress/kendo-data-query": "1.5.2",
+    "@progress/kendo-date-math": "1.5.1",
+    "@progress/kendo-drawing": "1.6.0",
+    "@progress/kendo-react-animation": "3.11.0",
+    "@progress/kendo-react-buttons": "3.11.0",
+    "@progress/kendo-react-data-tools": "3.11.0",
+    "@progress/kendo-react-dateinputs": "3.11.0",
+    "@progress/kendo-react-dialogs": "3.11.0",
+    "@progress/kendo-react-dropdowns": "3.11.0",
+    "@progress/kendo-react-excel-export": "3.11.0",
+    "@progress/kendo-react-grid": "3.11.0",
+    "@progress/kendo-react-inputs": "3.11.0",
+    "@progress/kendo-react-intl": "3.11.0",
+    "@progress/kendo-react-layout": "3.11.0",
+    "@progress/kendo-react-pdf": "3.11.0",
+    "@progress/kendo-react-popup": "3.11.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "adal-angular": "^1.0.17",
+    "d3-ease": "^1.0.6",
+    "d3-interpolate": "^1.4.0",
+    "match-sorter": "^4.0.2",
+    "material-ui": "^0.20.2",
+    "react": "^16.12.0",
+    "react-adal": "^0.5.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.0",
+    "react-switch": "^5.0.1",
+    "react-table": "^7.0.0-rc.15",
+    "react-toggle-switch": "^3.0.4",
+    "reakit": "^1.0.0-beta.16",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
