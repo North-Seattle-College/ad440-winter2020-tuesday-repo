@@ -20,6 +20,7 @@ function refreshPage() {
 }
 
 export default class MachinesMain extends React.Component {
+    // gridWidth = "100%"
     state = {
         products: MachineData.slice(0, 12),
         productInEdit: undefined,
@@ -292,6 +293,12 @@ deletemachine(id) {
         this.setState({ productInEdit: { } });
     }
 
+
+
+    setPercentage = (percentage) => {
+        return Math.round(this.gridWidth / 100) * percentage;
+    }
+
 // old edit method that displayed current product details in edit screen
 /*state of the edited machine*/
 // edit = (dataItem) => {
@@ -330,10 +337,12 @@ deletemachine(id) {
         // console.log("machinesCleanData in render: " , machinesCleanData)
 
          return (
-            <div >
+            <div className = 'grid-div'>
                 <Grid
                     data = {machinesCleanData}
-                    style={{ height: '620px' }}
+                    className = 'grid-container'
+                    style={{height: '620px' , marginTop: '1px' }}
+                  
                 >
                     {/* Add New Machine button */}
                     <GridToolbar>
@@ -348,27 +357,25 @@ deletemachine(id) {
                                     className="k-button">Add New</button>
                             </div>
 
-                            <div class = "searchField">
+                            {/* <div class = "searchField">
 
-                            </div>
+                            </div> */}
                         </div>
     </GridToolbar>
-                    <Column field="MachineID" title="ID" width="75px" />
-                    <Column field="VendorID" title="Vendor" width="150px"/>
-                    <Column field="LocationID" title="Location ID"  width="150px"/>
-                    <Column field="LocationName" title="Location Name"  width="150px"/>
-                    <Column field="Model" title="Model"
-
-                    // cell = {<button
-                    //     onClick={this.insert}
-                    //     className="k-button">Edit</button>}
-                       width="120px"/>
-                    <Column field="Status" title="Status"
+                    <Column field="MachineID" title="ID" id = "machine-id" 
+                    // style = {{ width: "1%" }} 
+                    />
+                    <Column field="VendorID" title="Vendor ID" width={this.setPercentage(5)}/>
+                    <Column field="LocationID" title="Location ID"  width={this.setPercentage(10)}/>
+                    <Column field="LocationName" title="Location Name" width={this.setPercentage(20)}/>
+                    <Column field="Model" title="Model"  width={this.setPercentage(15)}/>
+                    <Column field="Status" title="Status" width={this.setPercentage(20)}
                        // field = "status"
                         cell = {this.MyCustomCell}
-                                 width="150px"/>
+                        />
 
-                    <Column title="Edit Remove Details"
+                    <Column title="Edit Remove Details" className = "column-with-buttons" 
+                    // style = {{width: "38%" }}
                         cell={MachinesButtons(this.openEditForm, this.deletemachine, this.details)}
 
                     />

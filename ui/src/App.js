@@ -14,29 +14,30 @@ import './css/App.css';
  */
 export default  class App extends React.Component {
 
-    render(){
-      return (
-        <div className="App">
-        <div className="top-bar">
-        </div>
-            <div className="login">
+  render(){
+    return (
+      <div className="App">
+      <div className="top-bar">
+      </div>
+          <div className="login">
 <ErrorBoundary>< Login /></ErrorBoundary>
-            </div>
-            <MuiThemeProvider>
+          </div>
+          <MuiThemeProvider>
 
-        {/*  <Route path="/500" component={InternalServer} /> */}
+      {/*  <Route path="/500" component={InternalServer} /> */}
 
 <ErrorBoundary><SideNav/></ErrorBoundary>
-          <ErrorBoundary><MachinesMain/></ErrorBoundary>
+        <ErrorBoundary><MachinesMain/></ErrorBoundary>
 
 
-            </MuiThemeProvider>
-            <div className="bottom-bar">
-            </div>
-        </div>
-      );
-    }
+          </MuiThemeProvider>
+          <div className="bottom-bar">
+          </div>
+      </div>
+    );
+  }
 }
 
-setTimeout(() => {
-    window.location.reload(true);}, 60000);
+
+// setTimeout(() => {
+//     window.location.reload(true);}, 60000);
