@@ -61,7 +61,7 @@ export default class MachinesMain extends React.Component {
                   state: machines[i].State,
                   zip: machines[i].ZipCode,
                   phone: machines[i].PhoneNum,
-                  model: machines[i].Model,
+                  Model: machines[i].Model,
                   ModelNum: machines[i].ModelNum,
                   SerialNum: machines[i].SerialNum,
                   // LocationID: machines[i].LocationID,
