@@ -249,7 +249,7 @@ my-app {
       
     }
     .editHeader{
-        font-size: 16pt;
+        font-size: 14pt;
     }
     .machine-id{
         width: 1px;
@@ -266,6 +266,10 @@ my-app {
        box-sizing: content-box;
        margin-bottom: 4%;
          
+    }
+
+    .editHeader{
+        font-size: 19pt;
     }
 
     #details-button{
