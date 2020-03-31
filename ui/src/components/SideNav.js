@@ -27,7 +27,7 @@ class SideNav extends Component {
       }
     };
     return (
-      <div>
+      <div className = 'side-nav'>
 
         <Paper
         className="sidenav"
