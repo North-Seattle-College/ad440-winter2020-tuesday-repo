@@ -29,13 +29,15 @@ export default class MachinesMain extends React.Component {
         editedProductID: undefined
     };
 
-    customData = [
+    customStatusColors = [
         { color: 'green' },
         { color: 'yellow' },
         { color: 'red' }
     ];
 
-    MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customData}
+    
+// Constructing status cell and passing it the custome colors propls
+    MyCustomCell = (props) => <CustomStatusCell {...props} myColorsProp = {this.customStatusColors}
     />
 
 
@@ -58,7 +60,7 @@ export default class MachinesMain extends React.Component {
                   state: machines[i].State,
                   zip: machines[i].ZipCode,
                   phone: machines[i].PhoneNum,
-                  Model: machines[i].Model,
+                  model: machines[i].Model,
                   ModelNum: machines[i].ModelNum,
                   SerialNum: machines[i].SerialNum,
                   // LocationID: machines[i].LocationID,
