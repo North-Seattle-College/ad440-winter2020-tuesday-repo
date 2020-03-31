@@ -6,6 +6,19 @@ Welcome to the North Seattle AD440 "Coffee" Cloud Computing Practicum!
 
 ## Getting Started
 This practicum is geared Azure, and uses React, Javascript, and Python. This app does not use a traditional stack, like LAMP, or SEAN. Rather it breaks its tasks down into descrete files of code that execute using Azure services like Functions 
+#### Table with coffee machines displaying details and working status of every machine
+![](screenshots/table.png)
+#### Machine details pop up
+![](screenshots/detailsform.png)
+#### Machine edit form pop up
+![](screenshots/editform.png)
+#### Adding new machine form
+![](screenshots/addnewform.png)
+#### Delete machine
+![](screenshots/confirmdelete.png)
+#### Login page for coffee service personel
+![](screenshots/login.png)
+
 
 ### Installing
 While the app is deployed to the cloud, there are several local tools one should have local on their computer if they want to join in the development of this app. You may not need all the tools listed to work on this app.
@@ -18,3 +31,7 @@ https://reactjs.org/
 
 ### Python
 https://www.python.org/
+
+
+
+

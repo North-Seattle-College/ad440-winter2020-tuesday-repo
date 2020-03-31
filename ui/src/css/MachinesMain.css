@@ -20,6 +20,7 @@ my-app {
 .tableHeader {
     display:inline-block;
     width: 100%;
+
 }
 
 .editHeader {
@@ -27,6 +28,7 @@ my-app {
     text-align: left;
     padding-left: 15px;
     padding-top: 10px;
+    box-sizing: content-box;
 }
 
 .tableTitle {
@@ -40,6 +42,7 @@ my-app {
     float:right;
     padding: 16px 0px 12px 10px;
     text-align: right 20px;
+    
 }
 
 .searchField {
@@ -119,6 +122,10 @@ my-app {
     padding-right: 20px;
     padding-bottom: 20px;
 }
+
+#machine-id{
+    width: 5px;
+}
 .example-config {
     margin: 0 0 20px;
     padding: 20px;
@@ -142,4 +149,225 @@ my-app {
 }
 .event-log li:last-child {
     margin-bottom: -1px;
+}
+
+#edit-button{
+   width: 30.5%;
+   margin-right: 2%;
+  
+}
+
+#remove-button{
+    width: 30.5%;
+    margin-right: 2%;
+   
+ }
+
+ #details-button{
+    width: 30.5%;
+    margin-right: 1%;
+   
+ }
+
+ .column-with-buttons{
+    width: 60%;
+ }
+
+ .grid-div{
+     margin: 1%;
+ }
+
+
+@media  screen and (max-width: 480px){
+    
+    .grid-container{
+        font-size: 6pt;
+        font-weight: bold;
+    }
+    Column.machine-id {
+        width: 0;
+    }
+    #edit-button{
+       width: 90%;
+       float: left; 
+       margin-right: 2%;
+       font-size: 7pt;
+       box-sizing: content-box;
+       margin-bottom: 2%;
+    }
+
+    #details-button{
+        width: 90%;
+        float: left; 
+        margin-right: 2%;
+        
+        font-size: 7pt;
+        box-sizing: content-box;
+     }
+
+     #remove-button{
+        width: 90%;
+        float: left; 
+        font-size: 7pt;
+        box-sizing: content-box;
+        margin-bottom: 2%;
+        /* margin: 1%; */
+     }
+
+     .editHeader{
+         font-size: 10pt;
+     }
+
+     .grid-container{
+         width: 90%;
+        
+     }
+
+
+     .addNewButton {
+        width: 39%;
+        float:right;
+        padding: 1% 0 1% 0;
+        text-align: right 20px;
+       
+    }
+    .editHeader{
+        font-size: 18pt;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    .grid-container{
+        width: 97%;
+    }
+
+    .addNewButton {
+        width: 39%;
+        float:right;
+        padding: 1% 0 1% 0;
+        text-align: right 20px;
+      
+    }
+    .editHeader{
+        font-size: 16pt;
+    }
+    .machine-id{
+        width: 1px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    
+
+    #edit-button{
+       width: 30%;
+       float: left;
+       
+       box-sizing: content-box;
+       margin-bottom: 4%;
+         
+    }
+
+    #details-button{
+        width: 30%;
+        float: left; 
+        box-sizing: content-box;
+        margin-bottom: 4%;         
+     }
+
+     #remove-button{
+        width: 30%;
+        float: left;     
+        box-sizing: content-box;
+       
+     }
+    }
+
+
+@media screen and (max-width: 1000px){
+    
+
+    #edit-button{
+       width: 80%;
+       float: left;
+       
+       box-sizing: content-box;
+       margin-bottom: 2%;
+       
+     
+    }
+
+    #details-button{
+        width: 80%;
+        float: left; 
+        
+        margin-bottom: 2%;
+        box-sizing: content-box;
+        
+        
+       
+     }
+
+     #remove-button{
+        width: 80%;
+        float: left; 
+        box-sizing: content-box;
+       
+     }
+    }
+
+
+    
+         @media screen and (max-width: 1600px){
+    
+
+            #edit-button{
+               width: 80%;
+               float: left;
+               
+               box-sizing: content-box;
+               margin-bottom: 4%;
+                 
+            }
+        
+            #details-button{
+                width: 80%;
+                float: left; 
+                box-sizing: content-box;
+                margin-bottom: 4%;         
+             }
+        
+             #remove-button{
+                width: 80%;
+                float: left;     
+                box-sizing: content-box;
+               
+             }
+}
+
+@media screen and (max-width: 1900px){
+    
+
+    #edit-button{
+       width: 80%;
+       float: left;
+       
+       box-sizing: content-box;
+       margin-bottom: 4%;
+         
+    }
+
+    #details-button{
+        width: 80%;
+        float: left; 
+        box-sizing: content-box;
+        margin-bottom: 4%;         
+     }
+
+     #remove-button{
+        width: 80%;
+        float: left;     
+        box-sizing: content-box;
+       
+     }
 }
