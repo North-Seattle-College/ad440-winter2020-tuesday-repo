@@ -6,21 +6,38 @@ node_js:
 cache: npm
 
 #only updates on commits from this branch, develop and master
+#for testing, i have left "sto-ci-westus2", on pull this needs to be removed
 branches:
   only:
     - master
     - develop
-    - stor-dev-westus2
+    - sto-ci-westus2
 
 jobs:
   include:
-    # this is the stage that test the storage build
-    - stage: test storage and update static web build (virtual)
-      before install: cd ui
+    # -------------------------------------------------------------------------
+    #for testing purposes, I have left "on sto-ci-westus2".
+    #This needs to be changed to "on develop" before pulling to develop
+    - stage: test storage and update static web build
       script:
+        - echo "skip testing"
         - unset CI
-        - npm run build  #build the current UI storage for displying in browser
-      after script:
-        - cd ..
+      before deploy:
+        - cd ui
+      deploy:
+        provider: azure_web_apps
+        username: AZ_WEBAPP_LOGIN_NAME
+        password: AZ_WEBAPP_PASSWORD
+        site: PoG-WebApp
+        local_dir: ui
+        on:
+          - sto-ci-westus2
+    # -------------------------------------------------------------------------
+    # -stage: change directory back to root
+    #   after script:
+    #     - cd ..
+    # -------------------------------------------------------------------------
     # stage
+    # -------------------------------------------------------------------------
     # stage
+    # -------------------------------------------------------------------------
